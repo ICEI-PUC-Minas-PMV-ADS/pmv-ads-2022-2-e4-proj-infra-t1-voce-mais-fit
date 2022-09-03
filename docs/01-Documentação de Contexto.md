@@ -1,46 +1,19 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+É notável que o desejo por um estilo de vida saudável é uma ideia que já foi concebida pela maioria das pessoas, entretanto, com tantos empecilhos para atingir esse objetivo, muitas pessoas desistem. Um desses empecilhos é ter o controle de sua alimentação e exercícios, e é nesse sentido que a aplicação visa atuar.
 
-## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
+# Problema
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
+Muitas vezes as pessoas que fazem academia não sabem ao certo como ter uma dieta eficaz, nem mantém um controle adequado sobre os exercícios. Além desses motivos, a pandemia agravou o sedentarismo de forma geral para toda a população, afetando tanto o físico como psicológico do indivíduo.
 
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
+# Objetivos
 
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
-
-## Objetivos
-
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
-
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
+O objetivo dessa aplicação é fornecer duas interfaces, Web e Mobile, para que um usuário possa registrar suas características físicas, como peso e altura, e receber uma recomendação de dieta. A partir disso, o usuário poderá inserir o que consumiu diariamente e também quais exercícios fez, e assim ter uma métrica e controle do seu estado atual e progresso. Além disso, o usuário poderá estar vinculado a uma academia ou personal trainer, e assim terá novas opções no menu, podendo ver informações sobre a academia, horários etc. e também receber um programa de exercícios pronto feito pelo seu instrutor.
  
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+# Justificativa
 
-## Justificativa
+A razão dessa aplicação existir é fornecer aos usuários um meio centralizado de organizar seus objetivos e métricas relacionadas à exercícios físcos e boa alimentação. Assim, a aplicação almeja diminuir o esforço do usuário nesse sentido, permitindo-o focar no seu real objetivo.
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+# Público-Alvo
 
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
-
-## Público-Alvo
-
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
-
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
-
-> **Links Úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
+O público-alvo desta aplicação são pessoas de qualquer faixa etária, que desejam organizar de forma objetiva suas metas em relação à exercícios físicos e boa alimentação, independente de estarem frequentando uma academia ou não.

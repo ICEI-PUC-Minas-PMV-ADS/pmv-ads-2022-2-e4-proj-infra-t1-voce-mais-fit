@@ -1,136 +1,143 @@
 # Especificações do Projeto
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
-
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
-
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
+Os pontos mais relevantes a serem tratados neste projeto foram abordados e exemplificados através de personas fictícias e suas respectivas histórias, expondo casos comuns dos problemas levantados na pesquisa, que foram elaborados a partir do conhecimento comum e vivência dos membros da equipe.
 
 ## Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
+|<h3>**Karem**</h3> |  ||
+| ------------------------------------------------------- | -------------------| ---------|
+|![Foto X](img/personas/karem.jpg)| **Idade:** 63 | “Quero uma alimentação saudável e balanceada com exercícios.” |
+**Motivação:**  Deseja ter uma dieta com relação a suas condições físicas e idade.| **Frustrações:**  Não possuir conhecimentos em relação a nutrição e a idade elevada para atividades físicas. |  **História:** Sou uma senhora que realiza atividades físicas para manter a saúde e necessito de uma boa alimentação para me auxiliar nesta rotina.
+| |  |  |
 
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
+|<h3>**Chris**</h3> |  ||
+| ------------------------------------------------------- | -------------------| ---------|
+|![Foto X](img/personas/cbum.jpg)| **Idade:** 32 | “Quero uma forma de controlar os treinos, rotina, alimentação e dados corporais.” |
+**Motivação:**  Deseja ter uma aplicação para faciliar sua rotina de treinos.| **Frustrações:**  Não possuir organização e falta de tempo para o controle. |  **História:** Sou um atleta de alto nível e por este motivo necessito de ferramentas profisionais para controlar a rotina e auxiliar no dia a dia.
+| |  |  |
 
-> **Links Úteis**:
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+|<h3>**Bob**</h3> |  ||
+| ------------------------------------------------------- | -------------------| ---------|
+|![Foto X](img/personas/giga.jpg)| **Idade:** 28| “Preciso de um aplicativo e site web para auxilar com meus alunos.” |
+**Motivação:**  Deseja ter uma aplicação para aumentar a precisão e controle para seus alunos com acompanhamento de treino, exercícios e alimentação e informações corporais.| **Frustrações:**  Não possuir ferramentas ou modos de dar um melhor auxílio para seus alunos de forma digital e tecnológica. |  **História:** Sou um personal trainer e estou passando por problemas por não conseguir acompanhar e dar ajuda para meus alunos de forma digital.
+| |  |  |
 
 ## Histórias de Usuários
 
-Com base na análise das personas forma identificadas as seguintes histórias de usuários:
-
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
-
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
-
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
+|EU COMO| QUERO/PRECISO | PARA |
+| ----------------- | -------------- | ----------- |
+|Karem| Quero uma alimentação de calorias balanceada para minhas caracteristicas físicas | ter uma dieta especifica para meu físico |
+|Karem| Quero poder cadastrar e registrar minha alimentação diária | Ter um registro das calorias e alimentos de forma diária. |
+|Chris| Ter uma aplicação para definir uma rotina de exercícios para o dia a dia. | Conseguir ter organização e tempo para o controle das atividades físicas.|
+|Chris| Poder marcar as atividades já realizadas e poder verificar com facilidade as atividades faltantes. | Conseguir ter organização e controle das atividades físicas.|
+|Chris| Poder ter um histórico e retrospectiva de toda a rotina de treino. | Conseguir ter organização e mémorias dos treinos já feitos.|
+|Bob| Quero uma aplicação para auxiliar meus alunos |Poder ajudar e acompanhar meus alunos de forma digital.|
+|Bob| Preciso me comunicar com meus alunos de forma digital |Poder ter fácil comunicão com os alunos.|
+|Bob| Desejo ter uma forma de comunicar os meus horários para os alunos |Poder ter fácil comunicão dos horários para os alunos e desta forma ter melhor organização.|
+|Bob| Desejo ter uma forma de difinir as metas para os alunos de forma digital |Poder ter fácil controle e envio das metas de treino e rotina para os alunos.|
 
 ## Modelagem do Processo de Negócio 
 
-### Análise da Situação Atual
+Os processos abaixo descrevem a ordem de execução lógica de cada função do sistema.
 
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional. 
+#### Autenticação de usuário
+Dependência dos seguintes requisitos: 
 
-### Descrição Geral da Proposta
+![Diagrama de Autenticação do Usuário](img/processos/autenticacao.jpg)
 
-Apresente aqui uma descrição da sua proposta abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente aqui as oportunidades de melhorias.
+#### Inserir e Atualizar Características Físicas
+Abrange os requisitos: RF-001.
 
-### Processo 1 – NOME DO PROCESSO
+![Diagrama de Inserir e Atualizar Características Físicas](img/processos/.jpg)
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN. 
+#### Inserir Alimentos Consumidos no Dia
+Abrange o requisito: RF-002, RF-005, RF-006.
 
-![Processo 1](img/02-bpmn-proc1.png)
+![Diagrama de Inserir Alimentos Consumidos no Dia](img/processos/.jpg)
 
-### Processo 2 – NOME DO PROCESSO
+#### Registrar um Modelo de Metas de Exercícios do Dia
+Abrange os requisitos: RF-003.
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em seguida, apresente o modelo do processo 2, descrito no padrão BPMN.
+![Diagrama de Registrar um Modelo de Metas de Exercícios do Dia](img/processos/.jpg)
 
-![Processo 2](img/02-bpmn-proc2.png)
+#### Inserir Metas de Exercícios do Dia
+Abrange os requisitos: RF-003, RF-004 RF-005.
 
+![Diagrama de Insetir Metas de Exercícios do Dia](img/processos/.jpg)
+
+#### Marcar como 'Concluída' cada Meta do Dia
+Abrange os requisitos: RF-004, RF-005.
+
+![Diagrama de Marcar como 'Concluída' cada Meta do Dia](img/processos/.jpg)
+
+#### Visualizar um Panorama Geral de Progresso
+Abrange os requisitos: RF-006.
+
+![Diagrama de Visualizar um Panorama Geral de Progresso](img/processos/.jpg)
+
+#### Vincular com uma Academia
+Abrange os requisitos: RF-007, RF-008, RF-009, RF-010.
+
+![Diagrama de Vincular com uma Academia](img/processos/.jpg)
+
+<!--
 ## Indicadores de Desempenho
-
-Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores. 
-
-Usar o seguinte modelo: 
-
-![Indicadores de Desempenho](img/02-indic-desemp.png)
-Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori. 
+#### Data/Tempo postagem
+![PrimeiroKPI](img/KPI%201.png)
+#### Data/Pessoas simultâneas
+![PrimeiroKPI](img/KPI%202.png)
+#### Contagem Avaliações
+![PrimeiroKPI](img/KPI%203.png)
+#### Data/Receitas Postadas
+![PrimeiroKPI](img/KPI%204.png)
+#### Indicar público masculino / feminino
+![PrimeiroKPI](img/KPI%205.png)
+-->
 
 ## Requisitos
 
-As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto. Para determinar a prioridade de requisitos, aplicar uma técnica de priorização de requisitos e detalhar como a técnica foi aplicada.
+As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto.
 
 ### Requisitos Funcionais
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|RF-001| A aplicação deverá recomendar automaticamente uma quantidade de calorias baseada nas características físicas e objetivo do usuário. | ALTA |
+|RF-002| A aplicação deverá permitir que o usuário insira os alimentos que consumiu naquele dia, bem como seus nutrientes e calorias. | ALTA |
+|RF-003| A aplicação deverá permitir que o usuário defina metas de exercícios para o dia. | ALTA |
+|RF-004| A aplicação deverá permitir que o usuário marque como 'Concluído' cada um dos exercícios que colocou como meta. | MÉDIA |
+|RF-005| A aplicação deverá permitir que o usuário veja em retrospecto seu registro diário para dias anteriores. | MÉDIA |
+|RF-006| A aplicação deverá exibir uma síntese com base nos dados de cada dia, permitindo assim uma visão analítica para o usuário. | MÉDIA |
+|RF-007| A aplicação deverá permitir que o usuário se víncule a uma academia, tendo novas interações disponíveis a partir disso. | BAIXA |
+|RF-008| A aplicação deverá permitir que o usuário, vinculado à academia, veja comunicados da academia. | BAIXA |
+|RF-009| A aplicação deverá permitir que o usuário, vinculado à academia, veja o horário dos instrutores. | BAIXA |
+|RF-010| A aplicação deverá permitir que o usuário, vinculado à academia, tenha suas metas diárias definidas pelo seu instrutor. | BAIXA |
+
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
-
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+|RNF-001| A aplicação deve ser compatível com sistemas Android e iOS | ALTA |
+|RNF-002| A aplicação deve ser compatível com os principais navegadores Web | ALTA |
+|RNF-003| O projeto deverá ser implementado com um banco de dados NoSQL. | ALTA |
+|RNF-004| A aplicação deve possuir interface intuitiva. | MÉDIA |
 
 ## Restrições
 
-O projeto está restrito pelos itens apresentados na tabela a seguir.
+As questões que limitam a execução desse projeto e que se configuram como obrigações claras para o desenvolvimento do projeto em questão são apresentadas na tabela a seguir
 
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
 |01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
+|02| Só poderão ser utilizados programas gratuitos ou fornecidos pela PUC Minas |
 
-Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
-
-> **Links Úteis**:
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
 
 ## Diagrama de Casos de Uso
 
-O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos. 
+Os casos de uso mostrando os Requisitos Funcionais para a aplicação são ilustrados abaixo.
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Casos de Uso”.
-
-> **Links Úteis**:
-> - [Criando Casos de Uso](https://www.ibm.com/docs/pt-br/elm/6.0?topic=requirements-creating-use-cases)
-> - [Como Criar Diagrama de Caso de Uso: Tutorial Passo a Passo](https://gitmind.com/pt/fazer-diagrama-de-caso-uso.html/)
-> - [Lucidchart](https://www.lucidchart.com/)
-> - [Astah](https://astah.net/)
-> - [Diagrams](https://app.diagrams.net/)
+![Diagrama de Casos de Uso](img/processos/diagrama_casos_uso.png)
 
 # Matriz de Rastreabilidade
 
