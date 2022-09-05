@@ -43,42 +43,42 @@ Os processos abaixo descrevem a ordem de execução lógica de cada função do 
 #### Autenticação de usuário
 Dependência dos seguintes requisitos: 
 
-![Diagrama de Autenticação do Usuário](img/processos/autenticacao.jpg)
+![Diagrama de Autenticação do Usuário](img/Processos/autenticacao.jpg)
 
 #### Inserir e Atualizar Características Físicas
 Abrange os requisitos: RF-001.
 
-![Diagrama de Inserir e Atualizar Características Físicas](img/processos/.jpg)
+![Diagrama de Inserir e Atualizar Características Físicas](img/Processos/.jpg)
 
 #### Inserir Alimentos Consumidos no Dia
 Abrange o requisito: RF-002, RF-005, RF-006.
 
-![Diagrama de Inserir Alimentos Consumidos no Dia](img/processos/.jpg)
+![Diagrama de Inserir Alimentos Consumidos no Dia](img/Processos/.jpg)
 
 #### Registrar um Modelo de Metas de Exercícios do Dia
 Abrange os requisitos: RF-003.
 
-![Diagrama de Registrar um Modelo de Metas de Exercícios do Dia](img/processos/.jpg)
+![Diagrama de Registrar um Modelo de Metas de Exercícios do Dia](img/Processos/.jpg)
 
 #### Inserir Metas de Exercícios do Dia
 Abrange os requisitos: RF-003, RF-004 RF-005.
 
-![Diagrama de Insetir Metas de Exercícios do Dia](img/processos/.jpg)
+![Diagrama de Insetir Metas de Exercícios do Dia](img/Processos/.jpg)
 
 #### Marcar como 'Concluída' cada Meta do Dia
 Abrange os requisitos: RF-004, RF-005.
 
-![Diagrama de Marcar como 'Concluída' cada Meta do Dia](img/processos/.jpg)
+![Diagrama de Marcar como 'Concluída' cada Meta do Dia](img/Processos/.jpg)
 
 #### Visualizar um Panorama Geral de Progresso
 Abrange os requisitos: RF-006.
 
-![Diagrama de Visualizar um Panorama Geral de Progresso](img/processos/.jpg)
+![Diagrama de Visualizar um Panorama Geral de Progresso](img/Processos/.jpg)
 
 #### Vincular com uma Academia
 Abrange os requisitos: RF-007, RF-008, RF-009, RF-010.
 
-![Diagrama de Vincular com uma Academia](img/processos/.jpg)
+![Diagrama de Vincular com uma Academia](img/Processos/.jpg)
 
 <!--
 ## Indicadores de Desempenho
