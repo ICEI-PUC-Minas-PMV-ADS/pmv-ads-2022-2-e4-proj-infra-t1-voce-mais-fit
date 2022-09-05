@@ -5,7 +5,7 @@ Visão geral da interação do usuário pelas telas do sistema e protótipo inte
 
 O diagrama a seguir mostra o fluxo da interação do usuário com o sistema, tal como a interconexão entre telas e ações disponíveis.
 
-![Diagrama de Fluxos](img/processos/diagrama_fluxo.png)
+![Diagrama de Fluxos](img/Processos/diagrama_fluxo.png)
 
 ## Wireframes
 
