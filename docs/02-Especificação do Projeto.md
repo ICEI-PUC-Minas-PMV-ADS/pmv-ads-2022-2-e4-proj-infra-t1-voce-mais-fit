@@ -6,19 +6,19 @@ Os pontos mais relevantes a serem tratados neste projeto foram abordados e exemp
 
 |<h3>**Karem**</h3> |  ||
 | ------------------------------------------------------- | -------------------| ---------|
-|![Foto X](img/personas/karem.jpg)| **Idade:** 63 | “Quero uma alimentação saudável e balanceada com exercícios.” |
+|![Foto X](img/Personas/karem.jpg)| **Idade:** 63 | “Quero uma alimentação saudável e balanceada com exercícios.” |
 **Motivação:**  Deseja ter uma dieta com relação a suas condições físicas e idade.| **Frustrações:**  Não possuir conhecimentos em relação a nutrição e a idade elevada para atividades físicas. |  **História:** Sou uma senhora que realiza atividades físicas para manter a saúde e necessito de uma boa alimentação para me auxiliar nesta rotina.
 | |  |  |
 
 |<h3>**Chris**</h3> |  ||
 | ------------------------------------------------------- | -------------------| ---------|
-|![Foto X](img/personas/cbum.jpg)| **Idade:** 32 | “Quero uma forma de controlar os treinos, rotina, alimentação e dados corporais.” |
+|![Foto X](img/Personas/cbum.jpg)| **Idade:** 32 | “Quero uma forma de controlar os treinos, rotina, alimentação e dados corporais.” |
 **Motivação:**  Deseja ter uma aplicação para faciliar sua rotina de treinos.| **Frustrações:**  Não possuir organização e falta de tempo para o controle. |  **História:** Sou um atleta de alto nível e por este motivo necessito de ferramentas profisionais para controlar a rotina e auxiliar no dia a dia.
 | |  |  |
 
 |<h3>**Bob**</h3> |  ||
 | ------------------------------------------------------- | -------------------| ---------|
-|![Foto X](img/personas/giga.jpg)| **Idade:** 28| “Preciso de um aplicativo e site web para auxilar com meus alunos.” |
+|![Foto X](img/Personas/giga.jpg)| **Idade:** 28| “Preciso de um aplicativo e site web para auxilar com meus alunos.” |
 **Motivação:**  Deseja ter uma aplicação para aumentar a precisão e controle para seus alunos com acompanhamento de treino, exercícios e alimentação e informações corporais.| **Frustrações:**  Não possuir ferramentas ou modos de dar um melhor auxílio para seus alunos de forma digital e tecnológica. |  **História:** Sou um personal trainer e estou passando por problemas por não conseguir acompanhar e dar ajuda para meus alunos de forma digital.
 | |  |  |
 
