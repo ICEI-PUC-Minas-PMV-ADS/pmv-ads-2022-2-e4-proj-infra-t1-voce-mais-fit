@@ -6,19 +6,19 @@ Os pontos mais relevantes a serem tratados neste projeto foram abordados e exemp
 
 |<h3>**Karem**</h3> |  ||
 | ------------------------------------------------------- | -------------------| ---------|
-|![Foto X](img/personas/karem.jpg)| **Idade:** 63 | “Quero uma alimentação saudável e balanceada com exercícios.” |
+|![Foto X](img/Personas/karem.jpg)| **Idade:** 63 | “Quero uma alimentação saudável e balanceada com exercícios.” |
 **Motivação:**  Deseja ter uma dieta com relação a suas condições físicas e idade.| **Frustrações:**  Não possuir conhecimentos em relação a nutrição e a idade elevada para atividades físicas. |  **História:** Sou uma senhora que realiza atividades físicas para manter a saúde e necessito de uma boa alimentação para me auxiliar nesta rotina.
 | |  |  |
 
 |<h3>**Chris**</h3> |  ||
 | ------------------------------------------------------- | -------------------| ---------|
-|![Foto X](img/personas/cbum.jpg)| **Idade:** 32 | “Quero uma forma de controlar os treinos, rotina, alimentação e dados corporais.” |
+|![Foto X](img/Personas/cbum.jpg)| **Idade:** 32 | “Quero uma forma de controlar os treinos, rotina, alimentação e dados corporais.” |
 **Motivação:**  Deseja ter uma aplicação para faciliar sua rotina de treinos.| **Frustrações:**  Não possuir organização e falta de tempo para o controle. |  **História:** Sou um atleta de alto nível e por este motivo necessito de ferramentas profisionais para controlar a rotina e auxiliar no dia a dia.
 | |  |  |
 
 |<h3>**Bob**</h3> |  ||
 | ------------------------------------------------------- | -------------------| ---------|
-|![Foto X](img/personas/giga.jpg)| **Idade:** 28| “Preciso de um aplicativo e site web para auxilar com meus alunos.” |
+|![Foto X](img/Personas/giga.jpg)| **Idade:** 28| “Preciso de um aplicativo e site web para auxilar com meus alunos.” |
 **Motivação:**  Deseja ter uma aplicação para aumentar a precisão e controle para seus alunos com acompanhamento de treino, exercícios e alimentação e informações corporais.| **Frustrações:**  Não possuir ferramentas ou modos de dar um melhor auxílio para seus alunos de forma digital e tecnológica. |  **História:** Sou um personal trainer e estou passando por problemas por não conseguir acompanhar e dar ajuda para meus alunos de forma digital.
 | |  |  |
 
@@ -41,44 +41,44 @@ Os pontos mais relevantes a serem tratados neste projeto foram abordados e exemp
 Os processos abaixo descrevem a ordem de execução lógica de cada função do sistema.
 
 #### Autenticação de usuário
-Dependência dos seguintes requisitos: 
+Abrange todos os requisitos.
 
-![Diagrama de Autenticação do Usuário](img/processos/autenticacao.jpg)
+![Diagrama de Autenticação do Usuário](img/Processos/autenticacao.png)
 
 #### Inserir e Atualizar Características Físicas
 Abrange os requisitos: RF-001.
 
-![Diagrama de Inserir e Atualizar Características Físicas](img/processos/.jpg)
+![Diagrama de Inserir e Atualizar Características Físicas](img/Processos/atualizar_caracteristicas.png)
 
 #### Inserir Alimentos Consumidos no Dia
 Abrange o requisito: RF-002, RF-005, RF-006.
 
-![Diagrama de Inserir Alimentos Consumidos no Dia](img/processos/.jpg)
+![Diagrama de Inserir Alimentos Consumidos no Dia](img/Processos/inserir_alimentos.png)
 
 #### Registrar um Modelo de Metas de Exercícios do Dia
 Abrange os requisitos: RF-003.
 
-![Diagrama de Registrar um Modelo de Metas de Exercícios do Dia](img/processos/.jpg)
+![Diagrama de Registrar um Modelo de Metas de Exercícios do Dia](img/Processos/modelo_registrar.png)
 
 #### Inserir Metas de Exercícios do Dia
 Abrange os requisitos: RF-003, RF-004 RF-005.
 
-![Diagrama de Insetir Metas de Exercícios do Dia](img/processos/.jpg)
+![Diagrama de Insetir Metas de Exercícios do Dia](img/Processos/inserir_exercicio.png)
 
 #### Marcar como 'Concluída' cada Meta do Dia
 Abrange os requisitos: RF-004, RF-005.
 
-![Diagrama de Marcar como 'Concluída' cada Meta do Dia](img/processos/.jpg)
+![Diagrama de Marcar como 'Concluída' cada Meta do Dia](img/Processos/concluir_exercicio.png)
 
 #### Visualizar um Panorama Geral de Progresso
 Abrange os requisitos: RF-006.
 
-![Diagrama de Visualizar um Panorama Geral de Progresso](img/processos/.jpg)
+![Diagrama de Visualizar um Panorama Geral de Progresso](img/Processos/panorama_progresso.png)
 
 #### Vincular com uma Academia
 Abrange os requisitos: RF-007, RF-008, RF-009, RF-010.
 
-![Diagrama de Vincular com uma Academia](img/processos/.jpg)
+![Diagrama de Vincular com uma Academia](img/Processos/vincular_aluno.png)
 
 <!--
 ## Indicadores de Desempenho
@@ -153,20 +153,21 @@ De acordo com o PMBoK v6 as dez áreas que constituem os pilares para gerenciar 
 
 Com diagramas bem organizados que permitem gerenciar o tempo nos projetos, o gerente de projetos agenda e coordena tarefas dentro de um projeto para estimar o tempo necessário de conclusão.
 
-![Diagrama de rede simplificado notação francesa (método francês)](img/02-diagrama-rede-simplificado.png)
+![Diagrama de rede simplificado notação francesa (método francês)](img/GerProjeto/gerenciamento%20de%20tempo.png)
 
 O gráfico de Gantt ou diagrama de Gantt também é uma ferramenta visual utilizada para controlar e gerenciar o cronograma de atividades de um projeto. Com ele, é possível listar tudo que precisa ser feito para colocar o projeto em prática, dividir em atividades e estimar o tempo necessário para executá-las.
 
-![Gráfico de Gantt](img/02-grafico-gantt.png)
+![Gráfico de Gantt](img/GerProjeto/graficoGante.jpg)
 
 ## Gerenciamento de Equipe
 
 O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados. 
 
-![Simple Project Timeline](img/02-project-timeline.png)
+![Simple Project Timeline](img/GerProjeto/GerenciamentoEquipe.png)
 
 ## Gestão de Orçamento
 
 O processo de determinar o orçamento do projeto é uma tarefa que depende, além dos produtos (saídas) dos processos anteriores do gerenciamento de custos, também de produtos oferecidos por outros processos de gerenciamento, como o escopo e o tempo.
 
-![Orçamento](img/02-orcamento.png)
+![Orçamento](img/GerProjeto/gerenciamentoCusto.png)
+![Orçamento](img/GerProjeto/orcamento.jpg)
