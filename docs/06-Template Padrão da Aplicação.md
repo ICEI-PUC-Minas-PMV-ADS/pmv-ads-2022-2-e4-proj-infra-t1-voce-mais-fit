@@ -1,12 +1,33 @@
 # Template Padrão da Aplicação
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Especificação do Projeto</a></span>, <a href="3-Projeto de Interface.md"> Projeto de Interface</a>, <a href="4-Metodologia.md"> Metodologia</a>
-
 Layout padrão da aplicação que será utilizado em todas as páginas com a definição de identidade visual, aspectos de responsividade e iconografia.
 
-> **Links Úteis**:
->
-> - [CSS Website Layout (W3Schools)](https://www.w3schools.com/css/css_website_layout.asp)
-> - [Website Page Layouts](http://www.cellbiol.com/bioinformatics_web_development/chapter-3-your-first-web-page-learning-html-and-css/website-page-layouts/)
-> - [Perfect Liquid Layout](https://matthewjamestaylor.com/perfect-liquid-layouts)
-> - [How and Why Icons Improve Your Web Design](https://usabilla.com/blog/how-and-why-icons-improve-you-web-design/)
+![Template tela 1](img/Wireframes/1.jfif)
+
+![Template tela 2](img/Wireframes/2.jfif)
+
+![Template tela 3](img/Wireframes/3.jfif)
+
+![Template tela 4](img/Wireframes/4.jfif)
+
+![Template tela 5](img/Wireframes/5.jfif)
+
+![Template tela 6](img/Wireframes/6.jfif)
+
+![Template tela 7](img/Wireframes/7.jfif)
+
+![Template tela 8](img/Wireframes/8.jfif)
+
+![Template tela 10](img/Wireframes/10.jfif)
+
+![Template tela 11](img/Wireframes/11.jfif)
+
+![Template tela 12](img/Wireframes/12.jfif)
+
+![Template tela 13](img/Wireframes/13.jfif)
+
+![Template tela 14](img/Wireframes/14.jfif)
+
+![Template tela 15](img/Wireframes/15.jfif)
+
+![Template tela 16](img/Wireframes/16.jfif)
