@@ -33,27 +33,13 @@ Quanto à gerência de issues, o projeto adota a seguinte convenção para etiqu
 
 Com base nos papéis do Scrum, equipe está organizada da seguinte maneira:
 - Scrum Master: João Sena
-- Product Owner: Iann Iago
-- Equipe de desenvolvimento Front-End Web:
-    - Victor Lopes
+- Product Owner: Gabriel Ilídio
+- Equipe de desenvolvimento:
     - Felipe Bohm
     - Gabriel Ilídio
-    - João Sena
     - Iann Iago
-    - Yuri Witter
-- Equipe de desenvolvimento Front-End Mobile:
-    - Gabriel Ilídio
+    - João Sena
     - Victor Lopes
-    - Felipe Bohm
-    - João Sena
-    - Iann Iago
-    - Yuri Witter
-- Equipe de desenvolvimento Back-End API:
-    - João Sena
-    - Gabriel Ilídio
-    - Victor Lopes
-    - Felipe Bohm
-    - Iann Iago
     - Yuri Witter
 - Equipe de UX Design:
     - Iago Iann
@@ -95,17 +81,3 @@ O [Figma](https://www.figma.com/) e [Pencil Project](https://pencil.evolus.vn/) 
 O [Lucidchart](https://www.lucidchart.com/pages/pt) foi escolhido para o desenvolvimento de diagramas pois é uma ferramenta versátil e fácil de se utilizar.
 
 O [Git](https://git-scm.com/), [Github](https://github.com) e [GitKraken](https://www.gitkraken.com/) auxiliam no versionamento como foi exposto no Controle de Versão.
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
