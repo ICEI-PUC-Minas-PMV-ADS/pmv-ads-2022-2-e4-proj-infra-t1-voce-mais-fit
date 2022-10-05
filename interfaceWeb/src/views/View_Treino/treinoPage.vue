@@ -2,27 +2,6 @@
   <div>
     <md-toolbar class="md-accent" md-elevation="1">
       <h3 class="md-title" style="flex: 1">Bem-vindo, Senhor @</h3>
-      <md-menu>
-        <md-button md-menu-trigger>Default</md-button>
-
-        <md-menu-content>
-          <md-menu-item
-            ><md-button class="md-dense md-raised md-primary"
-              >Adicionar treino
-            </md-button></md-menu-item
-          >
-          <md-menu-item
-            ><md-button class="md-dense md-raised md-primary"
-              >Adicionar treino
-            </md-button></md-menu-item
-          >
-          <md-menu-item
-            ><md-button class="md-dense md-raised md-primary"
-              >Adicionar treino
-            </md-button></md-menu-item
-          >
-        </md-menu-content>
-      </md-menu>
       <md-button class="md-primary">
         <md-menu>
           <md-button md-menu-trigger>
@@ -38,17 +17,22 @@
           <md-menu-content>
             <md-menu-item
               ><md-button class="md-dense md-raised md-primary"
-                >Adicionar treino
+                >Editar perfil
               </md-button></md-menu-item
             >
             <md-menu-item
               ><md-button class="md-dense md-raised md-primary"
-                >Adicionar treino
+                >Sobre
               </md-button></md-menu-item
             >
             <md-menu-item
               ><md-button class="md-dense md-raised md-primary"
-                >Adicionar treino
+                >Sair
+              </md-button></md-menu-item
+            >
+             <md-menu-item
+              ><md-button class="md-dense md-raised md-primary"
+                >Página Inicial
               </md-button></md-menu-item
             >
           </md-menu-content>
@@ -56,28 +40,94 @@
       </md-button>
     </md-toolbar>
     <div class="Topo">
-      <div class="card-expansion">
+      <div class=" card-expansion">
         <md-card>
-          <md-card-media>
-            <img
-              src="https://storage.stfalcon.com/uploads/images/5731a37f467ff.webp"
-              alt="People"
-            />
+          <md-card-media class="foto_card"> 
+            <img  src="@/assets/anh-nguyen-kcA-c3f_3FE-unsplash.jpg" 
+              alt="People">
+               
           </md-card-media>
 
           <md-card-header>
-            <div class="md-title">Title goes here</div>
-            <div class="md-subhead">Subtitle here</div>
+            <div class="md-title">Costas</div>
+            <div class="md-subhead">Puxada frontal</div>
           </md-card-header>
 
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <div>
-                <md-button>Action</md-button>
+                <md-button>Adicionar ao treino</md-button>
               </div>
 
               <md-card-expand-trigger>
-                <md-button>Learn more</md-button>
+                <md-button>Saiba mais</md-button>
+              </md-card-expand-trigger>
+            </md-card-actions>
+
+            <md-card-expand-content>
+              <md-card-content>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
+                itaque ea, nostrum odio. Dolores, sed accusantium quasi non,
+                voluptas eius illo quas, saepe voluptate pariatur in deleniti
+                minus sint. Excepturi.
+              </md-card-content>
+            </md-card-expand-content>
+          </md-card-expand>
+        </md-card>
+        <md-card>
+          <md-card-media class="foto_card">
+             <img  src="@/assets/anh-nguyen-kcA-c3f_3FE-unsplash.jpg" 
+              alt="People"
+            /> 
+          </md-card-media>
+
+          <md-card-header>
+            <div class="md-title">Costas</div>
+            <div class="md-subhead">Puxada frontal</div>
+          </md-card-header>
+
+          <md-card-expand>
+            <md-card-actions md-alignment="space-between">
+              <div>
+                <md-button>Adicionar ao treino</md-button>
+              </div>
+
+              <md-card-expand-trigger>
+                <md-button>Saiba mais</md-button>
+              </md-card-expand-trigger>
+            </md-card-actions>
+
+            <md-card-expand-content>
+              <md-card-content>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
+                itaque ea, nostrum odio. Dolores, sed accusantium quasi non,
+                voluptas eius illo quas, saepe voluptate pariatur in deleniti
+                minus sint. Excepturi.
+              </md-card-content>
+            </md-card-expand-content>
+          </md-card-expand>
+        </md-card>
+        <md-card>
+          <md-card-media class="foto_card">
+             <img
+               src="@/assets/anh-nguyen-kcA-c3f_3FE-unsplash.jpg" 
+              alt="People"
+            />
+          </md-card-media>
+
+          <md-card-header>
+            <div class="md-title">Costas</div>
+            <div class="md-subhead">Puxada frontal</div>
+          </md-card-header>
+
+          <md-card-expand>
+            <md-card-actions md-alignment="space-between">
+              <div>
+                <md-button>Adicionar ao treino</md-button>
+              </div>
+
+              <md-card-expand-trigger>
+                <md-button>Saiba mais</md-button>
               </md-card-expand-trigger>
             </md-card-actions>
 
@@ -92,16 +142,18 @@
           </md-card-expand>
         </md-card>
       </div>
+
+      
     </div>
     <div class="Meio">
       <div>
-        <md-steppers :md-active-step.sync="active" md-vertical md-linear>
+        <md-steppers :md-active-step="active" md-vertical md-linear>
           <md-step
             id="first"
             md-label="First Step"
             md-description="Optional"
             :md-editable="false"
-            :md-done.sync="first"
+            :md-donev-model:propName="first"
           >
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
@@ -133,7 +185,7 @@
             md-label="Second Step"
             :md-error="secondStepError"
             :md-editable="false"
-            :md-done.sync="second"
+            :md-donev-model:propName="second"
           >
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
@@ -173,7 +225,7 @@
             id="third"
             md-label="Third Step"
             :md-editable="false"
-            :md-done.sync="third"
+            :md-donev-model:propName="third"
           >
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
@@ -230,24 +282,28 @@ export default {
 
 <style scoped>
 .Topo {
-  /* margin-top: 5%;
-  margin-left: 30%; */
-  height: 300px;
-  display: center;
-  align-content: center;
+  height: 400px;
+  display: auto;
+  align-content: grid;
   background-color: brown;
 }
 .card-expansion {
-  height: 480px;
+  padding: 25px 50px 75px 100px;
+  align-items: flex-start;
+  margin: 0px 20px 30px 60px;
 }
 
 .md-card {
   width: 700px;
-  margin: 4px;
   display: inline-block;
-  vertical-align: top;
+  align-content: space-between;
+  vertical-align: inherit; 
+  margin: 10px 10px 10px 10px;
+ /*  flex-direction: inherit; */
+ 
 }
 .Meio {
+  padding: 25px 50px 75px 100px;
   align-content: inline;
   height: 500px;
   background-color: orange;
@@ -255,8 +311,13 @@ export default {
 .md-button {
   width: 500px;
 }
+.foto_card{
+  
+  background-repeat: no-repeat, repeat;
+}
 .fim {
   height: 500px;
   background-color: purple;
 }
+
 </style>

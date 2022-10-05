@@ -1,0 +1,27 @@
+
+  .header-site{
+    background-image: url("@/assets/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #ffffff;
+    padding: 300px 0 300px 0 ;
+  }
+  .content-site{
+    padding: 200px 0 200px 0 ;
+  }
+  .img-site{
+    background-image: url("@/assets/braden-collum-9HI8UJMSdZA-unsplash.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 200px 0 200px 0 ;
+    color: #fff;
+  }
+  .footer-site{
+    background-color: #333333;
+    color: #fff;
+    padding: 250px 0 250px 0 ;
+  }
