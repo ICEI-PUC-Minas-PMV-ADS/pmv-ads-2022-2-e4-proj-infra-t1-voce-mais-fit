@@ -1,0 +1,37 @@
+.Topo {
+    height: 400px;
+    display: auto;
+    align-content: grid;
+    background-color: brown;
+  }
+  .card-expansion {
+    padding: 25px 50px 75px 100px;
+    align-items: flex-start;
+    margin: 0px 20px 30px 60px;
+  }
+  
+  .md-card {
+    
+    display: inline-block;
+    align-content: space-between;
+    vertical-align: inherit;
+    margin: 10px 10px 10px 200px;
+    /*  flex-direction: inherit; */
+  }
+  .Meio {
+    padding: 25px 50px 75px 100px;
+    align-content: inline;
+    height: 500px;
+    background-color: orange;
+  }
+  .md-button {
+    width: 500px;
+  }
+  .foto_card {
+    background-repeat: no-repeat, repeat;
+  }
+  .fim {
+    height: 500px;
+    background-color: purple;
+  }
+  @import'~bootstrap/dist/css/bootstrap.css'

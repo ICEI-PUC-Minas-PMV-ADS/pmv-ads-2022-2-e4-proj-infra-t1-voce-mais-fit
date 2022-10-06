@@ -1,6 +1,6 @@
 
   .header-site{
-    background-image: url("@/assets/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg");
+    background-image: url("@/assets/mainPage.jpg");
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,7 +12,7 @@
     padding: 200px 0 200px 0 ;
   }
   .img-site{
-    background-image: url("@/assets/braden-collum-9HI8UJMSdZA-unsplash.jpg");
+    background-image: url("@/assets/treinadorMainPage.jpg");
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -25,3 +25,9 @@
     color: #fff;
     padding: 250px 0 250px 0 ;
   }
+  #btn_treinador{
+    align-items: center;
+    margin: 0 0 0 45%;
+
+  }
+  @import'~bootstrap/dist/css/bootstrap.css'

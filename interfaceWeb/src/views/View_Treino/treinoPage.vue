@@ -30,7 +30,7 @@
                 >Sair
               </md-button></md-menu-item
             >
-             <md-menu-item
+            <md-menu-item
               ><md-button class="md-dense md-raised md-primary"
                 >Página Inicial
               </md-button></md-menu-item
@@ -40,110 +40,68 @@
       </md-button>
     </md-toolbar>
     <div class="Topo">
-      <div class=" card-expansion">
-        <md-card>
-          <md-card-media class="foto_card"> 
-            <img  src="@/assets/anh-nguyen-kcA-c3f_3FE-unsplash.jpg" 
-              alt="People">
-               
-          </md-card-media>
-
-          <md-card-header>
-            <div class="md-title">Costas</div>
-            <div class="md-subhead">Puxada frontal</div>
-          </md-card-header>
-
-          <md-card-expand>
-            <md-card-actions md-alignment="space-between">
-              <div>
-                <md-button>Adicionar ao treino</md-button>
+      <div class="card-expansion">
+        <div class="card mb-3 md-card" style="max-width: 540px">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="@/assets/funcional.jpg" class="img-fluid rounded-start" />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Funcional</h5>
+                <p class="card-text">
+                 Trata-se de um método de treino que utiliza exercícios que aprimoram nosso corpo para realização de um esporte ou de movimentos e funções do dia a dia, como agachar, correr, sentar, pular, empurrar ou carregar um objeto. 
+                </p>
+                <p class="card-text">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+                <button type="button" class="btn btn-success">Adicionar ao treino!</button>
               </div>
-
-              <md-card-expand-trigger>
-                <md-button>Saiba mais</md-button>
-              </md-card-expand-trigger>
-            </md-card-actions>
-
-            <md-card-expand-content>
-              <md-card-content>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-                itaque ea, nostrum odio. Dolores, sed accusantium quasi non,
-                voluptas eius illo quas, saepe voluptate pariatur in deleniti
-                minus sint. Excepturi.
-              </md-card-content>
-            </md-card-expand-content>
-          </md-card-expand>
-        </md-card>
-        <md-card>
-          <md-card-media class="foto_card">
-             <img  src="@/assets/anh-nguyen-kcA-c3f_3FE-unsplash.jpg" 
-              alt="People"
-            /> 
-          </md-card-media>
-
-          <md-card-header>
-            <div class="md-title">Costas</div>
-            <div class="md-subhead">Puxada frontal</div>
-          </md-card-header>
-
-          <md-card-expand>
-            <md-card-actions md-alignment="space-between">
-              <div>
-                <md-button>Adicionar ao treino</md-button>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-3 md-card" style="max-width: 540px">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="@/assets/LevantamentoDePeso.jpg"
+                class="img-fluid rounded-start"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Levantamento de peso</h5>
+                <p class="card-text">
+                  Mais do que uma modalidade esportiva olímpica, o levantamento de peso olímpico (LPO) pode ser parte de um treinamento funcional importante para a saúde.
+                </p>
+                <p class="card-text">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+                <button type="button" class="btn btn-success">Adicionar ao treino!</button>
               </div>
-
-              <md-card-expand-trigger>
-                <md-button>Saiba mais</md-button>
-              </md-card-expand-trigger>
-            </md-card-actions>
-
-            <md-card-expand-content>
-              <md-card-content>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-                itaque ea, nostrum odio. Dolores, sed accusantium quasi non,
-                voluptas eius illo quas, saepe voluptate pariatur in deleniti
-                minus sint. Excepturi.
-              </md-card-content>
-            </md-card-expand-content>
-          </md-card-expand>
-        </md-card>
-        <md-card>
-          <md-card-media class="foto_card">
-             <img
-               src="@/assets/anh-nguyen-kcA-c3f_3FE-unsplash.jpg" 
-              alt="People"
-            />
-          </md-card-media>
-
-          <md-card-header>
-            <div class="md-title">Costas</div>
-            <div class="md-subhead">Puxada frontal</div>
-          </md-card-header>
-
-          <md-card-expand>
-            <md-card-actions md-alignment="space-between">
-              <div>
-                <md-button>Adicionar ao treino</md-button>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-3 md-card" style="max-width: 540px">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="@/assets/Definiotion.jpg" class="img-fluid rounded-start" />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Definição</h5>
+                <p class="card-text">
+                  Uma preocupação comum aos iniciantes é achar que ao fazer um trabalho de hipertrofia, o treino para definição muscular vai deixá-los “grandes demais” ou “muito marombados”, na linguagem conhecida do mundo fitness.
+                </p>
+                <p class="card-text">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+                <button type="button" class="btn btn-success">Adicionar ao treino!</button>
               </div>
-
-              <md-card-expand-trigger>
-                <md-button>Saiba mais</md-button>
-              </md-card-expand-trigger>
-            </md-card-actions>
-
-            <md-card-expand-content>
-              <md-card-content>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-                itaque ea, nostrum odio. Dolores, sed accusantium quasi non,
-                voluptas eius illo quas, saepe voluptate pariatur in deleniti
-                minus sint. Excepturi.
-              </md-card-content>
-            </md-card-expand-content>
-          </md-card-expand>
-        </md-card>
+            </div>
+          </div>
+        </div>
       </div>
-
-      
     </div>
     <div class="Meio">
       <div>
@@ -280,44 +238,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.Topo {
-  height: 400px;
-  display: auto;
-  align-content: grid;
-  background-color: brown;
-}
-.card-expansion {
-  padding: 25px 50px 75px 100px;
-  align-items: flex-start;
-  margin: 0px 20px 30px 60px;
-}
-
-.md-card {
-  width: 700px;
-  display: inline-block;
-  align-content: space-between;
-  vertical-align: inherit; 
-  margin: 10px 10px 10px 10px;
- /*  flex-direction: inherit; */
- 
-}
-.Meio {
-  padding: 25px 50px 75px 100px;
-  align-content: inline;
-  height: 500px;
-  background-color: orange;
-}
-.md-button {
-  width: 500px;
-}
-.foto_card{
-  
-  background-repeat: no-repeat, repeat;
-}
-.fim {
-  height: 500px;
-  background-color: purple;
-}
-
-</style>
+<style src="./Style_TP.css"></style>
