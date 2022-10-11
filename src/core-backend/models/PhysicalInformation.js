@@ -15,11 +15,13 @@ const physicalInformationSchema = new mongoose.Schema({
     heigth: {type: Number, required: true},
     weight: {type: Number, required: true},
     imc: {type: Number},
-    tbm: {type: Number},
+    tmb: {type: Number},
     dailyKcal: {type: Number},
 })
 
 //TODO: criar um middleware de save e update que atualiza IMC, TMB e Kcal sempre
+
+
 
 const PhysicalInformationModel = mongoose.model('PhysicalInformation', physicalInformationSchema);
 
