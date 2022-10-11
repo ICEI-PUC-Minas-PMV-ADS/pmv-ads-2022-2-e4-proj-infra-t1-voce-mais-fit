@@ -7,11 +7,6 @@ const exerciseModel = require('./ExerciseWorkoutModel');
 const gymgoerSchema = new mongoose.Schema({
     name: {type: String, required: true, maxLength: 255},
     whatsapp: {type: String, required: false},
-    weightGoal: {
-        type: String, 
-        required: true, 
-        enum:['lose','gain','maintain']
-    },
     physicalInformation: physicalInformation.schema,
     foodModels: [foodModel.schema],
     dailyRegisters: [dailyRegister.schema],

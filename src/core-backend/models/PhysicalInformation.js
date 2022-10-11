@@ -6,6 +6,11 @@ const physicalInformationSchema = new mongoose.Schema({
         required: true, 
         enum:['male','female']
     },
+    weightGoal: {
+        type: String, 
+        required: true, 
+        enum:['lose','gain','maintain']
+    },
     age: {type: Number, required: true},
     heigth: {type: Number, required: true},
     weight: {type: Number, required: true},

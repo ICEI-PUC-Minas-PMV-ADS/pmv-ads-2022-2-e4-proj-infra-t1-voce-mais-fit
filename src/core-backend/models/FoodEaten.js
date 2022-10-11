@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const foodEatenSchema = new mongoose.Schema({
     name: {type: String, required: true, maxLength: 255},
     description: {type: String, required: false},
-    gramsAmount: {type: Interger, required: true},
+    gramsAmount: {type: Number, required: true},
     carb: {type: Number, required: true},
     protein: {type: Number, required: true},
     fat: {type: Number, required: true},
