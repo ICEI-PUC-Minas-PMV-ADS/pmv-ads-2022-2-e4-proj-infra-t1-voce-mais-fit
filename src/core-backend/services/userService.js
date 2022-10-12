@@ -43,7 +43,7 @@ async function createNewUser(user) {
 async function getAllUsers(){
     let users = await User.Model.find();
 
-    if(users == null)
+    if(users == null || users.length == 0)
         return {errorType: 404, errorMessage: 'There is no user in database'};
 
     return users;

@@ -10,6 +10,9 @@ async function getTrainerById(trainerId){
 }
 
 async function createNewTrainer(trainer) {    
+
+    //TODO: receber Id da academia e salvar dentro da academia o id do trainer
+
     let newTrainer = new Trainer.Model({
         name: trainer.name,
         whatsapp: trainer.whatsapp,
