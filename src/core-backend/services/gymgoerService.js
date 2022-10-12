@@ -24,5 +24,18 @@ async function createNewGymgoer(gymgoer) {
     return gymgoerDb;
 }
 
+async function updateGymgoerById(gymgoerId, gymgoer){
+    let gymgoerDb = await this.getGymgoerById(gymgoerId);
+
+    if(gymgoerDb._id == null)
+        return {errorType: 404, errorMessage: 'Gymgoer not found'};
+
+    gymgoerDb.name = gymgoer.name != null ? gymgoer.name : gymgoerDb.name;
+    gymgoerDb.whatsapp = gymgoer.whatsapp != null ? gymgoer.whatsapp : gymgoerDb.whatsapp;
+
+    return gymgoerDb.save();
+}
+
 module.exports.createNewGymgoer = createNewGymgoer;
 module.exports.getGymgoerById = getGymgoerById;
+module.exports.updateGymgoerById = updateGymgoerById;

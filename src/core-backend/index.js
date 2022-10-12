@@ -1,4 +1,5 @@
 const userRoute = require('./routes/userRoute');
+const gymgoerRoute = require('./routes/gymgoerRoute');
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:I6ZM5Nb1eM9cXjVx@cluster0.dna8nhy.mongodb.net/100ingredientes')
@@ -11,7 +12,8 @@ const app = express();
 app.use(express.json());
 
 //#region routes
-app.use('/api/userRoute', userRoute);
+app.use('/api/user', userRoute);
+app.use('/api/gymgoer', gymgoerRoute);
 
 //#endregion
 
