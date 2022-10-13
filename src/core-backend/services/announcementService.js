@@ -1,4 +1,3 @@
-const Announcement = require('../models/Announcement');
 const Gym = require('../models/Gym');
 const gymService = require('./gymService');
 const mongoose = require('mongoose');
@@ -27,11 +26,11 @@ async function createNewAnnouncement(gymId, announcement) {
     if(gym._id == null)
         return {errorType: 404, errorMessage: 'Gym not found'};
 
-    let newAnnouncement = new Announcement.Model({
+    let newAnnouncement = {
         _id: mongoose.Types.ObjectId(), //inserindo _id manualmente para poder retornar no response
         description: announcement.description,
         date: Date.now()
-    });
+    };
 
     gym.announcements.push(newAnnouncement);
         let gymDbWithNewAnnouncement = await gym.save();

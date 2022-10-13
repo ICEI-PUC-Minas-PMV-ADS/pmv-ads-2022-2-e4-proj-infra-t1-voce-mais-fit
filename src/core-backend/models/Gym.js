@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
-const announcement = require('./Announcement');
 
 const gymSchema = new mongoose.Schema({
     name: {type: String, required: true, maxLength: 255},
     description: {type: String, required: false},
     address: {type: String, required: false, maxLength: 255},
-    announcements: [announcement.schema],
+    announcements: [{
+        description: {type: String, required: true},
+        date: {type: Date, default: () => Date.now()}
+    }],
     trainers: [{
         type: mongoose.SchemaTypes.ObjectId, 
         ref: 'Trainer'
