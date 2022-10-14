@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const dailyRegister = require('./DailyRegister');
-const exerciseModel = require('./ExerciseWorkoutModel');
 
 const gymgoerSchema = new mongoose.Schema({
     name: {type: String, required: true, maxLength: 255},
@@ -37,7 +36,14 @@ const gymgoerSchema = new mongoose.Schema({
         },
     }],
     dailyRegisters: [dailyRegister.schema],
-    exerciseModels: [exerciseModel.schema]
+    exerciseModels: [{
+        name: {type: String, required: true, maxLength: 255},
+        description: {type: String, required: false},
+        exercises: [{
+            name: {type: String, required: true, maxLength: 255},
+            description: {type: String, required: false}
+        }],
+    }]
 })
 
 //TODO: metodo para codigo com vinculo de academia, vai ser uma propriedade cujo tipo é um outro schema com o numero e data de expiracao, e uma propriedade virtual bool se tá valido ou não

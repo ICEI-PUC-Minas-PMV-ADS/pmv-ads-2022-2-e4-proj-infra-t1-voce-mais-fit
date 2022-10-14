@@ -27,7 +27,7 @@ async function createNewFoodSaved(gymgoerId, foodSaved) {
         return {errorType: 404, errorMessage: 'Gym not found'};
 
     let newFoodSaved = {
-        _id: mongoose.Types.ObjectId(), //inserindo _id manualmente para poder retornar no response
+        _id: mongoose.Types.ObjectId(),
         name: foodSaved.name,
         carbPer100g: foodSaved.carbPer100g,
         proteinPer100g: foodSaved.proteinPer100g,
