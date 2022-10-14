@@ -2,6 +2,10 @@ const gymgoerService = require('../services/gymgoerService');
 const trainerService = require('../services/trainerService');
 const User = require('../models/User');
 
+
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 async function createNewUser(user) {
     let trainerInfo;
     let gymgoerInfo;
@@ -27,9 +31,13 @@ async function createNewUser(user) {
         trainerInfo = await trainerService.createNewTrainer(trainer);
     }
     
+
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(user.password, salt)
+
     let newUser = new User.Model({
         email: user.email,
-        password: user.password,
+        password: passwordHash,
         userType: user.userType,
         gymgoerInfo: user.userType == 'gymgoer' ? gymgoerInfo._id : null,
         trainerInfo: user.userType == 'trainer' ? trainerInfo._id : null,
@@ -72,6 +80,7 @@ async function updateUserById(userId, user){
 
     return userDb.save();
 }
+
 
 module.exports.createNewUser = createNewUser;
 module.exports.getAllUsers = getAllUsers;
