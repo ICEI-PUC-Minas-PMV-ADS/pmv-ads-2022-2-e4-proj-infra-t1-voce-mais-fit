@@ -2,8 +2,6 @@ const gymgoerService = require('../services/gymgoerService');
 
 async function upsertPhysicalInformationByGymgoerId(gymgoerId, physicalInformation) {    
     let gymgoerDb = await gymgoerService.getGymgoerById(gymgoerId);
-
-    console.log(physicalInformation);
     
     gymgoerDb.physicalInformation.geneticSex = physicalInformation.geneticSex != null ? physicalInformation.geneticSex : gymgoerDb.physicalInformation.geneticSex;
     gymgoerDb.physicalInformation.weightGoal = physicalInformation.weightGoal != null ? physicalInformation.weightGoal : gymgoerDb.physicalInformation.weightGoal;

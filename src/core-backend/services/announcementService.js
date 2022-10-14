@@ -33,7 +33,7 @@ async function createNewAnnouncement(gymId, announcement) {
     };
 
     gym.announcements.push(newAnnouncement);
-        let gymDbWithNewAnnouncement = await gym.save();
+        await gym.save();
 
     return {gymId: gym._id, newAnnouncement};
 }

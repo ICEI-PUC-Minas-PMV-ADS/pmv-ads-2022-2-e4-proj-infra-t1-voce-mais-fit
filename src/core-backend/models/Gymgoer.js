@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const foodModel = require('./FoodModel');
 const dailyRegister = require('./DailyRegister');
 const exerciseModel = require('./ExerciseWorkoutModel');
 
@@ -24,7 +23,19 @@ const gymgoerSchema = new mongoose.Schema({
         tmb: {type: Number},
         dailyKcal: {type: Number},
     },
-    foodModels: [foodModel.schema],
+    foodSaved: [{
+        name: {type: String, required: true, maxLength: 255},
+        description: {type: String, required: false},
+        carbPer100g: {type: Number, required: true},
+        proteinPer100g: {type: Number, required: true},
+        fatPer100g: {type: Number, required: true},
+        kcalPer100g: {
+            type: Number, 
+            default: function(){
+                return (this.carbPer100g * 4) + (this.proteinPer100g * 4) + (this.fatPer100g * 9)
+            }
+        },
+    }],
     dailyRegisters: [dailyRegister.schema],
     exerciseModels: [exerciseModel.schema]
 })

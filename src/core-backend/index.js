@@ -4,6 +4,7 @@ const trainerRoute = require('./routes/trainerRoute');
 const gymRoute = require('./routes/gymRoute');
 const announcementRoute = require('./routes/announcementRoute');
 const physicalInformationRoute = require('./routes/physicalInformationRoute');
+const foodSavedRoute = require('./routes/foodSavedRoute');
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:I6ZM5Nb1eM9cXjVx@cluster0.dna8nhy.mongodb.net/100ingredientes')
@@ -22,6 +23,7 @@ app.use('/api/trainer', trainerRoute);
 app.use('/api/gym', gymRoute);
 app.use('/api/announcement', announcementRoute);
 app.use('/api/physicalInformation', physicalInformationRoute);
+app.use('/api/foodSaved', foodSavedRoute);
 
 //#endregion
 
