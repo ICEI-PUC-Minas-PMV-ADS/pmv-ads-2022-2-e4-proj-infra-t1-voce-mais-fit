@@ -23,9 +23,9 @@ app.use('/api/gymgoer', gymgoerRoute);
 app.use('/api/trainer', trainerRoute);
 app.use('/api/gym', gymRoute);
 app.use('/api/announcement', announcementRoute);
-app.use('/api/physicalInformation', physicalInformationRoute);
+app.use('/api/', physicalInformationRoute);
 app.use('/api/foodSaved', foodSavedRoute);
-app.use('/api/exerciseModel', exerciseModelRoute);
+app.use('/api/', exerciseModelRoute);
 
 //#endregion
 

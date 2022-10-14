@@ -3,7 +3,7 @@ const router = express.Router();
 
 const exerciseModelService = require('../services/exerciseModelService');
 
-router.get('/:gymgoerId', (req, res) => {
+router.get('/gymgoer/:gymgoerId/exerciseModels', (req, res) => {
     exerciseModelService.getAllExerciseModelsByGymgoerId(req.params.gymgoerId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -14,7 +14,7 @@ router.get('/:gymgoerId', (req, res) => {
     });
 });
 
-router.post('/:gymgoerId', (req, res) => {
+router.post('/gymgoer/:gymgoerId/exerciseModels', (req, res) => {
     exerciseModelService.createNewExerciseModel(req.params.gymgoerId, req.body).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -25,7 +25,7 @@ router.post('/:gymgoerId', (req, res) => {
     });
 });
 
-router.patch('/:exerciseModelId', (req, res) => {
+router.patch('/gymgoer/exerciseModels/:exerciseModelId', (req, res) => {
     exerciseModelService.updateExerciseModelById(req.params.exerciseModelId, req.body).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
