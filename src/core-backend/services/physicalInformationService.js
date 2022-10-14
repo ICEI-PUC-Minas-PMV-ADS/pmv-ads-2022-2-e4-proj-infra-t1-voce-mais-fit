@@ -1,42 +1,19 @@
-const PhysicalInformation = require('../models/PhysicalInformation');
 const gymgoerService = require('../services/gymgoerService');
 
-async function getByGymgoerId(gymgoerId){
+async function upsertPhysicalInformationByGymgoerId(gymgoerId, physicalInformation) {    
     let gymgoerDb = await gymgoerService.getGymgoerById(gymgoerId);
 
-    if(gymgoerDb._id == null)
-        return {errorType: 404, errorMessage: 'Gymgoer not found'};
-
-    if(gymgoerDb.physicalInformation == null)
-        return {errorType: 404, errorMessage: 'Physical Information not found'};
-
-    return gymgoerDb.physicalInformation;
-}
-
-async function createNewPhysicalInformation(gymgoerId, physicalInformation){
-    let gymgoerDb = await gymgoerService.getGymgoerById(gymgoerId);
-
-    if(gymgoerDb._id == null)
-        return {errorType: 404, errorMessage: 'Gymgoer not found'};
-
-    gymgoerDb.physicalInformation = physicalInformation;
-
-    return gymgoerDb.save();
-}
-
-async function upsertPhysicalInformation(gymgoerId, physicalInformation) {    
-    let physicalInformationDb = await this.getByGymgoerId(gymgoerId);
-
-    if(physicalInformationDb._id == null)
-        return await this.createNewPhysicalInformation(gymgoerId, physicalInformation);
+    console.log(physicalInformation);
     
-    physicalInformationDb.geneticSex = physicalInformation.geneticSex != null ? physicalInformation.geneticSex : physicalInformationDb.geneticSex;
-    physicalInformationDb.weightGoal = physicalInformation.weightGoal != null ? physicalInformation.weightGoal : physicalInformationDb.weightGoal;
-    physicalInformationDb.age = physicalInformation.age != null ? physicalInformation.age : physicalInformationDb.age;
-    physicalInformationDb.weigth = physicalInformation.weigth != null ? physicalInformation.weigth : physicalInformationDb.weigth;
-    physicalInformationDb.heigth = physicalInformation.heigth != null ? physicalInformation.heigth : physicalInformationDb.heigth;
+    gymgoerDb.physicalInformation.geneticSex = physicalInformation.geneticSex != null ? physicalInformation.geneticSex : gymgoerDb.physicalInformation.geneticSex;
+    gymgoerDb.physicalInformation.weightGoal = physicalInformation.weightGoal != null ? physicalInformation.weightGoal : gymgoerDb.physicalInformation.weightGoal;
+    gymgoerDb.physicalInformation.age = physicalInformation.age != null ? physicalInformation.age : gymgoerDb.physicalInformation.age;
+    gymgoerDb.physicalInformation.weight = physicalInformation.weight != null ? physicalInformation.weight : gymgoerDb.physicalInformation.weight;
+    gymgoerDb.physicalInformation.height = physicalInformation.height != null ? physicalInformation.height : gymgoerDb.physicalInformation.height;
 
-    return await physicalInformationDb.save();
+    //TODO: calcular automaticamente valores de kcal, tmb e imc
+
+    return await gymgoerDb.save();
 }
 
-module.exports.upsertPhysicalInformation = upsertPhysicalInformation;
+module.exports.upsertPhysicalInformationByGymgoerId = upsertPhysicalInformationByGymgoerId;

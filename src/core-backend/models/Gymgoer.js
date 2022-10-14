@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const physicalInformation = require('./PhysicalInformation');
 const foodModel = require('./FoodModel');
 const dailyRegister = require('./DailyRegister');
 const exerciseModel = require('./ExerciseWorkoutModel');
@@ -7,7 +6,24 @@ const exerciseModel = require('./ExerciseWorkoutModel');
 const gymgoerSchema = new mongoose.Schema({
     name: {type: String, required: true, maxLength: 255},
     whatsapp: {type: String, required: false},
-    physicalInformation: physicalInformation.schema,
+    physicalInformation: {
+        geneticSex: {
+            type: String, 
+            required: true, 
+            enum:['male','female']
+        },
+        weightGoal: {
+            type: String, 
+            required: true, 
+            enum:['lose','gain','maintain']
+        },
+        age: {type: Number, required: true},
+        height: {type: Number, required: true},
+        weight: {type: Number, required: true},
+        imc: {type: Number},
+        tmb: {type: Number},
+        dailyKcal: {type: Number},
+    },
     foodModels: [foodModel.schema],
     dailyRegisters: [dailyRegister.schema],
     exerciseModels: [exerciseModel.schema]
