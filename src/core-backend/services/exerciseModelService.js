@@ -39,7 +39,6 @@ async function createNewExerciseModel(gymgoerId, exerciseModel) {
     return {gymgoerId: gymgoer._id, newExerciseModel};
 }
 
-
 async function updateExerciseModelById(exerciseModelsId, exerciseModels){
     let updateResult = await Gymgoer.Model.updateOne(
                                     {'exerciseModels._id': exerciseModelsId}, 
@@ -53,7 +52,20 @@ async function updateExerciseModelById(exerciseModelsId, exerciseModels){
     return updateResult;
 }
 
+    
+async function getAllExerciseByExerciseModelId(exerciseModelId){
+    let exercises = await Gymgoer.Model.aggregate([
+        { $unwind: "$exerciseModels" },
+        { $match: { 'exerciseModels._id': mongoose.Types.ObjectId(exerciseModelId)} },
+        { $replaceRoot: { newRoot: "$exerciseModels" }},
+        { $project: { exercises: 1}}
+    ]);
+
+    return exercises;
+}
+
 module.exports.createNewExerciseModel = createNewExerciseModel;
 module.exports.getAllExerciseModelsByGymgoerId = getAllExerciseModelsByGymgoerId;
 module.exports.getExerciseModelById = getExerciseModelById;
 module.exports.updateExerciseModelById = updateExerciseModelById;
+module.exports.getAllExerciseByExerciseModelId = getAllExerciseByExerciseModelId;
