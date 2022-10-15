@@ -2,6 +2,12 @@ const gymgoerService = require('../services/gymgoerService');
 const trainerService = require('../services/trainerService');
 const User = require('../models/User');
 
+
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const SECRET = "opsdfpsdfPAMAOSDNVSVMkdspamdvpaskdmvm";
+
 async function createNewUser(user) {
     let trainerInfo;
     let gymgoerInfo;
@@ -27,6 +33,10 @@ async function createNewUser(user) {
         trainerInfo = await trainerService.createNewTrainer(trainer);
     }
     
+
+   // const salt = await bcrypt.genSalt(10);
+   // const passwordHash = await bcrypt.hash(user.password, salt)
+
     let newUser = new User.Model({
         email: user.email,
         password: user.password,
@@ -48,6 +58,19 @@ async function getAllUsers(){
 
     return users;
 }
+
+
+async function deleteUserById(userId){
+    try{
+        let user = await User.Model.findByIdAndDelete(userId);
+        return {error: false, message: "Excluido com sucesso"}
+
+    }catch(err){
+        return {errorType: 404, errorMessage: 'There is no user in database'};
+    }
+    
+}
+
 
 async function getUserById(userId){
     let user = await User.Model.findById(userId);
@@ -73,7 +96,9 @@ async function updateUserById(userId, user){
     return userDb.save();
 }
 
+
 module.exports.createNewUser = createNewUser;
 module.exports.getAllUsers = getAllUsers;
 module.exports.getUserById = getUserById;
 module.exports.updateUserById = updateUserById;
+module.exports.deleteUserById = deleteUserById;
