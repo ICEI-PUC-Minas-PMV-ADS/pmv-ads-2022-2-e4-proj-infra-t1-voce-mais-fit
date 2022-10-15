@@ -86,6 +86,21 @@ async function addExerciseInModel(exerciseModelId, exercise){
 
     return gymgoerDb.exerciseModels.filter(exerciseModel => exerciseModel._id == exerciseModelId)[0].exercises;
 }
+
+async function deleteExerciseInModel(exerciseId){
+    let updatedGymgoerDb = await Gymgoer.Model.updateOne(
+        {'exerciseModels.exercises._id': mongoose.Types.ObjectId(exerciseId)},
+        {      
+            "$pull": {
+                "exerciseModels.$.exercises":{
+                "_id": mongoose.Types.ObjectId(exerciseId)
+                }
+            }
+        }
+    )
+
+    return updatedGymgoerDb;
+}
 //#endregion
 
 module.exports.createNewExerciseModel = createNewExerciseModel;
@@ -94,3 +109,4 @@ module.exports.getExerciseModelById = getExerciseModelById;
 module.exports.updateExerciseModelById = updateExerciseModelById;
 module.exports.getAllExerciseByExerciseModelId = getAllExerciseByExerciseModelId;
 module.exports.addExerciseInModel = addExerciseInModel;
+module.exports.deleteExerciseInModel = deleteExerciseInModel;
