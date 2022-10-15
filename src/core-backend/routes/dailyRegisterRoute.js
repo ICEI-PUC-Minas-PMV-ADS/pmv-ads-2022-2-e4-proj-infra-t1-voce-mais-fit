@@ -15,7 +15,6 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId', (req, res) => {
     });
 });
 
-//TODO criar automaticamente se a busca retornar null
 router.get('/gymgoer/dailyRegisters/:date', (req, res) => {
     dailyRegisterService.getDailyRegisterByDate(req.params.date).then((result) => {
         if(result.errorMessage != null)
@@ -96,8 +95,6 @@ router.post('/gymgoer/dailyRegisters/:dailyRegisterId/exercises', (req, res) => 
         return res.status(500).send(err.message);
     });
 });
-
-//TODO Update exercise in day
 
 router.delete('/gymgoer/dailyRegisters/:foodId', (req, res) => {
     dailyRegisterService.deleteExerciseInDailyRegister(req.params.foodId).then((result) => {
