@@ -3,6 +3,7 @@ const router = express.Router();
 
 const exerciseModelService = require('../services/exerciseModelService');
 
+//#region ExerciseModel
 router.get('/gymgoer/:gymgoerId/exerciseModels', (req, res) => {
     exerciseModelService.getAllExerciseModelsByGymgoerId(req.params.gymgoerId).then((result) => {
         if(result.errorMessage != null)
@@ -35,7 +36,9 @@ router.patch('/gymgoer/exerciseModels/:exerciseModelId', (req, res) => {
         return res.status(500).send(err.message);
     });
 });
+//#endregion
 
+//#region Exercise inside Exercise Model
 router.get('/gymgoer/exerciseModels/:exerciseModelId/exercises', (req, res) => {
     exerciseModelService.getAllExerciseByExerciseModelId(req.params.exerciseModelId).then((result) => {
         if(result.errorMessage != null)
@@ -68,6 +71,6 @@ router.delete('/gymgoer/exerciseModels/exercises/:exerciseId', (req, res) => {
         return res.status(500).send(err.message);
     });
 });
-
+//#endregion
 
 module.exports = router;
