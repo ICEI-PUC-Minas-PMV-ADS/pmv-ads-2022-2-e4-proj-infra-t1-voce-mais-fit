@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     email: {type: String, required: true, lowercase: true, maxLength: 255},
@@ -23,6 +24,7 @@ const userSchema = new mongoose.Schema({
         }
     }
 })
+
 
 const UserModel = mongoose.model('User', userSchema);
 

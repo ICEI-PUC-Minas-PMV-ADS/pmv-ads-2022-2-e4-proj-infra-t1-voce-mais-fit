@@ -6,6 +6,8 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const SECRET = "opsdfpsdfPAMAOSDNVSVMkdspamdvpaskdmvm";
+
 async function createNewUser(user) {
     let trainerInfo;
     let gymgoerInfo;
@@ -32,7 +34,7 @@ async function createNewUser(user) {
     }
     
 
-    const salt = await bcrypt.genSalt(12);
+    const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(user.password, salt)
 
     let newUser = new User.Model({
@@ -56,6 +58,10 @@ async function getAllUsers(){
 
     return users;
 }
+
+
+
+
 
 async function getUserById(userId){
     let user = await User.Model.findById(userId);

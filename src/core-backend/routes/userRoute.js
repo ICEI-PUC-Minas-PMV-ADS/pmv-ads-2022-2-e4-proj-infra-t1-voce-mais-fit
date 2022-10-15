@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const userService = require('../services/userService');
+const User = require('../models/User');
+
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 router.get('/', (req, res) => {
     userService.getAllUsers().then((result) => {
@@ -46,5 +50,39 @@ router.patch('/:userId', (req, res) => {
         return res.status(500).send(err.message);
     });
 });
+
+
+router.post('/login', async(req, res) => {
+    
+    const {email, password} = req.body
+    
+    // checar se o usr existe
+    const userCheck = await User.Model.findOne({email: email})
+    if(!userCheck){
+        return res.status(404).json({msg: "Usuário não encontrado, verifique o Email novamente"})
+    }
+
+    // checar a senha
+    //const passwordCheck = await bcrypt.compare(password, User.password);
+    const passwordCheck = await User.Model.findOne({password: password})
+    if(!passwordCheck){
+        return res.status(422).json({msg: "Senha invalida, verifique a senha novamente"})
+    }
+
+    try{
+        const secret = "sdfsadvsavsdfsvdsadvsadf"
+        const token = jwt.sign({
+            id: User._id
+        },
+        secret,
+        )
+
+        res.status(200).json({msg: "Autenticado com sucesso", token})
+    }catch(err){
+        console.log(err);
+    }
+
+});
+
 
 module.exports = router;
