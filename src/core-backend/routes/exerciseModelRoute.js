@@ -4,6 +4,17 @@ const router = express.Router();
 const exerciseModelService = require('../services/exerciseModelService');
 
 //#region ExerciseModel
+router.get('/gymgoer/exerciseModels/:exerciseModelId', (req, res) => {
+    exerciseModelService.getExerciseModelById(req.params.exerciseModelId).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
+
 router.get('/gymgoer/:gymgoerId/exerciseModels', (req, res) => {
     exerciseModelService.getAllExerciseModelsByGymgoerId(req.params.gymgoerId).then((result) => {
         if(result.errorMessage != null)

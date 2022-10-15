@@ -4,10 +4,12 @@ const mongoose = require('mongoose');
 
 //#region ExerciseModel
 async function getExerciseModelById(exerciseModelId){
-    let exerciseModel = await Gymgoer.Model.find({'exerciseModel._id': exerciseModelId});
+    let gymgoer = await Gymgoer.Model.findOne({'exerciseModel._id': exerciseModelId});
 
-    if(exerciseModel == null)
+    if(gymgoer == null)
         return {errorType: 404, errorMessage: 'Exercise Model not found'};
+
+    let exerciseModel = gymgoer.exerciseModels.filter(exerciseModel => exerciseModel._id == exerciseModelId)[0];
 
     return exerciseModel;
 }
@@ -66,7 +68,7 @@ async function getAllExerciseByExerciseModelId(exerciseModelId){
     if(exercises == null || exercises.length == 0)
         return {errorType: 404, errorMessage: 'Exercises not found'};
 
-    return exercises;
+    return exercises[0];
 }
 
 async function addExerciseInModel(exerciseModelId, exercise){
