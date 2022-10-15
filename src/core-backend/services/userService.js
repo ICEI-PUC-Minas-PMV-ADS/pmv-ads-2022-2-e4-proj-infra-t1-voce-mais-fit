@@ -34,12 +34,12 @@ async function createNewUser(user) {
     }
     
 
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(user.password, salt)
+   // const salt = await bcrypt.genSalt(10);
+   // const passwordHash = await bcrypt.hash(user.password, salt)
 
     let newUser = new User.Model({
         email: user.email,
-        password: passwordHash,
+        password: user.password,
         userType: user.userType,
         gymgoerInfo: user.userType == 'gymgoer' ? gymgoerInfo._id : null,
         trainerInfo: user.userType == 'trainer' ? trainerInfo._id : null,
@@ -60,7 +60,16 @@ async function getAllUsers(){
 }
 
 
+async function deleteUserById(userId){
+    try{
+        let user = await User.Model.findByIdAndDelete(userId);
+        return {error: false, message: "Excluido com sucesso"}
 
+    }catch(err){
+        return {errorType: 404, errorMessage: 'There is no user in database'};
+    }
+    
+}
 
 
 async function getUserById(userId){
@@ -92,3 +101,4 @@ module.exports.createNewUser = createNewUser;
 module.exports.getAllUsers = getAllUsers;
 module.exports.getUserById = getUserById;
 module.exports.updateUserById = updateUserById;
+module.exports.deleteUserById = deleteUserById;

@@ -51,7 +51,7 @@ router.patch('/:userId', (req, res) => {
     });
 });
 
-
+// Login
 router.post('/login', async(req, res) => {
     
     const {email, password} = req.body
@@ -81,7 +81,18 @@ router.post('/login', async(req, res) => {
     }catch(err){
         console.log(err);
     }
+});
 
+//Delete Users
+router.delete('/:userId', (req, res) => {
+    userService.deleteUserById(req.params.userId).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
 });
 
 
