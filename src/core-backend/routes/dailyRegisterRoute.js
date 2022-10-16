@@ -36,6 +36,17 @@ router.get('/gymgoer/:gymgoerId/dailyRegisters', (req, res) => {
         return res.status(500).send(err.message);
     });
 });
+
+router.post('/gymgoer/:gymgoerId/dailyRegisters', (req, res) => {
+    dailyRegisterService.createNewDailyRegister(req.params.gymgoerId, req.body).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
 //#endregion
 
 //#region Food Eaten in day
