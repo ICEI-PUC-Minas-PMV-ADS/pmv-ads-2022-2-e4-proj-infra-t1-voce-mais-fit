@@ -1,5 +1,5 @@
 <template>
-    <div class="allLoginPageContainer">
+    <div class="allContainer">
         <header class="headerLoginContainer">
             <div class="headerLogin">
                 <div class="headerMiniLogo">
@@ -18,6 +18,30 @@
                 <div class="row" id="row">
                     <div class="col-6 p-0" >
                         <label class="mb-1 label_default"
+                        >Nome</label
+                        >
+                        <input id="inputForm"
+                        placeholder="Seu Nome"
+                        type="text"
+                        class="input_default form-control requiredName"
+                        v-model="userName"
+                        />
+                        <span class="spanName">Insira um Nome válido</span>
+                    </div>
+                    <div class="col-6 p-0" >
+                        <label class="mb-1 label_default"
+                        >CPF</label
+                        >
+                        <input id="inputForm"
+                        placeholder="000.000.000-00"
+                        type="Seu CPF"
+                        class="input_default form-control requiredName"
+                        v-model="userCpf"
+                        />
+                        <span class="spanCpf">Insira um CPF válido</span>
+                    </div>
+                    <div class="col-6 p-0" >
+                        <label class="mb-1 label_default"
                         >Email</label
                         >
                         <input id="inputForm"
@@ -25,10 +49,8 @@
                         type="email"
                         class="input_default form-control requiredName"
                         v-model="userEmail"
-                        @input="validaMail"
                         />
                         <span class="spanMail">Insira um E-mail válido</span>
-                        <a class="forget">Esqueci o meu E-mail</a>
                     </div>
                     <div class="col-6 p-0" >
                         <label class="mb-1 label_default"
@@ -39,12 +61,10 @@
                         type="password"
                         class="input_default form-control required"
                         v-model="userSenha"
-                        @input="validaSenha"
                         />
                         <span class="spanSenha">Insira a senha correta</span>
-                        <a class="forget">Esqueci a minha Senha</a>
                     </div>
-                    <button class="submitButton" @click="toGo" type="submit">Entrar!</button>
+                    <button class="submitButton" type="submit">Cadastrar!</button>
                 </div>
             </div>
         </body>
@@ -60,100 +80,19 @@ export default {
     },
     data(){
         return{
+            userName:"",
+            userCpf:"",
             userEmail:"",
             userSenha:""
         }
     },
     methods:{
-        validaMail(k){
-            let email = this.userEmail;
-            let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-            
-            if(email.match(pattern)){
-                k.target.style.border = '1px solid #5B9CCF'
-                let span = document.querySelector('.spanMail')
-                span.style.display = 'none'
-            }else if(email.length === 0){
-                k.target.style.border = '1px solid #5B9CCF'
-                let span = document.querySelector('.spanMail')
-                span.style.display = 'none'
-            }else{
-                k.target.style.border = '2px solid #cc1313'
-                let span = document.querySelector('.spanMail')
-                span.style.display = 'block'
-            }
-        },
-        validaSenha(j){
-            if(this.userSenha === ""){
-                j.target.style.border = '1px solid #5B9CCF'
-                let spanSenha = document.querySelector('.spanSenha')
-                spanSenha.style.display = 'none'
-            }
-        },
-        toGo(){
-            if(!this.userEmail && !this.userSenha){
-                let spanMail = document.querySelector('.spanMail')
-                spanMail.style.display = 'block'
-                let spanSenha = document.querySelector('.spanSenha')
-                spanSenha.style.display = 'block'
-            }else if(this.userEmail && !this.userSenha){
-                let spanSenha = document.querySelector('.spanSenha')
-                spanSenha.style.display = 'block'
-            }else if(!this.userEmail && this.userSenha){
-                let spanMail = document.querySelector('.spanMail')
-                spanMail.style.display = 'block'
-            }
-        }
+
     }
 }
 </script>
-<style scoped>
-.submitButton{
-    width: 35%;
-    margin-top: 3%;
-    border: none;
-    border-radius: 15px;
-    height: 30px;
-    font-size: 18px;
-}
-.submitButton:hover{
-    background-color: #FD0054;
-    color: #FFFF;
-    transition: .6s;
-}
-.forget{
-    color: #FFFF;
-}
-input{
-    margin-bottom: 1%;
-}
-a{
-    text-decoration: none;
-    cursor: pointer;
-}
-.col-6 :nth-child(1){
-    margin-top: 4%;
-}
-.row{
-    padding-top: 5%;
-    padding-bottom: 12%;
-    border: 4px #FD0054 solid;
-    width: 80%;
-    padding-bottom: 8%;
-    margin-bottom: 2%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-span{
-    display: none;
-    color: red;
-}
-.allLoginPageContainer{
-    background-color: #601430;
-}
 
+<style scoped>
 .headerMiniLogo{
     width: 40%;
     height: 100%;
@@ -207,6 +146,13 @@ span{
     text-decoration: none;
     font-size:max(2.5vh, 16px) ;
 }
+
+.allContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #601430;
+}
+
 .formContainer{
     background: #601430;
     display: flex;
@@ -215,5 +161,46 @@ span{
 }
 label{
     color: #FFFF;
+}
+.submitButton{
+    width: 35%;
+    margin-top: 3%;
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    font-size: 18px;
+}
+.submitButton:hover{
+    background-color: #FD0054;
+    color: #FFFF;
+    transition: .6s;
+}
+.forget{
+    color: #FFFF;
+}
+input{
+    margin-bottom: 1%;
+}
+.col-6 :nth-child(1){
+    margin-top: 4%;
+}
+.row{
+    padding-top: 5%;
+    padding-bottom: 12%;
+    border: 4px #FD0054 solid;
+    width: 80%;
+    padding-bottom: 8%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+span{
+    display: none;
+    color: red;
+}
+.allLoginPageContainer{
+    background-color: #601430;
 }
 </style>
