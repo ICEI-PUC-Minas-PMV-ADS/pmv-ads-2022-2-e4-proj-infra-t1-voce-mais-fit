@@ -16,5 +16,6 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+   @import url(https://allfont.net/allfont.css?fonts=agency-fb);
 }
 </style>
