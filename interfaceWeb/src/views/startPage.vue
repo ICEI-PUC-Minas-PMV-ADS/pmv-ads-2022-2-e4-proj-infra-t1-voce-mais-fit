@@ -2,13 +2,13 @@
     <div class="allContainer">
         <header class="headerLoginContainer">
             <div class="headerLogin">
-                <div class="headerMiniLogo">
+                <router-link to="/" class="headerMiniLogo">
                     <img src="@/assets/alllImages/alterIcon.svg" class="alterLink">
                     <p class="textLogo">VOCÊ + FIT</p>
-                </div>
+                </router-link>
                 <div class="headerLink">
                     <router-link to="/registerUserPage" class="link">Criar Conta</router-link>
-                    <router-link to="/mainPage" class="link">Criar Conta Personal</router-link>
+                    <router-link to="/registerPersonal" class="link">Criar Conta Personal</router-link>
                     <router-link to="/loginPage" class="link">Fazer Login</router-link>
                 </div>
             </div>
@@ -44,6 +44,7 @@ export default {
     align-items: center;
     flex-direction: column;
     background-color: #222222;
+    text-decoration: none;
 }
 .headerLink{
     width: 60%;

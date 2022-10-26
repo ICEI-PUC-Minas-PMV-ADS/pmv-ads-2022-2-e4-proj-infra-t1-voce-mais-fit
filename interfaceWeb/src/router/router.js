@@ -5,6 +5,7 @@ import mainPage from "@/views/View_Usuario/mainPage";
 import treinoPage from "@/views/View_Treino/treinoPage";
 import loginPage from "@/views/Login/loginPage";
 import registerUserPage from "@/views/Register/registerUserPage"
+import registerPersonal from "@/views/Register/registerPersonal"
 
 Vue.use(Router);
 
@@ -31,5 +32,9 @@ export default new Router({
             path:"/registerUserPage",
             component: registerUserPage
         }, 
+        {
+            path:"/registerPersonal",
+            component: registerPersonal
+        },
     ] 
 })
