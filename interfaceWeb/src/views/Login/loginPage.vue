@@ -1,34 +1,159 @@
 <template>
-    <div class="allContainer">
-        <div class="headerLoginContainer">
+    <div class="allLoginPageContainer">
+        <header class="headerLoginContainer">
             <div class="headerLogin">
-                <div class="headerMiniLogo">
-                    <img src="@/assets/alterIcon.svg" class="alterLink">
+                <router-link to="/" class="headerMiniLogo">
+                    <img src="@/assets/alllImages/alterIcon.svg" class="alterLink">
                     <p class="textLogo">VOCÊ + FIT</p>
-                </div>
+                </router-link>
                 <div class="headerLink">
-                    <router-link to="/mainPage" class="link">Criar Conta</router-link>
-                    <router-link to="/mainPage" class="link">Criar Conta Personal</router-link>
-                    <router-link to="/mainPage" class="link">Fazer Login</router-link>
+                    <router-link to="/registerUserPage" class="link">Criar Conta</router-link>
+                    <router-link to="/registerPersonal" class="link">Criar Conta Personal</router-link>
+                    <router-link to="/loginPage" class="link">Fazer Login</router-link>
                 </div>
             </div>
-        </div>
-        <div class="bodyLogin">
-            <div class="bodyTextContainer">
-                <h2 id="h2Text">MAKE YOUR</h2><br>
-                <h1 id="h1Text">BODY</h1>
+        </header>
+        <body>
+            <div class="formContainer">
+                <div class="row" id="row">
+                    <div class="col-6 p-0" >
+                        <label class="mb-1 label_default"
+                        >Email</label
+                        >
+                        <input id="inputForm"
+                        placeholder="Seu e-mail"
+                        type="email"
+                        class="input_default form-control requiredName"
+                        v-model="userEmail"
+                        @input="validaMail"
+                        />
+                        <span class="spanMail">Insira um E-mail válido</span>
+                        <a class="forget">Esqueci o meu E-mail</a>
+                    </div>
+                    <div class="col-6 p-0" >
+                        <label class="mb-1 label_default"
+                        >Senha</label
+                        >
+                        <input id="inputFormTwo"
+                        placeholder="Sua Senha"
+                        type="password"
+                        class="input_default form-control required"
+                        v-model="userSenha"
+                        @input="validaSenha"
+                        />
+                        <span class="spanSenha">Insira a senha correta</span>
+                        <a class="forget">Esqueci a minha Senha</a>
+                    </div>
+                    <button class="submitButton" @click="toGo" type="submit">Entrar!</button>
+                </div>
             </div>
-        </div>
+        </body>
+        <footerComponent></footerComponent>
     </div>
 </template>
 
 <script>
+import footerComponent from '@/components/footerComponent.vue';
 export default {
-    
+    components:{
+        footerComponent,
+    },
+    data(){
+        return{
+            userEmail:"",
+            userSenha:""
+        }
+    },
+    methods:{
+        validaMail(k){
+            let email = this.userEmail;
+            let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            
+            if(email.match(pattern)){
+                k.target.style.border = '1px solid #5B9CCF'
+                let span = document.querySelector('.spanMail')
+                span.style.display = 'none'
+            }else if(email.length === 0){
+                k.target.style.border = '1px solid #5B9CCF'
+                let span = document.querySelector('.spanMail')
+                span.style.display = 'none'
+            }else{
+                k.target.style.border = '2px solid #cc1313'
+                let span = document.querySelector('.spanMail')
+                span.style.display = 'block'
+            }
+        },
+        validaSenha(j){
+            if(this.userSenha === ""){
+                j.target.style.border = '1px solid #5B9CCF'
+                let spanSenha = document.querySelector('.spanSenha')
+                spanSenha.style.display = 'none'
+            }
+        },
+        toGo(){
+            if(!this.userEmail && !this.userSenha){
+                let spanMail = document.querySelector('.spanMail')
+                spanMail.style.display = 'block'
+                let spanSenha = document.querySelector('.spanSenha')
+                spanSenha.style.display = 'block'
+            }else if(this.userEmail && !this.userSenha){
+                let spanSenha = document.querySelector('.spanSenha')
+                spanSenha.style.display = 'block'
+            }else if(!this.userEmail && this.userSenha){
+                let spanMail = document.querySelector('.spanMail')
+                spanMail.style.display = 'block'
+            }
+        }
+    }
 }
 </script>
-
 <style scoped>
+.submitButton{
+    width: 35%;
+    margin-top: 3%;
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    font-size: 18px;
+}
+.submitButton:hover{
+    background-color: #FD0054;
+    color: #FFFF;
+    transition: .6s;
+}
+.forget{
+    color: #FFFF;
+}
+input{
+    margin-bottom: 1%;
+}
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+.col-6 :nth-child(1){
+    margin-top: 4%;
+}
+.row{
+    padding-top: 5%;
+    padding-bottom: 12%;
+    border: 4px #FD0054 solid;
+    width: 80%;
+    padding-bottom: 8%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+span{
+    display: none;
+    color: red;
+}
+.allLoginPageContainer{
+    background-color: #601430;
+}
+
 .headerMiniLogo{
     width: 40%;
     height: 100%;
@@ -37,6 +162,7 @@ export default {
     align-items: center;
     flex-direction: column;
     background-color: #222222;
+    text-decoration: none;
 }
 .headerLink{
     width: 60%;
@@ -49,7 +175,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10%;
 }
 .headerLogin{
     width: 60%;
@@ -57,15 +182,6 @@ export default {
     background-color: #FD0054;
     display: flex;
     flex-direction: row;
-}
-.allContainer{
-    display: flex;
-    flex-direction: column;
-    background-color: #601430;
-}
-.imgLogoCont{
-    display: flex;
-    justify-content: center;
 }
 .headerLink{
     display: flex;
@@ -92,30 +208,13 @@ export default {
     text-decoration: none;
     font-size:max(2.5vh, 16px) ;
 }
-.bodyTextContainer{
-    flex-direction: column;
-    text-align: center;
-    border: 6px #FD0054 solid;
-    padding-right: 2%;
-    padding-left: 2%;
-    padding-bottom: 4%;
-}
-.bodyLogin{
+.formContainer{
+    background: #601430;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 9%;
+    align-items: center;
 }
-#h1Text{
+label{
     color: #FFFF;
-    font-size: 17vh;
-}
-#h2Text{ 
-    font-style: normal;
-    font-weight: 700;
-    line-height: 60px;
-    color: #dadada;
-    font-size: 3vh;
-    padding-top: 6%;
 }
 </style>
