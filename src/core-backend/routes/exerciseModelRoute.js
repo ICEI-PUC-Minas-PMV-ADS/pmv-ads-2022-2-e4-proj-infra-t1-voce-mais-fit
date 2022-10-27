@@ -15,6 +15,24 @@ router.get('/gymgoer/exerciseModels/:exerciseModelId', (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /api/gymgoer/{gymgoerId}/exerciseModels:
+ *  get:
+ *   tags:
+ *    - exerciseModels
+ *   description: Busca o todos os modelos de exercício salvos para determinado Gymgoer, através do GymgoerId (ObjectId)
+ *   parameters:
+ *    - name: gymgoerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    500:
+ *     description: Erro interno
+ */
 router.get('/gymgoer/:gymgoerId/exerciseModels', (req, res) => {
     exerciseModelService.getAllExerciseModelsByGymgoerId(req.params.gymgoerId).then((result) => {
         if(result.errorMessage != null)
@@ -50,6 +68,24 @@ router.patch('/gymgoer/exerciseModels/:exerciseModelId', (req, res) => {
 //#endregion
 
 //#region Exercise inside Exercise Model
+/**
+ * @swagger
+ * /api/gymgoer/exerciseModels/{exerciseModelId}/exercises:
+ *  get:
+ *   tags:
+ *    - exerciseModels
+ *   description: Busca o todos os exercícios salvos dentro de um modelo, através do exerciseModelId (ObjectId)
+ *   parameters:
+ *    - name: exerciseModelId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    500:
+ *     description: Erro interno
+ */
 router.get('/gymgoer/exerciseModels/:exerciseModelId/exercises', (req, res) => {
     exerciseModelService.getAllExerciseByExerciseModelId(req.params.exerciseModelId).then((result) => {
         if(result.errorMessage != null)

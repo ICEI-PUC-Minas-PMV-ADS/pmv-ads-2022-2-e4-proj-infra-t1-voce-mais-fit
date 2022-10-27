@@ -3,6 +3,24 @@ const router = express.Router();
 
 const foodSavedService = require('../services/foodSavedService');
 
+/**
+ * @swagger
+ * /api/foodSaved/{gymgoerId}:
+ *  get:
+ *   tags:
+ *    - foodSaved
+ *   description: Busca o todos os alimentos salvos para determinado Gymgoer, através do GymgoerId, tipo ObjectId
+ *   parameters:
+ *    - name: gymgoerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    500:
+ *     description: Erro interno
+ */
 router.get('/:gymgogerId', (req, res) => {
     foodSavedService.getAllFoodSavedByGymgoerId(req.params.gymgogerId).then((result) => {
         if(result.errorMessage != null)
