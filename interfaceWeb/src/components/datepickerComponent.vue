@@ -1,32 +1,29 @@
 <template>
-  <FullCalendar :options="calendarOptions" />
+ 
+  <div class="calendar">
+    <label for="example-datepicker">Choose a date</label>
+    <b-calendar block locale="en-US"></b-calendar>
+  </div>
+  
 </template>
-<script default >
-import '@fullcalendar/core/vdom' // solves problem with Vite
-import FullCalendar from '@fullcalendar/vue3';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-export default {
-  components: {
-    FullCalendar // make the <FullCalendar> tag available
-  },
-  data() {
-    return {
-      calendarOptions: {
-        plugins: [ dayGridPlugin, interactionPlugin ],
-        initialView: 'dayGridMonth'
-      }
-    }
-  }
-}
+<script>
+
 </script>
 <style scoped>
+
+
 * {
   /* font-family: 'Roboto', sans-serif; */
   left: 0px;
   top: 0px;
   border-radius: 0px;
-  background-color: #ab0139;
+ 
   text-align: center;
+  background-color: orangered;
+  text-align: center;
+  
+}
+.calendar{
+  width: 700px;
 }
 </style>
