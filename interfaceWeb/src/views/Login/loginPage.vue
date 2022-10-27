@@ -112,9 +112,9 @@ export default {
     width: 35%;
     margin-top: 3%;
     border: none;
-    border-radius: 15px;
-    height: 30px;
-    font-size: 18px;
+    border-radius: 25px;
+    height: 41px;
+    font-size: 27px;
 }
 .submitButton:hover{
     background-color: #FD0054;
@@ -126,6 +126,7 @@ export default {
 }
 input{
     margin-bottom: 1%;
+    height: 55px;
 }
 a{
     text-decoration: none;
