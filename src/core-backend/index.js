@@ -19,6 +19,25 @@ const app = express();
 
 app.use(express.json());
 
+//TODO: Colocar num arquivo separado
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+
+const swaggerOptions = {
+ swaggerDefinition: {
+  info: {
+   title: "Você Mais Fit",
+   version: "1.0.0"
+  }
+ },
+ apis: ['./routes/*.js']
+};
+
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
 //#region routes
 app.use('/api/user', userRoute);
 app.use('/api/gymgoer', gymgoerRoute);
