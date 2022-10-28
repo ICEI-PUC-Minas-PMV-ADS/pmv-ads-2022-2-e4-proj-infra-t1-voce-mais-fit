@@ -13,6 +13,7 @@
 </template>
 
 <script>
+
 export default {
  
 }
@@ -25,7 +26,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #7d002a;
-  margin-bottom: 6%;
+  margin-bottom: 11%;
 }
 .imgLogoCont{
   display: flex;

@@ -108,12 +108,11 @@ export default {
 input{
     height: 40px;
     width: 80%;
-    border: none;
-    margin-bottom: 12px;
+    margin-bottom: 3px;
 }
 p{
     margin-bottom: 10px!important;
-    height: 45px;
+    height: 27px;
     display: flex;
     align-items: center;
     justify-content: center;
