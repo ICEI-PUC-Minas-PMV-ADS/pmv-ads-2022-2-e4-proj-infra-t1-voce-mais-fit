@@ -5,14 +5,14 @@
             <p class="textLogo">VOCÊ + FIT</p>
         </div>
         <div class="linksHeader">
-            <p class="link">Home</p>
-            <p class="link">Dieta</p>
-            <p class="link">Exercicíos</p>
-            <p class="link">Blog</p>
+            <a class="link" href="#home">Home</a>
+            <a class="link" href="#rotina">Rotina</a>
+            <a class="link">Dieta</a>
+            <a class="link">Exercicíos</a>
         </div>
         <div class="personalLinksHeader">
-            <p class="link">Perfil</p>
-            <p class="link">Configurações</p>
+            <a class="link">Perfil</a>
+            <a class="link">Configurações</a>
         </div>
     </div>
 </template>
@@ -57,10 +57,14 @@ export default {
     font-size:max(3vh, 20px);
     text-decoration: none;
     color: #FFFF;
+    margin-right: 3%;
 }
 .link{
+    color: #FFFF;
     padding-left: 58px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none;
 }
 .personalLinksHeader{
     width: 20%;

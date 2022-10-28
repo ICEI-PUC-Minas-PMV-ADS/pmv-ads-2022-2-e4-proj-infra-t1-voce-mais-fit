@@ -102,6 +102,8 @@ export default {
             }else if(!this.userEmail && this.userSenha){
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
+            }else{
+                this.$router.push('/mainPage')
             }
         }
     }
