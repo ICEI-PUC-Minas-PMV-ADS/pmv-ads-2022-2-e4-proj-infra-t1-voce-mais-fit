@@ -55,6 +55,7 @@ p{
     width: 2%;
     margin-right: 3%;
     cursor: pointer;
+    margin-top: 0.5%;
 }
 .footerText{
     font-size:max(2vh, 14px) ;
