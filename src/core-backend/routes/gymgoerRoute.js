@@ -11,7 +11,7 @@ const gymgoerService = require('../services/gymgoerService');
  *  get:
  *   tags:
  *    - gymgoer
- *   description: Busca o Gymgoer através do GymgoerId, tipo ObjectId
+ *   description: Busca o Gymgoer através do gymgoerId (ObjectId)
  *   parameters:
  *    - name: gymgoerId
  *      in: path
