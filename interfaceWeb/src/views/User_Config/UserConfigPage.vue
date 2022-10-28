@@ -8,7 +8,10 @@
 
                         <label class="mb-1">{{nome}}</label>
                         <br>
-                        <p v-if="displayNome"><input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userName" /></p>
+                        <div class="stealth" v-if="displayNome">
+                            <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userName" />
+                            <button type="button" class="btn btn-light">Atualizar</button>
+                        </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplay">{{ ButtonName }}</button>
                         
                     </div>
@@ -16,7 +19,10 @@
 
                         <label class="mb-1">{{cpf}}</label>
                         <br>
-                        <p v-if="displayCpf"><input id="inputForm" placeholder="000.000.000-00" type="Seu CPF" class="input_default form-control requiredName" v-mask="'###.###.###-##'" v-model="userCpf" @input="validaCpf"/></p>
+                        <div class="stealth" v-if="displayCpf">
+                            <input id="inputForm" placeholder="000.000.000-00" type="Seu CPF" class="input_default form-control requiredName" v-mask="'###.###.###-##'" v-model="userCpf" @input="validaCpf"/>
+                            <button type="button" class="btn btn-light">Atualizar</button>
+                        </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplayCpf">{{ ButtonCpf }}</button>
                         
                     </div>
@@ -24,8 +30,10 @@
 
                         <label class="mb-1">{{email}}</label>
                         <br>
-                        <p v-if="displayEmail"><input id="inputForm" placeholder="Seu e-mail" type="email" class="input_default form-control requiredName" v-model="userEmail" @input="validaMail"/></p>
-                        
+                        <div class="stealth" v-if="displayEmail">
+                            <input id="inputForm" placeholder="Seu e-mail" type="email" class="input_default form-control requiredName" v-model="userEmail" @input="validaMail"/>
+                            <button type="button" class="btn btn-light">Atualizar</button>
+                        </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplayEmail">{{ ButtonEmail }}</button>
 
                     </div>
@@ -33,8 +41,10 @@
 
                         <label class="mb-1">{{senha}}</label>
                         <br>
-                        <p v-if="displaySenha"><input id="inputFormTwo" placeholder="Sua Senha" type="password" class="input_default form-control required" v-model="userSenha" @input="validaSenha"/></p>
-                        
+                        <div class="stealth" v-if="displaySenha">
+                            <input id="inputFormTwo" placeholder="Sua Senha" type="password" class="input_default form-control required" v-model="userSenha" @input="validaSenha"/>
+                            <button type="button" class="btn btn-light">Atualizar</button>
+                        </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplaySenha">{{ ButtonSenha }}</button>
 
                     </div>
@@ -219,5 +229,10 @@ span{
 .allLoginPageContainer{
     background-color: #601430;
 }
+
+.stealth button{
+    margin-bottom: 5px;
+}
+
 
 </style>
