@@ -24,7 +24,7 @@ async function createNewFoodSaved(gymgoerId, foodSaved) {
     let gymgoer = await gymgoerService.getGymgoerById(gymgoerId);
 
     if(gymgoer._id == null)
-        return {errorType: 404, errorMessage: 'Gym not found'};
+        return {errorType: 404, errorMessage: 'Gymgoer not found'};
 
     let newFoodSaved = {
         _id: mongoose.Types.ObjectId(),
