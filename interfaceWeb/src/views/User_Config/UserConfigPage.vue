@@ -1,7 +1,6 @@
 <template>
     <div>
         <headerComponent></headerComponent>
-        
         <div class="formContainer">
                 <div class="row" id="row">
                     <div class="col-6" >
@@ -10,7 +9,8 @@
                         <br>
                         <div class="stealth" v-if="displayNome">
                             <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userName" />
-                            <button type="button" class="btn btn-light">Atualizar</button>
+                            <p v-if="verificaNome">Deve digitar um nome para atualizar</p>
+                            <button type="button" class="btn btn-light" @click="verificaDadosName">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplay">{{ ButtonName }}</button>
                         
@@ -21,7 +21,8 @@
                         <br>
                         <div class="stealth" v-if="displayCpf">
                             <input id="inputForm" placeholder="000.000.000-00" type="Seu CPF" class="input_default form-control requiredName" v-mask="'###.###.###-##'" v-model="userCpf" @input="validaCpf"/>
-                            <button type="button" class="btn btn-light">Atualizar</button>
+                            <p v-if="verificaCPF">Deve digitar o CPF corretamente para atualizar</p>
+                            <button type="button" class="btn btn-light" @click="verificaDadosCpf">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplayCpf">{{ ButtonCpf }}</button>
                         
@@ -32,7 +33,8 @@
                         <br>
                         <div class="stealth" v-if="displayEmail">
                             <input id="inputForm" placeholder="Seu e-mail" type="email" class="input_default form-control requiredName" v-model="userEmail" @input="validaMail"/>
-                            <button type="button" class="btn btn-light">Atualizar</button>
+                            <p v-if="verificaEmail">Deve digitar o Email corretamente para atualizar</p>
+                            <button type="button" class="btn btn-light" @click="verificaDadosEmail">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplayEmail">{{ ButtonEmail }}</button>
 
@@ -43,7 +45,8 @@
                         <br>
                         <div class="stealth" v-if="displaySenha">
                             <input id="inputFormTwo" placeholder="Sua Senha" type="password" class="input_default form-control required" v-model="userSenha" @input="validaSenha"/>
-                            <button type="button" class="btn btn-light">Atualizar</button>
+                            <p v-if="verificaSenha">Deve digitar a Senha para atualizar</p>
+                            <button type="button" class="btn btn-light" @click="verificaDadosSenha">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplaySenha">{{ ButtonSenha }}</button>
 
@@ -81,13 +84,24 @@
                 displayEmail: false,
                 displaySenha: false,
 
+                verificaNome: false,
+                verificaCPF: false,
+                verificaEmail: false,
+                verificaSenha: false,
+
                 ButtonName: "Alterar",
                 ButtonCpf: "Alterar",
                 ButtonEmail: "Alterar",
                 ButtonSenha: "Alterar",
+
+                userName: "",
+                userCpf: "",
+                userEmail: "",
+                userSenha: "",
             }
         },
         methods:{
+            // Métodos para esconder e aparecer as DIVs
             AlteraDisplay(){
                 this.displayNome = !this.displayNome;
                 if(this.displayNome)
@@ -120,6 +134,39 @@
                     this.ButtonSenha = "Cancelar"
                 else
                     this.ButtonSenha = "Alterar"
+            },
+            // Métodos para verificar se os campos estão corretos e exibir ou não a msg
+            verificaDadosName(){
+                let nome = this.userName;
+                if(nome == "")
+                    this.verificaNome = true;
+                else
+                    alert("Nome foi atualizado com suceso")
+            },
+
+            verificaDadosCpf(){
+                let cpf = this.userCpf;
+                if(cpf == "" || cpf.length < 11)
+                    this.verificaCPF = true;
+                else
+                    alert("CPF foi alterado com sucesso")
+            },
+
+            verificaDadosEmail(){
+                let email = this.userEmail;
+                let carcEspc = email.includes("@");
+                if(email == "" || !carcEspc)
+                    this.verificaEmail = true;
+                else
+                    alert("Email foi alterado com sucesso")
+            },
+
+            verificaDadosSenha(){
+                let senha = this.userSenha;
+                if(senha == "")
+                    this.verificaSenha = true;
+                else
+                    alert("Senha foi alterada com sucesso");
             }
         }
     }
@@ -211,6 +258,7 @@ input{
     margin-top: 4%;
 }
 .row{
+    margin-top: 25px;
     padding-top: 5%;
     padding-bottom: 12%;
     border: 4px #FD0054 solid;
