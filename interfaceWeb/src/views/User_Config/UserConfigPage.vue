@@ -9,7 +9,7 @@
                         <br>
                         <div class="stealth" v-if="displayNome">
                             <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userName" />
-                            <p v-if="verificaNome">Deve digitar um nome para atualizar</p>
+                            <p class="p-waring" v-if="verificaNome">Deve digitar um nome para atualizar</p>
                             <button type="button" class="btn btn-light" @click="verificaDadosName">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplay">{{ ButtonName }}</button>
@@ -21,7 +21,7 @@
                         <br>
                         <div class="stealth" v-if="displayCpf">
                             <input id="inputForm" placeholder="000.000.000-00" type="Seu CPF" class="input_default form-control requiredName" v-mask="'###.###.###-##'" v-model="userCpf" @input="validaCpf"/>
-                            <p v-if="verificaCPF">Deve digitar o CPF corretamente para atualizar</p>
+                            <p class="p-waring" v-if="verificaCPF">Deve digitar o CPF corretamente para atualizar</p>
                             <button type="button" class="btn btn-light" @click="verificaDadosCpf">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplayCpf">{{ ButtonCpf }}</button>
@@ -33,7 +33,7 @@
                         <br>
                         <div class="stealth" v-if="displayEmail">
                             <input id="inputForm" placeholder="Seu e-mail" type="email" class="input_default form-control requiredName" v-model="userEmail" @input="validaMail"/>
-                            <p v-if="verificaEmail">Deve digitar o Email corretamente para atualizar</p>
+                            <p class="p-waring" v-if="verificaEmail">Deve digitar o Email corretamente para atualizar</p>
                             <button type="button" class="btn btn-light" @click="verificaDadosEmail">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplayEmail">{{ ButtonEmail }}</button>
@@ -45,7 +45,7 @@
                         <br>
                         <div class="stealth" v-if="displaySenha">
                             <input id="inputFormTwo" placeholder="Sua Senha" type="password" class="input_default form-control required" v-model="userSenha" @input="validaSenha"/>
-                            <p v-if="verificaSenha">Deve digitar a Senha para atualizar</p>
+                            <p class="p-waring" v-if="verificaSenha">Deve digitar a Senha para atualizar</p>
                             <button type="button" class="btn btn-light" @click="verificaDadosSenha">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplaySenha">{{ ButtonSenha }}</button>
@@ -280,6 +280,10 @@ span{
 
 .stealth button{
     margin-bottom: 5px;
+}
+
+.p-waring{
+    color: azure;
 }
 
 
