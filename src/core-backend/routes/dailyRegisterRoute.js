@@ -21,7 +21,7 @@ const dailyRegisterService = require('../services/dailyRegisterService');
  *    200:
  *     description: Sucesso
  *    404:
- *     description: Nenhum Registro Diário não encontrado
+ *     description: Nenhum Registro Diário encontrado
  *    500:
  *     description: Erro interno
  */
