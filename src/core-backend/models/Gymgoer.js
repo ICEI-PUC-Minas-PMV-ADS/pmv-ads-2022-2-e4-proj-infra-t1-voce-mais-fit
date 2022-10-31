@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const dailyRegister = require('./DailyRegister');
 
 const gymgoerSchema = new mongoose.Schema({
     name: {type: String, required: true, maxLength: 255},
@@ -35,7 +34,27 @@ const gymgoerSchema = new mongoose.Schema({
             }
         },
     }],
-    dailyRegisters: [dailyRegister.schema],
+    dailyRegisters: [{
+        date: {type: Date, required: true},
+        totalCarb: {type: Number, required: true},
+        totalProtein: {type: Number, required: true},
+        totalFat: {type: Number, required: true},
+        totalKcal: {type: Number, required: true},
+        foods: [{
+            name: {type: String, required: true, maxLength: 255},
+            description: {type: String, required: false},
+            gramsAmount: {type: Number, required: true},
+            carb: {type: Number, required: true},
+            protein: {type: Number, required: true},
+            fat: {type: Number, required: true},
+            kcal: {type: Number, required: true},
+        }],
+        exercises: [{
+            name: {type: String, required: true, maxLength: 255},
+            description: {type: String, required: false},
+            done: {type: Boolean, required: true, default: false}
+        }]
+    }],
     exerciseModels: [{
         name: {type: String, required: true, maxLength: 255},
         description: {type: String, required: false},

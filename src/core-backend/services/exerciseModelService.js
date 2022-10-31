@@ -2,11 +2,14 @@ const Gymgoer = require('../models/Gymgoer');
 const gymgoerService = require('./gymgoerService');
 const mongoose = require('mongoose');
 
+//#region ExerciseModel
 async function getExerciseModelById(exerciseModelId){
-    let exerciseModel = await Gymgoer.Model.find({'exerciseModel._id': exerciseModelId});
+    let gymgoer = await Gymgoer.Model.findOne({'exerciseModel._id': exerciseModelId});
 
-    if(exerciseModel == null)
+    if(gymgoer == null)
         return {errorType: 404, errorMessage: 'Exercise Model not found'};
+
+    let exerciseModel = gymgoer.exerciseModels.filter(exerciseModel => exerciseModel._id == exerciseModelId)[0];
 
     return exerciseModel;
 }
@@ -51,8 +54,9 @@ async function updateExerciseModelById(exerciseModelsId, exerciseModels){
 
     return updateResult;
 }
+//#endregion
 
-    
+//#region Exercise inside Exercise Model
 async function getAllExerciseByExerciseModelId(exerciseModelId){
     let exercises = await Gymgoer.Model.aggregate([
         { $unwind: "$exerciseModels" },
@@ -61,11 +65,51 @@ async function getAllExerciseByExerciseModelId(exerciseModelId){
         { $project: { exercises: 1}}
     ]);
 
-    return exercises;
+    if(exercises == null || exercises.length == 0)
+        return {errorType: 404, errorMessage: 'Exercises not found'};
+
+    return exercises[0];
 }
+
+async function addExerciseInModel(exerciseModelId, exercise){
+    let gymgoer = await Gymgoer.Model.findOne({'exerciseModels._id': mongoose.Types.ObjectId(exerciseModelId)});
+    
+    if(gymgoer._id == null)
+        return {errorType: 404, errorMessage: 'Gymgoer not found'};
+
+    gymgoer.exerciseModels.filter(exerciseModel => exerciseModel._id == exerciseModelId)[0].exercises.push({
+        name: exercise.name, 
+        description: exercise.description
+    });
+
+    let gymgoerDb = await gymgoer.save()
+
+    return gymgoerDb.exerciseModels.filter(exerciseModel => exerciseModel._id == exerciseModelId)[0].exercises;
+}
+
+async function deleteExerciseInModel(exerciseId){
+    let result = await Gymgoer.Model.updateOne(
+        {'exerciseModels.exercises._id': mongoose.Types.ObjectId(exerciseId)},
+        {      
+            "$pull": {
+                "exerciseModels.$.exercises":{
+                "_id": mongoose.Types.ObjectId(exerciseId)
+                }
+            }
+        }
+    )
+
+    if(result.modifiedCount == 0)
+        return {errorType: 404, errorMessage: 'Exercise in Model not found'};
+
+    return result;
+}
+//#endregion
 
 module.exports.createNewExerciseModel = createNewExerciseModel;
 module.exports.getAllExerciseModelsByGymgoerId = getAllExerciseModelsByGymgoerId;
 module.exports.getExerciseModelById = getExerciseModelById;
 module.exports.updateExerciseModelById = updateExerciseModelById;
 module.exports.getAllExerciseByExerciseModelId = getAllExerciseByExerciseModelId;
+module.exports.addExerciseInModel = addExerciseInModel;
+module.exports.deleteExerciseInModel = deleteExerciseInModel;
