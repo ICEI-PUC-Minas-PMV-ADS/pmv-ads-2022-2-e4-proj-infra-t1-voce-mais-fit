@@ -5,10 +5,11 @@
             <p class="textLogo">VOCÊ + FIT</p>
         </div>
         <div class="linksHeader">
-            <a class="link" href="#home">Home</a>
-            <a class="link" href="#rotina">Rotina</a>
+            <a @click="toMain" class="link" href="#home">Home</a>
+            <a @click="toMain" class="link" href="#rotina">Rotina</a>
             <a class="link">Dieta</a>
             <a class="link">Exercicíos</a>
+            <router-link to="/sobrepage" class="link">Sobre</router-link>
         </div>
         <div class="personalLinksHeader">
             <a class="link">Perfil</a>
@@ -19,7 +20,18 @@
 
 <script>
 export default {
-    
+    data(){
+        return{
+
+        }
+    },
+    methods:{
+        toMain(){
+            if(this.$route.path !== "/mainPage"){
+                this.$router.push("/mainPage")
+            }
+        }
+    }
 }
 </script>
 

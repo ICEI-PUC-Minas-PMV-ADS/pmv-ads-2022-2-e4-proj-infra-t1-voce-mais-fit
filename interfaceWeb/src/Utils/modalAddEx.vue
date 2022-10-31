@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div class="modal fade modal-lg" id="addFoodModal" tabindex="-1" aria-labelledby="addFoodModalLabel" aria-hidden="true">
+        <div class="modal fade modal-lg" id="addExModal" tabindex="-1" aria-labelledby="addExModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addFoodModalLabel">Selecione os alimentos!</h5>
+                <h5 class="modal-title" id="addExModalLabel">Selecione os exercícios!</h5>
                 <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="typeFoodCont">
-                    <div @click="turnImg" class="typeFood">
+                <div class="typeExCont">
+                    <div @click="turnImg" class="typeEx">
                         <div id="divInfo" class="divInfoModal">
                             <img src="@/assets/modalAddImg/noSelect.png" class="noSelect">
                             <img src="@/assets/modalAddImg/selected.png" class="selected">
@@ -18,25 +18,8 @@
                             <p class="titleInfo">Nome:</p>
                             <p>Carne de Boi</p>
                         </div>
-                        <div id="divInfo" class="carbo">
-                            <p class="titleInfo">Carboidratos:</p>
-                            <p>200</p>
-                        </div>
-                        <div id="divInfo" class="prot">
-                            <p class="titleInfo">Proteínas:</p>
-                            <p>200</p>
-                        </div>
-                        <div id="divInfo" class="gord">
-                            <p class="titleInfo">Gordura:</p>
-                            <p>200</p>
-                        </div>
-                        <div id="divInfo" class="kcal">
-                            <p class="titleInfo">Calorias:</p>
-                            <p>200</p>
-                        </div>
                         <div id="divInfo" class="quant">
-                            <p class="titleInfo">Gramas consumidas</p>
-                            <input type="text" placeholder="Q° Gramas"/>
+                            <p class="titleInfo">Vídeo</p>
                         </div>
                     </div>
                 </div>
@@ -124,14 +107,14 @@ export default {
 .selected{
     width: 59%;
 }
-.typeFoodCont{
+.typeExCont{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-.typeFood{
+.typeEx{
     height: 83px;
     width: 100%;
     border: 1px #c57a7a solid;

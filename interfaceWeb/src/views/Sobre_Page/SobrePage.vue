@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body" id="card-body-mod">
                             <h3 class="card-title" id="titulo3">OLÁ, CARO USUÁRIO.</h3>
-                            <p class="card-text">ESTE PROJETO FOI DESENVOLVIDO COMO UMA ATIVIDADE AVALIATIVA PARA A CONCLUSÃO DO 3º SEMESTRE DO CURSO DE ANÁLISE E DESENVOLVIMENTO DE SISTEMAS, PELA PUC-MINAS.</p>
+                            <p class="card-text">ESTE PROJETO FOI DESENVOLVIDO COMO UMA ATIVIDADE AVALIATIVA PARA A CONCLUSÃO DO 4º SEMESTRE DO CURSO DE ANÁLISE E DESENVOLVIMENTO DE SISTEMAS, PELA PUC-MINAS.</p>
                             <p>DENTRE AS VÁRIAS ESPECIFICAÇÕES QUE PODEM SER ENCONTRADAS NA DOCUMENTAÇÃO DO SITE, DESTACA-SE A UTILIZAÇÃO DO FRAMEWORK VUE.JS PARA O FRONT-END, DA TECNOLOGIA NODE PARA A CONSTRUÇÃO DE UMA API E UTILIZAÇÃO DO BANCO DE DADOS NÃO RELACIONAL MONGODB.</p>
                         </div>  
                     </div>
@@ -29,7 +29,7 @@
                             <div class="input-group mb-3">
                                 
                                 <select class="form-select" id="inputGroupSelect01">
-                                    <option selected>Motivo do Contato</option>
+                                    <option selected disabled>Motivo do Contato</option>
                                     <option value="1">Avaliação Positiva</option>
                                     <option value="2">Avaliação Negativa</option>
                                     <option value="3">Dúvida</option>
@@ -157,7 +157,18 @@
     
 
 <style scoped>
-
+    #titulo3{
+        margin-bottom: 4%;
+    }
+    h5{
+        color: #FFFF;
+    }
+    .carousel-dark .carousel-indicators [data-bs-target] {
+    background-color: #FFFF!important;
+    }
+    .carousel-dark .carousel-control-next-icon, .carousel-dark .carousel-control-prev-icon {
+     filter: none
+    }   
     .allContainer{
         display: flex;
         flex-direction: column;

@@ -38,7 +38,7 @@ export default {
 }
 </script>>
 
-<style  scoped>
+<style scoped>
 
 * {
   /* font-family: 'Roboto', sans-serif; */
@@ -53,7 +53,6 @@ export default {
   font-size: 60px;
 }
 .allContainerRotina {
-  font-family: Agency FB;
   font-weight: 700;
   line-height: 72px;
   letter-spacing: 3.5999999046325684px;

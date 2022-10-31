@@ -1,15 +1,25 @@
 <template>
     <div class="miniContainer">
-      <img src="@/assets/border.svg" class="border">
-      <div class="perfil"> PERFIL</div>
-      <img src="@/assets/profile.svg" class="profile">
-      <div class="profileName">
-        IAGO IANN
-        <img src="@/assets/stars.svg" class="stars">
-      </div>
-      <div class="diet"> 
-        <p> A DIETA É COMPLETAMENTE FUNCIONAL E OBRIGATÓRIA PARA SUA PERFOMANCE. </p>
-        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+      <div class="contentCont">
+        <div class="topProfileCont">
+          <div class="perfil">
+            <img class="borderImg" src="@/assets/border.svg">
+            <p class="profileTxt">PERFIL</p>
+          </div>
+          <img src="@/assets/profile.svg" class="profile">
+          <div class="profileName">
+            <p>IAGO IANN</p>
+            <img src="@/assets/stars.svg" class="stars">
+          </div>
+        </div>
+        <div class="diet"> 
+          <p> A DIETA É COMPLETAMENTE FUNCIONAL E OBRIGATÓRIA PARA SUA PERFOMANCE. </p>
+        </div>
+        <div class="loremContDad">
+          <div class="loremCont">
+            <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+          </div>
+        </div>
       </div>
     </div>
 </template>
@@ -21,36 +31,50 @@ export default {
 
 
 <style scoped>
+.loremContDad{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.loremCont{
+  width: 50%;
+}
+.topProfileCont{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 10px;
+
+}
 .miniContainer {
-  width: 95%;
-  position: absolute;
-  height: 370px;
-  left: 50px;
-  right: 50px;
+  margin-bottom: 2%;
+  width: 100%;
+  height: 370px;;
   font-family: 'Agency FB';
   font-style: normal;
-  background: #2B2024;
+  background: #222222;
   box-shadow: 0px 10px 40px rgb(0 0 0 / 10%);
-  top: 857px;
 }
 .perfil {
+  width: 7%;
+  display: flex;
+  flex-direction: row;
   color: #FD0054;
-  position: absolute;
   height: 38px;
-  left: 11.19%;
-  right: 83.81%;
-  top: calc(50% - 38px/2 - 116px);
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
   line-height: 38px;
   letter-spacing: 1.92px;
 }
+.borderImg{
+  width: 40%;
+  padding-right: 10px;
+  border: none;
+}
 .profileName {
-  position: absolute;
   height: 38px;
-  left: 50%;
-  top: calc(50% - 38px/2 - 143px);
   font-style: normal;
   font-weight: 700;
   font-size: 25px;
@@ -58,29 +82,27 @@ export default {
   letter-spacing: 1.92px;
   color: #FD0054;
 }
-
+.profileName{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .diet {
-  position: absolute;
   height: 57px;
-  left: 7.44%;
-  right: 13.6%;
-  top: calc(50% - 57px/2 - 29.5px);
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
   line-height: 57px;
   color: #FAFAFA;
-    
+  margin-left: 5%;
+  font-size: max(1.6rem, 15px);
 }
 .lorem {
-  position: absolute;
   height: 151px;
-  left: 30.55%;
-  right: 23.05%;
-  top: calc(50% - 151px/2 + 100.5px);
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: max(1.3rem, 18px);
   line-height: 28px;
   letter-spacing: 1.44px;
   color: #FAFAFA;
@@ -88,64 +110,20 @@ export default {
   opacity: 0.6;
 }
 .stars {
-  position: absolute;
-  top: 40px;
-  right: 19px;
-  
+  width: 80%;
 }
 .profile {
- position: absolute;
- left: 72vh;
+ width: 6%;
  padding: 10px;
 }
-.border {
-  position: absolute;
-  top: 65px;
-  left: 135px;
+
+.contentCont{
+  display: flex;
+    flex-direction: column;
 }
-.text {
-  position: absolute;
-  height: 24px;
-  right: 8.84%;
-  top: calc(50% - 24px/2 + 83px);
-  font-family: 'Agency FB';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 24px;
-  color: #FD0054;
-}
-@media screen and (max-width:2600px){
-  .miniContainer {
-    top: 968px!important;
-    height: 310px!important;
-  }
-  .profileName {
-    margin-top: 10px;
-  }
-}
-@media screen and (max-width:2450px){
-  .miniContainer {
-    top: 930px!important;
-    height: 310px!important;
-  }
-}
-@media screen and (max-width:2250px){
-  .miniContainer {
-    top: 910px!important;
-    height: 310px!important;
-  }
-}
-@media screen and (max-width:2070px){
-  .miniContainer {
-    top: 880px!important;
-  }
-}
-@media screen and (max-width:1860px){
-  .miniContainer {
-    top: 820px!important;
-    height: 340px!important;
-  }
+
+p{
+  margin-bottom: 0;
 }
 
 </style>
