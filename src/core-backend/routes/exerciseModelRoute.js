@@ -30,6 +30,8 @@ router.get('/gymgoer/exerciseModels/:exerciseModelId', (req, res) => {
  *   responses: 
  *    200:
  *     description: Sucesso
+ *    404:
+ *     description: Gymgoer não encontrado
  *    500:
  *     description: Erro interno
  */
@@ -44,6 +46,43 @@ router.get('/gymgoer/:gymgoerId/exerciseModels', (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /api/gymgoer/{gymgoerId}/exerciseModels:
+ *  post:
+ *   tags:
+ *    - exerciseModels
+ *   description: Cria um novo modelo de exercício, a partir do gymgoerId (ObjectId)
+ *   parameters:
+ *    - name: gymgoerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *    - name: foodSaved
+ *      in: body
+ *      type: object
+ *      properties:
+ *       name:
+ *        type: string
+ *       description: 
+ *        type: string
+ *       exercises:
+ *        type: array
+ *        items:
+ *         type: object
+ *         properties:
+ *          name:
+ *           type: string
+ *          description:
+ *           type: string
+ *   responses: 
+ *    201:
+ *     description: Criado com sucesso
+ *    404:
+ *     description: Gymgoer não encontrado
+ *    500:
+ *     description: Erro interno
+ */
 router.post('/gymgoer/:gymgoerId/exerciseModels', (req, res) => {
     exerciseModelService.createNewExerciseModel(req.params.gymgoerId, req.body).then((result) => {
         if(result.errorMessage != null)
@@ -83,6 +122,8 @@ router.patch('/gymgoer/exerciseModels/:exerciseModelId', (req, res) => {
  *   responses: 
  *    200:
  *     description: Sucesso
+ *    404:
+ *     description: Modelo de exercícios não encontrado
  *    500:
  *     description: Erro interno
  */

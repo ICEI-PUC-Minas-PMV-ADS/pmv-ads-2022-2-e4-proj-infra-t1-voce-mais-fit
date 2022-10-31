@@ -18,6 +18,8 @@ const foodSavedService = require('../services/foodSavedService');
  *   responses: 
  *    200:
  *     description: Sucesso
+ *    404:
+ *     description: Nenhum alimento salvo encontrado
  *    500:
  *     description: Erro interno
  */
