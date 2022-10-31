@@ -88,7 +88,7 @@ async function addExerciseInModel(exerciseModelId, exercise){
 }
 
 async function deleteExerciseInModel(exerciseId){
-    let updatedGymgoerDb = await Gymgoer.Model.updateOne(
+    let result = await Gymgoer.Model.updateOne(
         {'exerciseModels.exercises._id': mongoose.Types.ObjectId(exerciseId)},
         {      
             "$pull": {
@@ -99,7 +99,10 @@ async function deleteExerciseInModel(exerciseId){
         }
     )
 
-    return updatedGymgoerDb;
+    if(result.modifiedCount == 0)
+        return {errorType: 404, errorMessage: 'Exercise in Model not found'};
+
+    return result;
 }
 //#endregion
 
