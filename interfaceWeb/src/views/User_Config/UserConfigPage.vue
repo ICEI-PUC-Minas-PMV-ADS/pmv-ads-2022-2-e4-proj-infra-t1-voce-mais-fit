@@ -1,11 +1,13 @@
 <template>
     <div>
         <headerComponent></headerComponent>
+        
+        
         <div class="formContainer">
-                <div class="row" id="row">
+                <div class="row" id="row">                  
                     <div class="col-6" >
-
-                        <label class="mb-1">{{nome}}</label>
+                        <h3 id="Titulo">Dados da Conta</h3>
+                        <label class="mb-1">Nome: {{nome}}</label>
                         <br>
                         <div class="stealth" v-if="displayNome">
                             <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userName" />
@@ -17,7 +19,7 @@
                     </div>
                     <div class="col-6" >
 
-                        <label class="mb-1">{{cpf}}</label>
+                        <label class="mb-1">CPF: {{cpf}}</label>
                         <br>
                         <div class="stealth" v-if="displayCpf">
                             <input id="inputForm" placeholder="000.000.000-00" type="Seu CPF" class="input_default form-control requiredName" v-mask="'###.###.###-##'" v-model="userCpf" @input="validaCpf"/>
@@ -29,19 +31,19 @@
                     </div>
                     <div class="col-6" >
 
-                        <label class="mb-1">{{email}}</label>
+                        <label class="mb-1">Email: {{email}}</label>
                         <br>
                         <div class="stealth" v-if="displayEmail">
                             <input id="inputForm" placeholder="Seu e-mail" type="email" class="input_default form-control requiredName" v-model="userEmail" @input="validaMail"/>
                             <p class="p-waring" v-if="verificaEmail">Deve digitar o Email corretamente para atualizar</p>
-                            <button type="button" class="btn btn-light" @click="verificaDadosEmail">Atualizar</button>
+                             <button type="button" class="btn btn-light" @click="verificaDadosEmail">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplayEmail">{{ ButtonEmail }}</button>
 
                     </div>
                     <div class="col-6" >
 
-                        <label class="mb-1">{{senha}}</label>
+                        <label class="mb-1">Senha: {{senha}}</label>
                         <br>
                         <div class="stealth" v-if="displaySenha">
                             <input id="inputFormTwo" placeholder="Sua Senha" type="password" class="input_default form-control required" v-model="userSenha" @input="validaSenha"/>
@@ -49,11 +51,48 @@
                             <button type="button" class="btn btn-light" @click="verificaDadosSenha">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplaySenha">{{ ButtonSenha }}</button>
-
                     </div>
+            </div>
+        </div>
 
+        <div class="formContainer">
+                <div class="row" id="row">                  
+                    <div class="col-6" >
+                        <h3 id="Titulo">Dados do Perfil</h3>
+                        <label class="mb-1">Altura: {{altura}}</label>
+                        <br>
+                        <div class="stealth" v-if="displayAltura">
+                            <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userAlt" />
+                            <p class="p-waring" v-if="verificaAlt">Deve digitar a altura para atualizar</p>
+                            <button type="button" class="btn btn-light" @click="verificaDadoAlt">Atualizar</button>
+                        </div>
+                        <button type="button" class="btn btn-light" @click="AlteraDisplayAlt">{{ ButtonAlt }}</button>                   
+                </div>
+                <div class="col-6" >
+                        <label class="mb-1">Peso: {{peso}}</label>
+                        <br>
+                        <div class="stealth" v-if="displayPeso">
+                            <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userPeso" />
+                            <p class="p-waring" v-if="verificaPeso">Deve digitar a altura para atualizar</p>
+                            <button type="button" class="btn btn-light" @click="verificaDadoPeso">Atualizar</button>
+                        </div>
+                        <button type="button" class="btn btn-light" @click="AlteraDisplayPeso">{{ ButtonAlt }}</button>                   
+                </div>
+                <div class="col-6" >
+                        <label class="mb-1">Imagem de Perfil</label>
+                        <br>
+                        <!-- :src="require(`../../assets/carrouselImg/${imgUrl}`)" -->
+                        <img class="ImgUrl" :src="require(`../../assets/carrouselImg/${imgUrl}`)" alt="Imagem de perfil do usuário">
+                        <br>
+                        <div class="stealth" v-if="displayImg">
+                            <input id="inputForm" placeholder="Digite a URL da Imagem que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userImg" />
+                            <p class="p-waring" v-if="verificaImg">Deve digitar a Imagem para atualizar</p>
+                            <button type="button" class="btn btn-light" @click="verificaDadoImg">Atualizar</button>
+                        </div>
+                        <button type="button" class="btn btn-light" @click="AlteraDisplayImg">{{ ButtonImg }}</button>                   
                 </div>
             </div>
+        </div>
 
         <footerComponent></footerComponent>
     </div>
@@ -78,26 +117,41 @@
                 cpf: "00000000000",
                 email: "exp@exp",
                 senha: "******",
+                altura: "1.85",
+                peso: "55.8",
+                imgUrl: "gabriel.png",
 
                 displayNome: false,
                 displayCpf: false,
                 displayEmail: false,
                 displaySenha: false,
+                displayAltura: false,
+                displayPeso: false,
+                displayImg: false,
 
                 verificaNome: false,
                 verificaCPF: false,
                 verificaEmail: false,
                 verificaSenha: false,
+                verificaAlt: false,
+                verificaPeso: false,
+                verificaImg: false,
 
                 ButtonName: "Alterar",
                 ButtonCpf: "Alterar",
                 ButtonEmail: "Alterar",
                 ButtonSenha: "Alterar",
+                ButtonAlt: "Alterar",
+                ButtonPeso: "Alterar",
+                ButtonImg: "Alterar",
 
                 userName: "",
                 userCpf: "",
                 userEmail: "",
                 userSenha: "",
+                userAlt : "",
+                userPeso: "",
+                userImg: "",
             }
         },
         methods:{
@@ -135,6 +189,30 @@
                 else
                     this.ButtonSenha = "Alterar"
             },
+
+            AlteraDisplayAlt(){
+                this.displayAltura = !this.displayAltura;
+                if(this.displayAltura)
+                    this.ButtonAlt = "Cancelar"
+                else
+                    this.ButtonAlt = "Alterar"
+            },
+
+            AlteraDisplayPeso(){
+                this.displayPeso = !this.displayPeso;
+                if(this.displayPeso)
+                    this.ButtonPeso = "Cancelar"
+                else
+                    this.ButtonPeso = "ALterar"
+            },
+
+            AlteraDisplayImg(){
+                this.displayImg = !this.displayImg;
+                if(this.displayImg)
+                    this.ButtonImg = "Cancelar"
+                else
+                    this.ButtonImg = "Alterar"
+            },
             // Métodos para verificar se os campos estão corretos e exibir ou não a msg
             verificaDadosName(){
                 let nome = this.userName;
@@ -167,6 +245,32 @@
                     this.verificaSenha = true;
                 else
                     alert("Senha foi alterada com sucesso");
+            },
+
+            verificaDadoAlt(){
+                let alt = this.userName;
+                if(alt == "")
+                    this.verificaAlt = true;
+                else
+                    alert("Altura alterada com sucesso");
+            },
+
+            verificaDadoPeso(){
+                let peso = this.userPeso;
+                if(peso == "")
+                    this.verificaPeso = true;
+                else
+                    alert("Peso alterado com sucesso");
+            },
+
+            verificaDadoImg(){
+                let img = this.userImg;
+                if(img == "")
+                    this.verificaImg = true;
+                else
+                    this.imgUrl = this.userImg
+                console.log(this.imgUrl)
+                console.log(this.userImg)
             }
         }
     }
@@ -269,7 +373,9 @@ input{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: aliceblue;
 }
+
 span{
     display: none;
     color: red;
@@ -286,5 +392,20 @@ span{
     color: azure;
 }
 
+
+.card{
+    background-color: #601430;
+}
+
+.Titulo{
+    background-color: #601430;
+    
+}
+
+.ImgUrl{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
 
 </style>
