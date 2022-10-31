@@ -4,28 +4,27 @@ const router = express.Router();
 const dailyRegisterService = require('../services/dailyRegisterService');
 
 //#region DailyRegister
-router.get('/gymgoer/dailyRegisters/:dailyRegisterId', (req, res) => {
-    dailyRegisterService.getDailyRegisterById(req.params.dailyRegisterId).then((result) => {
-        if(result.errorMessage != null)
-            return res.status(result.errorType).send(result.errorMessage);
 
-        return res.status(200).send(result);
-    }).catch((err) => {
-        return res.status(500).send(err.message);
-    });
-});
-
-router.get('/gymgoer/dailyRegisters/:date', (req, res) => {
-    dailyRegisterService.getDailyRegisterByDate(req.params.date).then((result) => {
-        if(result.errorMessage != null)
-            return res.status(result.errorType).send(result.errorMessage);
-
-        return res.status(200).send(result);
-    }).catch((err) => {
-        return res.status(500).send(err.message);
-    });
-});
-
+/**
+ * @swagger
+ * /api/gymgoer/{gymgoerId}/dailyRegister:
+ *  get:
+ *   tags:
+ *    - Registro Diário
+ *   description: Busca todos os Registros Diários de determinado Gymgoer, através do gymgoerId (ObjectId)
+ *   parameters:
+ *    - name: gymgoerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    404:
+ *     description: Nenhum Registro Diário não encontrado
+ *    500:
+ *     description: Erro interno
+ */
 router.get('/gymgoer/:gymgoerId/dailyRegisters', (req, res) => {
     dailyRegisterService.getAllDailyRegistersByGymgoerId(req.params.gymgoerId).then((result) => {
         if(result.errorMessage != null)
@@ -37,8 +36,61 @@ router.get('/gymgoer/:gymgoerId/dailyRegisters', (req, res) => {
     });
 });
 
-router.post('/gymgoer/:gymgoerId/dailyRegisters', (req, res) => {
-    dailyRegisterService.createNewDailyRegister(req.params.gymgoerId, req.body).then((result) => {
+/**
+ * @swagger
+ * /api/gymgoer/dailyRegister/{dailyRegisterId}:
+ *  get:
+ *   tags:
+ *    - Registro Diário
+ *   description: Busca um Registro Diário específico, através do dailyRegisterId (ObjectId)
+ *   parameters:
+ *    - name: dailyRegisterId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    404:
+ *     description: Registro Diário não encontrado
+ *    500:
+ *     description: Erro interno
+ */
+router.get('/gymgoer/dailyRegisters/:dailyRegisterId', (req, res) => {
+    dailyRegisterService.getDailyRegisterById(req.params.dailyRegisterId).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
+
+/**
+ * @swagger
+ * /api/gymgoer/{gymgoerId}/dailyRegister/{date}:
+ *  get:
+ *   tags:
+ *    - Registro Diário
+ *   description: Busca um Registro Diário específico através de uma data (AAAA-MM-DD) e do gymgoerId (ObjectId). Caso ainda não exista no banco de dados, ele é criado na hora.
+ *   parameters:
+ *    - name: gymgoerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *    - name: date
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    500:
+ *     description: Erro interno
+ */
+router.get('/gymgoer/dailyRegisters/:date', (req, res) => {
+    dailyRegisterService.getDailyRegisterByDate(req.params.gymgoerId, req.params.date).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
 
@@ -50,6 +102,26 @@ router.post('/gymgoer/:gymgoerId/dailyRegisters', (req, res) => {
 //#endregion
 
 //#region Food Eaten in day
+/**
+ * @swagger
+ * /api/gymgoer/dailyRegister/{dailyRegisterId}/foods:
+ *  get:
+ *   tags:
+ *    - Registro Diário - Alimentos Consumidos
+ *   description: Busca um todos os Alimentos Consumidos para um Registro Diário específico, através do dailyRegisterId (ObjectId)
+ *   parameters:
+ *    - name: dailyRegisterId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    404:
+ *     description: Registro Diário não encontrado
+ *    500:
+ *     description: Erro interno
+ */
 router.get('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
     dailyRegisterService.getAllFoodEatenInDailyRegister(req.params.dailyRegisterId).then((result) => {
         if(result.errorMessage != null)
@@ -61,18 +133,78 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
     });
 });
 
+//#region Food Eaten in day
+/**
+ * @swagger
+ * /api/gymgoer/dailyRegister/{dailyRegisterId}/foods:
+ *  post:
+ *   tags:
+ *    - Registro Diário - Alimentos Consumidos
+ *   description: Adiciona um Alimento Consumido ao Registro Diário, através do dailyRegisterId (ObjectId)
+ *   parameters:
+ *    - name: dailyRegisterId
+ *      in: path
+ *      required: true
+ *      type: string
+ *    - name: foodEaten
+ *      in: body
+ *      required: true
+ *      type: object
+ *      properties:
+ *       name:
+ *        type: string
+ *       description:
+ *        type: string
+ *       gramsAmount:
+ *        type: number
+ *       carb: 
+ *        type: number
+ *       protein:
+ *        type: number
+ *       fat:
+ *        type: number
+ *       kcal:
+ *        type: number
+ *   responses: 
+ *    201:
+ *     description: Criado com sucesso
+ *    404:
+ *     description: Registro Diário não encontrado
+ *    500:
+ *     description: Erro interno
+ */
 router.post('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
     dailyRegisterService.addFoodEatenInDailyRegister(req.params.dailyRegisterId, req.body).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
 
-        return res.status(200).send(result);
+        return res.status(201).send(result);
     }).catch((err) => {
         return res.status(500).send(err.message);
     });
 });
 
-router.delete('/gymgoer/dailyRegisters/:foodId', (req, res) => {
+/**
+ * @swagger
+ * /api/gymgoer/dailyRegister/foods/{foodId}:
+ *  delete:
+ *   tags:
+ *    - Registro Diário - Alimentos Consumidos
+ *   description: Deleta um Alimento Consumido dentro de um Registro Diário, através do foodId (ObjectId)
+ *   parameters:
+ *    - name: foodId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    204:
+ *     description: Deletado com sucesso
+ *    404:
+ *     description: Alimento Consumido não encontrado
+ *    500:
+ *     description: Erro interno
+ */
+router.delete('/gymgoer/dailyRegisters/foods/:foodId', (req, res) => {
     dailyRegisterService.deleteFoodEatenInDailyRegister(req.params.foodId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -85,6 +217,26 @@ router.delete('/gymgoer/dailyRegisters/:foodId', (req, res) => {
 //#endregion
 
 //#region Exercise in day
+/**
+ * @swagger
+ * /api/gymgoer/dailyRegister/{dailyRegisterId}/exercises:
+ *  get:
+ *   tags:
+ *    - Registro Diário - Exercícios
+ *   description: Busca um todos os Exercícios para um Registro Diário específico, através do dailyRegisterId (ObjectId)
+ *   parameters:
+ *    - name: dailyRegisterId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    404:
+ *     description: Registro Diário não encontrado
+ *    500:
+ *     description: Erro interno
+ */
 router.get('/gymgoer/dailyRegisters/:dailyRegisterId/exercises', (req, res) => {
     dailyRegisterService.getAllExercisesInDaybyDailyRegisterId(req.params.dailyRegisterId).then((result) => {
         if(result.errorMessage != null)
@@ -96,6 +248,38 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId/exercises', (req, res) => {
     });
 });
 
+//#region Exercises in day
+/**
+ * @swagger
+ * /api/gymgoer/dailyRegister/{dailyRegisterId}/exercises:
+ *  post:
+ *   tags:
+ *    - Registro Diário - Exercícios
+ *   description: Adiciona um Exercício ao Registro Diário, através do dailyRegisterId (ObjectId)
+ *   parameters:
+ *    - name: dailyRegisterId
+ *      in: path
+ *      required: true
+ *      type: string
+ *    - name: exercise
+ *      in: body
+ *      required: true
+ *      type: object
+ *      properties:
+ *       name:
+ *        type: string
+ *       description:
+ *        type: string
+ *       done:
+ *        type: boolean
+ *   responses: 
+ *    201:
+ *     description: Criado com sucesso
+ *    404:
+ *     description: Registro Diário não encontrado
+ *    500:
+ *     description: Erro interno
+ */
 router.post('/gymgoer/dailyRegisters/:dailyRegisterId/exercises', (req, res) => {
     dailyRegisterService.addExerciseInDailyRegister(req.params.dailyRegisterId, req.body).then((result) => {
         if(result.errorMessage != null)
@@ -107,7 +291,27 @@ router.post('/gymgoer/dailyRegisters/:dailyRegisterId/exercises', (req, res) => 
     });
 });
 
-router.delete('/gymgoer/dailyRegisters/:foodId', (req, res) => {
+/**
+ * @swagger
+ * /api/gymgoer/dailyRegister/exercises/{exerciseId}:
+ *  delete:
+ *   tags:
+ *    - Registro Diário - Exercícios
+ *   description: Deleta um Exercício dentro de um Registro Diário, através do exerciseId (ObjectId)
+ *   parameters:
+ *    - name: exerciseId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    204:
+ *     description: Deletado com sucesso
+ *    404:
+ *     description: Exercício não encontrado
+ *    500:
+ *     description: Erro interno
+ */
+router.delete('/gymgoer/dailyRegisters/exercises/:exerciseId', (req, res) => {
     dailyRegisterService.deleteExerciseInDailyRegister(req.params.foodId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
