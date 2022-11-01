@@ -26,7 +26,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #7d002a;
-  margin-bottom: 11%;
+  margin-bottom: 2%;
 }
 .imgLogoCont{
   display: flex;

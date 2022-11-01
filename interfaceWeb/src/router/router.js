@@ -6,6 +6,8 @@ import treinoPage from "@/views/View_Treino/treinoPage";
 import loginPage from "@/views/Login/loginPage";
 import registerUserPage from "@/views/Register/registerUserPage"
 import registerPersonal from "@/views/Register/registerPersonal"
+import UserConfig from "@/views/User_Config/UserConfigPage"
+import SobrePage from "@/views/Sobre_Page/SobrePage"
 
 Vue.use(Router);
 
@@ -36,5 +38,13 @@ export default new Router({
             path:"/registerPersonal",
             component: registerPersonal
         },
+        {
+            path:"/userconfig",
+            component: UserConfig
+        },
+        {
+            path:"/sobrepage",
+            component: SobrePage
+        }
     ] 
 })
