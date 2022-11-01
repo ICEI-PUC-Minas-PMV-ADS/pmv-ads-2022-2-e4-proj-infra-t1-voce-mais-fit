@@ -6,9 +6,10 @@
         </div>
         <div class="linksHeader">
             <a @click="toMain" class="link" href="#home">Home</a>
-            <a @click="toMain" class="link" href="#rotina">Rotina</a>
-            <a class="link">Dieta</a>
-            <a class="link">Exercicíos</a>
+            <a v-if="this.$route.path === '/mainPageTraner'" class="link">Alunos</a>
+            <a v-if="this.$route.path !== '/mainPageTraner'" @click="toMain" id="rotina" class="link" href="#rotina">Rotina</a>
+            <a v-if="this.$route.path !== '/mainPageTraner'" class="link" id="dieta">Dieta</a>
+            <a v-if="this.$route.path !== '/mainPageTraner'" class="link" id="ex">Exercicíos</a>
             <router-link to="/sobrepage" class="link">Sobre</router-link>
         </div>
         <div class="personalLinksHeader">
@@ -30,7 +31,8 @@ export default {
             if(this.$route.path !== "/mainPage"){
                 this.$router.push("/mainPage")
             }
-        }
+        },
+        
     }
 }
 </script>

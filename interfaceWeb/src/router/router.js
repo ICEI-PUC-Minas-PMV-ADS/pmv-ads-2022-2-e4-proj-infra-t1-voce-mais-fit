@@ -23,7 +23,7 @@ export default new Router({
             component: mainPage
         },
         {
-            path:"/treinoPage",
+            path:"/mainPageTraner",
             component: treinoPage
         }, 
         {

@@ -2,7 +2,7 @@ import axios from 'axios'
 
  export const HTTP =
     axios.create({
-        baseURL: "http://localhost:3000/swagger/api/",
+        baseURL: "http://localhost:3000/api/",
         responseType: "json",
         headers: {},
     })
