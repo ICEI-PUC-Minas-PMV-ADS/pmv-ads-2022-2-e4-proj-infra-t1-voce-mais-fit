@@ -24,6 +24,7 @@ export default {
     startComponentVue,
     datepickerComponent
   },
+ 
 };
 </script>
 
