@@ -82,7 +82,7 @@
                         <label class="mb-1">Imagem de Perfil</label>
                         <br>
                         <!-- :src="require(`../../assets/carrouselImg/${imgUrl}`)" -->
-                        <img class="ImgUrl" :src="require(`../../assets/carrouselImg/${imgUrl}`)" alt="Imagem de perfil do usuário">
+                        <img class="ImgUrl" :src="imgUrl" alt="Imagem de perfil do usuário">
                         <br>
                         <div class="stealth" v-if="displayImg">
                             <input id="inputForm" placeholder="Digite a URL da Imagem que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userImg" />
@@ -119,7 +119,7 @@
                 senha: "******",
                 altura: "1.85",
                 peso: "55.8",
-                imgUrl: "gabriel.png",
+                imgUrl: "https://img.freepik.com/fotos-gratis/o-gato-vermelho-ou-branco-eu-no-estudio-branco_155003-13189.jpg?w=2000",
 
                 displayNome: false,
                 displayCpf: false,
