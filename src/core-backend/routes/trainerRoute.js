@@ -3,6 +3,28 @@ const router = express.Router();
 
 const trainerService = require('../services/trainerService');
 
+//TODO get all gymgoers
+
+/**
+ * @swagger
+ * /api/trainer/{trainerId}:
+ *  get:
+ *   tags:
+ *    - trainer
+ *   description: Busca o Trainer através do TrainerId, tipo ObjectId
+ *   parameters:
+ *    - name: trainerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    404:
+ *     description: Trainer não encontrado
+ *    500:
+ *     description: Erro interno
+ */
 router.get('/:trainerId', (req, res) => {
     trainerService.getTrainerById(req.params.trainerId).then((result) => {
         if(result.errorMessage != null)
@@ -14,6 +36,36 @@ router.get('/:trainerId', (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /api/trainer/{trainerId}:
+ *  patch:
+ *   tags:
+ *    - trainer
+ *   description: Atualiza informações do Trainer através do TrainerId (ObjectId)
+ *   parameters:
+ *    - name: trainerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *    - name: trainer
+ *      in: body
+ *      type: object
+ *      properties:
+ *       name:
+ *        type: string
+ *       whatsapp: 
+ *        type: string
+ *       workHoursDescription:
+ *        type: string
+ *   responses: 
+ *    200:
+ *     description: Atualizado com sucesso
+ *    404:
+ *     description: Trainer não encontrado
+ *    500:
+ *     description: Erro interno
+ */
 router.patch('/:trainerId', (req, res) => {
     trainerService.updateTrainerById(req.params.trainerId, req.body).then((result) => {
         if(result.errorMessage != null)
