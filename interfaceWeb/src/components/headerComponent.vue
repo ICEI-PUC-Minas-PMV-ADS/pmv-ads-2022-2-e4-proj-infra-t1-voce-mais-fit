@@ -12,7 +12,7 @@
             <router-link to="/sobrepage" class="link">Sobre</router-link>
         </div>
         <div class="personalLinksHeader">
-            <a class="link">Perfil</a>
+            <router-link to="/userconfig" class="link">Perfil</router-link>
             <a class="link">Configurações</a>
         </div>
     </div>

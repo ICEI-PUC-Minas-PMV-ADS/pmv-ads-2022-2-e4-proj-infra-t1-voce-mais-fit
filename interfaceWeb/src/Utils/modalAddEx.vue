@@ -16,7 +16,7 @@
                         </div>
                         <div id="divInfo" class="name">
                             <p class="titleInfo">Nome:</p>
-                            <p>Carne de Boi</p>
+                            <p>Voador</p>
                         </div>
                         <div id="divInfo" class="quant">
                             <p class="titleInfo">Vídeo</p>
@@ -130,7 +130,7 @@ export default {
     width: 6.2%!important;
 }
 #divInfo{
-    width: 15.2%;
+    width: 45%;
     display: flex;
     align-items: center;
     justify-content: center;

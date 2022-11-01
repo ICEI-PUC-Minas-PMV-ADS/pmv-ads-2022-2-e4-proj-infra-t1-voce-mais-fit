@@ -8,6 +8,7 @@
   </div>
 </template>
 <script>
+import { HTTP } from '@/api_system'
 import startComponentVue from '@/components/startComponent.vue';
 import headerComponent from '@/components/headerComponent.vue'
 import footerComponent from '@/components/footerComponent.vue'
@@ -21,6 +22,20 @@ export default {
     footerComponent,
     startComponentVue
   },
+  methods:{
+    buscaAluno(){
+      HTTP.get("user")
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
+  mounted(){
+    this.buscaAluno()
+  }
 };
 </script>
 
