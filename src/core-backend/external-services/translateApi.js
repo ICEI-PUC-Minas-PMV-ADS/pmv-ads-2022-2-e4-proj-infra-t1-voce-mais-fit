@@ -1,6 +1,15 @@
 const axios = require("axios");
 
-//todo get apy key com varias apis
+const getRapidApiKey = () => {
+    let rapidApiKeyList = [
+        'f925efd88dmshe8f7e399c56488ep1fb094jsn2e1fe75385f3',
+        '7b8abc1f81mshb7b8ca514a09a92p11a08ejsnf1cc8b90009a'
+    ];
+
+    let randomKey = rapidApiKeyList[Math.floor(Math.random() * rapidApiKeyList.length)];
+
+    return randomKey;
+};
 
 async function translate(optionsData){
     let options = {
@@ -9,7 +18,7 @@ async function translate(optionsData){
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
           'Accept-Encoding': 'application/gzip',
-          'X-RapidAPI-Key': 'f925efd88dmshe8f7e399c56488ep1fb094jsn2e1fe75385f3',
+          'X-RapidAPI-Key': getRapidApiKey(),
           'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
         },
         data: optionsData
