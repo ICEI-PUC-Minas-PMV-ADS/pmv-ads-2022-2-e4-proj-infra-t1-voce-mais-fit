@@ -30,17 +30,17 @@
                     </div>
                     <div class="col-6 p-0" >
                         <label class="mb-1 label_default"
-                        >CPF</label
+                        >WhatsApp</label
                         >
                         <input id="inputForm"
-                        placeholder="000.000.000-00"
+                        placeholder="(00)00000-0000"
                         type="Seu CPF"
                         class="input_default form-control requiredName"
-                        v-mask="'###.###.###-##'"
-                        v-model="userCpf"
-                        @input="validaCpf"
+                        v-mask="'(##)#####-####'"
+                        v-model="userTel"
+                        @input="validaTel"
                         />
-                        <span class="spanCpf">Insira um CPF válido</span>
+                        <span class="spanTel">Insira um telefone válido</span>
                     </div>
                     <div class="col-6 p-0" >
                         <label class="mb-1 label_default"
@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import { HTTP } from '@/api_system';
 import footerComponent from '@/components/footerComponent.vue';
 export default {
     components:{
@@ -85,9 +86,10 @@ export default {
     data(){
         return{
             userName:"",
-            userCpf:"",
+            userTel:"",
             userEmail:"",
-            userSenha:""
+            userSenha:"",
+            type:"trainer"
         }
     },
     methods:{
@@ -110,74 +112,89 @@ export default {
             }
         },
         toGo(){
-            if(!this.userEmail && !this.userSenha && !this.userCpf && !this.userName){
+            if(!this.userEmail && !this.userSenha && !this.userTel && !this.userName){
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
                 let spanSenha = document.querySelector('.spanSenha')
                 spanSenha.style.display = 'block'
-                let spanCpf = document.querySelector('.spanCpf')
-                spanCpf.style.display = 'block'
+                let spanTel = document.querySelector('.spanTel')
+                spanTel.style.display = 'block'
                 let spanName = document.querySelector('.spanName')
                 spanName.style.display = 'block'
-            }else if(this.userEmail && !this.userSenha && !this.userCpf && !this.userName){
+            }else if(this.userEmail && !this.userSenha && !this.userTel && !this.userName){
                 let spanSenha = document.querySelector('.spanSenha')
                 spanSenha.style.display = 'block'
-                let spanCpf = document.querySelector('.spanCpf')
-                spanCpf.style.display = 'block'
+                let spanTel = document.querySelector('.spanTel')
+                spanTel.style.display = 'block'
                 let spanName = document.querySelector('.spanName')
                 spanName.style.display = 'block'
-            }else if(!this.userEmail && this.userSenha && !this.userCpf && !this.userName){
+            }else if(!this.userEmail && this.userSenha && !this.userTel && !this.userName){
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
-                let spanCpf = document.querySelector('.spanCpf')
-                spanCpf.style.display = 'block'
+                let spanTel = document.querySelector('.spanTel')
+                spanTel.style.display = 'block'
                 let spanName = document.querySelector('.spanName')
                 spanName.style.display = 'block'
-            }else if(!this.userEmail && !this.userSenha && this.userCpf && !this.userName){
-                let spanMail = document.querySelector('.spanMail')
-                spanMail.style.display = 'block'
-                let spanSenha = document.querySelector('.spanSenha')
-                spanSenha.style.display = 'block'
-                let spanName = document.querySelector('.spanName')
-                spanName.style.display = 'block'
-            }else if(!this.userEmail && !this.userSenha && !this.userCpf && this.userName){
+            }else if(!this.userEmail && !this.userSenha && this.userTel && !this.userName){
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
                 let spanSenha = document.querySelector('.spanSenha')
                 spanSenha.style.display = 'block'
-                let spanCpf = document.querySelector('.spanCpf')
-                spanCpf.style.display = 'block'
-            }else if(!this.userEmail && !this.userSenha && this.userCpf && this.userName){
+                let spanName = document.querySelector('.spanName')
+                spanName.style.display = 'block'
+            }else if(!this.userEmail && !this.userSenha && !this.userTel && this.userName){
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
                 let spanSenha = document.querySelector('.spanSenha')
                 spanSenha.style.display = 'block'
-            }else if(!this.userEmail && this.userSenha && !this.userCpf && this.userName){
+                let spanTel = document.querySelector('.spanTel')
+                spanTel.style.display = 'block'
+            }else if(!this.userEmail && !this.userSenha && this.userTel && this.userName){
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
-                let spanCpf = document.querySelector('.spanCpf')
-                spanCpf.style.display = 'block'
-            }else if(this.userEmail && !this.userSenha && !this.userCpf && this.userName){
                 let spanSenha = document.querySelector('.spanSenha')
                 spanSenha.style.display = 'block'
-                let spanCpf = document.querySelector('.spanCpf')
-                spanCpf.style.display = 'block'
-            }else if(!this.userEmail && this.userSenha && this.userCpf && !this.userName){
+            }else if(!this.userEmail && this.userSenha && !this.userTel && this.userName){
+                let spanMail = document.querySelector('.spanMail')
+                spanMail.style.display = 'block'
+                let spanTel = document.querySelector('.spanTel')
+                spanTel.style.display = 'block'
+            }else if(this.userEmail && !this.userSenha && !this.userTel && this.userName){
+                let spanSenha = document.querySelector('.spanSenha')
+                spanSenha.style.display = 'block'
+                let spanTel = document.querySelector('.spanTel')
+                spanTel.style.display = 'block'
+            }else if(!this.userEmail && this.userSenha && this.userTel && !this.userName){
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
                 let spanName = document.querySelector('.spanName')
                 spanName.style.display = 'block'
-            }else if(this.userEmail && !this.userSenha && this.userCpf && !this.userName){
+            }else if(this.userEmail && !this.userSenha && this.userTel && !this.userName){
                 let spanSenha = document.querySelector('.spanSenha')
                 spanSenha.style.display = 'block'
                 let spanName = document.querySelector('.spanName')
                 spanName.style.display = 'block'
-            }else if(this.userEmail && this.userSenha && !this.userCpf && !this.userName){
-                let spanCpf = document.querySelector('.spanCpf')
-                spanCpf.style.display = 'block'
+            }else if(this.userEmail && this.userSenha && !this.userTel && !this.userName){
+                let spanTel = document.querySelector('.spanTel')
+                spanTel.style.display = 'block'
                 let spanName = document.querySelector('.spanName')
                 spanName.style.display = 'block'
-            } 
+            }else{
+                HTTP.post("/user", {
+                    email: this.userEmail,
+                    password: this.userSenha,
+                    userType: this.type,
+                    name: this.userName,
+                    whatsapp: this.userTel
+                })
+                .then(response =>{
+                    console.log(response)
+                    this.$router.push('/loginPage')
+                })
+                .catch(error =>{
+                    console.log(error)
+                })
+            }
         },
         validaSenha(j){
             if(this.userSenha === ""){
@@ -190,19 +207,19 @@ export default {
                 spanSenha.style.display = 'none'
             }
         },
-        validaCpf(x){
-            if(this.userCpf.length > 0 && this.userCpf.length < 14 || this.userCpf.length > 14){
+        validaTel(x){
+            if(this.userTel.length > 0 && this.userTel.length < 14 || this.userTel.length > 14){
                 x.target.style.border = '2px solid #cc1313'
-                let span = document.querySelector('.spanCpf')
+                let span = document.querySelector('.spanTel')
                 span.style.display = 'block'
-            }else if(this.userCpf.length === 0){
+            }else if(this.userTel.length === 0){
                 x.target.style.border = '1px solid #5B9CCF'
-                let span = document.querySelector('.spanCpf')
+                let span = document.querySelector('.spanTel')
                 span.style.display = 'none'
             }
             else{
                 x.target.style.border = '1px solid #5B9CCF'
-                let span = document.querySelector('.spanCpf')
+                let span = document.querySelector('.spanTel')
                 span.style.display = 'none'
             }
             

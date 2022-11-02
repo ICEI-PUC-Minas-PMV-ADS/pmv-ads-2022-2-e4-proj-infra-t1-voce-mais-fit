@@ -73,7 +73,11 @@ export default {
             }
         },
         closeModal(){
-            this.defineModal === false
+            let noSelect = document.querySelector('.noSelect')
+            let selected = document.querySelector('.selected')
+            this.defineImg = false
+            noSelect.style.display = 'block'
+            selected.style.display = 'none'
         }
     },
     mounted(){

@@ -33,6 +33,10 @@ const swaggerOptions = {
  apis: ['./routes/*.js']
 };
 
+const cors = require('cors');
+app.use(cors({
+    origin: '*'
+}));
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 

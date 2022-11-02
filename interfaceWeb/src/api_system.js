@@ -2,7 +2,7 @@ import axios from 'axios'
 
  export const HTTP =
     axios.create({
-        baseURL: process.env.VUE_APP_ROOT_API + "/api/",
+        baseURL: "http://localhost:3000/api/",
         responseType: "json",
         headers: {},
     })
