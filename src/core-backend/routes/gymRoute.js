@@ -8,13 +8,13 @@ const gymService = require('../services/gymService');
  * /api/gym:
  *  get:
  *   tags:
- *    - gym
- *   description: Busca todas as academias
+ *    - Academia
+ *   description: Busca todas as Academias
  *   responses: 
  *    200:
  *     description: Sucesso
  *    404:
- *     description: Nenhuma academia encontrada
+ *     description: Nenhuma Academia encontrada
  *    500:
  *     description: Erro interno
  */
@@ -34,7 +34,7 @@ router.get('/', (req, res) => { //TODO: Buscar junto os trainers
  * /api/gym/{gymId}:
  *  get:
  *   tags:
- *    - gym
+ *    - Academia
  *   parameters:
  *    - name: gymId
  *      in: path
@@ -65,8 +65,8 @@ router.get('/:gymId', (req, res) => { //TODO: Buscar junto os trainers
  * /api/gym:
  *  post:
  *   tags:
- *    - gym
- *   description: Cadastra uma nova academia
+ *    - Academia
+ *   description: Cadastra uma nova Academia
  *   parameters:
  *    - name: gym
  *      in: body
@@ -100,8 +100,8 @@ router.post('/', (req, res) => {
  * /api/gym/{gymId}:
  *  patch:
  *   tags:
- *    - gym
- *   description: Atualiza uma academia
+ *    - Academia
+ *   description: Atualiza uma Academia
  *   parameters:
 *    - name: gymId
  *      in: path

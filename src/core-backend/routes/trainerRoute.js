@@ -10,7 +10,7 @@ const trainerService = require('../services/trainerService');
  * /api/trainer/{trainerId}:
  *  get:
  *   tags:
- *    - trainer
+ *    - Instrutor
  *   description: Busca o Trainer através do TrainerId, tipo ObjectId
  *   parameters:
  *    - name: trainerId
@@ -41,7 +41,7 @@ router.get('/:trainerId', (req, res) => {
  * /api/trainer/{trainerId}:
  *  patch:
  *   tags:
- *    - trainer
+ *    - Instrutor
  *   description: Atualiza informações do Trainer através do TrainerId (ObjectId)
  *   parameters:
  *    - name: trainerId
