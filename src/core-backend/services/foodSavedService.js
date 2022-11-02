@@ -1,5 +1,6 @@
 const Gymgoer = require('../models/Gymgoer');
 const gymgoerService = require('./gymgoerService');
+const foodApi = require('../external-services/foodApi');
 const mongoose = require('mongoose');
 
 async function getFoodSavedById(foodSavedId){
@@ -41,7 +42,6 @@ async function createNewFoodSaved(gymgoerId, foodSaved) {
     return {gymgoerId: gymgoer._id, newFoodSaved};
 }
 
-
 async function updateFoodSavedById(foodSavedId, foodSaved){
     if(!foodSaved.kcalPer100g || foodSaved.kcalPer100g == 0)
         foodSaved.kcalPer100g = ((foodSaved.carbPer100g * 4) + (foodSaved.proteinPer100g * 4) + (foodSaved.fatPer100g * 9));
@@ -60,7 +60,21 @@ async function updateFoodSavedById(foodSavedId, foodSaved){
     return updateResult;
 }
 
+async function searchFoodByGymgoerId(gymgoerId, query){
+
+}
+
+async function searchFood(query){
+    let result = await foodApi.searchFood(query);
+
+    if(!result || result.length == 0)
+        return {errorType: 404, errorMessage: 'Foods not found'};
+
+    return result;
+}
+
 module.exports.createNewFoodSaved = createNewFoodSaved;
 module.exports.getAllFoodSavedByGymgoerId = getAllFoodSavedByGymgoerId;
 module.exports.getFoodSavedById = getFoodSavedById;
 module.exports.updateFoodSavedById = updateFoodSavedById;
+module.exports.searchFood = searchFood;

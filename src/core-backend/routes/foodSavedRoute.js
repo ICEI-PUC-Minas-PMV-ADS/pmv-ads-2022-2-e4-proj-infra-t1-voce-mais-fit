@@ -8,8 +8,8 @@ const foodSavedService = require('../services/foodSavedService');
  * /api/foodSaved/{gymgoerId}:
  *  get:
  *   tags:
- *    - foodSaved
- *   description: Busca o todos os alimentos salvos para determinado Gymgoer, através do GymgoerId, tipo ObjectId
+ *    - Alimento Salvo
+ *   description: Busca o todos os Alimentos Salvos para determinado Gymgoer, através do GymgoerId, tipo ObjectId
  *   parameters:
  *    - name: gymgoerId
  *      in: path
@@ -36,11 +36,42 @@ router.get('/:gymgogerId', (req, res) => {
 
 /**
  * @swagger
+ * /api/foodSaved:
+ *  get:
+ *   tags:
+ *    - Alimento Salvo
+ *   description: Busca o todos os Alimentos de acordo com o texto informado
+ *   parameters:
+ *    - name: foodName
+ *      in: query
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    404:
+ *     description: Nenhum Alimento encontrado
+ *    500:
+ *     description: Erro interno
+ */
+router.get('/', (req, res) => {
+    foodSavedService.searchFood(req.query.foodName).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
+
+/**
+ * @swagger
  * /api/foodSaved/{gymgoerId}:
  *  post:
  *   tags:
- *    - foodSaved
- *   description: Cria um novo alimento salvo para um Gymgoer, através do GymgoerId (ObjectId)
+ *    - Alimento Salvo
+ *   description: Cria um novo Alimento Salvo para um Gymgoer, através do GymgoerId (ObjectId)
  *   parameters:
  *    - name: gymgoerId
  *      in: path
@@ -84,8 +115,8 @@ router.post('/:gymgoerId', (req, res) => {
  * /api/foodSaved/{foodSavedId}:
  *  patch:
  *   tags:
- *    - foodSaved
- *   description: Atualiza um alimento salvo, através do foodSavedId (ObjectId)
+ *    - Alimento Salvo
+ *   description: Atualiza um Alimento Salvo, através do foodSavedId (ObjectId)
  *   parameters:
  *    - name: foodSavedId
  *      in: path
