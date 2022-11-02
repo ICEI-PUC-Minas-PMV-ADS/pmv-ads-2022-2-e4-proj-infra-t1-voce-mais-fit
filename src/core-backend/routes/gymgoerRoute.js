@@ -10,8 +10,8 @@ const gymgoerService = require('../services/gymgoerService');
  * /api/gymgoer/{gymgoerId}:
  *  get:
  *   tags:
- *    - gymgoer
- *   description: Busca o Gymgoer através do gymgoerId (ObjectId)
+ *    - Aluno
+ *   description: Busca o Aluno através do gymgoerId (ObjectId)
  *   parameters:
  *    - name: gymgoerId
  *      in: path
@@ -41,8 +41,8 @@ router.get('/:gymgoerId', (req, res) => {
  * /api/gymgoer/{gymgoerId}:
  *  patch:
  *   tags:
- *    - gymgoer
- *   description: Atualiza informações básicas do Gymgoer através do GymgoerId (ObjectId)
+ *    - Aluno
+ *   description: Atualiza informações básicas do Aluno através do GymgoerId (ObjectId)
  *   parameters:
  *    - name: gymgoerId
  *      in: path

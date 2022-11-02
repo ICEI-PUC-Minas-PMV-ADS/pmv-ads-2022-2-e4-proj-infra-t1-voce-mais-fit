@@ -8,7 +8,7 @@ const physicalInformationService = require('../services/physicalInformationServi
  * /api/gymgoer/{gymgoerId}/physicalInformation:
  *  patch:
  *   tags:
- *    - physicalInformation
+ *    - Informações Físicas
  *   description: (UPSERT) Atualiza informações físicas do Gymgoer através do GymgoerId (ObjectId)
  *   parameters:
  *    - name: gymgoerId
