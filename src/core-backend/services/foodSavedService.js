@@ -61,7 +61,19 @@ async function updateFoodSavedById(foodSavedId, foodSaved){
 }
 
 async function searchFoodByGymgoerId(gymgoerId, query){
+    let gymgoer = await gymgoerService.getGymgoerById(gymgoerId);
 
+    if(gymgoer._id == null)
+        return {errorType: 404, errorMessage: 'Gymgoer not found'};
+        
+    let resultByGymgoer = gymgoer.foodSaved;
+    if(query) resultByGymgoer = gymgoer.foodSaved.filter(p => new RegExp(query, 'i').test(p.name));
+
+    let resultByFoodApi = await foodApi.searchFood(query);
+
+    let totalResult  = resultByGymgoer.concat(resultByFoodApi);
+
+    return totalResult;
 }
 
 async function searchFood(query){
@@ -78,3 +90,4 @@ module.exports.getAllFoodSavedByGymgoerId = getAllFoodSavedByGymgoerId;
 module.exports.getFoodSavedById = getFoodSavedById;
 module.exports.updateFoodSavedById = updateFoodSavedById;
 module.exports.searchFood = searchFood;
+module.exports.searchFoodByGymgoerId = searchFoodByGymgoerId;

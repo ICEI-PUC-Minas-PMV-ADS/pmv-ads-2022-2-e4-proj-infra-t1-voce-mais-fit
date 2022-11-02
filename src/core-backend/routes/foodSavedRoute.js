@@ -5,37 +5,6 @@ const foodSavedService = require('../services/foodSavedService');
 
 /**
  * @swagger
- * /api/foodSaved/{gymgoerId}:
- *  get:
- *   tags:
- *    - Alimento Salvo
- *   description: Busca o todos os Alimentos Salvos para determinado Gymgoer, através do GymgoerId, tipo ObjectId
- *   parameters:
- *    - name: gymgoerId
- *      in: path
- *      required: true
- *      type: string
- *   responses: 
- *    200:
- *     description: Sucesso
- *    404:
- *     description: Nenhum alimento salvo encontrado
- *    500:
- *     description: Erro interno
- */
-router.get('/:gymgogerId', (req, res) => {
-    foodSavedService.getAllFoodSavedByGymgoerId(req.params.gymgogerId).then((result) => {
-        if(result.errorMessage != null)
-            return res.status(result.errorType).send(result.errorMessage);
-
-        return res.status(200).send(result);
-    }).catch((err) => {
-        return res.status(500).send(err.message);
-    });
-});
-
-/**
- * @swagger
  * /api/foodSaved:
  *  get:
  *   tags:
@@ -56,6 +25,41 @@ router.get('/:gymgogerId', (req, res) => {
  */
 router.get('/', (req, res) => {
     foodSavedService.searchFood(req.query.foodName).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
+
+/**
+ * @swagger
+ * /api/foodSaved/{gymgoerId}:
+ *  get:
+ *   tags:
+ *    - Alimento Salvo
+ *   description: Busca o todos os Alimentos de acordo com o texto informado (opcional), juntamente com os Alimentos Salvos daquele Gymgoer específico, através do gymgoerId (ObjectId)
+ *   parameters:
+ *    - name: gymgoerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *    - name: foodName
+ *      in: query
+ *      required: false
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    404:
+ *     description: Nenhum Alimento encontrado
+ *    500:
+ *     description: Erro interno
+ */
+ router.get('/:gymgoerId', (req, res) => {
+    foodSavedService.searchFoodByGymgoerId(req.params.gymgoerId, req.query.foodName).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
 
