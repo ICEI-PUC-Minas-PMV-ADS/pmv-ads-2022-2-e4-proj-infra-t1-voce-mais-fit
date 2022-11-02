@@ -171,7 +171,7 @@ router.post('/login', async(req, res) => {
         secret,
         )
 
-        res.status(200).json({msg: "Autenticado com sucesso", token})
+        res.status(200).json({msg: "Autenticado com sucesso", token, email})
     }catch(err){
         console.log(err);
     }
