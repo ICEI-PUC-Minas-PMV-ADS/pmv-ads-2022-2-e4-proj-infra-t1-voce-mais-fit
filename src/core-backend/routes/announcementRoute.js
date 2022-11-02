@@ -8,7 +8,7 @@ const announcementService = require('../services/announcementService');
  * /api/announcement/{gymId}:
  *  get:
  *   tags:
- *    - announcement
+ *    - Anúncios
  *   description: Busca o todos os anúncios salvos para determinada Gym, através do Gymg, tipo ObjectId
  *   parameters:
  *    - name: gymId
@@ -39,7 +39,7 @@ router.get('/:gymId', (req, res) => { //todo retornar ordenado pelo mais recente
  * /api/announcement/{gymId}:
  *  post:
  *   tags:
- *    - announcement
+ *    - Anúncios
  *   description: Cria um novo anúncio para determinada Gym, através do GymId, tipo ObjectId
  *   parameters:
  *    - name: gymId
@@ -74,7 +74,7 @@ router.post('/:gymId', (req, res) => {
  * /api/announcement/{announcementId}:
  *  patch:
  *   tags:
- *    - announcement
+ *    - Anúncios
  *   description: Atualiza um anúncio, através do AnnouncementId, tipo ObjectId
  *   parameters:
  *    - name: announcementId
