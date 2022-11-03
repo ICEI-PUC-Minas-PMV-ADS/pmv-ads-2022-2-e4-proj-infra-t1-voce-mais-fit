@@ -1,6 +1,6 @@
 <template >
   <div class="allContainerRotina">
-    <div>
+    <div class="titleBlockCont">
       <label class="titleBlock" for="">Rotina</label>
     </div>
     <div class="geraldebaixo">
@@ -47,6 +47,9 @@ export default {
   border-radius: 0px;
   background-color: #ab0139;
   text-align: center;
+}
+.titleBlockCont{
+  margin-right: 3%;
 }
 .titleBlock{
   color: #FFFF;

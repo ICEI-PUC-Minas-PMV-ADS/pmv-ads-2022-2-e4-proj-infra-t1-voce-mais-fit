@@ -1,6 +1,17 @@
 const axios = require("axios");
+const internalDictionary = require('../utils/dictionaryEnPt');
 
-//todo get apy key com varias apis
+const getRapidApiKey = () => {
+    let rapidApiKeyList = [
+        'f925efd88dmshe8f7e399c56488ep1fb094jsn2e1fe75385f3',
+        '7b8abc1f81mshb7b8ca514a09a92p11a08ejsnf1cc8b90009a',
+        'ec01fa8e35mshc22af4dc5bbd3bcp14c77ajsn775ea72335a9'
+    ];
+
+    let randomKey = rapidApiKeyList[Math.floor(Math.random() * rapidApiKeyList.length)];
+
+    return randomKey;
+};
 
 async function translate(optionsData){
     let options = {
@@ -9,7 +20,7 @@ async function translate(optionsData){
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
           'Accept-Encoding': 'application/gzip',
-          'X-RapidAPI-Key': 'f925efd88dmshe8f7e399c56488ep1fb094jsn2e1fe75385f3',
+          'X-RapidAPI-Key': getRapidApiKey(),
           'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
         },
         data: optionsData
@@ -37,7 +48,10 @@ async function portugueseToEnglish(text){
     optionsData.append("target", "en");
     optionsData.append("q", text);
 
-    let result = await translate(optionsData);
+    let result = internalDictionary.portugueseToEnglish(text);
+
+    if(!result)
+        result = await translate(optionsData);
 
     return result;
 }
@@ -48,7 +62,10 @@ async function englishToPortuguese(text){
     optionsData.append("target", "pt");
     optionsData.append("q", text);
 
-    let result = await translate(optionsData);
+    let result = internalDictionary.englishToPortuguese(text);
+
+    if(!result)
+        result = await translate(optionsData);
 
     return result;
 }
