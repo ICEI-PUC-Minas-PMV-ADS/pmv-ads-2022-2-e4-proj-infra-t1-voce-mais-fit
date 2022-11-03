@@ -117,12 +117,23 @@ export default {
             axios
                 .post("http://localhost:3000/api/user/login", { email: this.userEmail, password: this.userSenha })
                 .then((res) => {
-                    console.log(res.data)
+                    const data = res.data;
+                    const dataUser = res.data.usuario[0]
+                    const localStorage = {
+                        userId: dataUser._id,
+                        gymgoerId: dataUser.gymgoerInfo,
+                        token: data.token,
+                        trainerId: dataUser.trainerInfo,
+                    }
+                    console.log(localStorage)
+                    window.localStorage.setItem("localStorage", JSON.stringify(localStorage))
                 })
                 .catch((error) => {
                     console.log(error)
                 })
-        }
+        },
+
+        
     }
 }
 </script>
