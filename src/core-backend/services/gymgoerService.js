@@ -1,5 +1,14 @@
 const Gymgoer = require('../models/Gymgoer');
 
+async function getAllGymgoers(){
+    let gymgoers = await Gymgoer.Model.find();
+
+    if(!gymgoers || gymgoers.length == 0)
+        return {errorType: 404, errorMessage: 'There is no Gymgoer in database'};
+
+    return gymgoers;
+}
+
 async function getGymgoerById(gymgoerId){
     let gymgoer = await Gymgoer.Model.findById(gymgoerId);
 
@@ -37,5 +46,6 @@ async function updateGymgoerById(gymgoerId, gymgoer){
 }
 
 module.exports.createNewGymgoer = createNewGymgoer;
+module.exports.getAllGymgoers = getAllGymgoers;
 module.exports.getGymgoerById = getGymgoerById;
 module.exports.updateGymgoerById = updateGymgoerById;

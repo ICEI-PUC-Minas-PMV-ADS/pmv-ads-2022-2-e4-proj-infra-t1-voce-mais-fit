@@ -1,5 +1,6 @@
 const Gymgoer = require('../models/Gymgoer');
 const gymgoerService = require('./gymgoerService');
+const youtubeApi = require('../external-services/youtubeApi');
 const mongoose = require('mongoose');
 
 //#region ExerciseModel
@@ -35,6 +36,9 @@ async function createNewExerciseModel(gymgoerId, exerciseModel) {
         description: exerciseModel.description,
         exercises: exerciseModel.exercises
     };
+
+    for(const exercise of exerciseModel.exercises)
+        exercise.youtubeUrl = await youtubeApi.searchVideo(exercise.name);
 
     gymgoer.exerciseModels.push(newExerciseModel);
         await gymgoer.save();
@@ -79,7 +83,8 @@ async function addExerciseInModel(exerciseModelId, exercise){
 
     gymgoer.exerciseModels.filter(exerciseModel => exerciseModel._id == exerciseModelId)[0].exercises.push({
         name: exercise.name, 
-        description: exercise.description
+        description: exercise.description,
+        youtubeUrl: await youtubeApi.searchVideo(exercise.name),
     });
 
     let gymgoerDb = await gymgoer.save()
