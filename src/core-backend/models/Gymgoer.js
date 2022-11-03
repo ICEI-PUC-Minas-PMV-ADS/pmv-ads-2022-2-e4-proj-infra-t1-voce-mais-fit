@@ -6,17 +6,16 @@ const gymgoerSchema = new mongoose.Schema({
     physicalInformation: {
         geneticSex: {
             type: String, 
-            required: true, 
             enum:['male','female']
         },
         weightGoal: {
             type: String, 
-            required: true, 
+            required: false, 
             enum:['lose','gain','maintain']
         },
-        age: {type: Number, required: true},
-        height: {type: Number, required: true},
-        weight: {type: Number, required: true},
+        age: {type: Number},
+        height: {type: Number},
+        weight: {type: Number},
         imc: {type: Number},
         tmb: {type: Number},
         dailyKcal: {type: Number},
