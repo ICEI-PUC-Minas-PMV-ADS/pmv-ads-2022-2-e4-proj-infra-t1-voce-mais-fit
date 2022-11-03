@@ -8,7 +8,7 @@
             <a @click="toMain" class="link" href="#home">Home</a>
             <a v-if="this.$route.path === '/mainPageTraner'" class="link">Alunos</a>
             <a v-if="this.$route.path !== '/mainPageTraner'" @click="toMain" id="rotina" class="link" href="#rotina">Rotina</a>
-            <a v-if="this.$route.path !== '/mainPageTraner'" class="link" id="dieta">Dieta</a>
+            <a v-if="this.$route.path !== '/mainPageTraner'" class="link" id="dieta" href="#listaFood">Dieta</a>
             <a v-if="this.$route.path !== '/mainPageTraner'" class="link" id="ex">Exercicíos</a>
             <router-link to="/sobrepage" class="link">Sobre</router-link>
         </div>

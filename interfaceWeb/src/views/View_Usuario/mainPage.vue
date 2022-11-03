@@ -4,17 +4,19 @@
     <startComponentVue id="home"></startComponentVue>
     <resumo-Usuario />
     <rotinaComponent id="rotina"/>
-    <datepickerComponent></datepickerComponent>
+    <datepickerComponent id="listaFood"></datepickerComponent>
+    <datapickerComponentEx id="listaEx"></datapickerComponentEx>
     <footerComponent></footerComponent>
   </div>
 </template>
 <script>
 import startComponentVue from '@/components/startComponent.vue';
-import headerComponent from '@/components/headerComponent.vue'
-import footerComponent from '@/components/footerComponent.vue'
+import headerComponent from '@/components/headerComponent.vue';
+import footerComponent from '@/components/footerComponent.vue';
 import resumoUsuario from '@/Utils/resumoUsuario.vue';
-import rotinaComponent from '@/components/rotinaComponent.vue'
-import datepickerComponent from '@/components/datepickerComponent.vue'
+import rotinaComponent from '@/components/rotinaComponent.vue';
+import datepickerComponent from '@/components/datepickerComponent.vue';
+import datapickerComponentEx from '@/components/datepickerComponentEx.vue'
 export default {
   components: {
     resumoUsuario,
@@ -22,12 +24,12 @@ export default {
     headerComponent,
     footerComponent,
     startComponentVue,
-    datepickerComponent
+    datepickerComponent,
+    datapickerComponentEx
   },
  
 };
 </script>
-
 
 <style scoped>
 
