@@ -51,6 +51,7 @@ const gymgoerSchema = new mongoose.Schema({
         exercises: [{
             name: {type: String, required: true, maxLength: 255},
             description: {type: String, required: false},
+            youtubeUrl: {type: String, required: false},
             done: {type: Boolean, required: true, default: false}
         }]
     }],
@@ -59,6 +60,7 @@ const gymgoerSchema = new mongoose.Schema({
         description: {type: String, required: false},
         exercises: [{
             name: {type: String, required: true, maxLength: 255},
+            youtubeUrl: {type: String, required: false},
             description: {type: String, required: false}
         }],
     }]
