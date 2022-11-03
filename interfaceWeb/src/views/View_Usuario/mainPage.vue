@@ -2,7 +2,7 @@
   <div>
     <headerComponent></headerComponent>
     <startComponentVue id="home"></startComponentVue>
-    <resumo-Usuario />
+    <resumo-Usuario/>
     <rotinaComponent id="rotina"/>
     <datepickerComponent id="listaFood"></datepickerComponent>
     <datapickerComponentEx id="listaEx"></datapickerComponentEx>
