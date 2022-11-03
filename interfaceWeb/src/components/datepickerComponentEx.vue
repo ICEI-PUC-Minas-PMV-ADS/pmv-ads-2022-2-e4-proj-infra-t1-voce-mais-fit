@@ -1,13 +1,13 @@
 <template>
   <div class="calendar">
-    <p class="titleList">CRIE SUA DIETA ALIMENTAR</p>
+    <p class="titleList">MODELO DE EXERCÍCIOS</p>
     <div class="table-responsive-sm"> 
     <table class="table table-bordered ">
       <thead class="cab">
         <tr class="titleTr">
           <th scope="col">#</th>
-          <th colspan="1" scope="col"> Alimento</th>
-          <th  style="width: 50%;" scope="col"> Quantidade</th>
+          <th colspan="1" scope="col"> Exercício</th>
+          <th  style="width: 50%;" scope="col"> Repetição</th>
         </tr>      
       </thead>
       <tbody >
@@ -38,18 +38,18 @@
     <button class="addList" type="submit">ADICIONAR LISTA</button>
   </div>
   <div class="titleListCont">
-    <p class="titleListFood">Selecione a lista de Alimentos do dia!</p>
+    <p class="titleListEx">Selecione a lista de Exercícios do dia!</p>
   </div>
-  <carouselFoodVue></carouselFoodVue>
+  <carouselExVue></carouselExVue>
 </div> 
 </template>
 <script>
-import carouselFoodVue from './carouselFood.vue';
-export default {
-  components: {
-    carouselFoodVue
-  },
-};
+import carouselExVue from './carouselEx.vue';
+  export default{
+    components:{
+      carouselExVue
+    }
+  }
 </script>
 <style scoped>
 * {
@@ -83,23 +83,23 @@ p{
   color: #FFFF;
   transition: .7s;
 }
-.titleList{
-  color: #222222;
-  font-size:max(3vh, 20px) ;
-}
-.titleTr{
-  background-color: #e1e1e1;
-}
 .titleListCont{
   margin-top: 3%;
   text-align: center;
   height: 60px;
   padding-left: 2%;
 }
-.titleListFood{
+.titleListEx{
   color: #FD0054;
   font-weight: 700;
   font-size:max(3vh, 20px) ;
+}
+.titleList{
+  color: #222222;
+  font-size:max(3vh, 20px) ;
+}
+.titleTr{
+  background-color: #e1e1e1;
 }
 .buttonContainer{
   margin-top: 2%;
@@ -108,7 +108,7 @@ p{
   justify-content: center;
 }
 .calendar {
-  padding: 5% 5% 1% 5%;
+  padding: 5% 5% 5% 5%;
   width: 100%;
   display: flex;
   flex-direction: column;
