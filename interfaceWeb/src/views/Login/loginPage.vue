@@ -44,7 +44,7 @@
                         <span class="spanSenha">Insira a senha correta</span>
                         <a class="forget">Esqueci a minha Senha</a>
                     </div>
-                    <button class="submitButton" @click="logar" type="submit">Entrar!</button>
+                    <button class="submitButton" @click="toGo" type="submit">Entrar!</button>
                 </div>
             </div>
         </body>
@@ -55,7 +55,7 @@
 <script>
 
 import footerComponent from '@/components/footerComponent.vue';
-import axios from "axios";
+import { HTTP } from '@/api_system'
 
 
 export default {
@@ -65,7 +65,11 @@ export default {
     data(){
         return{
             userEmail:"",
-            userSenha:""
+            userSenha:"",
+            emailAfter:"",
+            emailBefore:"",
+            senhaAfter:"",
+            senhaBefore:""
         }
     },
     methods:{
@@ -107,6 +111,7 @@ export default {
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
             }else{
+                this.logar()
                 this.$router.push('/mainPage')
             }
         },
@@ -114,8 +119,8 @@ export default {
         logar(){
             // userEmail
             // userSenha
-            axios
-                .post("http://localhost:3000/api/user/login", { email: this.userEmail, password: this.userSenha })
+            
+                HTTP.post("user/login", { email: this.userEmail, password: this.userSenha })
                 .then((res) => {
                     // Possui a msg de sucesso da API e o Token
                     const data = res.data;
@@ -130,15 +135,15 @@ export default {
                         token: data.token,
                         trainerId: dataUser.trainerInfo,
                     }
-                    window.localStorage.setItem("localStorage", JSON.stringify(localStorage))
+                    
                 })
                 .catch((error) => {
                     console.log(error)
                 })
         },
 
-        
-    }
+    },
+    
 }
 </script>
 <style scoped>

@@ -17,7 +17,7 @@
         </div>
         <div class="loremContDad">
           <div class="loremCont">
-            <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+            <p class="lorem">A melhor forma de ver o resultado da academia é treinando com frequência. Há dias bons e dias ruins nos treinos, mas é sempre melhor treinar do que deixar de movimentar o corpo!</p>
           </div>
         </div>
       </div>

@@ -4,7 +4,8 @@
         
         
         <div class="formContainer">
-                <div class="row" id="row">                  
+            <div class="row" id="row">  
+                <div class="lowerRow">               
                     <div class="col-6" >
                         <h3 id="Titulo">Dados da Conta</h3>
                         <label class="mb-1">Nome: {{nome}}</label>
@@ -19,24 +20,12 @@
                     </div>
                     <div class="col-6" >
 
-                        <label class="mb-1">CPF: {{cpf}}</label>
-                        <br>
-                        <div class="stealth" v-if="displayCpf">
-                            <input id="inputForm" placeholder="000.000.000-00" type="Seu CPF" class="input_default form-control requiredName" v-mask="'###.###.###-##'" v-model="userCpf" @input="validaCpf"/>
-                            <p class="p-waring" v-if="verificaCPF">Deve digitar o CPF corretamente para atualizar</p>
-                            <button type="button" class="btn btn-light" @click="verificaDadosCpf">Atualizar</button>
-                        </div>
-                        <button type="button" class="btn btn-light" @click="AlteraDisplayCpf">{{ ButtonCpf }}</button>
-                        
-                    </div>
-                    <div class="col-6" >
-
                         <label class="mb-1">Email: {{email}}</label>
                         <br>
                         <div class="stealth" v-if="displayEmail">
                             <input id="inputForm" placeholder="Seu e-mail" type="email" class="input_default form-control requiredName" v-model="userEmail" @input="validaMail"/>
                             <p class="p-waring" v-if="verificaEmail">Deve digitar o Email corretamente para atualizar</p>
-                             <button type="button" class="btn btn-light" @click="verificaDadosEmail">Atualizar</button>
+                            <button type="button" class="btn btn-light" @click="verificaDadosEmail">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplayEmail">{{ ButtonEmail }}</button>
 
@@ -52,46 +41,44 @@
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplaySenha">{{ ButtonSenha }}</button>
                     </div>
-            </div>
-        </div>
-
-        <div class="formContainer">
-                <div class="row" id="row">                  
-                    <div class="col-6" >
-                        <h3 id="Titulo">Dados do Perfil</h3>
-                        <label class="mb-1">Altura: {{altura}}</label>
-                        <br>
-                        <div class="stealth" v-if="displayAltura">
-                            <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userAlt" />
-                            <p class="p-waring" v-if="verificaAlt">Deve digitar a altura para atualizar</p>
-                            <button type="button" class="btn btn-light" @click="verificaDadoAlt">Atualizar</button>
+                </div> 
+                    <div class="lowerRow">                  
+                        <div class="col-6" >
+                            <h3 id="Titulo">Dados do Perfil</h3>
+                            <label class="mb-1">Altura: {{altura}}</label>
+                            <br>
+                            <div class="stealth" v-if="displayAltura">
+                                <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userAlt" />
+                                <p class="p-waring" v-if="verificaAlt">Deve digitar a altura para atualizar</p>
+                                <button type="button" class="btn btn-light" @click="verificaDadoAlt">Atualizar</button>
+                            </div>
+                            <button type="button" class="btn btn-light" @click="AlteraDisplayAlt">{{ ButtonAlt }}</button>                   
                         </div>
-                        <button type="button" class="btn btn-light" @click="AlteraDisplayAlt">{{ ButtonAlt }}</button>                   
-                </div>
-                <div class="col-6" >
-                        <label class="mb-1">Peso: {{peso}}</label>
-                        <br>
-                        <div class="stealth" v-if="displayPeso">
-                            <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userPeso" />
-                            <p class="p-waring" v-if="verificaPeso">Deve digitar a altura para atualizar</p>
-                            <button type="button" class="btn btn-light" @click="verificaDadoPeso">Atualizar</button>
+                        <div class="col-6" >
+                                <label class="mb-1">Peso: {{peso}}</label>
+                                <br>
+                                <div class="stealth" v-if="displayPeso">
+                                    <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userPeso" />
+                                    <p class="p-waring" v-if="verificaPeso">Deve digitar a altura para atualizar</p>
+                                    <button type="button" class="btn btn-light" @click="verificaDadoPeso">Atualizar</button>
+                                </div>
+                                <button type="button" class="btn btn-light" @click="AlteraDisplayPeso">{{ ButtonAlt }}</button>                   
                         </div>
-                        <button type="button" class="btn btn-light" @click="AlteraDisplayPeso">{{ ButtonAlt }}</button>                   
-                </div>
-                <div class="col-6" >
-                        <label class="mb-1">Imagem de Perfil</label>
-                        <br>
-                        <!-- :src="require(`../../assets/carrouselImg/${imgUrl}`)" -->
-                        <img class="ImgUrl" :src="imgUrl" alt="Imagem de perfil do usuário">
-                        <br>
-                        <div class="stealth" v-if="displayImg">
-                            <input id="inputForm" placeholder="Digite a URL da Imagem que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userImg" />
-                            <p class="p-waring" v-if="verificaImg">Deve digitar a Imagem para atualizar</p>
-                            <button type="button" class="btn btn-light" @click="verificaDadoImg">Atualizar</button>
+                        <div class="col-6" >
+                                <label class="mb-1">Imagem de Perfil</label>
+                                <br>
+                                <!-- :src="require(`../../assets/carrouselImg/${imgUrl}`)" -->
+                                <img class="ImgUrl" :src="imgUrl" alt="Imagem de perfil do usuário">
+                                <br>
+                                <div class="stealth" v-if="displayImg">
+                                    <input id="inputForm" placeholder="Digite a URL da Imagem que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userImg" />
+                                    <p class="p-waring" v-if="verificaImg">Deve digitar a Imagem para atualizar</p>
+                                    <button type="button" class="btn btn-light" @click="verificaDadoImg">Atualizar</button>
+                                </div>
+                                <button type="button" class="btn btn-light" @click="AlteraDisplayImg">{{ ButtonImg }}</button>                   
                         </div>
-                        <button type="button" class="btn btn-light" @click="AlteraDisplayImg">{{ ButtonImg }}</button>                   
+                    </div>
                 </div>
-            </div>
         </div>
 
         <footerComponent></footerComponent>
@@ -102,7 +89,7 @@
 
 
 <script>
-
+    import { HTTP } from '@/api_system'
     import headerComponent from '@/components/headerComponent.vue'
     import footerComponent from '@/components/footerComponent.vue'
 
@@ -113,16 +100,18 @@
         },
         data(){
             return{
-                nome: "nome Exp",
-                cpf: "00000000000",
-                email: "exp@exp",
-                senha: "******",
-                altura: "1.85",
-                peso: "55.8",
                 imgUrl: "https://img.freepik.com/fotos-gratis/o-gato-vermelho-ou-branco-eu-no-estudio-branco_155003-13189.jpg?w=2000",
+                
+                allData:[],
+                allDataGyn:[],
+                email:"",
+                senha:"",
+                nome:"",
+                altura:"",
+                peso:"",
+                gyngoerId:"",
 
                 displayNome: false,
-                displayCpf: false,
                 displayEmail: false,
                 displaySenha: false,
                 displayAltura: false,
@@ -130,7 +119,6 @@
                 displayImg: false,
 
                 verificaNome: false,
-                verificaCPF: false,
                 verificaEmail: false,
                 verificaSenha: false,
                 verificaAlt: false,
@@ -138,7 +126,6 @@
                 verificaImg: false,
 
                 ButtonName: "Alterar",
-                ButtonCpf: "Alterar",
                 ButtonEmail: "Alterar",
                 ButtonSenha: "Alterar",
                 ButtonAlt: "Alterar",
@@ -146,7 +133,6 @@
                 ButtonImg: "Alterar",
 
                 userName: "",
-                userCpf: "",
                 userEmail: "",
                 userSenha: "",
                 userAlt : "",
@@ -154,7 +140,7 @@
                 userImg: "",
             }
         },
-        methods:{
+        methods:{         
             // Métodos para esconder e aparecer as DIVs
             AlteraDisplay(){
                 this.displayNome = !this.displayNome;
@@ -164,16 +150,6 @@
                     this.ButtonName = "Alterar"
                 }
             },
-
-            AlteraDisplayCpf(){
-                this.displayCpf = !this.displayCpf;
-                if(this.displayCpf)
-                    this.ButtonCpf = "Cancelar"
-                else{
-                    this.ButtonCpf = "Alterar"
-                }
-            },
-
             AlteraDisplayEmail(){
                 this.displayEmail = !this.displayEmail;
                 if(this.displayEmail)
@@ -181,7 +157,6 @@
                 else
                     this.ButtonEmail = "Alterar"
             },
-
             AlteraDisplaySenha(){
                 this.displaySenha = !this.displaySenha;
                 if(this.displaySenha)
@@ -189,7 +164,6 @@
                 else
                     this.ButtonSenha = "Alterar"
             },
-
             AlteraDisplayAlt(){
                 this.displayAltura = !this.displayAltura;
                 if(this.displayAltura)
@@ -197,7 +171,6 @@
                 else
                     this.ButtonAlt = "Alterar"
             },
-
             AlteraDisplayPeso(){
                 this.displayPeso = !this.displayPeso;
                 if(this.displayPeso)
@@ -205,7 +178,6 @@
                 else
                     this.ButtonPeso = "ALterar"
             },
-
             AlteraDisplayImg(){
                 this.displayImg = !this.displayImg;
                 if(this.displayImg)
@@ -221,15 +193,6 @@
                 else
                     alert("Nome foi atualizado com suceso")
             },
-
-            verificaDadosCpf(){
-                let cpf = this.userCpf;
-                if(cpf == "" || cpf.length < 11)
-                    this.verificaCPF = true;
-                else
-                    alert("CPF foi alterado com sucesso")
-            },
-
             verificaDadosEmail(){
                 let email = this.userEmail;
                 let carcEspc = email.includes("@");
@@ -238,7 +201,6 @@
                 else
                     alert("Email foi alterado com sucesso")
             },
-
             verificaDadosSenha(){
                 let senha = this.userSenha;
                 if(senha == "")
@@ -246,7 +208,6 @@
                 else
                     alert("Senha foi alterada com sucesso");
             },
-
             verificaDadoAlt(){
                 let alt = this.userName;
                 if(alt == "")
@@ -254,7 +215,6 @@
                 else
                     alert("Altura alterada com sucesso");
             },
-
             verificaDadoPeso(){
                 let peso = this.userPeso;
                 if(peso == "")
@@ -262,7 +222,6 @@
                 else
                     alert("Peso alterado com sucesso");
             },
-
             verificaDadoImg(){
                 let img = this.userImg;
                 if(img == "")
@@ -271,7 +230,35 @@
                     this.imgUrl = this.userImg
                 console.log(this.imgUrl)
                 console.log(this.userImg)
+            },
+            getData(){
+                this.id = localStorage.getItem('UserId')
+                var idNoAs = this.id.replace(/"/g, '');
+                HTTP.get(`user/${idNoAs}`)
+                .then((res) => {
+                    this.allData = res.data
+                    console.log(this.allData)
+                    this.email = this.allData.email
+                    this.senha = this.allData.password
+                    this.gyngoerId = this.allData.gymgoerInfo
+                    this.getGynData()
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
+            getGynData(){
+                HTTP.get(`gymgoer/${this.gyngoerId}`)
+                .then(response =>{
+                    this.allDataGyn = response.data
+                    this.nome = this.allDataGyn.name;
+                    this.peso = this.allDataGyn.physicalInformation.weight;
+                    this.altura = this.allDataGyn.physicalInformation.height;
+                })
             }
+        },
+        mounted(){
+            this.getData()
         }
     }
 
@@ -279,7 +266,13 @@
 
 
 <style scoped>
-
+.lowerRow{
+    display: flex;
+    flex-direction: column;
+    width: 50%!important;
+    align-items: center;
+    justify-content: center;
+}
 headerMiniLogo{
     width: 40%;
     height: 100%;
@@ -370,10 +363,11 @@ input{
     padding-bottom: 8%;
     margin-bottom: 2%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     color: aliceblue;
+    
 }
 
 span{

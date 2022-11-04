@@ -21,6 +21,10 @@
                             <p class="titleInfo">Nome:</p>
                             <p>{{resultado.name}}</p>
                         </div>
+                        <div id="divInfo" class="prot">
+                            <p class="titleInfo">Proteinas:</p>
+                            <p>{{resultado.proteinPer100g}}</p>
+                        </div>
                         <div id="divInfo" class="carbo">
                             <p class="titleInfo">Carboidratos:</p>
                             <p>{{resultado.carbPer100g}}</p>

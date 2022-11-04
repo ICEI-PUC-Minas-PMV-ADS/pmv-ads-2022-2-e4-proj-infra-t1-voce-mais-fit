@@ -4,7 +4,6 @@
     <startComponentVue id="home"></startComponentVue>
     <resumo-Usuario/>
     <rotinaComponent id="rotina"/>
-    <datepickerComponent id="listaFood"></datepickerComponent>
     <datapickerComponentEx id="listaEx"></datapickerComponentEx>
     <footerComponent></footerComponent>
   </div>
@@ -15,7 +14,6 @@ import headerComponent from '@/components/headerComponent.vue';
 import footerComponent from '@/components/footerComponent.vue';
 import resumoUsuario from '@/Utils/resumoUsuario.vue';
 import rotinaComponent from '@/components/rotinaComponent.vue';
-import datepickerComponent from '@/components/datepickerComponent.vue';
 import datapickerComponentEx from '@/components/datepickerComponentEx.vue'
 export default {
   components: {
@@ -24,7 +22,6 @@ export default {
     headerComponent,
     footerComponent,
     startComponentVue,
-    datepickerComponent,
     datapickerComponentEx
   },
  
