@@ -3,7 +3,31 @@ const router = express.Router();
 
 const gymgoerService = require('../services/gymgoerService');
 
-//TODO get all gymgoers
+/**
+ * @swagger
+ * /api/gymgoer:
+ *  get:
+ *   tags:
+ *    - Aluno
+ *   description: Busca o todos os Alunos
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    404:
+ *     description: Nenhnum Aluno encontrado
+ *    500:
+ *     description: Erro interno
+ */
+ router.get('/', (req, res) => {
+    gymgoerService.getAllGymgoers().then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
 
 /**
  * @swagger

@@ -44,7 +44,7 @@
                         <span class="spanSenha">Insira a senha correta</span>
                         <a class="forget">Esqueci a minha Senha</a>
                     </div>
-                    <button class="submitButton" @click="toGo" type="submit">Entrar!</button>
+                    <button class="submitButton" @click="logar" type="submit">Entrar!</button>
                 </div>
             </div>
         </body>
@@ -53,7 +53,11 @@
 </template>
 
 <script>
+
 import footerComponent from '@/components/footerComponent.vue';
+import axios from "axios";
+
+
 export default {
     components:{
         footerComponent,
@@ -105,7 +109,35 @@ export default {
             }else{
                 this.$router.push('/mainPage')
             }
-        }
+        },
+
+        logar(){
+            // userEmail
+            // userSenha
+            axios
+                .post("http://localhost:3000/api/user/login", { email: this.userEmail, password: this.userSenha })
+                .then((res) => {
+                    // Possui a msg de sucesso da API e o Token
+                    const data = res.data;
+
+                    // Possui todos os dados do usuário
+                    const dataUser = res.data.usuario[0]
+
+                    // Separa os dados expecificos do usuário
+                    const localStorage = {
+                        userId: dataUser._id,
+                        gymgoerId: dataUser.gymgoerInfo,
+                        token: data.token,
+                        trainerId: dataUser.trainerInfo,
+                    }
+                    window.localStorage.setItem("localStorage", JSON.stringify(localStorage))
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
+
+        
     }
 }
 </script>
