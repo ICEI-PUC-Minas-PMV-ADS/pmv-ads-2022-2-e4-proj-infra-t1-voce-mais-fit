@@ -237,7 +237,6 @@
                 HTTP.get(`user/${idNoAs}`)
                 .then((res) => {
                     this.allData = res.data
-                    console.log(this.allData)
                     this.email = this.allData.email
                     this.senha = this.allData.password
                     this.gyngoerId = this.allData.gymgoerInfo
