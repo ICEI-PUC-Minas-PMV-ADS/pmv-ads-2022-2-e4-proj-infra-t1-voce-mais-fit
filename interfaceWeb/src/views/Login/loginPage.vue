@@ -66,10 +66,6 @@ export default {
         return{
             userEmail:"",
             userSenha:"",
-            emailAfter:"",
-            emailBefore:"",
-            senhaAfter:"",
-            senhaBefore:""
         }
     },
     methods:{
@@ -135,7 +131,8 @@ export default {
                         token: data.token,
                         trainerId: dataUser.trainerInfo,
                     }
-                    
+                    window.localStorage.setItem("UserInfomation", JSON.stringify(localStorage))
+                    window.localStorage.setItem("UserId", JSON.stringify(localStorage.userId))
                 })
                 .catch((error) => {
                     console.log(error)
