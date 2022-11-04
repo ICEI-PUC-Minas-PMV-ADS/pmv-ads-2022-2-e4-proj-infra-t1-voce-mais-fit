@@ -117,15 +117,19 @@ export default {
             axios
                 .post("http://localhost:3000/api/user/login", { email: this.userEmail, password: this.userSenha })
                 .then((res) => {
+                    // Possui a msg de sucesso da API e o Token
                     const data = res.data;
+
+                    // Possui todos os dados do usuário
                     const dataUser = res.data.usuario[0]
+
+                    // Separa os dados expecificos do usuário
                     const localStorage = {
                         userId: dataUser._id,
                         gymgoerId: dataUser.gymgoerInfo,
                         token: data.token,
                         trainerId: dataUser.trainerInfo,
                     }
-                    console.log(localStorage)
                     window.localStorage.setItem("localStorage", JSON.stringify(localStorage))
                 })
                 .catch((error) => {
