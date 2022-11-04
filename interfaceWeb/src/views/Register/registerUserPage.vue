@@ -85,6 +85,7 @@ export default {
     },
     data(){
         return{
+            id:"",
             userName:"",
             userTel:"",
             userEmail:"",
