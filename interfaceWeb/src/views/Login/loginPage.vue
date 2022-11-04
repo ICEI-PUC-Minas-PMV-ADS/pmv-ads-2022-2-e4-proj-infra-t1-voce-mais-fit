@@ -17,6 +17,7 @@
             <div class="formContainer">
                 <div class="row" id="row">
                     <div class="col-6 p-0" >
+                        <h1>Tokken: {{tokkenLogin}}</h1>
                         <label class="mb-1 label_default"
                         >Email</label
                         >
@@ -65,7 +66,8 @@ export default {
     data(){
         return{
             userEmail:"",
-            userSenha:""
+            userSenha:"",
+            tokkenLogin: "",
         }
     },
     methods:{
@@ -119,6 +121,7 @@ export default {
                 .then((res) => {
                     // Possui a msg de sucesso da API e o Token
                     const data = res.data;
+                    this.tokkenLogin = data.token
 
                     // Possui todos os dados do usuário
                     const dataUser = res.data.usuario[0]
@@ -131,6 +134,9 @@ export default {
                         trainerId: dataUser.trainerInfo,
                     }
                     window.localStorage.setItem("localStorage", JSON.stringify(localStorage))
+
+                    const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).token
+                    console.log(localStorageToken)
                 })
                 .catch((error) => {
                     console.log(error)
