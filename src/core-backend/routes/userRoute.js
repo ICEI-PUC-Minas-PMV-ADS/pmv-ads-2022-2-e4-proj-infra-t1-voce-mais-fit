@@ -150,8 +150,12 @@ router.post('/login', async(req, res) => {
     
     const {email, password} = req.body
     
+    
     // checar se o usr existe
     const userCheck = await User.Model.findOne({email: email})
+
+    // pegar os dados do usuário
+    let usuario = await User.Model.find({email: email})
     if(!userCheck){
         return res.status(404).json({msg: "Usuário não encontrado, verifique o Email novamente"})
     }
@@ -170,8 +174,8 @@ router.post('/login', async(req, res) => {
         },
         secret,
         )
-
-        res.status(200).json({msg: "Autenticado com sucesso", token})
+        
+        res.status(200).json({msg: "Autenticado com sucesso", token, usuario})
     }catch(err){
         console.log(err);
     }
