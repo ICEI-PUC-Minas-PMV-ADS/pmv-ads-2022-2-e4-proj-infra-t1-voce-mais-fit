@@ -186,12 +186,16 @@ router.post('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
 
 /**
  * @swagger
- * /api/gymgoer/dailyRegisters/foods/{foodId}:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}/foods/{foodId}:
  *  delete:
  *   tags:
  *    - Registro Diário - Alimentos Consumidos
  *   description: Deleta um Alimento Consumido dentro de um Registro Diário, através do foodId (ObjectId)
  *   parameters:
+ *    - name: dailyRegisterId
+ *      in: path
+ *      required: true
+ *      type: string
  *    - name: foodId
  *      in: path
  *      required: true
@@ -204,12 +208,12 @@ router.post('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.delete('/gymgoer/dailyRegisters/foods/:foodId', (req, res) => {
-    dailyRegisterService.deleteFoodEatenInDailyRegister(req.params.foodId).then((result) => {
+router.delete('/gymgoer/dailyRegisters/:dailyRegisterId/foods/:foodId', (req, res) => {
+    dailyRegisterService.deleteFoodEatenInDailyRegister(req.params.dailyRegisterId, req.params.foodId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
 
-        return res.status(200).send(result);
+        return res.status(204).send("Deleted successfully");
     }).catch((err) => {
         return res.status(500).send(err.message);
     });

@@ -88,6 +88,7 @@ async function getAllFoodEatenInDailyRegister(dailyRegisterId){
 }
 
 async function addFoodEatenInDailyRegister(dailyRegisterId, foodEaten){
+    //todo adicionar em foodSaved também
     let dailyRegister = await getDailyRegisterById(dailyRegisterId);
 
     if(dailyRegister.errorMessage)
@@ -117,8 +118,38 @@ async function addFoodEatenInDailyRegister(dailyRegisterId, foodEaten){
     return updateResult;
 }
 
-async function deleteFoodEatenInDailyRegister(foodId){
-    //TODO, remover comida da lista, alem disso, recalcular os macros
+async function deleteFoodEatenInDailyRegister(dailyRegisterId, foodId){
+    let dailyRegister = await getDailyRegisterById(dailyRegisterId);
+
+    if(dailyRegister.errorMessage)
+        return {errorType: dailyRegister.errorType, errorMessage: dailyRegister.errorMessage};
+
+    let foodInArray = dailyRegister.foods.filter(food => food._id == foodId)[0];
+
+    if(!foodInArray)
+        return {errorType: 404, errorMessage: 'Food not found'};
+
+    let indexToRemove = dailyRegister.foods.indexOf(foodInArray);
+
+    dailyRegister.foods.splice(indexToRemove, 1);
+
+    let totalCarb = dailyRegister.foods.map(item => item.carb).reduce((prev, next) => prev + next);
+    let totalProtein = dailyRegister.foods.map(item => item.protein).reduce((prev, next) => prev + next);
+    let totalFat = dailyRegister.foods.map(item => item.fat).reduce((prev, next) => prev + next);
+    let totalKcal = dailyRegister.foods.map(item => item.kcal).reduce((prev, next) => prev + next);
+
+    let updateResult = await Gymgoer.Model.updateOne(
+                                {'dailyRegisters._id': dailyRegisterId}, 
+                                {'$set': {
+                                    'dailyRegisters.$.totalCarb': totalCarb,
+                                    'dailyRegisters.$.totalProtein': totalProtein,
+                                    'dailyRegisters.$.totalFat': totalFat,
+                                    'dailyRegisters.$.totalKcal': totalKcal,
+                                    'dailyRegisters.$.foods': dailyRegister.foods
+                                }}, 
+                                {runValidators: true});
+
+    return updateResult;
 }
 //#endregion
 
@@ -128,3 +159,4 @@ module.exports.getDailyRegisterByDate = getDailyRegisterByDate;
 module.exports.getAllDailyRegistersByGymgoerId = getAllDailyRegistersByGymgoerId;
 module.exports.getAllFoodEatenInDailyRegister = getAllFoodEatenInDailyRegister;
 module.exports.addFoodEatenInDailyRegister = addFoodEatenInDailyRegister;
+module.exports.deleteFoodEatenInDailyRegister = deleteFoodEatenInDailyRegister;
