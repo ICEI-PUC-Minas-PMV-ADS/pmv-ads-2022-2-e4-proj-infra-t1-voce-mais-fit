@@ -2,10 +2,10 @@
     <div class="miniContainer">
       <div class="contentCont">
         <div class="topProfileCont">
-          <div class="perfil">
+          <router-link to="/userconfig" class="perfil">
             <img class="borderImg" src="@/assets/border.svg">
             <p class="profileTxt">PERFIL</p>
-          </div>
+          </router-link >
           <img src="@/assets/profile.svg" class="profile">
           <div class="profileName">
             <p>IAGO IANN</p>
@@ -17,7 +17,7 @@
         </div>
         <div class="loremContDad">
           <div class="loremCont">
-            <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+            <p class="lorem">A melhor forma de ver o resultado da academia é treinando com frequência. Há dias bons e dias ruins nos treinos, mas é sempre melhor treinar do que deixar de movimentar o corpo!</p>
           </div>
         </div>
       </div>
@@ -67,6 +67,7 @@ export default {
   font-size: 22px;
   line-height: 38px;
   letter-spacing: 1.92px;
+  text-decoration: none;
 }
 .borderImg{
   width: 40%;

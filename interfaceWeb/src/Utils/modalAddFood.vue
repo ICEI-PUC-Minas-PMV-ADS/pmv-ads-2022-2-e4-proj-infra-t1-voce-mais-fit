@@ -5,34 +5,37 @@
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addFoodModalLabel">Selecione os alimentos!</h5>
-                <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button @click="closeModal"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div class="searchFoodCont">
+                    <p class="searchTitleTxt">Pesquise o alimento que quer adicionar!</p>
+                    <div class="searchCont">
+                        <input class="searchFood" type="text" placeholder="Pesquise aqui!" v-model="searchResult"/>
+                        <img @click="searchFood" class="lupaSearch" src="@/assets/modalAddImg/searchButton.png">
+                    </div>
+                </div>
                 <div class="typeFoodCont">
-                    <div @click="turnImg" class="typeFood">
-                        <div id="divInfo" class="divInfoModal">
-                            <img src="@/assets/modalAddImg/noSelect.png" class="noSelect">
-                            <img src="@/assets/modalAddImg/selected.png" class="selected">
-                        </div>
+                    <div v-for="resultado in result" :key="resultado" :value="resultado" class="typeFood">
                         <div id="divInfo" class="name">
                             <p class="titleInfo">Nome:</p>
-                            <p>Carne de Boi</p>
+                            <p>{{resultado.name}}</p>
+                        </div>
+                        <div id="divInfo" class="prot">
+                            <p class="titleInfo">Proteinas:</p>
+                            <p>{{resultado.proteinPer100g}}</p>
                         </div>
                         <div id="divInfo" class="carbo">
                             <p class="titleInfo">Carboidratos:</p>
-                            <p>200</p>
-                        </div>
-                        <div id="divInfo" class="prot">
-                            <p class="titleInfo">Proteínas:</p>
-                            <p>200</p>
+                            <p>{{resultado.carbPer100g}}</p>
                         </div>
                         <div id="divInfo" class="gord">
                             <p class="titleInfo">Gordura:</p>
-                            <p>200</p>
+                            <p>{{resultado.fatPer100g}}</p>
                         </div>
                         <div id="divInfo" class="kcal">
                             <p class="titleInfo">Calorias:</p>
-                            <p>200</p>
+                            <p>{{resultado.kcalPer100g}}</p>
                         </div>
                         <div id="divInfo" class="quant">
                             <p class="titleInfo">Gramas consumidas</p>
@@ -43,7 +46,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="buttonSend">Adicionar</button>
-                <button @click="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="buttonClose">Fechar</button>
+                <button @click="closeModal"  type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="buttonClose">Fechar</button>
             </div>
             </div>
         </div>
@@ -51,43 +54,35 @@
     </div>
 </template>
 <script>
+import { HTTP } from '@/api_system'
 export default {
     data(){
         return{
             defineImg: false,
-            defineModal:true
+            defineModal:true,
+            searchResult: "",
+            result:[]
         }
     },
     methods:{
-        turnImg(){
-            let noSelect = document.querySelector('.noSelect')
-            let selected = document.querySelector('.selected')
-            if(this.defineImg === false){
-                this.defineImg = true
-                noSelect.style.display = 'none'
-                selected.style.display = 'block'
-            }else{
-                this.defineImg = false
-                noSelect.style.display = 'block'
-                selected.style.display = 'none'
-            }
+        searchFood(){
+            HTTP.get(`foodSaved?foodName=${this.searchResult}`)
+            .then(response =>{
+                this.result = response.data
+            })
+            .catch(error =>{
+                if(error.message === 'Request failed with status code 404'){
+                    alert('ALIMENTO NÃO ENCONTRADO')
+                }else{
+                    alert('OPS, O BANCO DE DADOS EXPLODIU <3')
+                }
+            })
         },
         closeModal(){
-            let noSelect = document.querySelector('.noSelect')
-            let selected = document.querySelector('.selected')
-            this.defineImg = false
-            noSelect.style.display = 'block'
-            selected.style.display = 'none'
+            this.searchResult = ""
+            this.result = ""
         }
     },
-    mounted(){
-        if(this.defineImg === false){
-            let noSelect = document.querySelector('.noSelect')
-            let selected = document.querySelector('.selected')
-            noSelect.style.display = 'block'
-            selected.style.display = 'none'
-        }
-    }
 }
 </script>
 <style scoped>
@@ -173,6 +168,30 @@ p{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.searchTitleTxt{
+    font-size: 1.3rem;
+}
+.searchFoodCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.searchFood{
+    border-radius: 10px;
+    width: 60%;
+    border: 1px #222222 solid;
+}
+.searchCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.lupaSearch{
+    margin-left: 10px;
+    width: 4.5%;
+    cursor: pointer;
 }
 .modal-title{
     font-size: 1.8rem;

@@ -17,6 +17,7 @@
             <div class="formContainer">
                 <div class="row" id="row">
                     <div class="col-6 p-0" >
+                        <h1>Tokken: {{tokkenLogin}}</h1>
                         <label class="mb-1 label_default"
                         >Email</label
                         >
@@ -44,7 +45,8 @@
                         <span class="spanSenha">Insira a senha correta</span>
                         <a class="forget">Esqueci a minha Senha</a>
                     </div>
-                    <button class="submitButton" @click="toGo" type="submit">Entrar!</button>
+                    <button class="submitButton" @click="logar" type="submit">Entrar!</button>
+                    <p class="Error"> {{errorLogin}} </p>
                 </div>
             </div>
         </body>
@@ -53,7 +55,11 @@
 </template>
 
 <script>
+
 import footerComponent from '@/components/footerComponent.vue';
+import { HTTP } from '@/api_system'
+
+
 export default {
     components:{
         footerComponent,
@@ -61,7 +67,9 @@ export default {
     data(){
         return{
             userEmail:"",
-            userSenha:""
+            userSenha:"",
+            tokkenLogin: "",
+            errorLogin: "",
         }
     },
     methods:{
@@ -103,13 +111,51 @@ export default {
                 let spanMail = document.querySelector('.spanMail')
                 spanMail.style.display = 'block'
             }else{
+                this.logar()
                 this.$router.push('/mainPage')
             }
-        }
-    }
+        },
+
+        logar(){
+            // userEmail
+            // userSenha
+            
+                HTTP.post("user/login", { email: this.userEmail, password: this.userSenha })
+                .then((res) => {
+                    // Possui a msg de sucesso da API e o Token
+                    const data = res.data;
+                    this.tokkenLogin = data.token
+
+                    // Possui todos os dados do usuário
+                    const dataUser = res.data.usuario[0]
+
+                    // Separa os dados expecificos do usuário
+                    const localStorage = {
+                        userId: dataUser._id,
+                        gymgoerId: dataUser.gymgoerInfo,
+                        token: data.token,
+                        trainerId: dataUser.trainerInfo,
+                    }
+                    window.localStorage.setItem("localStorage", JSON.stringify(localStorage))
+
+                    const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).token
+                    console.log(localStorageToken)
+                    this.$router.push('/mainPage')
+                })
+                .catch((error) => {
+                    this.errorLogin = error
+                })
+        },
+
+    },
+    
 }
 </script>
 <style scoped>
+
+.Error{
+    color: aliceblue;
+}
 .submitButton{
     width: 35%;
     margin-top: 3%;

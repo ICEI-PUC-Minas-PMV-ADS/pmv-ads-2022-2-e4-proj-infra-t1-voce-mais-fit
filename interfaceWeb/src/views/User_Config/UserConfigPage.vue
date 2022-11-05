@@ -1,11 +1,14 @@
 <template>
     <div>
         <headerComponent></headerComponent>
+        
+        
         <div class="formContainer">
-                <div class="row" id="row">
+            <div class="row" id="row">  
+                <div class="lowerRow">               
                     <div class="col-6" >
-
-                        <label class="mb-1">{{nome}}</label>
+                        <h3 id="Titulo">Dados da Conta</h3>
+                        <label class="mb-1">Nome: {{nome}}</label>
                         <br>
                         <div class="stealth" v-if="displayNome">
                             <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userName" />
@@ -17,19 +20,7 @@
                     </div>
                     <div class="col-6" >
 
-                        <label class="mb-1">{{cpf}}</label>
-                        <br>
-                        <div class="stealth" v-if="displayCpf">
-                            <input id="inputForm" placeholder="000.000.000-00" type="Seu CPF" class="input_default form-control requiredName" v-mask="'###.###.###-##'" v-model="userCpf" @input="validaCpf"/>
-                            <p class="p-waring" v-if="verificaCPF">Deve digitar o CPF corretamente para atualizar</p>
-                            <button type="button" class="btn btn-light" @click="verificaDadosCpf">Atualizar</button>
-                        </div>
-                        <button type="button" class="btn btn-light" @click="AlteraDisplayCpf">{{ ButtonCpf }}</button>
-                        
-                    </div>
-                    <div class="col-6" >
-
-                        <label class="mb-1">{{email}}</label>
+                        <label class="mb-1">Email: {{email}}</label>
                         <br>
                         <div class="stealth" v-if="displayEmail">
                             <input id="inputForm" placeholder="Seu e-mail" type="email" class="input_default form-control requiredName" v-model="userEmail" @input="validaMail"/>
@@ -41,7 +32,7 @@
                     </div>
                     <div class="col-6" >
 
-                        <label class="mb-1">{{senha}}</label>
+                        <label class="mb-1">Senha: {{senha}}</label>
                         <br>
                         <div class="stealth" v-if="displaySenha">
                             <input id="inputFormTwo" placeholder="Sua Senha" type="password" class="input_default form-control required" v-model="userSenha" @input="validaSenha"/>
@@ -49,11 +40,46 @@
                             <button type="button" class="btn btn-light" @click="verificaDadosSenha">Atualizar</button>
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplaySenha">{{ ButtonSenha }}</button>
-
                     </div>
-
+                </div> 
+                    <div class="lowerRow">                  
+                        <div class="col-6" >
+                            <h3 id="Titulo">Dados do Perfil</h3>
+                            <label class="mb-1">Altura: {{altura}}</label>
+                            <br>
+                            <div class="stealth" v-if="displayAltura">
+                                <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userAlt" />
+                                <p class="p-waring" v-if="verificaAlt">Deve digitar a altura para atualizar</p>
+                                <button type="button" class="btn btn-light" @click="verificaDadoAlt">Atualizar</button>
+                            </div>
+                            <button type="button" class="btn btn-light" @click="AlteraDisplayAlt">{{ ButtonAlt }}</button>                   
+                        </div>
+                        <div class="col-6" >
+                                <label class="mb-1">Whatsapp: {{Whatsapp}}</label>
+                                <br>
+                                <div class="stealth" v-if="displayWhatsapp">
+                                    <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userWhatsapp" />
+                                    <p class="p-waring" v-if="verificaWhatsapp">Deve digitar a altura para atualizar</p>
+                                    <button type="button" class="btn btn-light" @click="verificaDadoWhatsapp">Atualizar</button>
+                                </div>
+                                <button type="button" class="btn btn-light" @click="AlteraDisplayWhatsapp">{{ ButtonAlt }}</button>                   
+                        </div>
+                        <div class="col-6" >
+                                <label class="mb-1">Imagem de Perfil</label>
+                                <br>
+                                <!-- :src="require(`../../assets/carrouselImg/${imgUrl}`)" -->
+                                <img class="ImgUrl" :src="imgUrl" alt="Imagem de perfil do usuário">
+                                <br>
+                                <div class="stealth" v-if="displayImg">
+                                    <input id="inputForm" placeholder="Digite a URL da Imagem que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userImg" />
+                                    <p class="p-waring" v-if="verificaImg">Deve digitar a Imagem para atualizar</p>
+                                    <button type="button" class="btn btn-light" @click="verificaDadoImg">Atualizar</button>
+                                </div>
+                                <button type="button" class="btn btn-light" @click="AlteraDisplayImg">{{ ButtonImg }}</button>                   
+                        </div>
+                    </div>
                 </div>
-            </div>
+        </div>
 
         <footerComponent></footerComponent>
     </div>
@@ -63,9 +89,10 @@
 
 
 <script>
-
+    import { HTTP } from '@/api_system'
     import headerComponent from '@/components/headerComponent.vue'
     import footerComponent from '@/components/footerComponent.vue'
+    import axios from "axios";
 
     export default {
         components: {
@@ -74,33 +101,47 @@
         },
         data(){
             return{
-                nome: "nome Exp",
-                cpf: "00000000000",
-                email: "exp@exp",
-                senha: "******",
+                imgUrl: "https://img.freepik.com/fotos-gratis/o-gato-vermelho-ou-branco-eu-no-estudio-branco_155003-13189.jpg?w=2000",
+                
+                email:"",
+                senha:"",
+                nome:"",
+                altura:"",
+                Whatsapp:"",
+                gyngoerId:"",
+
+                Data: [],
 
                 displayNome: false,
-                displayCpf: false,
                 displayEmail: false,
                 displaySenha: false,
+                displayAltura: false,
+                displayWhatsapp: false,
+                displayImg: false,
 
                 verificaNome: false,
-                verificaCPF: false,
                 verificaEmail: false,
                 verificaSenha: false,
+                verificaAlt: false,
+                verificaWhatsapp: false,
+                verificaImg: false,
 
                 ButtonName: "Alterar",
-                ButtonCpf: "Alterar",
                 ButtonEmail: "Alterar",
                 ButtonSenha: "Alterar",
+                ButtonAlt: "Alterar",
+                ButtonWhatsapp: "Alterar",
+                ButtonImg: "Alterar",
 
                 userName: "",
-                userCpf: "",
                 userEmail: "",
                 userSenha: "",
+                userAlt : "",
+                userWhatsapp: "",
+                userImg: "",
             }
         },
-        methods:{
+        methods:{         
             // Métodos para esconder e aparecer as DIVs
             AlteraDisplay(){
                 this.displayNome = !this.displayNome;
@@ -110,16 +151,6 @@
                     this.ButtonName = "Alterar"
                 }
             },
-
-            AlteraDisplayCpf(){
-                this.displayCpf = !this.displayCpf;
-                if(this.displayCpf)
-                    this.ButtonCpf = "Cancelar"
-                else{
-                    this.ButtonCpf = "Alterar"
-                }
-            },
-
             AlteraDisplayEmail(){
                 this.displayEmail = !this.displayEmail;
                 if(this.displayEmail)
@@ -127,7 +158,6 @@
                 else
                     this.ButtonEmail = "Alterar"
             },
-
             AlteraDisplaySenha(){
                 this.displaySenha = !this.displaySenha;
                 if(this.displaySenha)
@@ -135,39 +165,175 @@
                 else
                     this.ButtonSenha = "Alterar"
             },
+            AlteraDisplayAlt(){
+                this.displayAltura = !this.displayAltura;
+                if(this.displayAltura)
+                    this.ButtonAlt = "Cancelar"
+                else
+                    this.ButtonAlt = "Alterar"
+            },
+            AlteraDisplayWhatsapp(){
+                this.displayWhatsapp = !this.displayWhatsapp;
+                if(this.displayWhatsapp)
+                    this.ButtonWhatsapp = "Cancelar"
+                else
+                    this.ButtonWhatsapp = "ALterar"
+            },
+            AlteraDisplayImg(){
+                this.displayImg = !this.displayImg;
+                if(this.displayImg)
+                    this.ButtonImg = "Cancelar"
+                else
+                    this.ButtonImg = "Alterar"
+            },
             // Métodos para verificar se os campos estão corretos e exibir ou não a msg
             verificaDadosName(){
                 let nome = this.userName;
                 if(nome == "")
                     this.verificaNome = true;
-                else
+                else{
+                    this.alterDataName(this.userName)
                     alert("Nome foi atualizado com suceso")
+                }
+                    
             },
-
-            verificaDadosCpf(){
-                let cpf = this.userCpf;
-                if(cpf == "" || cpf.length < 11)
-                    this.verificaCPF = true;
-                else
-                    alert("CPF foi alterado com sucesso")
-            },
-
             verificaDadosEmail(){
                 let email = this.userEmail;
                 let carcEspc = email.includes("@");
                 if(email == "" || !carcEspc)
                     this.verificaEmail = true;
-                else
-                    alert("Email foi alterado com sucesso")
+                else{
+                    this.alterDataEmail(this.userEmail)
+                    alert("Email alterado com sucesso")
+                }
+                    
             },
-
             verificaDadosSenha(){
                 let senha = this.userSenha;
                 if(senha == "")
                     this.verificaSenha = true;
-                else
+                else{
+                    this.alterDataPassword(this.userSenha)
                     alert("Senha foi alterada com sucesso");
+                }
+                    
+            },
+            verificaDadoAlt(){
+                let alt = this.userName;
+                if(alt == "")
+                    this.verificaAlt = true;
+                else
+                    alert("Altura alterada com sucesso");
+            },
+            verificaDadoWhatsapp(){
+                let Whatsapp = this.userWhatsapp;
+                if(Whatsapp == "")
+                    this.verificaWhatsapp = true;
+                else
+                    this.alterDataWhatsapp(this.userWhatsapp)
+                    alert("Whatsapp alterado com sucesso");
+            },
+            verificaDadoImg(){
+                let img = this.userImg;
+                if(img == "")
+                    this.verificaImg = true;
+                else
+                    this.imgUrl = this.userImg
+                console.log(this.imgUrl)
+                console.log(this.userImg)
+            },
+
+            // Get para pegar o usuário logado do banco
+            allData(){
+                const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).userId
+                const localStorageTrainerId = JSON.parse(window.localStorage.getItem('localStorage')).trainerId
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+
+                // GET usuario
+                axios
+                .get("http://localhost:3000/api/user/"+localStorageToken)
+                .then((res) => {
+                        this.Data = res.data
+                       this.email = res.data.email
+                       this.senha = res.data.password
+                })
+                .catch((error) => {
+                        console.log(error);
+                });
+            
+                // GET trainer
+                if(localStorageTrainerId != null){
+                    axios
+                    .get("http://localhost:3000/api/trainer/"+localStorageTrainerId)
+                    .then((res) => {
+                        this.nome = res.data.name
+                        this.Whatsapp = res.data.whatsapp
+                    })
+                }
+                //GET Gymgoer
+                if(localStorageGymgoerId != null){
+                    axios
+                    .get("http://localhost:3000/api/gymgoer/"+localStorageGymgoerId)
+                    .then((res) => {
+                        this.nome = res.data.name
+                        this.Whatsapp = res.data.whatsapp
+                    })
+                }
+                
+            },
+
+            // Alteração de dados do Banco
+            alterDataEmail(email){
+                const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).userId
+                HTTP.patch("user/"+localStorageToken, { email: email})
+                .then((res) => {
+                    console.log(res);
+                })
+        },
+            getGynData(){
+                HTTP.get(`gymgoer/${this.gyngoerId}`)
+                .then(response =>{
+                    this.allDataGyn = response.data
+                    console.log(this.allDataGyn)
+                    this.nome = this.allDataGyn.name;
+                    this.peso = this.allDataGyn.physicalInformation.weight;
+                    this.altura = this.allDataGyn.physicalInformation.height;
+                })
+            },
+            alterDataPassword(password){
+                const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).userId
+                HTTP.patch("user/"+localStorageToken, { password: password})
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+
+           alterDataName(name){
+                const localStorageTrainerId = JSON.parse(window.localStorage.getItem('localStorage')).trainerId
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+                if(localStorageTrainerId != null){
+                    HTTP.patch("trainer/"+localStorageTrainerId, { name: name})
+                }
+                if(localStorageGymgoerId != null){
+                    HTTP.patch("gymgoer/"+localStorageGymgoerId, { name: name})
+                }
+            },
+            alterDataWhatsapp(whatsapp){
+                const localStorageTrainerId = JSON.parse(window.localStorage.getItem('localStorage')).trainerId
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+                if(localStorageTrainerId != null){
+                    HTTP.patch("trainer/"+localStorageTrainerId, { whatsapp: whatsapp})
+                }
+                if(localStorageGymgoerId != null){
+                    HTTP.patch("gymgoer/"+localStorageGymgoerId, { whatsapp: whatsapp})
+                }
             }
+        },
+        mounted(){
+            this.allData()
         }
     }
 
@@ -175,7 +341,13 @@
 
 
 <style scoped>
-
+.lowerRow{
+    display: flex;
+    flex-direction: column;
+    width: 50%!important;
+    align-items: center;
+    justify-content: center;
+}
 headerMiniLogo{
     width: 40%;
     height: 100%;
@@ -266,10 +438,13 @@ input{
     padding-bottom: 8%;
     margin-bottom: 2%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    color: aliceblue;
+    
 }
+
 span{
     display: none;
     color: red;
@@ -286,5 +461,20 @@ span{
     color: azure;
 }
 
+
+.card{
+    background-color: #601430;
+}
+
+.Titulo{
+    background-color: #601430;
+    
+}
+
+.ImgUrl{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
 
 </style>
