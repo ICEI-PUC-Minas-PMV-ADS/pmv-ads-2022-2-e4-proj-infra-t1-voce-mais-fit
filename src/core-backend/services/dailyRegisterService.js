@@ -91,21 +91,6 @@ async function deleteFoodEatenInDailyRegister(foodId){
 }
 //#endregion
 
-//#region Exercise in day
-async function getAllExercisesInDaybyDailyRegisterId(dailyRegisterId){
-    //TODO get all por id
-}
-
-async function addExerciseInDailyRegister(dailyRegisterId, exercise){
-    //TODO adicionar exercicio no dia
-}
-
-async function deleteExerciseInDailyRegister(exerciseId){
-    //TODO deletar exercicio no dia
-}
-
-//#endregion
-
 module.exports.getDailyRegisterById = getDailyRegisterById;
 module.exports.createNewDailyRegister = createNewDailyRegister;
 module.exports.getDailyRegisterByDate = getDailyRegisterByDate;
