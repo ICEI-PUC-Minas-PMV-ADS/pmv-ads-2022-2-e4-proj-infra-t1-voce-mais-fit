@@ -35,19 +35,22 @@
     </table>
   </div>
   <div class="buttonContainer">
-    <button class="addList" type="submit">ADICIONAR LISTA</button>
+    <button class="addList" type="submit" data-bs-toggle="modal" data-bs-target="#addListEx">ADICIONAR LISTA</button>
   </div>
   <div class="titleListCont">
-    <p class="titleListEx">Selecione a lista de Exercícios do dia!</p>
+  <p class="titleListEx">Selecione a lista de Exercícios do dia!</p>
+  <modalAddList></modalAddList>
   </div>
   <carouselExVue></carouselExVue>
 </div> 
 </template>
 <script>
 import carouselExVue from './carouselEx.vue';
+import modalAddList from '@/Utils/modalAddList.vue'
   export default{
     components:{
-      carouselExVue
+      carouselExVue,
+      modalAddList
     }
   }
 </script>
