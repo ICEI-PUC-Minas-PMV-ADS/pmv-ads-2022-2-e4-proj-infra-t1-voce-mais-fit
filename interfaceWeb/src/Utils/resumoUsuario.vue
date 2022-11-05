@@ -2,10 +2,10 @@
     <div class="miniContainer">
       <div class="contentCont">
         <div class="topProfileCont">
-          <div class="perfil">
+          <router-link to="/userconfig" class="perfil">
             <img class="borderImg" src="@/assets/border.svg">
             <p class="profileTxt">PERFIL</p>
-          </div>
+          </router-link >
           <img src="@/assets/profile.svg" class="profile">
           <div class="profileName">
             <p>IAGO IANN</p>
@@ -67,6 +67,7 @@ export default {
   font-size: 22px;
   line-height: 38px;
   letter-spacing: 1.92px;
+  text-decoration: none;
 }
 .borderImg{
   width: 40%;

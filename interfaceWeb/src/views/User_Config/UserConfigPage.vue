@@ -250,6 +250,7 @@
                 HTTP.get(`gymgoer/${this.gyngoerId}`)
                 .then(response =>{
                     this.allDataGyn = response.data
+                    console.log(this.allDataGyn)
                     this.nome = this.allDataGyn.name;
                     this.peso = this.allDataGyn.physicalInformation.weight;
                     this.altura = this.allDataGyn.physicalInformation.height;
