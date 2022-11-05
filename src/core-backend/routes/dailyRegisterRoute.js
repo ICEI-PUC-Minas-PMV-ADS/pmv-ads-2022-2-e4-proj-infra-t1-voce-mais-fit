@@ -7,7 +7,7 @@ const dailyRegisterService = require('../services/dailyRegisterService');
 
 /**
  * @swagger
- * /api/gymgoer/{gymgoerId}/dailyRegister:
+ * /api/gymgoer/{gymgoerId}/dailyRegisters:
  *  get:
  *   tags:
  *    - Registro Diário
@@ -38,7 +38,7 @@ router.get('/gymgoer/:gymgoerId/dailyRegisters', (req, res) => {
 
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}:
  *  get:
  *   tags:
  *    - Registro Diário
@@ -69,7 +69,7 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId', (req, res) => {
 
 /**
  * @swagger
- * /api/gymgoer/{gymgoerId}/dailyRegister/{date}:
+ * /api/gymgoer/{gymgoerId}/dailyRegisters/{date}:
  *  get:
  *   tags:
  *    - Registro Diário
@@ -89,7 +89,7 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.get('/gymgoer/dailyRegisters/:date', (req, res) => {
+router.get('/gymgoer/:gymgoerId/dailyRegisters/:date', (req, res) => {
     dailyRegisterService.getDailyRegisterByDate(req.params.gymgoerId, req.params.date).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -104,7 +104,7 @@ router.get('/gymgoer/dailyRegisters/:date', (req, res) => {
 //#region Food Eaten in day
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}/foods:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}/foods:
  *  get:
  *   tags:
  *    - Registro Diário - Alimentos Consumidos
@@ -136,7 +136,7 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
 //#region Food Eaten in day
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}/foods:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}/foods:
  *  post:
  *   tags:
  *    - Registro Diário - Alimentos Consumidos
@@ -186,12 +186,16 @@ router.post('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
 
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/foods/{foodId}:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}/foods/{foodId}:
  *  delete:
  *   tags:
  *    - Registro Diário - Alimentos Consumidos
  *   description: Deleta um Alimento Consumido dentro de um Registro Diário, através do foodId (ObjectId)
  *   parameters:
+ *    - name: dailyRegisterId
+ *      in: path
+ *      required: true
+ *      type: string
  *    - name: foodId
  *      in: path
  *      required: true
@@ -204,119 +208,12 @@ router.post('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.delete('/gymgoer/dailyRegisters/foods/:foodId', (req, res) => {
-    dailyRegisterService.deleteFoodEatenInDailyRegister(req.params.foodId).then((result) => {
+router.delete('/gymgoer/dailyRegisters/:dailyRegisterId/foods/:foodId', (req, res) => {
+    dailyRegisterService.deleteFoodEatenInDailyRegister(req.params.dailyRegisterId, req.params.foodId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
 
-        return res.status(200).send(result);
-    }).catch((err) => {
-        return res.status(500).send(err.message);
-    });
-});
-//#endregion
-
-//#region Exercise in day
-/**
- * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}/exercises:
- *  get:
- *   tags:
- *    - Registro Diário - Exercícios
- *   description: Busca um todos os Exercícios para um Registro Diário específico, através do dailyRegisterId (ObjectId)
- *   parameters:
- *    - name: dailyRegisterId
- *      in: path
- *      required: true
- *      type: string
- *   responses: 
- *    200:
- *     description: Sucesso
- *    404:
- *     description: Registro Diário não encontrado
- *    500:
- *     description: Erro interno
- */
-router.get('/gymgoer/dailyRegisters/:dailyRegisterId/exercises', (req, res) => {
-    dailyRegisterService.getAllExercisesInDaybyDailyRegisterId(req.params.dailyRegisterId).then((result) => {
-        if(result.errorMessage != null)
-            return res.status(result.errorType).send(result.errorMessage);
-
-        return res.status(200).send(result);
-    }).catch((err) => {
-        return res.status(500).send(err.message);
-    });
-});
-
-//#region Exercises in day
-/**
- * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}/exercises:
- *  post:
- *   tags:
- *    - Registro Diário - Exercícios
- *   description: Adiciona um Exercício ao Registro Diário, através do dailyRegisterId (ObjectId)
- *   parameters:
- *    - name: dailyRegisterId
- *      in: path
- *      required: true
- *      type: string
- *    - name: exercise
- *      in: body
- *      required: true
- *      type: object
- *      properties:
- *       name:
- *        type: string
- *       description:
- *        type: string
- *       done:
- *        type: boolean
- *   responses: 
- *    201:
- *     description: Criado com sucesso
- *    404:
- *     description: Registro Diário não encontrado
- *    500:
- *     description: Erro interno
- */
-router.post('/gymgoer/dailyRegisters/:dailyRegisterId/exercises', (req, res) => {
-    dailyRegisterService.addExerciseInDailyRegister(req.params.dailyRegisterId, req.body).then((result) => {
-        if(result.errorMessage != null)
-            return res.status(result.errorType).send(result.errorMessage);
-
-        return res.status(200).send(result);
-    }).catch((err) => {
-        return res.status(500).send(err.message);
-    });
-});
-
-/**
- * @swagger
- * /api/gymgoer/dailyRegister/exercises/{exerciseId}:
- *  delete:
- *   tags:
- *    - Registro Diário - Exercícios
- *   description: Deleta um Exercício dentro de um Registro Diário, através do exerciseId (ObjectId)
- *   parameters:
- *    - name: exerciseId
- *      in: path
- *      required: true
- *      type: string
- *   responses: 
- *    204:
- *     description: Deletado com sucesso
- *    404:
- *     description: Exercício não encontrado
- *    500:
- *     description: Erro interno
- */
-router.delete('/gymgoer/dailyRegisters/exercises/:exerciseId', (req, res) => {
-    dailyRegisterService.deleteExerciseInDailyRegister(req.params.foodId).then((result) => {
-        if(result.errorMessage != null)
-            return res.status(result.errorType).send(result.errorMessage);
-
-        return res.status(200).send(result);
+        return res.status(204).send("Deleted successfully");
     }).catch((err) => {
         return res.status(500).send(err.message);
     });
