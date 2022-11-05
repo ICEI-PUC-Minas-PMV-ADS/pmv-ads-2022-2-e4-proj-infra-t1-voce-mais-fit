@@ -55,14 +55,14 @@
                             <button type="button" class="btn btn-light" @click="AlteraDisplayAlt">{{ ButtonAlt }}</button>                   
                         </div>
                         <div class="col-6" >
-                                <label class="mb-1">Peso: {{peso}}</label>
+                                <label class="mb-1">Whatsapp: {{Whatsapp}}</label>
                                 <br>
-                                <div class="stealth" v-if="displayPeso">
-                                    <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userPeso" />
-                                    <p class="p-waring" v-if="verificaPeso">Deve digitar a altura para atualizar</p>
-                                    <button type="button" class="btn btn-light" @click="verificaDadoPeso">Atualizar</button>
+                                <div class="stealth" v-if="displayWhatsapp">
+                                    <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userWhatsapp" />
+                                    <p class="p-waring" v-if="verificaWhatsapp">Deve digitar a altura para atualizar</p>
+                                    <button type="button" class="btn btn-light" @click="verificaDadoWhatsapp">Atualizar</button>
                                 </div>
-                                <button type="button" class="btn btn-light" @click="AlteraDisplayPeso">{{ ButtonAlt }}</button>                   
+                                <button type="button" class="btn btn-light" @click="AlteraDisplayWhatsapp">{{ ButtonAlt }}</button>                   
                         </div>
                         <div class="col-6" >
                                 <label class="mb-1">Imagem de Perfil</label>
@@ -92,6 +92,7 @@
     import { HTTP } from '@/api_system'
     import headerComponent from '@/components/headerComponent.vue'
     import footerComponent from '@/components/footerComponent.vue'
+    import axios from "axios";
 
     export default {
         components: {
@@ -102,41 +103,41 @@
             return{
                 imgUrl: "https://img.freepik.com/fotos-gratis/o-gato-vermelho-ou-branco-eu-no-estudio-branco_155003-13189.jpg?w=2000",
                 
-                allData:[],
-                allDataGyn:[],
                 email:"",
                 senha:"",
                 nome:"",
                 altura:"",
-                peso:"",
+                Whatsapp:"",
                 gyngoerId:"",
+
+                Data: [],
 
                 displayNome: false,
                 displayEmail: false,
                 displaySenha: false,
                 displayAltura: false,
-                displayPeso: false,
+                displayWhatsapp: false,
                 displayImg: false,
 
                 verificaNome: false,
                 verificaEmail: false,
                 verificaSenha: false,
                 verificaAlt: false,
-                verificaPeso: false,
+                verificaWhatsapp: false,
                 verificaImg: false,
 
                 ButtonName: "Alterar",
                 ButtonEmail: "Alterar",
                 ButtonSenha: "Alterar",
                 ButtonAlt: "Alterar",
-                ButtonPeso: "Alterar",
+                ButtonWhatsapp: "Alterar",
                 ButtonImg: "Alterar",
 
                 userName: "",
                 userEmail: "",
                 userSenha: "",
                 userAlt : "",
-                userPeso: "",
+                userWhatsapp: "",
                 userImg: "",
             }
         },
@@ -171,12 +172,12 @@
                 else
                     this.ButtonAlt = "Alterar"
             },
-            AlteraDisplayPeso(){
-                this.displayPeso = !this.displayPeso;
-                if(this.displayPeso)
-                    this.ButtonPeso = "Cancelar"
+            AlteraDisplayWhatsapp(){
+                this.displayWhatsapp = !this.displayWhatsapp;
+                if(this.displayWhatsapp)
+                    this.ButtonWhatsapp = "Cancelar"
                 else
-                    this.ButtonPeso = "ALterar"
+                    this.ButtonWhatsapp = "ALterar"
             },
             AlteraDisplayImg(){
                 this.displayImg = !this.displayImg;
@@ -190,23 +191,32 @@
                 let nome = this.userName;
                 if(nome == "")
                     this.verificaNome = true;
-                else
+                else{
+                    this.alterDataName(this.userName)
                     alert("Nome foi atualizado com suceso")
+                }
+                    
             },
             verificaDadosEmail(){
                 let email = this.userEmail;
                 let carcEspc = email.includes("@");
                 if(email == "" || !carcEspc)
                     this.verificaEmail = true;
-                else
-                    alert("Email foi alterado com sucesso")
+                else{
+                    this.alterDataEmail(this.userEmail)
+                    alert("Email alterado com sucesso")
+                }
+                    
             },
             verificaDadosSenha(){
                 let senha = this.userSenha;
                 if(senha == "")
                     this.verificaSenha = true;
-                else
+                else{
+                    this.alterDataPassword(this.userSenha)
                     alert("Senha foi alterada com sucesso");
+                }
+                    
             },
             verificaDadoAlt(){
                 let alt = this.userName;
@@ -215,12 +225,13 @@
                 else
                     alert("Altura alterada com sucesso");
             },
-            verificaDadoPeso(){
-                let peso = this.userPeso;
-                if(peso == "")
-                    this.verificaPeso = true;
+            verificaDadoWhatsapp(){
+                let Whatsapp = this.userWhatsapp;
+                if(Whatsapp == "")
+                    this.verificaWhatsapp = true;
                 else
-                    alert("Peso alterado com sucesso");
+                    this.alterDataWhatsapp(this.userWhatsapp)
+                    alert("Whatsapp alterado com sucesso");
             },
             verificaDadoImg(){
                 let img = this.userImg;
@@ -231,33 +242,91 @@
                 console.log(this.imgUrl)
                 console.log(this.userImg)
             },
-            getData(){
-                this.id = localStorage.getItem('UserId')
-                var idNoAs = this.id.replace(/"/g, '');
-                HTTP.get(`user/${idNoAs}`)
+
+            // Get para pegar o usuário logado do banco
+            allData(){
+                const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).userId
+                const localStorageTrainerId = JSON.parse(window.localStorage.getItem('localStorage')).trainerId
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+
+                // GET usuario
+                axios
+                .get("http://localhost:3000/api/user/"+localStorageToken)
                 .then((res) => {
-                    this.allData = res.data
-                    this.email = this.allData.email
-                    this.senha = this.allData.password
-                    this.gyngoerId = this.allData.gymgoerInfo
-                    this.getGynData()
+                        this.Data = res.data
+                       this.email = res.data.email
+                       this.senha = res.data.password
                 })
                 .catch((error) => {
-                    console.log(error)
+                        console.log(error);
+                });
+            
+                // GET trainer
+                if(localStorageTrainerId != null){
+                    axios
+                    .get("http://localhost:3000/api/trainer/"+localStorageTrainerId)
+                    .then((res) => {
+                        this.nome = res.data.name
+                        this.Whatsapp = res.data.whatsapp
+                    })
+                }
+                //GET Gymgoer
+                if(localStorageGymgoerId != null){
+                    axios
+                    .get("http://localhost:3000/api/gymgoer/"+localStorageGymgoerId)
+                    .then((res) => {
+                        this.nome = res.data.name
+                        this.Whatsapp = res.data.whatsapp
+                    })
+                }
+                
+            },
+
+            // Alteração de dados do Banco
+            alterDataEmail(email){
+                const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).userId
+                HTTP.patch("user/"+localStorageToken, { email: email})
+                .then((res) => {
+                    console.log(res);
                 })
-        },
-            getGynData(){
-                HTTP.get(`gymgoer/${this.gyngoerId}`)
-                .then(response =>{
-                    this.allDataGyn = response.data
-                    this.nome = this.allDataGyn.name;
-                    this.peso = this.allDataGyn.physicalInformation.weight;
-                    this.altura = this.allDataGyn.physicalInformation.height;
+                .catch((error) => {
+                    console.log(error);
                 })
+            },
+            alterDataPassword(password){
+                const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).userId
+                HTTP.patch("user/"+localStorageToken, { password: password})
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+
+           alterDataName(name){
+                const localStorageTrainerId = JSON.parse(window.localStorage.getItem('localStorage')).trainerId
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+                if(localStorageTrainerId != null){
+                    HTTP.patch("trainer/"+localStorageTrainerId, { name: name})
+                }
+                if(localStorageGymgoerId != null){
+                    HTTP.patch("gymgoer/"+localStorageGymgoerId, { name: name})
+                }
+            },
+            alterDataWhatsapp(whatsapp){
+                const localStorageTrainerId = JSON.parse(window.localStorage.getItem('localStorage')).trainerId
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+                if(localStorageTrainerId != null){
+                    HTTP.patch("trainer/"+localStorageTrainerId, { whatsapp: whatsapp})
+                }
+                if(localStorageGymgoerId != null){
+                    HTTP.patch("gymgoer/"+localStorageGymgoerId, { whatsapp: whatsapp})
+                }
             }
         },
         mounted(){
-            this.getData()
+            this.allData()
         }
     }
 
