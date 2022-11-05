@@ -7,7 +7,7 @@ const dailyRegisterService = require('../services/dailyRegisterService');
 
 /**
  * @swagger
- * /api/gymgoer/{gymgoerId}/dailyRegister:
+ * /api/gymgoer/{gymgoerId}/dailyRegisters:
  *  get:
  *   tags:
  *    - Registro Diário
@@ -38,7 +38,7 @@ router.get('/gymgoer/:gymgoerId/dailyRegisters', (req, res) => {
 
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}:
  *  get:
  *   tags:
  *    - Registro Diário
@@ -69,7 +69,7 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId', (req, res) => {
 
 /**
  * @swagger
- * /api/gymgoer/{gymgoerId}/dailyRegister/{date}:
+ * /api/gymgoer/{gymgoerId}/dailyRegisters/{date}:
  *  get:
  *   tags:
  *    - Registro Diário
@@ -89,7 +89,7 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.get('/gymgoer/dailyRegisters/:date', (req, res) => {
+router.get('/gymgoer/:gymgoerId/dailyRegisters/:date', (req, res) => {
     dailyRegisterService.getDailyRegisterByDate(req.params.gymgoerId, req.params.date).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -104,7 +104,7 @@ router.get('/gymgoer/dailyRegisters/:date', (req, res) => {
 //#region Food Eaten in day
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}/foods:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}/foods:
  *  get:
  *   tags:
  *    - Registro Diário - Alimentos Consumidos
@@ -136,7 +136,7 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
 //#region Food Eaten in day
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}/foods:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}/foods:
  *  post:
  *   tags:
  *    - Registro Diário - Alimentos Consumidos
@@ -186,7 +186,7 @@ router.post('/gymgoer/dailyRegisters/:dailyRegisterId/foods', (req, res) => {
 
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/foods/{foodId}:
+ * /api/gymgoer/dailyRegisters/foods/{foodId}:
  *  delete:
  *   tags:
  *    - Registro Diário - Alimentos Consumidos
@@ -219,7 +219,7 @@ router.delete('/gymgoer/dailyRegisters/foods/:foodId', (req, res) => {
 //#region Exercise in day
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}/exercises:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}/exercises:
  *  get:
  *   tags:
  *    - Registro Diário - Exercícios
@@ -251,7 +251,7 @@ router.get('/gymgoer/dailyRegisters/:dailyRegisterId/exercises', (req, res) => {
 //#region Exercises in day
 /**
  * @swagger
- * /api/gymgoer/dailyRegister/{dailyRegisterId}/exercises:
+ * /api/gymgoer/dailyRegisters/{dailyRegisterId}/exercises:
  *  post:
  *   tags:
  *    - Registro Diário - Exercícios

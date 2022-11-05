@@ -14,12 +14,39 @@ async function getDailyRegisterById(dailyRegisterId){
     return dailyRegister;
 }
 
-async function getDailyRegisterByDate(date){
-    //TODO: get pela data (sempre vai haver um unico registro para cada dia), se nao existir, criar na hora e devolver
+async function getDailyRegisterByDate(gymgoerId, dateString){
+    var date = new Date(dateString);
+
+    if(isNaN(Date.parse(dateString)))
+        return {errorType: 500, errorMessage: 'Error in date format, must be YYYY-MM-DD'};
+
+    let gymgoer = await gymgoerService.getGymgoerById(gymgoerId);
+
+    if(gymgoer._id == null)
+        return {errorType: 404, errorMessage: 'Gymgoer not found'};
+
+    let savedDailyRegister = gymgoer.dailyRegisters.filter(dailyRegister => Date.parse(dailyRegister.date) == Date.parse(date))[0];
+
+    if(!savedDailyRegister){
+        let newDailyRegister = {
+            date: date
+        }
+
+        savedDailyRegister = await createNewDailyRegister(gymgoerId, newDailyRegister);
+    }
+
+    return savedDailyRegister;
 }
 
 async function getAllDailyRegistersByGymgoerId(gymgoerId){
-    //TODO pegar todos os daily register pelo gymgoerid
+    let gymgoer = await gymgoerService.getGymgoerById(gymgoerId);
+
+    if(gymgoer._id == null)
+        return {errorType: 404, errorMessage: 'Gymgoer not found'};
+
+    //todo ordenar pelo mais recente
+
+    return gymgoer.dailyRegisters;   
 }
 
 async function createNewDailyRegister(gymgoerId, dailyRegister){
@@ -81,3 +108,5 @@ async function deleteExerciseInDailyRegister(exerciseId){
 
 module.exports.getDailyRegisterById = getDailyRegisterById;
 module.exports.createNewDailyRegister = createNewDailyRegister;
+module.exports.getDailyRegisterByDate = getDailyRegisterByDate;
+module.exports.getAllDailyRegistersByGymgoerId = getAllDailyRegistersByGymgoerId;
