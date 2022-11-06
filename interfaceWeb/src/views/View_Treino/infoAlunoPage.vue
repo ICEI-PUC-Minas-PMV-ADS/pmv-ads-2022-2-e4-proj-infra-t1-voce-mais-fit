@@ -1,46 +1,38 @@
-<template>
-    <div class="allContainer">
+<template> 
+    <div class="allContainer"> 
         <div class="profile">
             <div class="box1">
                 <img class="icon" src="@/assets/profile.svg">
             </div>
             <div class="box2">
-                <h1 class="user">Iago Iann</h1>
+                <h1 class="user">{{ nome }}</h1>
             </div>
         </div>
         <div class="sections">
             <div class="sectionChild">
                 <p>Informações do Aluno</p>
                 <ul>
-                    <li>Nome: Iago Iann</li>
-                    <li>Idade: 16 Anos</li>
-                    <li>Peso: 53KG</li>
-                    <li>Altura: 173CM</li>
-                    <li>Etnia: Branco</li>
-                    <li>Profissão: Universitario</li>
+                    <li>Nome: {{ nome }}</li>
+                    <li>Idade: {{ idade }} Anos</li>
+                    <li>Peso: {{ peso }} KG</li>
+                    <li>Altura: {{ altura }} CM</li>
+                    <li>Sexo: {{ sexo }}</li>
                 </ul>
             </div>
             <div class="sectionChild">
                 <p>Lista de Exercicios</p>
                 <ul>
-                    <li>Dar o Cu</li>
-                    <li>Mamar Rola</li>
-                    <li>Dar de Ladinho</li>
-                    <li>Altura: 173CM</li>
-                    <li>Etnia: Branco</li>
-                    <li>Profissão: Universitario</li>
-                    <button type="submit"> Adicionar Lista</button>
+                    <li v-for="listas in lista" :key="listas" :value="listas">
+                        {{ listas.name }}
+                    </li>
                 </ul>
             </div>
             <div class="sectionChild">
-                <p>Lista de Alimentos</p>
+                <p>Alimentos Salvos</p>
                 <ul>
-                    <li>Dar o Cu</li>
-                    <li>Mamar Rola</li>
-                    <li>Dar de Ladinho</li>
-                    <li>Altura: 173CM</li>
-                    <li>Etnia: Branco</li>
-                    <li>Profissão: Universitario</li>
+                    <li>Maçã</li>
+                    <li>Banana</li>
+                    <li>Pera</li>
                     <button type="submit"> Adicionar Lista</button>
                 </ul>
             </div>
@@ -49,8 +41,82 @@
 </template>
 
 <script>
+
+
+import axios from "axios";
+
 export default {
-    
+    data(){
+        return{
+            nome: "",
+            idade: "",
+            peso: "",
+            altura: "",
+            sexo: "",
+
+            lista: [],
+            Exrcnome: "",
+        }
+        
+    },
+    methods:{
+        // Get para pegar o usuário logado do banco
+        allData(){
+                const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).userId
+                const localStorageTrainerId = JSON.parse(window.localStorage.getItem('localStorage')).trainerId
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+
+                // GET usuario
+                axios
+                .get("http://localhost:3000/api/user/"+localStorageToken)
+                .then((res) => {
+                        this.Data = res.data
+                       this.email = res.data.email
+                       this.senha = res.data.password
+                })
+                .catch((error) => {
+                        console.log(error);
+                });
+            
+                // GET trainer
+                if(localStorageTrainerId != null){
+                    axios
+                    .get("http://localhost:3000/api/trainer/"+localStorageTrainerId)
+                    .then((res) => {
+                        this.nome = res.data.name
+                    })
+                }
+                //GET Gymgoer
+                if(localStorageGymgoerId != null){
+                    axios
+                    .get("http://localhost:3000/api/gymgoer/"+localStorageGymgoerId)
+                    .then((res) => {
+                        this.nome = res.data.name
+                        this.idade = res.data.physicalInformation.age
+                        this.peso = res.data.physicalInformation.weight
+                        this.altura = res.data.physicalInformation.height
+                        this.sexo = res.data.physicalInformation.geneticSex
+                    })
+                }
+                
+            },
+
+            allExercices(){
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+                axios
+                .get("http://localhost:3000/api/gymgoer/"+localStorageGymgoerId+"/exerciseModels")
+                .then((res) => {
+                        this.lista = res.data     
+                })
+                .catch((error) => {
+                        console.log(error);
+                });
+            }
+    },
+    mounted(){
+            this.allData()
+            this.allExercices()
+        }
 }
 </script>
 
