@@ -3,6 +3,8 @@ const router = express.Router();
 
 const physicalInformationService = require('../services/physicalInformationService');
 
+//todo get physicalInformation
+
 /**
  * @swagger
  * /api/gymgoer/{gymgoerId}/physicalInformation:
