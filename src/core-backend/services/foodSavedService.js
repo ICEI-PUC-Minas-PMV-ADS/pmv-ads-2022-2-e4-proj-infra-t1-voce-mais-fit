@@ -4,10 +4,12 @@ const foodApi = require('../external-services/foodApi');
 const mongoose = require('mongoose');
 
 async function getFoodSavedById(foodSavedId){
-    let foodSaved = await Gymgoer.Model.find({'foodSaved._id': foodSavedId});
+    let gymgoer = await Gymgoer.Model.findOne({'foodSaved._id': foodSavedId});
 
-    if(foodSaved == null)
+    if(gymgoer == null)
         return {errorType: 404, errorMessage: 'Food not found'};
+
+    let foodSaved = gymgoer.foodSaved.filter(foodSaved => foodSaved._id == foodSavedId)[0];
 
     return foodSaved;
 }
@@ -42,7 +44,12 @@ async function createNewFoodSaved(gymgoerId, foodSaved) {
     return {gymgoerId: gymgoer._id, newFoodSaved};
 }
 
-async function updateFoodSavedById(foodSavedId, foodSaved){
+async function updateFoodSavedById(foodSavedId, foodSaved){  
+    let oldFoodSaved = await getFoodSavedById(foodSavedId);
+
+    if(oldFoodSaved.errorMessage)
+        return {errorType: oldFoodSaved.errorType, errorMessage: oldFoodSaved.errorMessage};
+
     if(!foodSaved.kcalPer100g || foodSaved.kcalPer100g == 0)
         foodSaved.kcalPer100g = ((foodSaved.carbPer100g * 4) + (foodSaved.proteinPer100g * 4) + (foodSaved.fatPer100g * 9));
 
@@ -57,7 +64,10 @@ async function updateFoodSavedById(foodSavedId, foodSaved){
                                     }}, 
                                     {runValidators: true});
 
-    return updateResult;
+    if(!updateResult.acknowledged || updateResult.matchedCount == 0)
+        return {errorType: 500, errorMessage: "Cannot update Food Saved"};
+
+    return await getFoodSavedById(foodSavedId);        
 }
 
 async function searchFoodByGymgoerId(gymgoerId, query){

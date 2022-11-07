@@ -58126,6 +58126,6 @@ function portugueseToEnglish(text){
 
     return words[0];
 }
-
+//normalize na comparacao para obter mais resultados
 module.exports.englishToPortuguese = englishToPortuguese;
 module.exports.portugueseToEnglish = portugueseToEnglish;

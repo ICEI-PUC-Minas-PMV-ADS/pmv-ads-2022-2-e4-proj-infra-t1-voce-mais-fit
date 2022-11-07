@@ -5,7 +5,7 @@ const foodSavedService = require('../services/foodSavedService');
 
 /**
  * @swagger
- * /api/foodSaved:
+ * /api/searchFood:
  *  get:
  *   tags:
  *    - Alimento Salvo
@@ -23,7 +23,7 @@ const foodSavedService = require('../services/foodSavedService');
  *    500:
  *     description: Erro interno
  */
-router.get('/', (req, res) => {
+router.get('/searchFood', (req, res) => {
     foodSavedService.searchFood(req.query.foodName).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
- * /api/foodSaved/{gymgoerId}:
+ * /api/gymgoer/{gymgoerId}/foodSaved:
  *  get:
  *   tags:
  *    - Alimento Salvo
@@ -58,7 +58,7 @@ router.get('/', (req, res) => {
  *    500:
  *     description: Erro interno
  */
- router.get('/:gymgoerId', (req, res) => {
+ router.get('/gymgoer/:gymgoerId/foodSaved', (req, res) => {
     foodSavedService.searchFoodByGymgoerId(req.params.gymgoerId, req.query.foodName).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -71,7 +71,7 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
- * /api/foodSaved/{gymgoerId}:
+ * /api/gymgoer/{gymgoerId}/foodSaved:
  *  post:
  *   tags:
  *    - Alimento Salvo
@@ -103,8 +103,8 @@ router.get('/', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.post('/:gymgoerId', (req, res) => {
-    foodSavedService.createNewFoodSaved(req.params.gymgogerId, req.body).then((result) => {
+router.post('/gymgoer/:gymgoerId/foodSaved', (req, res) => {
+    foodSavedService.createNewFoodSaved(req.params.gymgoerId, req.body).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
 
@@ -116,7 +116,7 @@ router.post('/:gymgoerId', (req, res) => {
 
 /**
  * @swagger
- * /api/foodSaved/{foodSavedId}:
+ * /api/gymgoer/foodSaved/{foodSavedId}:
  *  patch:
  *   tags:
  *    - Alimento Salvo
@@ -148,7 +148,7 @@ router.post('/:gymgoerId', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.patch('/:foodSavedId', (req, res) => {
+router.patch('/gymgoer/foodSaved/:foodSavedId', (req, res) => {
     foodSavedService.updateFoodSavedById(req.params.foodSavedId, req.body).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);

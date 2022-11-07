@@ -49,7 +49,7 @@ app.use('/api/trainer', trainerRoute);
 app.use('/api/gym', gymRoute);
 app.use('/api/announcement', announcementRoute); //TODO: ajustar rota de announcement
 app.use('/api/', physicalInformationRoute);
-app.use('/api/foodSaved', foodSavedRoute); //TODO: Ajustar rota de food saved
+app.use('/api/', foodSavedRoute);
 app.use('/api/', exerciseModelRoute);
 app.use('/api/', dailyRegisterRoute);
 //#endregion
