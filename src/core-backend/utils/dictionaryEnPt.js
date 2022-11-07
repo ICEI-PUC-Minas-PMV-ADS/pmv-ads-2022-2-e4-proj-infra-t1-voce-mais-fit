@@ -58111,8 +58111,10 @@ const dictionary = [
     {enWord: 'zulus', ptWord: 'zulus'}
 ];
 
+const stringUtil = require('./string');
+
 function englishToPortuguese(text){
-    let words = dictionary.filter(p => p.enWord == text).map(p => p.ptWord);
+    let words = dictionary.filter(p => stringUtil.normalize(p.enWord) == stringUtil.normalize(text)).map(p => p.ptWord);
 
     if(!words || words.length == 0) return null;
 
@@ -58120,12 +58122,12 @@ function englishToPortuguese(text){
 }
 
 function portugueseToEnglish(text){
-    let words = dictionary.filter(p => p.ptWord == text).map(p => p.enWord);
+    let words = dictionary.filter(p => stringUtil.normalize(p.ptWord) == stringUtil.normalize(text)).map(p => p.enWord);
 
     if(!words || words.length == 0) return null;
 
     return words[0];
 }
-//normalize na comparacao para obter mais resultados
+
 module.exports.englishToPortuguese = englishToPortuguese;
 module.exports.portugueseToEnglish = portugueseToEnglish;
