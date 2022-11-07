@@ -47,7 +47,7 @@ app.use('/api/user', userRoute);
 app.use('/api/gymgoer', gymgoerRoute);
 app.use('/api/trainer', trainerRoute);
 app.use('/api/gym', gymRoute);
-app.use('/api/announcement', announcementRoute); //TODO: ajustar rota de announcement
+app.use('/api/', announcementRoute); //TODO: ajustar rota de announcement
 app.use('/api/', physicalInformationRoute);
 app.use('/api/', foodSavedRoute);
 app.use('/api/', exerciseModelRoute);
