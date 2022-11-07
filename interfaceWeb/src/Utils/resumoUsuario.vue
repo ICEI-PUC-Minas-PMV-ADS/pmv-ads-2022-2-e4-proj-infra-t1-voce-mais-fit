@@ -8,7 +8,7 @@
           </router-link >
           <img src="@/assets/profile.svg" class="profile">
           <div class="profileName">
-            <p>IAGO IANN</p>
+            <p>{{ nome }}</p>
             <img src="@/assets/stars.svg" class="stars">
           </div>
         </div>
@@ -23,10 +23,63 @@
       </div>
     </div>
 </template>
-<script>
-export default {
 
-};
+<script>
+
+import axios from "axios";
+
+export default {
+  data(){
+    return{
+      nome: "",
+    }
+  },
+  methods:{
+        // Get para pegar o usuário logado do banco
+        allData(){
+                const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).userId
+                const localStorageTrainerId = JSON.parse(window.localStorage.getItem('localStorage')).trainerId
+                const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+
+                // GET usuario
+                axios
+                .get("http://localhost:3000/api/user/"+localStorageToken)
+                .then((res) => {
+                        this.Data = res.data
+                       this.email = res.data.email
+                       this.senha = res.data.password
+                })
+                .catch((error) => {
+                        console.log(error);
+                });
+            
+                // GET trainer
+                if(localStorageTrainerId != null){
+                    axios
+                    .get("http://localhost:3000/api/trainer/"+localStorageTrainerId)
+                    .then((res) => {
+                        this.nome = res.data.name
+                       /* this.Whatsapp = res.data.whatsapp */
+                    })
+                }
+                //GET Gymgoer
+                if(localStorageGymgoerId != null){
+                    axios
+                    .get("http://localhost:3000/api/gymgoer/"+localStorageGymgoerId)
+                    .then((res) => {
+                        this.nome = res.data.name
+                       /* this.idade = res.data.age
+                        this.peso = res.data.weight
+                        this.altura = res.data.height
+                        this.sexo = res.data.geneticSex */
+                    })
+                }
+    }
+  },
+  mounted(){
+    this.allData()
+  }
+}
 </script>
 
 

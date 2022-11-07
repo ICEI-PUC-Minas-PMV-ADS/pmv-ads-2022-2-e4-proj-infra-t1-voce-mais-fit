@@ -43,24 +43,13 @@
                     </div>
                     <router-link class="logout" to="/">Logout</router-link>
                 </div> 
-                    <div class="lowerRow">                  
-                        <div class="col-6" >
-                            <h3 id="Titulo">Dados do Perfil</h3>
-                            <label class="mb-1">Altura: {{altura}}</label>
-                            <br>
-                            <div class="stealth" v-if="displayAltura">
-                                <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userAlt" />
-                                <p class="p-waring" v-if="verificaAlt">Deve digitar a altura para atualizar</p>
-                                <button type="button" class="btn btn-light" @click="verificaDadoAlt">Atualizar</button>
-                            </div>
-                            <button type="button" class="btn btn-light" @click="AlteraDisplayAlt">{{ ButtonAlt }}</button>                   
-                        </div>
+                    <div class="lowerRow">
                         <div class="col-6" >
                                 <label class="mb-1">Whatsapp: {{Whatsapp}}</label>
                                 <br>
                                 <div class="stealth" v-if="displayWhatsapp">
                                     <input id="inputForm" placeholder="Digite o nome que deseja alterar" type="text" class="input_default form-control requiredName" v-model="userWhatsapp" />
-                                    <p class="p-waring" v-if="verificaWhatsapp">Deve digitar a altura para atualizar</p>
+                                    <p class="p-waring" v-if="verificaWhatsapp">Deve digitar o número para atualizar</p>
                                     <button type="button" class="btn btn-light" @click="verificaDadoWhatsapp">Atualizar</button>
                                 </div>
                                 <button type="button" class="btn btn-light" @click="AlteraDisplayWhatsapp">{{ ButtonAlt }}</button>                   
@@ -108,7 +97,6 @@
                 email:"",
                 senha:"",
                 nome:"",
-                altura:"",
                 Whatsapp:"",
                 gyngoerId:"",
 
@@ -220,13 +208,7 @@
                 }
                     
             },
-            verificaDadoAlt(){
-                let alt = this.userName;
-                if(alt == "")
-                    this.verificaAlt = true;
-                else
-                    alert("Altura alterada com sucesso");
-            },
+
             verificaDadoWhatsapp(){
                 let Whatsapp = this.userWhatsapp;
                 if(Whatsapp == "")
@@ -279,6 +261,7 @@
                     .then((res) => {
                         this.nome = res.data.name
                         this.Whatsapp = res.data.whatsapp
+                        this.altura = res.data.height
                     })
                 }
                 
@@ -332,7 +315,7 @@
                 if(localStorageGymgoerId != null){
                     HTTP.patch("gymgoer/"+localStorageGymgoerId, { whatsapp: whatsapp})
                 }
-            }
+            },
         },
         mounted(){
             this.allData()
