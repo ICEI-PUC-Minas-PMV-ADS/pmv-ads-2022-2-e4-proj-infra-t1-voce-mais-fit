@@ -6,9 +6,8 @@
         </div>
         <div class="linksHeader">
             <a @click="toMain" class="link" href="#home">Home</a>
-            <a @click="toMain" class="link" href="#rotina">Rotina</a>
-            <a class="link" id="dieta" href="#listaFood">Dieta</a>
-            <a class="link" id="ex" href="#listaEx">Exercicíos</a>
+            <a @click="toMain" class="link" href="#rotina">Alunos</a>
+            <a class="link" id="dieta">Academia</a>
         </div>
         <div class="personalLinksHeader">
             <router-link to="/userconfig" class="link">Perfil</router-link>
@@ -26,8 +25,8 @@ export default {
     },
     methods:{
         toMain(){
-            if(this.$route.path !== "/mainPage"){
-                this.$router.push("/mainPage")
+            if(this.$route.path !== "/mainPageTraner"){
+                this.$router.push("/mainPageTraner")
             }
         },
         

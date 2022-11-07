@@ -5,7 +5,7 @@
 </template> 
 
 <script>
-import headerComponentVue from '@/components/headerComponent.vue';
+import headerComponentVue from '@/components/headerComponenTrainer.vue';
 export default {
   components:{
     headerComponentVue
