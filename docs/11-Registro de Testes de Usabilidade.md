@@ -39,4 +39,4 @@ Relatório com as evidências dos testes de software realizados no sistema pela 
 
 ## Avaliação
 
-A maior parte das funcionabilidades estão corretas de acordo com a documentação. Algumas funcionalidades extras foram criadas mas ainda existem possibilidades para melhorias.
+A maior parte das funcionabilidades estão corretas de acordo com a documentação. Algumas funcionalidades extras foram criadas mas ainda existem possibilidades para melhorias e atualizações.
