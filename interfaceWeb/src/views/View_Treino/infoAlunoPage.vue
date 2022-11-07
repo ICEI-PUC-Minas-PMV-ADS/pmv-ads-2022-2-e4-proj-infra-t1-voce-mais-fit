@@ -70,7 +70,7 @@ export default {
                 axios
                 .get("http://localhost:3000/api/user/"+localStorageToken)
                 .then((res) => {
-                        this.Data = res.data
+                       this.Data = res.data
                        this.email = res.data.email
                        this.senha = res.data.password
                 })
