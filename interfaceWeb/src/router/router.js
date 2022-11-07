@@ -8,7 +8,9 @@ import registerUserPage from "@/views/Register/registerUserPage";
 import registerPersonal from "@/views/Register/registerPersonal";
 import UserConfig from "@/views/User_Config/UserConfigPage";
 import SobrePage from "@/views/Sobre_Page/SobrePage";
+import SobrePageTrainer from "@/views/Sobre_Page/SobrePageTrainer";
 import infoAlunoPage from "@/views/View_Treino/infoAlunoPage";
+import userConfigPageTrainer from "@/views/User_Config/userConfigPageTrainer"
 
 Vue.use(Router);
 
@@ -48,8 +50,16 @@ export default new Router({
             component: SobrePage
         },
         {
+            path:"/SobrePageTrainer",
+            component: SobrePageTrainer
+        },
+        {
             path: "/infoAlunoPage",
             component: infoAlunoPage
-        }
+        },
+        {
+            path:"/trainerConfig",
+            component: userConfigPageTrainer
+        },
     ] 
 })
