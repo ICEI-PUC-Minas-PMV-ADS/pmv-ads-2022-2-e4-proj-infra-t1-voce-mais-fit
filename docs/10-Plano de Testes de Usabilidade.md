@@ -36,14 +36,3 @@ Planejamento de realização de testes com usuários definindo as operações qu
 |**Objetivo do teste**|O usuário deverá poder se comunicar com os desenvolvedores através de formulário de email ou de suas redes sociais profissionais.|
 |**Passos**|1 - Acessar o site.<br/>2 - Sobre.<br/>3 - Preencher e enviar formulário, ou entrar nos links de cada desenvolvedor. 
 |**Critérios de Êxito**|Direciona-lo para a rede social do desenvolvedor e enviar email corretamente.|
-
-
-<br><br><br><br><br><br><br><br>
-
-**Controle de Mudanças a Baixo( Modelo apenas para ilustar, refazer corretamente )**
-![Funcionamento Interdace do Usuário](./img/RTS/ControleDeMudancas.png)
-
-<br><br><br>
-
-**Gerenciamento do Processo de Desenvolvimento de Software a Baixo( Modelo apenas para ilustar, refazer corretamente )**
-![Funcionamento Interdace do Usuário](./img/RTS/gerenciamentoDoProcessoDeDesenvolvimentoDeSoftware.png)
