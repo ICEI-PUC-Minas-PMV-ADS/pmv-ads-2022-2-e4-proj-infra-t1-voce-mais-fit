@@ -2,48 +2,25 @@
   <div>
     <header-component-vue></header-component-vue>
     <start-component-vue></start-component-vue>
-    <div id="tbl" class="container">
-      <table class="table  table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <alunos-list-component-vue id="alunos"></alunos-list-component-vue>
+    <add-gym-component-vue></add-gym-component-vue>
+    <footer-component-vue></footer-component-vue>
   </div>
 </template> 
 
 <script>
-import headerComponentVue from "@/components/headerComponenTrainer.vue";
+import alunosListComponentVue from "@/components/trainerComponents/alunosListComponent.vue";
+import headerComponentVue from "@/components/trainerComponents/headerComponenTrainer.vue";
 import startComponentVue from "@/components/startComponent.vue";
+import addGymComponentVue from "@/components/trainerComponents/addGymComponent.vue";
+import footerComponentVue from "@/components/footerComponent.vue";
 export default {
   components: {
     headerComponentVue,
-    startComponentVue
-    
+    startComponentVue,
+    alunosListComponentVue,
+    addGymComponentVue,
+    footerComponentVue
   },
 };
 </script>

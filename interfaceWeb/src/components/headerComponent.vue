@@ -9,6 +9,7 @@
             <a @click="toMain" class="link" href="#rotina">Rotina</a>
             <a class="link" id="dieta" href="#listaFood">Dieta</a>
             <a class="link" id="ex" href="#listaEx">Exercicíos</a>
+            <a class="link" id="ex" href="#academia">Academias</a>
         </div>
         <div class="personalLinksHeader">
             <router-link to="/userconfig" class="link">Perfil</router-link>
