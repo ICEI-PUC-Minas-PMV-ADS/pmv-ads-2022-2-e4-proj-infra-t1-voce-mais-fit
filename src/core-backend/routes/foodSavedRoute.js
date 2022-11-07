@@ -5,7 +5,7 @@ const foodSavedService = require('../services/foodSavedService');
 
 /**
  * @swagger
- * /api/searchFood:
+ * /api/gymgoer/foodSaved/searchFood:
  *  get:
  *   tags:
  *    - Alimento Salvo
@@ -23,7 +23,7 @@ const foodSavedService = require('../services/foodSavedService');
  *    500:
  *     description: Erro interno
  */
-router.get('/searchFood', (req, res) => {
+router.get('/gymgoer/foodSaved/searchFood', (req, res) => {
     foodSavedService.searchFood(req.query.foodName).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
