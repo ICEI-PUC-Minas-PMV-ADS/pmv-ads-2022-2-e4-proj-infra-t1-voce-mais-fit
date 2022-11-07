@@ -41,15 +41,15 @@
   <p class="titleListEx">Selecione a lista de Exercícios do dia!</p>
   <modalAddList></modalAddList>
   </div>
-  <carouselExVue></carouselExVue>
+  <userListExVue></userListExVue>
 </div> 
 </template>
 <script>
-import carouselExVue from './carouselEx.vue';
+import userListExVue from './userListComp.vue';
 import modalAddList from '@/Utils/modalAddList.vue'
   export default{
     components:{
-      carouselExVue,
+      userListExVue,
       modalAddList
     }
   }

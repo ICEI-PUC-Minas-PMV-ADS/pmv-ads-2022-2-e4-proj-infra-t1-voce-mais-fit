@@ -12,11 +12,13 @@
                     <div class="inputCont">
                         <label>Nome da Lista</label>
                         <input 
+                        v-model="nameList"
                         type="text"
                         placeholder="Nome da Lista"
                         />
                         <label>Descrição</label>
                         <input 
+                        v-model="descList"
                         type="text"
                         placeholder="Descrição da Lista"
                         />
@@ -28,7 +30,9 @@
                             type="text"
                             placeholder="Nome do Exercício"
                             v-model="nameOfEx"
+                            @input="changeConferSpanName"
                             />
+                            <span class="spanAtentionName">Insira o nome do Exercício!</span>
                         </div>
                         <div class="insideExCont">
                             <label>Descrição/Repetições</label>
@@ -36,7 +40,9 @@
                             type="text"
                             placeholder="Descrição/Repetições"
                             v-model="descOfEx"
+                            @input="changeConferSpanDesc"
                             />
+                            <span class="spanAtentionDesc">Insira a descrção/repetição do Exercício!</span>
                         </div>   
                         <img @click="addToArray" src="@/assets/modalAddImg/plusAddIcon.png" class="addIcon" />  
                         <p>Adicionar para Lista</p>
@@ -56,7 +62,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="buttonSend">Adicionar Lista</button>
+                <button @click="sendList" type="button" class="btn btn-primary" id="buttonSend">Adicionar Lista</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="buttonClose">Cancelar</button>
             </div>
             </div>
@@ -66,9 +72,12 @@
 </template>
 
 <script>
+import { HTTP } from '@/api_system'
 export default {
     data(){
         return{
+            nameList:"",
+            descList:"",
             arrayList: [],
             nameOfEx:"",
             descOfEx:"",
@@ -76,20 +85,87 @@ export default {
     },
     methods:{
         addToArray(){
-            this.arrayList.push({'name':`${this.nameOfEx}`, 'desc':`${this.descOfEx}`})
-            this.nameOfEx = ""
-            this.descOfEx = ""
+            if(this.nameOfEx === "" || this.descOfEx ===""){
+                this.conferSpan()
+            }else{
+                this.arrayList.push({'name':`${this.nameOfEx}`, 'desc':`${this.descOfEx}`})
+                this.conferClearList()
+                this.nameOfEx = ""
+                this.descOfEx = ""
+            }
         },
         clearList(){
             this.arrayList = []
+            this.conferClearList()
             this.nameOfEx = ""
             this.descOfEx = ""
+        },
+        conferClearList(){
+            if(this.arrayList.length === 0){
+                let cont = document.querySelector('.clearCont')
+                cont.style.display = 'none'
+            }else{
+                let cont = document.querySelector('.clearCont')
+                cont.style.display = 'block'
+            }
+        },
+        conferSpan(){
+            if(this.nameOfEx === "" && this.descOfEx === ""){
+                let spanName = document.querySelector('.spanAtentionName')
+                spanName.style.display = 'block'
+                let spanDesc = document.querySelector('.spanAtentionDesc')
+                spanDesc.style.display = 'block'
+            }else if(this.nameOfEx !== "" && this.descOfEx === ""){
+                let spanDesc = document.querySelector('.spanAtentionDesc')
+                spanDesc.style.display = 'block'
+            }else if(this.nameOfEx === "" && this.descOfEx !== ""){
+                let spanName = document.querySelector('.spanAtentionName')
+                spanName.style.display = 'block'
+            }else{
+                let spanName = document.querySelector('.spanAtentionName')
+                spanName.style.display = 'none'
+                let spanDesc = document.querySelector('.spanAtentionDesc')
+                spanDesc.style.display = 'none'
+            }
+        },
+        changeConferSpanName(){
+            if(this.nameOfEx !== ""){
+                let spanName = document.querySelector('.spanAtentionName')
+                spanName.style.display = 'none'
+            }
+        },
+        changeConferSpanDesc(){
+            if(this.descOfEx !== ""){
+                let spanDesc = document.querySelector('.spanAtentionDesc')
+                spanDesc.style.display = 'none'
+                
+            }
+        },
+
+        
+
+        sendList(){
+            const localStorageGymgoerId = JSON.parse(window.localStorage.getItem('localStorage')).gymgoerId
+            HTTP.post(`gymgoer/${localStorageGymgoerId}/exerciseModels`, {
+                name: this.nameList,
+                description: this.descList,
+                exercises: this.arrayList
+            })
+            window.location.reload()
         }
+    },
+    mounted(){
+        this.conferClearList()
     }
 }
 </script>
 
 <style scoped>
+span{
+    font-size: 16px;
+    color: red;
+    display: none;
+}
 .allBodyCont{
     display: flex;
     align-items: center;

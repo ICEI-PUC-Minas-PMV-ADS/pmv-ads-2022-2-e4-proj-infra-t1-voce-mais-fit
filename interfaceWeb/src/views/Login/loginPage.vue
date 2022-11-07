@@ -17,7 +17,6 @@
             <div class="formContainer">
                 <div class="row" id="row">
                     <div class="col-6 p-0" >
-                        <h1>Tokken: {{tokkenLogin}}</h1>
                         <label class="mb-1 label_default"
                         >Email</label
                         >
@@ -140,7 +139,12 @@ export default {
 
                     const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).token
                     console.log(localStorageToken)
-                    this.$router.push('/mainPage')
+                    if(localStorage.gymgoerId){
+                        this.$router.push('/mainPage')
+                    }else if(localStorage.trainerId){
+                        this.$router.push('/mainPageTraner')
+                    }
+                    
                 })
                 .catch((error) => {
                     this.errorLogin = error

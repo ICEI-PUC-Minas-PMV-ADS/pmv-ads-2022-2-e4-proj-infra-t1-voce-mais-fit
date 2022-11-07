@@ -22,7 +22,7 @@ export default {
     headerComponent,
     footerComponent,
     startComponentVue,
-    datapickerComponentEx
+    datapickerComponentEx,
   },
  
 };

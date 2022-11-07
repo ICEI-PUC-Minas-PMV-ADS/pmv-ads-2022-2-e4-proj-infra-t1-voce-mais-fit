@@ -41,6 +41,7 @@
                         </div>
                         <button type="button" class="btn btn-light" @click="AlteraDisplaySenha">{{ ButtonSenha }}</button>
                     </div>
+                    <router-link class="logout" to="/">Logout</router-link>
                 </div> 
                     <div class="lowerRow">                  
                         <div class="col-6" >
@@ -79,6 +80,7 @@
                         </div>
                     </div>
                 </div>
+
         </div>
 
         <footerComponent></footerComponent>
@@ -357,6 +359,15 @@ headerMiniLogo{
     flex-direction: column;
     background-color: #222222;
     text-decoration: none;
+}
+.logout{
+    text-decoration: none;
+    color: #FFFF;
+    font-size: 22px;
+    border: 1px #FFFF solid;
+    padding: 5px;
+    margin-top: 12%;
+    margin-right: 36%;
 }
 .headerLink{
     width: 60%;
