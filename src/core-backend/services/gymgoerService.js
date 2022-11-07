@@ -12,6 +12,8 @@ async function getAllGymgoers(){
 async function getGymgoerById(gymgoerId){
     let gymgoer = await Gymgoer.Model.findById(gymgoerId);
 
+ 
+
     if(gymgoer == null)
         return {errorType: 404, errorMessage: 'Gymgoer not found'};
 
