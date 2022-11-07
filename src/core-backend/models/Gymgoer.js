@@ -46,7 +46,13 @@ const gymgoerSchema = new mongoose.Schema({
             carb: {type: Number, required: true},
             protein: {type: Number, required: true},
             fat: {type: Number, required: true},
-            kcal: {type: Number, required: true},
+            kcal: {
+                type: Number, 
+                required: true,
+                default: function(){
+                    return (this.carb * 4) + (this.protein * 4) + (this.fat * 9)
+                }
+            }
         }],
         exercises: [{
             name: {type: String, required: true, maxLength: 255},
