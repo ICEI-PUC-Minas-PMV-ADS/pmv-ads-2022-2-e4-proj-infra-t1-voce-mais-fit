@@ -23,7 +23,7 @@ const announcementService = require('../services/announcementService');
  *    500:
  *     description: Erro interno
  */
-router.get('/:gymId', (req, res) => { //todo retornar ordenado pelo mais recente
+router.get('/:gymId', (req, res) => {
     announcementService.getAllAnnouncementsByGymId(req.params.gymId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
