@@ -16,12 +16,11 @@ const getRapidApiKey = () => {
 async function translate(optionsData){
     let options = {
         method: 'POST',
-        url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
+        url: 'https://translo.p.rapidapi.com/api/v3/translate',
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
-          'Accept-Encoding': 'application/gzip',
           'X-RapidAPI-Key': getRapidApiKey(),
-          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+          'X-RapidAPI-Host': 'translo.p.rapidapi.com'
         },
         data: optionsData
     };
@@ -31,22 +30,22 @@ async function translate(optionsData){
     try{
         response = await axios.request(options);
 
-        if(!response || !response.data || !response.data.data || !response.data.data.translations || response.data.data.translations.length == 0)
-            return optionsData.get('q');
+        if(!response || !response.data || !response.data.ok)
+            return optionsData.get('text');
 
-        return response.data.data.translations[0].translatedText;
+        return response.data.translated_text;
 
     }catch(e){
         console.log("Erro ao traduzir: " + e.response.data.message);
-        return optionsData.get('q');
+        return optionsData.get('text');
     }
 }
 
 async function portugueseToEnglish(text){
     let optionsData = new URLSearchParams();
-    optionsData.append("source", "pt");
-    optionsData.append("target", "en");
-    optionsData.append("q", text);
+    optionsData.append("from", "pt");
+    optionsData.append("to", "en");
+    optionsData.append("text", text);
 
     let result = internalDictionary.portugueseToEnglish(text);
 
@@ -58,9 +57,9 @@ async function portugueseToEnglish(text){
 
 async function englishToPortuguese(text){
     let optionsData = new URLSearchParams();
-    optionsData.append("source", "en");
-    optionsData.append("target", "pt");
-    optionsData.append("q", text);
+    optionsData.append("from", "en");
+    optionsData.append("to", "pt");
+    optionsData.append("text", text);
 
     let result = internalDictionary.englishToPortuguese(text);
 
