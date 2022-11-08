@@ -44,9 +44,9 @@ async function getAllDailyRegistersByGymgoerId(gymgoerId){
     if(gymgoer._id == null)
         return {errorType: 404, errorMessage: 'Gymgoer not found'};
 
-    //todo ordenar pelo mais recente
+    let result = gymgoer.dailyRegisters.sort(function(a, b){return a.date - b.date}).reverse(); 
 
-    return gymgoer.dailyRegisters;   
+    return result;   
 }
 
 async function createNewDailyRegister(gymgoerId, dailyRegister){
