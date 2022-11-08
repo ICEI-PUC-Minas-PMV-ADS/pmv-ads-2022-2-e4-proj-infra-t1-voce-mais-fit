@@ -1,5 +1,14 @@
 const gymgoerService = require('../services/gymgoerService');
 
+async function getPhysicalInformationByGymgoerId(gymgoerId){
+    let gymgoerDb = await gymgoerService.getGymgoerById(gymgoerId);
+
+    if(gymgoerDb.errorMessage)
+        return {errorType: gymgoerDb.errorType, errorMessage: gymgoerDb.errorMessage};
+
+    return gymgoerDb.physicalInformation;
+}
+
 async function upsertPhysicalInformationByGymgoerId(gymgoerId, physicalInformation) {    
     let gymgoerDb = await gymgoerService.getGymgoerById(gymgoerId);
 
@@ -63,3 +72,4 @@ function calculateDailyKcalConsumption(tmb, weightGoal){
 }
 
 module.exports.upsertPhysicalInformationByGymgoerId = upsertPhysicalInformationByGymgoerId;
+module.exports.getPhysicalInformationByGymgoerId = getPhysicalInformationByGymgoerId;
