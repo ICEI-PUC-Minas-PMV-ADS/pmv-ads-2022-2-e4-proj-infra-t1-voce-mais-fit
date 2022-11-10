@@ -28,11 +28,7 @@ async function getGymgoerByValidAuthCode(authCode){
     let authCodeDb = gymgoerDb.authCodes.filter(authCodes => authCodes.code == authCode)[0];
 
     if(authCodeDb.expirationDate < Date.now())
-        return {errorType: 404, errorMessage: 'Auth code expired'};
-
-    console.log(authCodeDb);
-
-    
+        return {errorType: 403, errorMessage: 'Auth code expired'};   
 
     return gymgoerDb;
 }
