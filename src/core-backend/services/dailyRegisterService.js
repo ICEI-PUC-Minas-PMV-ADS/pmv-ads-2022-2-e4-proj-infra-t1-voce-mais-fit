@@ -1,5 +1,6 @@
 const Gymgoer = require('../models/Gymgoer');
 const gymgoerService = require('./gymgoerService');
+const foodSavedService = require('./foodSavedService');
 const mongoose = require('mongoose');
 
 //#region DailyRegister
@@ -44,9 +45,9 @@ async function getAllDailyRegistersByGymgoerId(gymgoerId){
     if(gymgoer._id == null)
         return {errorType: 404, errorMessage: 'Gymgoer not found'};
 
-    //todo ordenar pelo mais recente
+    let result = gymgoer.dailyRegisters.sort(function(a, b){return a.date - b.date}).reverse(); 
 
-    return gymgoer.dailyRegisters;   
+    return result;   
 }
 
 async function createNewDailyRegister(gymgoerId, dailyRegister){
@@ -88,7 +89,6 @@ async function getAllFoodEatenInDailyRegister(dailyRegisterId){
 }
 
 async function addFoodEatenInDailyRegister(dailyRegisterId, foodEaten){
-    //todo adicionar em foodSaved também
     let dailyRegister = await getDailyRegisterById(dailyRegisterId);
 
     if(dailyRegister.errorMessage)
@@ -103,17 +103,42 @@ async function addFoodEatenInDailyRegister(dailyRegisterId, foodEaten){
     let totalProtein = dailyRegister.foods.map(item => item.protein).reduce((prev, next) => prev + next);
     let totalFat = dailyRegister.foods.map(item => item.fat).reduce((prev, next) => prev + next);
     let totalKcal = dailyRegister.foods.map(item => item.kcal).reduce((prev, next) => prev + next);
+ 
+    const session = await Gymgoer.Model.startSession();
+    session.startTransaction();
+    let updateResult;
+    
+    try{
+        //Salvando alimento em dailyRegister
+        updateResult = await Gymgoer.Model.updateOne(
+            {'dailyRegisters._id': dailyRegisterId}, 
+            {'$set': {
+                'dailyRegisters.$.totalCarb': totalCarb,
+                'dailyRegisters.$.totalProtein': totalProtein,
+                'dailyRegisters.$.totalFat': totalFat,
+                'dailyRegisters.$.totalKcal': totalKcal,
+                'dailyRegisters.$.foods': dailyRegister.foods
+            }}, 
+            {runValidators: true});
 
-    let updateResult = await Gymgoer.Model.updateOne(
-                                {'dailyRegisters._id': dailyRegisterId}, 
-                                {'$set': {
-                                    'dailyRegisters.$.totalCarb': totalCarb,
-                                    'dailyRegisters.$.totalProtein': totalProtein,
-                                    'dailyRegisters.$.totalFat': totalFat,
-                                    'dailyRegisters.$.totalKcal': totalKcal,
-                                    'dailyRegisters.$.foods': dailyRegister.foods
-                                }}, 
-                                {runValidators: true});
+        //Salvando alimento em foodSaved
+        let newFoodSaved = {
+            name: foodEaten.name,
+            description: foodEaten.description,
+            carbPer100g: foodEaten.carb / foodEaten.gramsAmount * 100,
+            proteinPer100g: foodEaten.protein / foodEaten.gramsAmount * 100,
+            fatPer100g: foodEaten.protein / foodEaten.gramsAmount * 100,
+            kcalPer100g: foodEaten.kcal / foodEaten.gramsAmount * 100
+        }
+
+        let gymgoerDb = await Gymgoer.Model.findOne({'dailyRegisters._id': dailyRegisterId});
+        await foodSavedService.createNewFoodSaved(gymgoerDb._id, newFoodSaved);
+
+        await session.commitTransaction();
+        session.endSession();
+    } catch (err) {
+        return {errorType: 500, errorMessage: err}; 
+    }
 
     return updateResult;
 }

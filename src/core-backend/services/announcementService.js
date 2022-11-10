@@ -17,7 +17,9 @@ async function getAllAnnouncementsByGymId(gymId){
     if(gym._id == null)
         return {errorType: 404, errorMessage: 'Gym not found'};
 
-    return gym.announcements;
+    let result = gym.announcements.sort(function(a, b){return a.date - b.date}).reverse(); 
+
+    return result;
 }
 
 async function createNewAnnouncement(gymId, announcement) {
