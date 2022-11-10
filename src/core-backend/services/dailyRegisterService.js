@@ -1,5 +1,6 @@
 const Gymgoer = require('../models/Gymgoer');
 const gymgoerService = require('./gymgoerService');
+const foodSavedService = require('./foodSavedService');
 const mongoose = require('mongoose');
 
 //#region DailyRegister
@@ -88,7 +89,6 @@ async function getAllFoodEatenInDailyRegister(dailyRegisterId){
 }
 
 async function addFoodEatenInDailyRegister(dailyRegisterId, foodEaten){
-    //todo adicionar em foodSaved também
     let dailyRegister = await getDailyRegisterById(dailyRegisterId);
 
     if(dailyRegister.errorMessage)
@@ -114,6 +114,20 @@ async function addFoodEatenInDailyRegister(dailyRegisterId, foodEaten){
                                     'dailyRegisters.$.foods': dailyRegister.foods
                                 }}, 
                                 {runValidators: true});
+
+    //transaction
+    //Salvando alimento em foodSaved
+    let newFoodSaved = {
+        name: foodEaten.name,
+        description: foodEaten.description,
+        carbPer100g: foodEaten.carb / 100 * foodEaten.gramsAmount,
+        proteinPer100g: foodEaten.protein / 100 * foodEaten.gramsAmount,
+        fatPer100g: foodEaten.protein / 100 * foodEaten.gramsAmount,
+        kcalPer100g: foodEaten.kcal / 100 * foodEaten.gramsAmount
+    }
+
+    let gymgoerDb = await Gymgoer.Model.findOne({'dailyRegisters._id': dailyRegisterId});
+    await foodSavedService.createNewFoodSaved(gymgoerDb._id, newFoodSaved);
 
     return updateResult;
 }

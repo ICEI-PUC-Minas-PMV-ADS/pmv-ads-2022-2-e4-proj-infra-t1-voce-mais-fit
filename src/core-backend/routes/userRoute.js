@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.get('/:userId', (req, res) => {//todo buscar info gymgoer ou trainer carregada
+router.get('/:userId', (req, res) => {
     userService.getUserById(req.params.userId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
