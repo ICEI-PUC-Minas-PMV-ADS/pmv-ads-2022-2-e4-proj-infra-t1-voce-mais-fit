@@ -24,11 +24,12 @@ async function getAllFoodSavedByGymgoerId(gymgoerId){
 }
 
 async function createNewFoodSaved(gymgoerId, foodSaved) {
-    console.log(foodSaved);
     let gymgoer = await gymgoerService.getGymgoerById(gymgoerId);
 
     if(gymgoer._id == null)
         return {errorType: 404, errorMessage: 'Gymgoer not found'};
+
+    //todo buscar pra ver se nao existe comida igual
 
     let newFoodSaved = {
         _id: mongoose.Types.ObjectId(),

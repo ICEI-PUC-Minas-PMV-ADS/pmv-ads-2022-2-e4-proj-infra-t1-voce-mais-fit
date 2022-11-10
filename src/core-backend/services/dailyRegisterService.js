@@ -103,31 +103,42 @@ async function addFoodEatenInDailyRegister(dailyRegisterId, foodEaten){
     let totalProtein = dailyRegister.foods.map(item => item.protein).reduce((prev, next) => prev + next);
     let totalFat = dailyRegister.foods.map(item => item.fat).reduce((prev, next) => prev + next);
     let totalKcal = dailyRegister.foods.map(item => item.kcal).reduce((prev, next) => prev + next);
+ 
+    const session = await Gymgoer.Model.startSession();
+    session.startTransaction();
+    let updateResult;
+    
+    try{
+        //Salvando alimento em dailyRegister
+        updateResult = await Gymgoer.Model.updateOne(
+            {'dailyRegisters._id': dailyRegisterId}, 
+            {'$set': {
+                'dailyRegisters.$.totalCarb': totalCarb,
+                'dailyRegisters.$.totalProtein': totalProtein,
+                'dailyRegisters.$.totalFat': totalFat,
+                'dailyRegisters.$.totalKcal': totalKcal,
+                'dailyRegisters.$.foods': dailyRegister.foods
+            }}, 
+            {runValidators: true});
 
-    let updateResult = await Gymgoer.Model.updateOne(
-                                {'dailyRegisters._id': dailyRegisterId}, 
-                                {'$set': {
-                                    'dailyRegisters.$.totalCarb': totalCarb,
-                                    'dailyRegisters.$.totalProtein': totalProtein,
-                                    'dailyRegisters.$.totalFat': totalFat,
-                                    'dailyRegisters.$.totalKcal': totalKcal,
-                                    'dailyRegisters.$.foods': dailyRegister.foods
-                                }}, 
-                                {runValidators: true});
+        //Salvando alimento em foodSaved
+        let newFoodSaved = {
+            name: foodEaten.name,
+            description: foodEaten.description,
+            carbPer100g: foodEaten.carb / foodEaten.gramsAmount * 100,
+            proteinPer100g: foodEaten.protein / foodEaten.gramsAmount * 100,
+            fatPer100g: foodEaten.protein / foodEaten.gramsAmount * 100,
+            kcalPer100g: foodEaten.kcal / foodEaten.gramsAmount * 100
+        }
 
-    //transaction
-    //Salvando alimento em foodSaved
-    let newFoodSaved = {
-        name: foodEaten.name,
-        description: foodEaten.description,
-        carbPer100g: foodEaten.carb / 100 * foodEaten.gramsAmount,
-        proteinPer100g: foodEaten.protein / 100 * foodEaten.gramsAmount,
-        fatPer100g: foodEaten.protein / 100 * foodEaten.gramsAmount,
-        kcalPer100g: foodEaten.kcal / 100 * foodEaten.gramsAmount
+        let gymgoerDb = await Gymgoer.Model.findOne({'dailyRegisters._id': dailyRegisterId});
+        await foodSavedService.createNewFoodSaved(gymgoerDb._id, newFoodSaved);
+
+        await session.commitTransaction();
+        session.endSession();
+    } catch (err) {
+        return {errorType: 500, errorMessage: err}; 
     }
-
-    let gymgoerDb = await Gymgoer.Model.findOne({'dailyRegisters._id': dailyRegisterId});
-    await foodSavedService.createNewFoodSaved(gymgoerDb._id, newFoodSaved);
 
     return updateResult;
 }
