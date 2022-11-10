@@ -77,8 +77,6 @@ const gymgoerSchema = new mongoose.Schema({
     }]
 })
 
-//TODO: metodo para codigo com vinculo de academia, vai ser uma propriedade cujo tipo é um outro schema com o numero e data de expiracao, e uma propriedade virtual bool se tá valido ou não
-
 const GymgoerModel = mongoose.model('Gymgoer', gymgoerSchema);
 
 module.exports.schema = gymgoerSchema;
