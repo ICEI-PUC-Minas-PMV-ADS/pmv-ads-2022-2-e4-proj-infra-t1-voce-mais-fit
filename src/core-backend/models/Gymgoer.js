@@ -69,6 +69,11 @@ const gymgoerSchema = new mongoose.Schema({
             youtubeUrl: {type: String, required: false},
             description: {type: String, required: false}
         }],
+    }],
+    authCodes: [{
+        code: {type: String},
+        createdDate: {type: Date},
+        expirationDate: {type: Date}
     }]
 })
 
