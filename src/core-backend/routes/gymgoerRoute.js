@@ -62,6 +62,39 @@ router.get('/:gymgoerId', (req, res) => {
 
 /**
  * @swagger
+ * /api/gymgoer/authCode/{authCode}:
+ *  get:
+ *   tags:
+ *    - Aluno
+ *   description: Busca o Aluno através do Código de Autenticação (case-sensitive)
+ *   parameters:
+ *    - name: authCode
+ *      in: path
+ *      required: true
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Sucesso
+ *    403:
+ *     description: Código de Autenticação expirado
+ *    404:
+ *     description: Gymgoer não encontrado
+ *    500:
+ *     description: Erro interno
+ */
+ router.get('/authCode/:authCode', (req, res) => {
+    gymgoerService.getGymgoerByValidAuthCode(req.params.authCode).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
+
+/**
+ * @swagger
  * /api/gymgoer/{gymgoerId}:
  *  patch:
  *   tags:
@@ -98,5 +131,42 @@ router.patch('/:gymgoerId', (req, res) => {
         return res.status(500).send(err.message);
     });
 });
+
+/**
+ * @swagger
+ * /api/gymgoer/{gymgoerId}/authCode:
+ *  post:
+ *   tags:
+ *    - Aluno
+ *   description: Gera um código de autenticação para vínculo do Aluno com Academia, através do GymgoerId (ObjectId)
+ *   parameters:
+ *    - name: gymgoerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *    - name: minutes
+ *      in: query
+ *      type: number
+ *      required: false
+ *   responses: 
+ *    200:
+ *     description: Atualizado com sucesso
+ *    404:
+ *     description: Gymgoer não encontrado
+ *    500:
+ *     description: Erro interno
+ */
+ router.post('/:gymgoerId/authCode', (req, res) => {
+    gymgoerService.generateAuthCode(req.params.gymgoerId, req.query.minutes).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
+
+
 
 module.exports = router;
