@@ -137,7 +137,7 @@ As questões que limitam a execução desse projeto e que se configuram como obr
 
 Os casos de uso mostrando os Requisitos Funcionais para a aplicação são ilustrados abaixo.
 
-![Diagrama de Casos de Uso](img/processos/diagrama_casos_uso.png)
+![Diagrama de Casos de Uso](img/Processos/Diagrama%20de%20Casos%20de%20Uso.png)
 
 # Matriz de Rastreabilidade
 
