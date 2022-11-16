@@ -1,0 +1,9 @@
+
+{
+    "CLIENT_ID" :"1068301370081-k6k822hr2fefl9ujerr63cri8o90a198.apps.googleusercontent.com",
+    "REDIRECT_URI":"https://auth.expo.io/@gilidio8/vc-mais-fit",
+    "RESPONSE_YPE":"token",
+    "SCOPE":"profile email",
+    "URL":"https://accounts.google.com/o/oauth2/v2/auth?",
+    "antiga": "https://auth.expo.io/@gilidio8/vc-mais-fit"
+}
