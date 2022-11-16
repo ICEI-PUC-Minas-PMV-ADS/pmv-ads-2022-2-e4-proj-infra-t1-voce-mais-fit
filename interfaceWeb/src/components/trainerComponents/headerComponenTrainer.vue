@@ -6,12 +6,12 @@
         </div>
         <div class="linksHeader">
             <a @click="toMain" class="link" href="#home">Home</a>
-            <a @click="toMain" class="link" href="#rotina">Alunos</a>
+            <a @click="toMain" class="link" href="#alunos">Alunos</a>
             <a class="link" id="dieta">Academia</a>
         </div>
         <div class="personalLinksHeader">
-            <router-link to="/userconfig" class="link">Perfil</router-link>
-            <router-link to="/sobrepage" class="link">Sobre</router-link>
+            <router-link to="/trainerConfig" class="link">Perfil</router-link>
+            <router-link to="/SobrePageTrainer" class="link">Sobre</router-link>
         </div>
     </div>
 </template>

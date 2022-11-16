@@ -5,7 +5,7 @@ const announcementService = require('../services/announcementService');
 
 /**
  * @swagger
- * /api/announcement/{gymId}:
+ * /api/gym/{gymId}/announcement:
  *  get:
  *   tags:
  *    - Anúncios
@@ -23,7 +23,7 @@ const announcementService = require('../services/announcementService');
  *    500:
  *     description: Erro interno
  */
-router.get('/:gymId', (req, res) => { //todo retornar ordenado pelo mais recente
+router.get('/:gymId', (req, res) => {
     announcementService.getAllAnnouncementsByGymId(req.params.gymId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -36,7 +36,7 @@ router.get('/:gymId', (req, res) => { //todo retornar ordenado pelo mais recente
 
 /**
  * @swagger
- * /api/announcement/{gymId}:
+ * /api/gym/{gymId}/announcement:
  *  post:
  *   tags:
  *    - Anúncios
@@ -58,7 +58,7 @@ router.get('/:gymId', (req, res) => { //todo retornar ordenado pelo mais recente
  *    500:
  *     description: Erro interno
  */
-router.post('/:gymId', (req, res) => {
+router.post('/gym/:gymId/announcement', (req, res) => {
     announcementService.createNewAnnouncement(req.params.gymId, req.body).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
@@ -71,7 +71,7 @@ router.post('/:gymId', (req, res) => {
 
 /**
  * @swagger
- * /api/announcement/{announcementId}:
+ * /api/gym/announcement/{announcementId}:
  *  patch:
  *   tags:
  *    - Anúncios
@@ -93,7 +93,7 @@ router.post('/:gymId', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.patch('/:announcementId', (req, res) => {
+router.patch('/gym/announcement/:announcementId', (req, res) => {
     announcementService.updateAnnouncementById(req.params.announcementId, req.body).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);

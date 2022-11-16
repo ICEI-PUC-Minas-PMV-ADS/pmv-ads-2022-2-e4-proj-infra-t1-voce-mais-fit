@@ -25,6 +25,7 @@
                     <li v-for="listas in lista" :key="listas" :value="listas">
                         {{ listas.name }}
                     </li>
+                    <button type="submit"> Adicionar Lista</button>
                 </ul>
             </div>
             <div class="sectionChild">
@@ -37,6 +38,7 @@
                 </ul>
             </div>
         </div>
+        <div class="backToMain"><router-link to="/mainPageTraner#alunos" class="backTo">Voltar</router-link></div>
     </div>
 </template>
 
@@ -121,6 +123,17 @@ export default {
 </script>
 
 <style scoped>
+.backToMain{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.backTo{
+    text-decoration: none;
+    font-size: 40px;
+    color: #FFFF;
+}
 .sectionChild{
     text-align: center;
     display: flex;

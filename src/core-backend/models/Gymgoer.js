@@ -69,10 +69,13 @@ const gymgoerSchema = new mongoose.Schema({
             youtubeUrl: {type: String, required: false},
             description: {type: String, required: false}
         }],
+    }],
+    authCodes: [{
+        code: {type: String},
+        createdDate: {type: Date},
+        expirationDate: {type: Date}
     }]
 })
-
-//TODO: metodo para codigo com vinculo de academia, vai ser uma propriedade cujo tipo é um outro schema com o numero e data de expiracao, e uma propriedade virtual bool se tá valido ou não
 
 const GymgoerModel = mongoose.model('Gymgoer', gymgoerSchema);
 
