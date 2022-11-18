@@ -3,7 +3,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useState } from 'react';
-import { View, Text,TouchableOpacity,StatusBar ,Button ,StyleSheet , Image, TextInput,Modal,Alert, AsyncStorage} from "react-native";
+import { View, Text,TouchableOpacity,StatusBar ,StyleSheet, Button, Image, TextInput,Modal,Alert, AsyncStorage} from "react-native";
 
 import VALOR from "../../OAuth-google.json"
 import { propsStack } from '../models/modelStack';
@@ -102,32 +102,42 @@ const LoginPage = () =>{
 
     return (  
       <View style={Styles.container}>
-         <TextInput 
+
+        <Text style={Styles.title}>
+          Você Mais Fit!
+        </Text>
+
+        <Image style={Styles.imgLogin}
+          source={require('../../assets/loginImagem.jpg')}
+        />
+         <TextInput style={Styles.input}
               placeholder="nome@email.com"
               autoCorrect={true}
               onChangeText={(text) => setEmail(text)}
               />
-          <TextInput
+          <TextInput style={Styles.input}
               placeholder="********"
               autoCorrect={true}
               onChangeText={(text) => setPassword(text)}
           />
 
-        <Button 
-          title={"Login"}
-          onPress={()=> email == ''|| password == ''? 
-          console.log('Mula!')
-          :logar(email,password)}
-        />  
-        <Button 
-          title={"Login com Google"}
-          onPress={()=>logarGoogle()}
-        />
-        <StatusBar/>
-        <Button
-          title={'Register'}
-          onPress={()=> navigation.navigate("registerPage")}
-        />
+        <Text style={Styles.btnLogin}
+        onPress={()=> email == ''|| password == ''? 
+        console.log('Mula!')
+        :logar(email,password)}>
+          Login
+        </Text >
+
+        <Text style={Styles.btnLogin}
+        onPress={()=>logarGoogle()}>
+          Login com Google
+        </Text>
+        
+        <Text style={Styles.btnLogin}
+        onPress={()=> navigation.navigate("registerPage")}>
+          Criar Conta
+        </Text>
+        
       </View>
       
      
