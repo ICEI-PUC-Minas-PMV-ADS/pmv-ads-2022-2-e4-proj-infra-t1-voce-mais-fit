@@ -11,9 +11,11 @@ import Styles from '../styles/stylesLogin';
 import StylesGeneric from './../styles/stylesGeneric';
 import modalGeneric from './modalGeneric';
 import RegisterPage from './registerPage';
+import exerciciosPage from './exerciciosPage';
 
 WebBrowser.maybeCompleteAuthSession();
 const LoginPage = () =>{
+
   const navigation = useNavigation<propsStack>()
     
     type Profile = {
@@ -31,6 +33,8 @@ const LoginPage = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+
+    const [loginError, setLoginError] = useState(false);
     
     const[resp, setResp]  = useState({});
 
@@ -41,11 +45,10 @@ const LoginPage = () =>{
     });
 
     useEffect(() => {
-    if (response?.type === 'success') {
-        const { authentication } = response;
-        getGoogleUser((authentication as any).accessToken)
-        
-    }
+      if (response?.type === 'success') {
+          const { authentication } = response;
+          getGoogleUser((authentication as any).accessToken)
+      }
     }, [response]);
 
 
@@ -81,7 +84,7 @@ const LoginPage = () =>{
       }
         
     }  
-   async function logar(email: string, password:string){
+/*   async function logar(email: string, password:string){
       let response = await fetch('http://localhost:3000/api/user/login',{
           body: JSON.stringify({
           email:`${email}`,
@@ -98,7 +101,10 @@ const LoginPage = () =>{
           }
         })    
     }
-
+*/
+    function logar(email: string, password: string){
+      navigation.navigate("exerciciosPage");
+    }
 
     return (  
       <View style={Styles.container}>
@@ -114,17 +120,20 @@ const LoginPage = () =>{
               placeholder="nome@email.com"
               autoCorrect={true}
               onChangeText={(text) => setEmail(text)}
-              />
+          />
           <TextInput style={Styles.input}
               placeholder="********"
               autoCorrect={true}
               onChangeText={(text) => setPassword(text)}
           />
 
+
+        <Text style={StylesGeneric.GenericLabelAlert}>{ loginError ? 'Email ou senha incorretos!' : null }</Text>
+
         <Text style={Styles.btnLogin}
         onPress={()=> email == ''|| password == ''? 
-        console.log('Mula!')
-        :logar(email,password)}>
+        setLoginError(true)
+        : logar(email,password)}>
           Login
         </Text >
 
