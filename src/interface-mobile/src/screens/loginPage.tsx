@@ -9,9 +9,6 @@ import VALOR from "../../OAuth-google.json"
 import { propsStack } from '../models/modelStack';
 import Styles from '../styles/stylesLogin';
 import StylesGeneric from './../styles/stylesGeneric';
-import modalGeneric from './modalGeneric';
-import RegisterPage from './registerPage';
-import exerciciosPage from './exerciciosPage';
 
 WebBrowser.maybeCompleteAuthSession();
 const LoginPage = () =>{
