@@ -47,6 +47,10 @@ const Styles = StyleSheet.create({
       textAlign: 'center',
       marginBottom: 90,
       fontStyle: 'italic',
+    },
+    tamanho: {
+      marginTop: 130,
+      marginBottom: 130,
     }
   });
 

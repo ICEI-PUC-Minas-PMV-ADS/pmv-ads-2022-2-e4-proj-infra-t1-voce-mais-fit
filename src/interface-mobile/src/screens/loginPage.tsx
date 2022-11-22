@@ -95,8 +95,9 @@ const LoginPage = () =>{
       }
         
     }  
+
     const logar = async (email: string, password:string) => {
-      try{
+    /*  try{
           let response = await api.post('/api/user/login', {
               email:`${email}`,
               password: `${password}`
@@ -107,8 +108,10 @@ const LoginPage = () =>{
       }
       catch(error){
           console.log('Erro usuarioApi error: ', error);
-      }
+      } */
+      navigation.navigate('indexPage', { name: '', rota: "Api-Sena"})
     }
+
 
     return (  
       <View style={Styles.container}>
@@ -137,7 +140,7 @@ const LoginPage = () =>{
         <Text style={Styles.btnLogin}
         onPress={()=> email == ''|| password == ''? 
         setLoginError(true)
-        : logar(email,password)}>
+        : logar(email,password)} >
           Login
         </Text >
 
