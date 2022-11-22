@@ -26,6 +26,7 @@ const Styles = StyleSheet.create({
       marginBottom: 60,
     },
     input: {
+      color:'#fffbfb',
       backgroundColor: '#601430',
       padding: 5,
       width: 200,

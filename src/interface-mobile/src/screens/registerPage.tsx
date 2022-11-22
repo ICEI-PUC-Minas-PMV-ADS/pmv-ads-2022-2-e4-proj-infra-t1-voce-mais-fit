@@ -7,6 +7,7 @@ import { View, Text, TextInput} from "react-native";
 
 import VALOR from "../../OAuth-google.json"
 import { propsStack } from '../models/modelStack';
+import api from '../services/api';
 import Styles from '../styles/stylesLogin';
 import StylesRegister from '../styles/stylesRegister';
 
@@ -16,25 +17,31 @@ WebBrowser.maybeCompleteAuthSession();
 const LoginPage = () =>{
   const navigation = useNavigation<propsStack>()
     
-    type Profile = {
-        email: string;
-        family_name: string;
-        given_name: string;
-        name: string;
-        picture: string;
-    }
-
-
 
     const [email, setEmail] = useState('');
+    const[name, setName] = useState('');
     const [password, setPassword] = useState('');
-    const [peso, setPeso] = useState('');
-    const [altura, setAltura] = useState('');
-    
+    const [userType, setuserType] = useState('');
+    const [whatsapp, setwhatsapp] = useState('');
+    const [workHoursDescription, setworkHoursDescription] = useState('');
     const [loginError, setLoginError] = useState(false);
 
-    function logar(){
-
+    const criar = async (name: string, email: string, password:string, userType:string, whatsapp:string,workHoursDescription:string) => {
+      try{
+          let response = await api.post('/api/user', {
+              name:`${name}`,
+              email:`${email}`,
+              password: `${password}`,
+              userType: `${userType}`,
+              whatsapp: `${whatsapp}`,
+              workHoursDescription: `${workHoursDescription}`
+          })
+            console.log(JSON.stringify(response.data));
+           //navigation.goBack()
+      }
+      catch(error){
+          console.log('Erro usuarioApi error: ', error);
+      }
     }
 
 
@@ -49,7 +56,7 @@ const LoginPage = () =>{
          <TextInput style={Styles.input}
               placeholder="Digite o Nome"
               autoCorrect={true}
-              onChangeText={(text) => setEmail(text)}
+              onChangeText={(text) => setName(text)}
               />
         <TextInput style={Styles.input}
             placeholder="Digite o Email"
@@ -71,19 +78,23 @@ const LoginPage = () =>{
               autoCorrect={true}
               onChangeText={(text) => setPassword(text)}
           />
-
+        <TextInput style={Styles.input}
+            placeholder="Motivação para TREINAR"
+            autoCorrect={true}
+            onChangeText={(text) => setworkHoursDescription(text)}
+        />
         <View style={StylesRegister.containerBtn}>
 
             <TextInput style={StylesRegister.inputBtn}
               placeholder="Peso"
               autoCorrect={true}
-              onChangeText={(text) => setPeso(text)}
+              onChangeText={(text) => setuserType(text)}
             />
 
             <TextInput style={StylesRegister.inputBtn}
               placeholder="Altura"
               autoCorrect={true}
-              onChangeText={(text) => setAltura(text)}
+              onChangeText={(text) => setwhatsapp(text)}
             />
         </View>
 
@@ -91,9 +102,9 @@ const LoginPage = () =>{
         <Text>{ loginError ? 'Verifique os campos!' : null }</Text>
 
         <Text style={Styles.btnLogin}
-        onPress={()=> email == ''|| password == '' || peso == '' || altura == '' ? 
+        onPress={()=> email == ''|| password == '' || userType == '' || whatsapp == '' || workHoursDescription == '' ? 
         setLoginError(true)
-        : logar()}>
+        : criar(name ,email, password, userType, whatsapp, workHoursDescription)}>
           Criar a Conta
         </Text >
         

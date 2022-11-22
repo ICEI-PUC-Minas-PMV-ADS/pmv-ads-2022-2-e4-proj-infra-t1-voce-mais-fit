@@ -7,6 +7,7 @@ import { View, Text,TouchableOpacity,StatusBar ,StyleSheet, Button, Image, TextI
 
 import VALOR from "../../OAuth-google.json"
 import { propsStack } from '../models/modelStack';
+import api from '../services/api';
 import Styles from '../styles/stylesLogin';
 import StylesGeneric from './../styles/stylesGeneric';
 
@@ -22,14 +23,28 @@ const LoginPage = () =>{
         name: string;
         picture: string;
     }
-
+    type ProfileApi={
+        msg: string,
+        token: string,
+        usuario: [
+            {
+              _id: string,
+              email: string,
+              password:string,
+              userType: string,
+              trainerInfo?: string,
+              gymgoerInfo?: string,
+              __v: 0
+            }
+        ]
+    }
 
     const [userInfo, setUserInfo] = useState();
     const [profile, setProfile] = useState({} as Profile);
     const [accessToken, setAccessToken] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [modalVisible, setModalVisible] = useState(false);
+    const [profileApi, setProfileApi] = useState({} as ProfileApi);
 
     const [loginError, setLoginError] = useState(false);
     
@@ -59,7 +74,7 @@ const LoginPage = () =>{
             setProfile(data);
             console.log(JSON.stringify(data))
             localStorage.setItem('usuarioGoogle', JSON.stringify(data))
-            navigation.navigate('indexPage', { name: data.name, email: data.email, rota: "Google"})
+            navigation.navigate('indexPage', { name: data.name, rota: "Google"})
             });
        }
        catch(error){
@@ -72,7 +87,6 @@ const LoginPage = () =>{
       if(accessToken && userInfo){
         navigation.navigate("indexPage",{
           name : profile.name,
-          email : profile.email,
           rota: "Google"
         });
       }
@@ -81,26 +95,19 @@ const LoginPage = () =>{
       }
         
     }  
-/*   async function logar(email: string, password:string){
-      let response = await fetch('http://localhost:3000/api/user/login',{
-          body: JSON.stringify({
-          email:`${email}`,
-          password: `${password}`
-      })
-      });
-      response.json().then(data =>{setResp(data)
-      console.log(resp)
-          if (data != '' && data.msg == 'Autenticado com sucesso') {
-            localStorage.setItem('usuario',data)
-            navigation.navigate('indexPage', { name: data._id, email: data.email, rota:"api"})
-          } else {
-            
-          }
-        })    
-    }
-*/
-    function logar(email: string, password: string){
-      navigation.navigate("exerciciosPage");
+    const logar = async (email: string, password:string) => {
+      try{
+          let response = await api.post('/api/user/login', {
+              email:`${email}`,
+              password: `${password}`
+          })
+            console.log(JSON.stringify(response.data));
+            localStorage.setItem('usuarioApi', JSON.stringify(response.data));
+            navigation.navigate('indexPage', { name: email, rota: "Api-Sena"})
+      }
+      catch(error){
+          console.log('Erro usuarioApi error: ', error);
+      }
     }
 
     return (  
