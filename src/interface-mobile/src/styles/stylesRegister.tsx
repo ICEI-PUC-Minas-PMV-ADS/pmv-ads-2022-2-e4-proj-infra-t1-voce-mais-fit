@@ -8,6 +8,7 @@ const StylesRegister = StyleSheet.create({
         flexDirection: "row",
     },
     inputBtn: {
+        color:'#fffbfb',
         width: 50,
         height: 40,
         backgroundColor: '#601430',

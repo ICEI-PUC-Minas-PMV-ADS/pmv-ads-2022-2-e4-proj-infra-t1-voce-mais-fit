@@ -11,7 +11,7 @@ const indexPage = () =>{
     const route = useRoute()
     const navigation = useNavigation<propsStack>()
     let dadosUsuario = ""
-    var resultado =["a","b","c"];
+    var resultado =["a","b"];
 
     if (route.params != undefined ) {
         dadosUsuario = Object.values(route.params).toString()

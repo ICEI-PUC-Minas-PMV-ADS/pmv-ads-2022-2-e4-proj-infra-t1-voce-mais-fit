@@ -10,7 +10,6 @@ export type propsNavigationStack = {
     registerPage: undefined
     indexPage:{
         name: string,
-        email: string,
         rota: string
     }
     exerciciosPage:undefined
