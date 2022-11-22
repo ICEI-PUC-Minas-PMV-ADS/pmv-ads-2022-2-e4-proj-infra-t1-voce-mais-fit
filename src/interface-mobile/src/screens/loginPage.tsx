@@ -7,10 +7,8 @@ import { View, Text,TouchableOpacity,StatusBar ,Button ,StyleSheet , Image, Text
 
 import VALOR from "../../OAuth-google.json"
 import { propsStack } from '../models/modelStack';
+import api from '../services/api';
 import Styles from '../styles/stylesLogin';
-import StylesGeneric from './../styles/stylesGeneric';
-import modalGeneric from './modalGeneric';
-import RegisterPage from './registerPage';
 
 WebBrowser.maybeCompleteAuthSession();
 const LoginPage = () =>{
@@ -23,7 +21,6 @@ const LoginPage = () =>{
         name: string;
         picture: string;
     }
-
 
     const [userInfo, setUserInfo] = useState();
     const [profile, setProfile] = useState({} as Profile);
@@ -81,24 +78,18 @@ const LoginPage = () =>{
       }
         
     }  
-   async function logar(email: string, password:string){
-      let response = await fetch('http://localhost:3000/api/user/login',{
-          body: JSON.stringify({
-          email:`${email}`,
-          password: `${password}`
-      })
-      });
-      response.json().then(data =>{setResp(data)
-      console.log(resp)
-          if (data != '' && data.msg == 'Autenticado com sucesso') {
-            localStorage.setItem('usuario',data)
-            navigation.navigate('indexPage', { name: data._id, email: data.email, rota:"api"})
-          } else {
-            
-          }
-        })    
+    const logar = async (email: string, password:string) => {
+      try{
+          const response = await api.post('/api/user/login', {
+              email:`${email}`,
+              password: `${password}`
+          });
+            console.log(JSON.stringify(response.data));
+      }
+      catch(error){
+          console.log('GoogleUserReq error: ', error);
+      }
     }
-
 
     return (  
       <View style={Styles.container}>
