@@ -17,14 +17,23 @@ const StylesExercices = StyleSheet.create({
     containeListExercices: {
         flex: 1,
         maxHeight: 500,
-        backgroundColor: 'pink'
     },
     menuExercicesButton: {
-        color: 'white',
-        marginLeft: 10,
-        marginRight: 10,
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: 'pink',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 100,
+        marginTop: 20,
+        marginLeft: 5,
+        marginRight: 5,
+    },
+    btnModalClose: {
+        height: 25,
+        borderRadius: 10,
+        backgroundColor: 'pink',
     }
-    
 
 })
 
