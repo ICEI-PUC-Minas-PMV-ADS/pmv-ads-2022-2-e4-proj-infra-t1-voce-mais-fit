@@ -79,6 +79,7 @@ const exerciciosPage = () =>{
             
 
             <Modal visible={modalOpen} animationType='slide'>
+
                 <View style={Styles.container}>
 
                     <TextInput style={Styles.input}
@@ -104,13 +105,22 @@ const exerciciosPage = () =>{
                         onChangeText={(text) => setSeries(text)}
                         />
                     </View>
-                    <TouchableOpacity style={StylesExercices.menuExercicesButton}>
+
+                    <View style={StylesRegister.containerBtn}>
+                        <TouchableOpacity style={StylesExercices.menuExercicesButton}>
                         <Text>
                             Adicionar
                         </Text>
                     </TouchableOpacity>
-                    <Text style={StylesExercices.btnModalClose}
-                    onPress={()=> setModalOpen(false)}>X</Text> 
+                    <TouchableOpacity style={StylesExercices.menuExercicesButton}>
+                        <Text
+                        onPress={()=> setModalOpen(false)}>
+                            Fechar
+                        </Text> 
+                    </TouchableOpacity>
+                    </View>
+                    
+                    
 
                 </View>
             </Modal>

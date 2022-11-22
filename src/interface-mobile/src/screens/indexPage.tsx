@@ -90,7 +90,7 @@ const indexPage = () =>{
             <Text> {resultado[0]}</Text>
             <Text> {resultado[1]}</Text>
 
-            <View>
+            <View style={Styles.tamanho}>
 
                 <Text>Nome: {nome}</Text>
                 { esconde ? <TextInput style={Styles.input}
