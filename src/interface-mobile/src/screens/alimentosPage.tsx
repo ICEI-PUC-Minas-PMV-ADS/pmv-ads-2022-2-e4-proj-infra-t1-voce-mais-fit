@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {useNavigation, useRoute} from "@react-navigation/native";
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, TouchableHighlight, Image } from "react-native";
 import Styles from '../styles/stylesLogin';
 import StylesRegister from '../styles/stylesRegister';
 import StylesExercices from '../styles/stylesExercices';
@@ -20,6 +20,42 @@ const alimentosPage = () =>{
 
     return(
         <View style={Styles.container}>
+
+            <View style={StylesRegister.containerMenu}>
+
+            <View style={StylesRegister.elementsMenu}>
+                <TouchableHighlight onPress={()=> navigation.navigate("alimentosPage")}>
+                    <Image style={StylesExercices.img}
+                    source={require('../../assets/menu/alimentosMenu.png')}
+                    />
+                </TouchableHighlight>
+                <Text style={StylesRegister.textMenu}>
+                    Alimentos
+                </Text> 
+            </View>
+            <View style={StylesRegister.elementsMenu}>
+                <TouchableHighlight onPress={()=> navigation.navigate('indexPage', { name: '', rota: "Api-Sena"})}>
+                    <Image style={StylesExercices.img}
+                    source={require('../../assets/menu/indexMenu.png')}
+                    />
+                </TouchableHighlight>
+                <Text style={StylesRegister.textMenu}>
+                    Inicio
+                </Text> 
+            </View>
+            <View style={StylesRegister.elementsMenu}>
+                <TouchableHighlight onPress={()=> navigation.navigate("exerciciosPage")}>
+                    <Image style={StylesExercices.img}
+                    source={require('../../assets/menu/exercicesMenu.png')}
+                    />
+                </TouchableHighlight>
+                <Text style={StylesRegister.textMenu}>
+                    Exercícios
+                </Text> 
+            </View>
+
+            </View>
+
 
             <View style={StylesRegister.containerBtn}>
 
@@ -60,12 +96,20 @@ const alimentosPage = () =>{
                 />
             </View>
 
-            <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                    <Text
-                    onPress={() => navigation.goBack()}>
+
+            <View style={StylesRegister.containerMenu}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
+                    <Text>
+                    Adicionar
+                    </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={() => navigation.goBack()}>
+                    <Text>
                     Voltar
                     </Text>
             </TouchableOpacity>
+            </View>
+            
         </View>
     )
 }

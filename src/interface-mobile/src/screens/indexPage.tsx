@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Button, Image, TouchableHighlight, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, Modal, Image, TouchableHighlight, TextInput } from "react-native";
 import {useNavigation, useRoute} from "@react-navigation/native";
 import { propsStack } from "../models/modelStack";
 
@@ -22,7 +22,7 @@ const indexPage = () =>{
 
 
     const [nomePrint, setNomePrint] = useState('');
-    const [emailPint, setEmailPint] = useState('');
+    const [emailPint, setEmailPrint] = useState('');
     const [senhaPrint, setSenhaPrint] = useState('');
     const [pesoPrint, setPesoPrint] = useState('');
     const [alturaPrint, setAlturaPrint] = useState('');
@@ -35,6 +35,8 @@ const indexPage = () =>{
     const [pesoEsc, setPesoEsc] = useState(false);
     const [alturaEsc, setAlturaEsc] = useState(false);
     const [WhatsappEsc, setWhatsappEsc] = useState(false);
+
+    const [modalOpen, setModalOpen] = useState(false)
 
 
     let dadosUsuario = ""
@@ -52,35 +54,35 @@ const indexPage = () =>{
     return(
         <View style={Styles.container}>
             
-            <View style={StylesRegister.containerBtn}>
+            <View style={StylesRegister.containerMenu}>
 
-                <View>
+                <View style={StylesRegister.elementsMenu}>
                     <TouchableHighlight onPress={()=> navigation.navigate("alimentosPage")}>
                         <Image style={StylesExercices.img}
                         source={require('../../assets/menu/alimentosMenu.png')}
                         />
                     </TouchableHighlight>
-                    <Text style={StylesExercices.inputBtn}>
+                    <Text style={StylesRegister.textMenu}>
                         Alimentos
                     </Text> 
                 </View>
-                <View>
+                <View style={StylesRegister.elementsMenu}>
                     <TouchableHighlight onPress={()=> navigation.navigate('indexPage', { name: '', rota: "Api-Sena"})}>
                         <Image style={StylesExercices.img}
                         source={require('../../assets/menu/indexMenu.png')}
                         />
                     </TouchableHighlight>
-                    <Text style={StylesExercices.inputBtn}>
+                    <Text style={StylesRegister.textMenu}>
                         Inicio
                     </Text> 
                 </View>
-                <View>
+                <View style={StylesRegister.elementsMenu}>
                     <TouchableHighlight onPress={()=> navigation.navigate("exerciciosPage")}>
                         <Image style={StylesExercices.img}
                         source={require('../../assets/menu/exercicesMenu.png')}
                         />
                     </TouchableHighlight>
-                    <Text style={StylesExercices.inputBtn}>
+                    <Text style={StylesRegister.textMenu}>
                         Exercícios
                     </Text> 
                 </View>
@@ -93,62 +95,88 @@ const indexPage = () =>{
             <View style={Styles.tamanho}>
 
                 <Text>Nome: {nome}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite o Nome"
-                    autoCorrect={true}
-                    onChangeText={(text) => setNomePrint(text)}
-                /> : null }
                 
                 <Text>Email: {email}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite o Email"
-                    autoCorrect={true}
-                    onChangeText={(text) => setEmailPint(text)}
-                /> : null }
+    
                 <Text>Senha: ***** </Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite a Senha"
-                    autoCorrect={true}
-                    onChangeText={(text) => setSenhaPrint(text)}
-                /> : null }
+
                 <Text>Peso: {Peso}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite o Peso"
-                    autoCorrect={true}
-                    onChangeText={(text) => setPesoPrint(text)}
-                /> : null }
+
                 <Text>Altura: {Altura}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite a Altura"
-                    autoCorrect={true}
-                    onChangeText={(text) => setAlturaPrint(text)}
-                /> : null }
+
                 <Text>Whatsapp: {Whatsapp}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite o Whatsapp"
-                    autoCorrect={true}
-                    onChangeText={(text) => setWhatsappPrint(text)}
-                /> : null }
 
             </View>
+
+            <Modal visible={modalOpen} animationType='slide'>
+
+                <View style={Styles.container}>
+
+                <Text style={Styles.title}>
+                    Alterar os Dados
+                </Text>
+
+                    <TextInput style={Styles.input}
+                        placeholder="Nome"
+                        autoCorrect={true}
+                        onChangeText={(text) => setNomePrint(text)}
+                    />
+                    <TextInput style={Styles.input}
+                        placeholder="Email"
+                        autoCorrect={true}
+                        onChangeText={(text) => setEmailPrint(text)}
+                    />
+                    <TextInput style={Styles.input}
+                        placeholder="Senha"
+                        autoCorrect={true}
+                        onChangeText={(text) => setSenhaPrint(text)}
+                    />
+                    <TextInput style={Styles.input}
+                        placeholder="Peso"
+                        autoCorrect={true}
+                        onChangeText={(text) => setPesoPrint(text)}
+                    />
+                    <TextInput style={Styles.input}
+                        placeholder="Altura"
+                        autoCorrect={true}
+                        onChangeText={(text) => setAlturaPrint(text)}
+                    />
+                    <TextInput style={Styles.input}
+                        placeholder="Whatsapp"
+                        autoCorrect={true}
+                        onChangeText={(text) => setWhatsappPrint(text)}
+                    />
+
+                    <View style={StylesRegister.containerBtn}>
+                        <TouchableOpacity style={StylesExercices.menuExercicesButton}>
+                        <Text>
+                            Adicionar
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpen(false)}>
+                        <Text
+                        >
+                            Fechar
+                        </Text> 
+                    </TouchableOpacity>
+                    </View>
+                    
+                    
+
+                </View>
+            </Modal>
 
             <View>
 
             <View style={StylesRegister.containerBtn}>
-                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                    { esconde ? <Text  onPress={()=> {
-                            setEsconde(false)
-                            //APi para alterar os dados vai aqui
-                        }}>
-                    Alterar Status
-                    </Text> : <Text onPress={()=> setEsconde(true)}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpen(true)}>
+                <Text >
                         Alterar Status
-                    </Text> }
+                    </Text>
                 </TouchableOpacity>
                     
-                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                    <Text 
-                    onPress={() => Voltar()}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={() => Voltar()}>
+                    <Text >
                         Sair
                     </Text>
                 </TouchableOpacity>

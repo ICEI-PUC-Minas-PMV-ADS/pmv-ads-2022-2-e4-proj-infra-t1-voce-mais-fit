@@ -31,40 +31,40 @@ const exerciciosPage = () =>{
     return(
         <View style={Styles.container}>
 
-        <View style={StylesRegister.containerBtn}>
+            <View style={StylesRegister.containerMenu}>
 
-        <View>
-            <TouchableHighlight onPress={()=> navigation.navigate("alimentosPage")}>
-                <Image style={StylesExercices.img}
-                source={require('../../assets/menu/alimentosMenu.png')}
-                />
-            </TouchableHighlight>
-            <Text style={StylesExercices.inputBtn}>
-                Alimentos
-            </Text> 
-        </View>
-        <View>
-            <TouchableHighlight onPress={()=> navigation.navigate('indexPage', { name: '', rota: "Api-Sena"})}>
-                <Image style={StylesExercices.img}
-                source={require('../../assets/menu/indexMenu.png')}
-                />
-            </TouchableHighlight>
-            <Text style={StylesExercices.inputBtn}>
-                Inicio
-            </Text> 
-        </View>
-        <View>
-            <TouchableHighlight onPress={()=> navigation.navigate("exerciciosPage")}>
-                <Image style={StylesExercices.img}
-                source={require('../../assets/menu/exercicesMenu.png')}
-                />
-            </TouchableHighlight>
-            <Text style={StylesExercices.inputBtn}>
-                Exercícios
-            </Text> 
-        </View>
+            <View style={StylesRegister.elementsMenu}>
+                <TouchableHighlight onPress={()=> navigation.navigate("alimentosPage")}>
+                    <Image style={StylesExercices.img}
+                    source={require('../../assets/menu/alimentosMenu.png')}
+                    />
+                </TouchableHighlight>
+                <Text style={StylesRegister.textMenu}>
+                    Alimentos
+                </Text> 
+            </View>
+            <View style={StylesRegister.elementsMenu}>
+                <TouchableHighlight onPress={()=> navigation.navigate('indexPage', { name: '', rota: "Api-Sena"})}>
+                    <Image style={StylesExercices.img}
+                    source={require('../../assets/menu/indexMenu.png')}
+                    />
+                </TouchableHighlight>
+                <Text style={StylesRegister.textMenu}>
+                    Inicio
+                </Text> 
+            </View>
+            <View style={StylesRegister.elementsMenu}>
+                <TouchableHighlight onPress={()=> navigation.navigate("exerciciosPage")}>
+                    <Image style={StylesExercices.img}
+                    source={require('../../assets/menu/exercicesMenu.png')}
+                    />
+                </TouchableHighlight>
+                <Text style={StylesRegister.textMenu}>
+                    Exercícios
+                </Text> 
+            </View>
 
-        </View>
+            </View>
             
 
             <View style={StylesExercices.containeListExercices}>
@@ -112,9 +112,8 @@ const exerciciosPage = () =>{
                             Adicionar
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                        <Text
-                        onPress={()=> setModalOpen(false)}>
+                    <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpen(false)}>
+                        <Text>
                             Fechar
                         </Text> 
                     </TouchableOpacity>
@@ -129,8 +128,8 @@ const exerciciosPage = () =>{
 
             <View style={StylesRegister.containerBtn}>
 
-                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                    <Text onPress={()=> setModalOpen(true)}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpen(true)}>
+                    <Text >
                         Adicionar
                     </Text>
                 </TouchableOpacity>
@@ -139,9 +138,8 @@ const exerciciosPage = () =>{
                     Listar Personal
                 </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                    <Text
-                    onPress={() => navigation.goBack()}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={() => navigation.goBack()}>
+                    <Text>
                     Voltar
                     </Text>
                 </TouchableOpacity>
