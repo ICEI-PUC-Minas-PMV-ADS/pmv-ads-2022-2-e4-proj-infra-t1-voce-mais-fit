@@ -12,6 +12,8 @@ import modalGeneric from "./modalGeneric";
 const exerciciosPage = () =>{
 
     const [modalOpen, setModalOpen] = useState(false)
+    const [modalOpenEx, setModalOpenEx] = useState(false);
+
     const [exercicio, setExercicio] = useState('')
     const [URLVideo, setURLVideo] = useState('')
     const [dias, setDias] = useState('')
@@ -123,6 +125,49 @@ const exerciciosPage = () =>{
 
                 </View>
             </Modal>
+
+
+
+            <Modal visible={modalOpenEx} animationType='slide'>
+
+                <View style={Styles.container}>
+
+                <Text style={Styles.title}>
+                    Lista de Exercícios
+                </Text>
+                    
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Lista Cost Inic </Text>
+                    <Text style={StylesExercices.espacamentoText}> Segunda</Text>
+                </View>
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Lista Perna Hard </Text>
+                    <Text style={StylesExercices.espacamentoText}> Terça</Text>
+                </View>
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Peitoral de Monstro </Text>
+                    <Text style={StylesExercices.espacamentoText}> Quarta</Text>
+                </View>
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Barriga Seca </Text>
+                    <Text style={StylesExercices.espacamentoText}> Quinta</Text>
+                </View>
+                    
+                    
+                    
+                    
+
+
+                    <View style={StylesRegister.containerBtn}>
+                    <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenEx(false)}>
+                        <Text>
+                            Fechar
+                        </Text> 
+                    </TouchableOpacity>
+                    </View>
+                    
+                </View>
+            </Modal>
         
 
 
@@ -133,7 +178,7 @@ const exerciciosPage = () =>{
                         Adicionar
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenEx(true)}>
                     <Text>
                     Listar Personal
                 </Text>

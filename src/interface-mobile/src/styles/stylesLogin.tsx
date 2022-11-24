@@ -51,6 +51,17 @@ const Styles = StyleSheet.create({
     tamanho: {
       marginTop: 130,
       marginBottom: 130,
+    },
+    textButton: {
+      height: 30,
+      borderRadius: 10,
+      backgroundColor: 'pink',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 50,
+      marginLeft: 5,
+    /*  marginTop: 20,
+      marginRight: 5, */
     }
   });
 

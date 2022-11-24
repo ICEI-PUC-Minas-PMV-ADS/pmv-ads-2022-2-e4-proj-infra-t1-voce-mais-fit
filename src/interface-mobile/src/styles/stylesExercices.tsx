@@ -33,7 +33,11 @@ const StylesExercices = StyleSheet.create({
         height: 25,
         borderRadius: 10,
         backgroundColor: 'pink',
-    }
+    },
+    espacamentoText: {
+        color: '#fff',
+        padding: 15,
+    },
 
 })
 

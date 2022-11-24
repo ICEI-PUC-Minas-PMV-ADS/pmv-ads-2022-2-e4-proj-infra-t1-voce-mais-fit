@@ -116,52 +116,65 @@ const indexPage = () =>{
                     Alterar os Dados
                 </Text>
 
+                <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
                         placeholder="Nome"
                         autoCorrect={true}
                         onChangeText={(text) => setNomePrint(text)}
                     />
+                    <Text style={Styles.textButton}>Alterar</Text>
+                </View>
+                    
+                <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
                         placeholder="Email"
                         autoCorrect={true}
                         onChangeText={(text) => setEmailPrint(text)}
                     />
+                    <Text style={Styles.textButton}>Alterar</Text>
+                </View>
+                <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
                         placeholder="Senha"
                         autoCorrect={true}
                         onChangeText={(text) => setSenhaPrint(text)}
                     />
+                    <Text style={Styles.textButton}>Alterar</Text>
+                </View>
+                <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
                         placeholder="Peso"
                         autoCorrect={true}
                         onChangeText={(text) => setPesoPrint(text)}
                     />
+                    <Text style={Styles.textButton}>Alterar</Text>
+                </View>
+                <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
                         placeholder="Altura"
                         autoCorrect={true}
                         onChangeText={(text) => setAlturaPrint(text)}
                     />
+                    <Text style={Styles.textButton}>Alterar</Text>
+                </View>
+                <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
                         placeholder="Whatsapp"
                         autoCorrect={true}
                         onChangeText={(text) => setWhatsappPrint(text)}
                     />
+                    <Text style={Styles.textButton}>Alterar</Text>
+                </View>
+                    
 
                     <View style={StylesRegister.containerBtn}>
-                        <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                        <Text>
-                            Adicionar
-                        </Text>
-                    </TouchableOpacity>
+                        
                     <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpen(false)}>
-                        <Text
-                        >
+                        <Text>
                             Fechar
                         </Text> 
                     </TouchableOpacity>
                     </View>
-                    
-                    
 
                 </View>
             </Modal>

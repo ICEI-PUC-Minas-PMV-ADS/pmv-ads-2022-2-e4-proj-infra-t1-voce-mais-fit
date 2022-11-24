@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {useNavigation, useRoute} from "@react-navigation/native";
-import { View, Text, TouchableOpacity, TextInput, TouchableHighlight, Image } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, TouchableHighlight, Image, Modal } from "react-native";
 import Styles from '../styles/stylesLogin';
 import StylesRegister from '../styles/stylesRegister';
 import StylesExercices from '../styles/stylesExercices';
@@ -15,6 +15,11 @@ const alimentosPage = () =>{
     const [proteina, setProteina] = useState('')
     const [gordura, setGordura] = useState('')
     const [calorias, setCalorias] = useState('')
+    
+    const [alimento, setAlimento] = useState('');
+
+    const [modalOpenEx, setModalOpenEx] = useState(false);
+    const [modalOpenAl, setModalOpenAl] = useState(false);
 
     const navigation = useNavigation<propsStack>()
 
@@ -56,7 +61,7 @@ const alimentosPage = () =>{
 
             </View>
 
-
+        <View style={StylesAliments.main}>
             <View style={StylesRegister.containerBtn}>
 
                 <View style={StylesAliments.viewSpaco}>
@@ -95,12 +100,98 @@ const alimentosPage = () =>{
                     onChangeText={(text) => setCalorias(text)}
                 />
             </View>
+        </View>
+
+
+            <Modal visible={modalOpenAl} animationType='slide'>
+
+                <View style={Styles.container}>
+
+                <Text style={Styles.title}>
+                    Adicione um Alimento
+                </Text>
+                
+                    <TextInput style={Styles.input}
+                        placeholder="Alimento"
+                        autoCorrect={true}
+                        onChangeText={(text) => setAlimento(text)}
+                    />
+                    
+                
+
+                    <View style={StylesRegister.containerBtn}>
+                    <TouchableOpacity style={StylesExercices.menuExercicesButton}>
+                        <Text>
+                            Adicionar
+                        </Text> 
+                    </TouchableOpacity>
+                    <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenAl(false)}>
+                        <Text>
+                            Fechar
+                        </Text> 
+                    </TouchableOpacity>
+                    </View>
+                    
+                </View>
+            </Modal>
+
+
+            <Modal visible={modalOpenEx} animationType='slide'>
+
+                <View style={Styles.container}>
+
+                <Text style={Styles.title}>
+                    Dieta de Alimentos
+                </Text>
+
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Dom</Text>
+                    <Text style={StylesExercices.espacamentoText}>Seg</Text>
+                    <Text style={StylesExercices.espacamentoText}>Ter</Text>
+                    <Text style={StylesExercices.espacamentoText}>Qua</Text>
+                    <Text style={StylesExercices.espacamentoText}>Qui</Text>
+                    <Text style={StylesExercices.espacamentoText}>Sex</Text>
+                    <Text style={StylesExercices.espacamentoText}>Sab</Text>
+                </View>
+                    
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Alimento </Text>
+                    <Text style={StylesExercices.espacamentoText}> V.Kcal e V.Nutri</Text>
+                </View>
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Alimento </Text>
+                    <Text style={StylesExercices.espacamentoText}> V.Kcal e V.Nutri</Text>
+                </View>
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Alimento </Text>
+                    <Text style={StylesExercices.espacamentoText}> V.Kcal e V.Nutr</Text>
+                </View>
+                <View style={StylesRegister.containerBtn}>
+                    <Text style={StylesExercices.espacamentoText}>Alimento </Text>
+                    <Text style={StylesExercices.espacamentoText}> V.Kcal e V.Nutr</Text>
+                </View>
+
+                    <View style={StylesRegister.containerBtn}>
+                    <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenEx(false)}>
+                        <Text>
+                            Fechar
+                        </Text> 
+                    </TouchableOpacity>
+                    </View>
+                    
+                </View>
+            </Modal>
 
 
             <View style={StylesRegister.containerMenu}>
-                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenAl(true)}>
                     <Text>
                     Adicionar
+                    </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenEx(true)}>
+                    <Text>
+                    Dieta
                     </Text>
             </TouchableOpacity>
             <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={() => navigation.goBack()}>
