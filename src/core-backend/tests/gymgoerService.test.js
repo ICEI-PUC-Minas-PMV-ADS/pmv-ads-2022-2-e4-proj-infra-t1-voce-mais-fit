@@ -81,7 +81,7 @@ describe('Get Gymgoer by Id', () => {
         })
     })
 
-    it('should return an error 404 if Id doesnt match', async () => {
+    it('should return an error 404 if Id does not match', async () => {
         let data = await gymgoerService.getGymgoerById('637c2e4d907bed0e49c1de08');
 
         expect(data).toMatchObject({
