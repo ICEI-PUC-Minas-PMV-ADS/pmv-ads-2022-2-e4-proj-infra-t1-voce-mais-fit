@@ -23,7 +23,7 @@ const databaseMock = [
 ]
 
 describe('Get all Gymgoers', () => {
-    it('should return a list of gymgoer if database has data', async () => {
+    it('should return an array of Gymgoers if database has data', async () => {
         let functionMock = jest
         .spyOn(Gymgoer.Model, 'find')
         .mockImplementation(() => {
