@@ -41,7 +41,7 @@ const LoginPage = () =>{
               name:`${name}`,
               email:`${email}`,
               password: `${password}`,
-              userType: `${userType}`,
+              userType: 'gymgoer',
               whatsapp: `${whatsapp}`,
               workHoursDescription: `${workHoursDescription}`
           })
@@ -117,26 +117,16 @@ const LoginPage = () =>{
                 autoCorrect={true}
                 onChangeText={(text) => setworkHoursDescription(text)}
               />
-              <View style={StylesRegister.containerBtn}>
-
-                <TextInput style={StylesRegister.inputBtn}
-                  placeholder="Peso"
-                  autoCorrect={true}
-                  onChangeText={(text) => setuserType(text)}
-                />
-
-                <TextInput style={StylesRegister.inputBtn}
-                  placeholder="Altura"
-                  autoCorrect={true}
-                  onChangeText={(text) => setwhatsapp(text)}
-                />
-              </View>
-
+              <TextInput style={StylesRegister.inputBtn}
+                placeholder="Whatsapp"
+                autoCorrect={true}
+                onChangeText={(text) => setwhatsapp(text)}
+              />
 
               <Text>{ loginError ? 'Verifique os campos!' : null }</Text>
 
               <Text style={Styles.btnLogin}
-                onPress={()=> email == ''|| password == '' || userType == '' || whatsapp == '' || workHoursDescription == '' 
+                onPress={()=> email == ''|| password == '' || whatsapp == '' || workHoursDescription == '' 
                 ? setLoginError(true)
                 : criar(name ,email, password, userType, whatsapp, workHoursDescription)}>
                 Criar a Conta

@@ -3,23 +3,24 @@ import { View, Text, TouchableOpacity, Modal, Image, TouchableHighlight, TextInp
 import {useNavigation, useRoute} from "@react-navigation/native";
 import { propsStack } from "../models/modelStack";
 
+import api from '../services/api';
+
 import Styles from '../styles/stylesLogin';
 import StylesGeneric from './../styles/stylesGeneric';
 import StylesRegister from '../styles/stylesRegister';
 import StylesExercices from '../styles/stylesExercices';
-
-const nome = "Felipe";
-const email = "emailVeridico@IssoEUmEmail.com"
-const Senha = ""
-const Peso = "65"
-const Altura = "170"
-const Whatsapp = "31 9 9856-8542"
 
 
 const indexPage = () =>{
     const route = useRoute()
     const navigation = useNavigation<propsStack>()
 
+    const [email, setEmail] = useState('')
+    const [nome, setNome] = useState('');
+    const [senha, setSenha] = useState('');
+    const [Whatsapp, setWhatsapp] = useState('')
+    const [Peso, setPeso] = useState('');
+    const [Altura, setAltura] = useState('');
 
     const [nomePrint, setNomePrint] = useState('');
     const [emailPint, setEmailPrint] = useState('');
@@ -38,6 +39,122 @@ const indexPage = () =>{
 
     const [modalOpen, setModalOpen] = useState(false)
 
+    const userId = localStorage.getItem("userId")
+    const gymgoerId = localStorage.getItem("userGymgoerInfo")
+
+
+    // Métodos para pegar os dados do usuário da API
+    const getUser = async () => {
+        try{
+            let response = await api.get(`/api/user/${userId}`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+            
+            setEmail(dados.data.email);
+            setSenha(dados.data.password)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const getGymgoer = async () => {
+        try{
+            let response = await api.get(`/api/gymgoer/${gymgoerId}`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+
+            setNome(dados.data.name)
+            setWhatsapp(dados.data.whatsapp)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const getGymgoerPhisical = async () => {
+        try{
+            let response = await api.get(`/api/gymgoer/${gymgoerId}/physicalInformation`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+
+            setPeso(dados.data.weight)
+            setAltura(dados.data.height)
+
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        getUser();
+        getGymgoer();
+        getGymgoerPhisical();
+    })
+
+
+    //Métodos para alterar os dados do usuário
+    const alterarNome = async () => {
+        try{
+            await api.patch(`/api/gymgoer/${gymgoerId}`, {
+                name: `${nomePrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarWhatsapp = async () => {
+        try{
+            await api.patch(`/api/gymgoer/${gymgoerId}`, {
+                whatsapp: `${WhatsappPrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarAltura = async () => {
+        try{
+            await api.patch(`/api/gymgoer/${gymgoerId}/physicalInformation`, {
+                height: `${alturaPrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarPeso = async () => {
+        try{
+            await api.patch(`/api/gymgoer/${gymgoerId}/physicalInformation`, {
+                weight: `${pesoPrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarEmail = async () => {
+        try{
+            await api.patch(`/api/user/${userId}`, {
+                email: `${emailPint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarSenha = async () => {
+        try{
+            await api.patch(`/api/user/${userId}`, {
+                password: `${senhaPrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+    
 
     let dadosUsuario = ""
     var resultado =["a","b"];
@@ -54,6 +171,7 @@ const indexPage = () =>{
     return(
         <View style={Styles.container}>
             
+            {/* Menu */}
             <View style={StylesRegister.containerMenu}>
 
                 <View style={StylesRegister.elementsMenu}>
@@ -97,8 +215,8 @@ const indexPage = () =>{
                 <Text>Nome: {nome}</Text>
                 
                 <Text>Email: {email}</Text>
-    
-                <Text>Senha: ***** </Text>
+
+                <Text>Senha: {senha}</Text>
 
                 <Text>Peso: {Peso}</Text>
 
@@ -108,6 +226,8 @@ const indexPage = () =>{
 
             </View>
 
+
+            {/* Modal Alteração dos Dados */}
             <Modal visible={modalOpen} animationType='slide'>
 
                 <View style={Styles.container}>
@@ -122,7 +242,7 @@ const indexPage = () =>{
                         autoCorrect={true}
                         onChangeText={(text) => setNomePrint(text)}
                     />
-                    <Text style={Styles.textButton}>Alterar</Text>
+                    <Text style={Styles.textButton} onPress={alterarNome}>Alterar</Text>
                 </View>
                     
                 <View style={StylesRegister.containerMenu}>
@@ -131,7 +251,7 @@ const indexPage = () =>{
                         autoCorrect={true}
                         onChangeText={(text) => setEmailPrint(text)}
                     />
-                    <Text style={Styles.textButton}>Alterar</Text>
+                    <Text style={Styles.textButton} onPress={alterarEmail}>Alterar</Text>
                 </View>
                 <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
@@ -139,7 +259,7 @@ const indexPage = () =>{
                         autoCorrect={true}
                         onChangeText={(text) => setSenhaPrint(text)}
                     />
-                    <Text style={Styles.textButton}>Alterar</Text>
+                    <Text style={Styles.textButton} onPress={alterarSenha}>Alterar</Text>
                 </View>
                 <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
@@ -147,7 +267,7 @@ const indexPage = () =>{
                         autoCorrect={true}
                         onChangeText={(text) => setPesoPrint(text)}
                     />
-                    <Text style={Styles.textButton}>Alterar</Text>
+                    <Text style={Styles.textButton} onPress={alterarPeso}>Alterar</Text>
                 </View>
                 <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
@@ -155,7 +275,7 @@ const indexPage = () =>{
                         autoCorrect={true}
                         onChangeText={(text) => setAlturaPrint(text)}
                     />
-                    <Text style={Styles.textButton}>Alterar</Text>
+                    <Text style={Styles.textButton} onPress={alterarAltura}>Alterar</Text>
                 </View>
                 <View style={StylesRegister.containerMenu}>
                     <TextInput style={Styles.input}
@@ -163,7 +283,7 @@ const indexPage = () =>{
                         autoCorrect={true}
                         onChangeText={(text) => setWhatsappPrint(text)}
                     />
-                    <Text style={Styles.textButton}>Alterar</Text>
+                    <Text style={Styles.textButton} onPress={alterarWhatsapp}>Alterar</Text>
                 </View>
                     
 
