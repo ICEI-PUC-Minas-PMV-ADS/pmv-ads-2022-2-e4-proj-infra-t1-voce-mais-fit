@@ -104,11 +104,13 @@ const LoginPage = () =>{
               password: `${password}`
           })
             localStorage.setItem('usuarioApi', JSON.stringify(response.data));
-            navigation.navigate('indexPage', { name: email, rota: "Api-Sena"})
             let dados = JSON.parse(localStorage.getItem("usuarioApi") || '{}');
             localStorage.setItem('userId', dados.usuario[0]._id);
             localStorage.setItem('userGymgoerInfo', dados.usuario[0].gymgoerInfo);
             localStorage.setItem('userTrainerInfo', dados.usuario[0].trainerInfo);
+
+            if(dados != null || dados != undefined)
+              navigation.navigate('indexPage', { name: email, rota: "Api-Sena"})
       }
       catch(error){
           console.log('Erro usuarioApi error: ', error);
