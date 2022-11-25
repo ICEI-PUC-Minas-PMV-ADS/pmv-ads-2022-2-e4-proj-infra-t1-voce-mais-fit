@@ -49,7 +49,7 @@ describe('Get all Gymgoers', () => {
         functionMock.mockRestore();
     })
 
-    it('should return 404 if database is null', async () => {
+    it('should return an error 404 if database is null', async () => {
         Gymgoer.Model.find = jest.fn(() => {
             return null;
         })
@@ -81,7 +81,7 @@ describe('Get Gymgoer by Id', () => {
         })
     })
 
-    it('should return 404 if Id doesnt match', async () => {
+    it('should return an error 404 if Id doesnt match', async () => {
         let data = await gymgoerService.getGymgoerById('637c2e4d907bed0e49c1de08');
 
         expect(data).toMatchObject({
@@ -95,11 +95,49 @@ describe('Get Gymgoer by Valid Auth Code', () => {
         //todo: implement
     })
 
-    it('should return 404 if Auth Code doest match any Gymgoer', async () => {
+    it('should return an error 404 if Auth Code doest match any Gymgoer', async () => {
         //todo: implement
     })
 
-    it('should return 403 if Auth Code match a Gymgoer, but is expired', async () => {
+    it('should return an error 403 if Auth Code match a Gymgoer, but is expired', async () => {
+        //todo: implement
+    })
+})
+
+describe('Create New Gymgoer', () => {
+    it('should add a new Gymgoer to the database if Model is correct', async () => {
+        //todo: implement
+    })
+
+    it('should return an error if Model is incorrect', async () => {
+        //todo: implement
+    })
+})
+
+describe('Update Gymgoer by Id', () => {
+    it('should return an error 404 if Id doesnt match any Gymgoer', async () => {
+        //todo: implement
+    })
+
+    it('should return same properties if they are not given', async () => {
+        //todo: implement
+    })
+
+    it('should update properties if they are given', async () => {
+        //todo: implement
+    })
+})
+
+describe('Generate AuthCode', () => {
+    it('should return an error 404 if Id doesnt match any Gymgoer', async () => {
+        //todo: implement
+    })
+
+    it('should create expirationDate with the exact time difference between minutes given and createdDate', async () => {
+        //todo: implement
+    })
+
+    it('should add the Auth Code to the Gymgoer', async () => {
         //todo: implement
     })
 })
