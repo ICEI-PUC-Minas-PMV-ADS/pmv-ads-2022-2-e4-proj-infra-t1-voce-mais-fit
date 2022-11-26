@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {useNavigation, useRoute} from "@react-navigation/native";
 import { View, Text, Modal, Image, FlatList, ScrollView, TouchableOpacity, TouchableHighlight, TextInput } from "react-native";
 import Styles from '../styles/stylesLogin';
 import StylesRegister from '../styles/stylesRegister';
 import StylesExercices from '../styles/stylesExercices';
+import api from '../services/api';
 
 import { propsStack } from "../models/modelStack";
 import modalGeneric from "./modalGeneric";
@@ -21,6 +22,34 @@ const exerciciosPage = () =>{
 
     const navigation = useNavigation<propsStack>()
 
+
+    const userId = localStorage.getItem("userId")
+    const gymgoerId = localStorage.getItem("userGymgoerInfo")
+
+    const getExercices = async () => {
+            try{
+                let response = await api.get(`/api/gymgoer/${gymgoerId}/exerciseModels`)
+                let json = JSON.stringify(response);
+                let dados = JSON.parse(json || '{}')
+                for(let i = 0; i < dados.data.length; i++){
+                    console.log(dados.data[i].name);
+                    console.log(dados.data[i].description);
+                    console.log(dados.data[i]._id);
+                    console.log("---------------------")
+                    for(let x=0; x < i; x++){
+                        console.log(dados.data[i].exercises[x].name);
+                        console.log(dados.data[i].exercises[x].youtubeUrl);
+                        console.log(dados.data[i].exercises[x]._id);
+                        console.log("---------------------")
+                    }
+                    
+                }
+            }
+            catch(err){
+                console.log('Error: ' + err);
+            }
+    }
+
     const dadosExercices = [
         {key: ["Peito ", "Supino ", "Supino com Halter "]},
         {key: "Perna"},
@@ -29,6 +58,11 @@ const exerciciosPage = () =>{
         {key: "Triceps"},
         {key: "Abomen"},
     ]
+
+
+    useEffect(() => {
+        getExercices();
+    })
 
     return(
         <View style={Styles.container}>
