@@ -1,28 +1,29 @@
 import { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Button, Image, TouchableHighlight, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, Modal, Image, TouchableHighlight, TextInput } from "react-native";
 import {useNavigation, useRoute} from "@react-navigation/native";
 import { propsStack } from "../models/modelStack";
+
+import api from '../services/api';
 
 import Styles from '../styles/stylesLogin';
 import StylesGeneric from './../styles/stylesGeneric';
 import StylesRegister from '../styles/stylesRegister';
 import StylesExercices from '../styles/stylesExercices';
 
-const nome = "Felipe";
-const email = "emailVeridico@IssoEUmEmail.com"
-const Senha = ""
-const Peso = "65"
-const Altura = "170"
-const Whatsapp = "31 9 9856-8542"
-
 
 const indexPage = () =>{
     const route = useRoute()
     const navigation = useNavigation<propsStack>()
 
+    const [email, setEmail] = useState('')
+    const [nome, setNome] = useState('');
+    const [senha, setSenha] = useState('');
+    const [Whatsapp, setWhatsapp] = useState('')
+    const [Peso, setPeso] = useState('');
+    const [Altura, setAltura] = useState('');
 
     const [nomePrint, setNomePrint] = useState('');
-    const [emailPint, setEmailPint] = useState('');
+    const [emailPint, setEmailPrint] = useState('');
     const [senhaPrint, setSenhaPrint] = useState('');
     const [pesoPrint, setPesoPrint] = useState('');
     const [alturaPrint, setAlturaPrint] = useState('');
@@ -36,6 +37,154 @@ const indexPage = () =>{
     const [alturaEsc, setAlturaEsc] = useState(false);
     const [WhatsappEsc, setWhatsappEsc] = useState(false);
 
+    const [modalOpen, setModalOpen] = useState(false)
+
+    const userId = localStorage.getItem("userId")
+    const gymgoerId = localStorage.getItem("userGymgoerInfo")
+    const trainerId = localStorage.getItem("userTrainerInfo")
+    console.log(gymgoerId)
+    console.log(trainerId)
+
+
+    // Métodos para pegar os dados do usuário da API
+    const getUser = async () => {
+        try{
+            let response = await api.get(`/api/user/${userId}`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+            
+            setEmail(dados.data.email);
+            setSenha(dados.data.password)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const getGymgoer = async () => {
+        try{
+            let response = await api.get(`/api/gymgoer/${gymgoerId}`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+
+            setNome(dados.data.name)
+            setWhatsapp(dados.data.whatsapp)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+    const getTrainer = async () => {
+        try{
+            let response = await api.get(`/api/trainer/${trainerId}`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+
+            setNome(dados.data.name)
+            setWhatsapp(dados.data.whatsapp)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+    const getGymgoerPhisical = async () => {
+        try{
+            let response = await api.get(`/api/gymgoer/${gymgoerId}/physicalInformation`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+
+            setPeso(dados.data.weight)
+            setAltura(dados.data.height)
+
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+
+        useEffect(() => {
+            getUser();
+            if(gymgoerId != 'null'){
+                getGymgoer();
+                getGymgoerPhisical();
+                console.log("Entrou Gym")
+            }
+            else if(trainerId != 'null'){
+                getTrainer();
+                console.log("Entrou Trainer")
+            }
+        })
+
+        
+
+    
+
+
+    //Métodos para alterar os dados do usuário
+    const alterarNome = async () => {
+        try{
+            await api.patch(`/api/gymgoer/${gymgoerId}`, {
+                name: `${nomePrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarWhatsapp = async () => {
+        try{
+            await api.patch(`/api/gymgoer/${gymgoerId}`, {
+                whatsapp: `${WhatsappPrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarAltura = async () => {
+        try{
+            await api.patch(`/api/gymgoer/${gymgoerId}/physicalInformation`, {
+                height: `${alturaPrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarPeso = async () => {
+        try{
+            await api.patch(`/api/gymgoer/${gymgoerId}/physicalInformation`, {
+                weight: `${pesoPrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarEmail = async () => {
+        try{
+            await api.patch(`/api/user/${userId}`, {
+                email: `${emailPint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    const alterarSenha = async () => {
+        try{
+            await api.patch(`/api/user/${userId}`, {
+                password: `${senhaPrint}`
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
+    
 
     let dadosUsuario = ""
     var resultado =["a","b"];
@@ -52,35 +201,36 @@ const indexPage = () =>{
     return(
         <View style={Styles.container}>
             
-            <View style={StylesRegister.containerBtn}>
+            {/* Menu */}
+            <View style={StylesRegister.containerMenu}>
 
-                <View>
+                <View style={StylesRegister.elementsMenu}>
                     <TouchableHighlight onPress={()=> navigation.navigate("alimentosPage")}>
                         <Image style={StylesExercices.img}
                         source={require('../../assets/menu/alimentosMenu.png')}
                         />
                     </TouchableHighlight>
-                    <Text style={StylesExercices.inputBtn}>
+                    <Text style={StylesRegister.textMenu}>
                         Alimentos
                     </Text> 
                 </View>
-                <View>
+                <View style={StylesRegister.elementsMenu}>
                     <TouchableHighlight onPress={()=> navigation.navigate('indexPage', { name: '', rota: "Api-Sena"})}>
                         <Image style={StylesExercices.img}
                         source={require('../../assets/menu/indexMenu.png')}
                         />
                     </TouchableHighlight>
-                    <Text style={StylesExercices.inputBtn}>
+                    <Text style={StylesRegister.textMenu}>
                         Inicio
                     </Text> 
                 </View>
-                <View>
+                <View style={StylesRegister.elementsMenu}>
                     <TouchableHighlight onPress={()=> navigation.navigate("exerciciosPage")}>
                         <Image style={StylesExercices.img}
                         source={require('../../assets/menu/exercicesMenu.png')}
                         />
                     </TouchableHighlight>
-                    <Text style={StylesExercices.inputBtn}>
+                    <Text style={StylesRegister.textMenu}>
                         Exercícios
                     </Text> 
                 </View>
@@ -93,62 +243,103 @@ const indexPage = () =>{
             <View style={Styles.tamanho}>
 
                 <Text>Nome: {nome}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite o Nome"
-                    autoCorrect={true}
-                    onChangeText={(text) => setNomePrint(text)}
-                /> : null }
                 
                 <Text>Email: {email}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite o Email"
-                    autoCorrect={true}
-                    onChangeText={(text) => setEmailPint(text)}
-                /> : null }
-                <Text>Senha: ***** </Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite a Senha"
-                    autoCorrect={true}
-                    onChangeText={(text) => setSenhaPrint(text)}
-                /> : null }
+
+                <Text>Senha: {senha}</Text>
+
                 <Text>Peso: {Peso}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite o Peso"
-                    autoCorrect={true}
-                    onChangeText={(text) => setPesoPrint(text)}
-                /> : null }
+
                 <Text>Altura: {Altura}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite a Altura"
-                    autoCorrect={true}
-                    onChangeText={(text) => setAlturaPrint(text)}
-                /> : null }
+
                 <Text>Whatsapp: {Whatsapp}</Text>
-                { esconde ? <TextInput style={Styles.input}
-                    placeholder="Digite o Whatsapp"
-                    autoCorrect={true}
-                    onChangeText={(text) => setWhatsappPrint(text)}
-                /> : null }
 
             </View>
+
+
+            {/* Modal Alteração dos Dados */}
+            <Modal visible={modalOpen} animationType='slide'>
+
+                <View style={Styles.container}>
+
+                <Text style={Styles.title}>
+                    Alterar os Dados
+                </Text>
+
+                <View style={StylesRegister.containerMenu}>
+                    <TextInput style={Styles.input}
+                        placeholder="Nome"
+                        autoCorrect={true}
+                        onChangeText={(text) => setNomePrint(text)}
+                    />
+                    <Text style={Styles.textButton} onPress={alterarNome}>Alterar</Text>
+                </View>
+                    
+                <View style={StylesRegister.containerMenu}>
+                    <TextInput style={Styles.input}
+                        placeholder="Email"
+                        autoCorrect={true}
+                        onChangeText={(text) => setEmailPrint(text)}
+                    />
+                    <Text style={Styles.textButton} onPress={alterarEmail}>Alterar</Text>
+                </View>
+                <View style={StylesRegister.containerMenu}>
+                    <TextInput style={Styles.input}
+                        placeholder="Senha"
+                        autoCorrect={true}
+                        onChangeText={(text) => setSenhaPrint(text)}
+                    />
+                    <Text style={Styles.textButton} onPress={alterarSenha}>Alterar</Text>
+                </View>
+                <View style={StylesRegister.containerMenu}>
+                    <TextInput style={Styles.input}
+                        placeholder="Peso"
+                        autoCorrect={true}
+                        onChangeText={(text) => setPesoPrint(text)}
+                    />
+                    <Text style={Styles.textButton} onPress={alterarPeso}>Alterar</Text>
+                </View>
+                <View style={StylesRegister.containerMenu}>
+                    <TextInput style={Styles.input}
+                        placeholder="Altura"
+                        autoCorrect={true}
+                        onChangeText={(text) => setAlturaPrint(text)}
+                    />
+                    <Text style={Styles.textButton} onPress={alterarAltura}>Alterar</Text>
+                </View>
+                <View style={StylesRegister.containerMenu}>
+                    <TextInput style={Styles.input}
+                        placeholder="Whatsapp"
+                        autoCorrect={true}
+                        onChangeText={(text) => setWhatsappPrint(text)}
+                    />
+                    <Text style={Styles.textButton} onPress={alterarWhatsapp}>Alterar</Text>
+                </View>
+                    
+
+                    <View style={StylesRegister.containerBtn}>
+                        
+                    <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpen(false)}>
+                        <Text>
+                            Fechar
+                        </Text> 
+                    </TouchableOpacity>
+                    </View>
+
+                </View>
+            </Modal>
 
             <View>
 
             <View style={StylesRegister.containerBtn}>
-                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                    { esconde ? <Text  onPress={()=> {
-                            setEsconde(false)
-                            //APi para alterar os dados vai aqui
-                        }}>
-                    Alterar Status
-                    </Text> : <Text onPress={()=> setEsconde(true)}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpen(true)}>
+                <Text >
                         Alterar Status
-                    </Text> }
+                    </Text>
                 </TouchableOpacity>
                     
-                <TouchableOpacity style={StylesExercices.menuExercicesButton}>
-                    <Text 
-                    onPress={() => Voltar()}>
+                <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={() => Voltar()}>
+                    <Text >
                         Sair
                     </Text>
                 </TouchableOpacity>

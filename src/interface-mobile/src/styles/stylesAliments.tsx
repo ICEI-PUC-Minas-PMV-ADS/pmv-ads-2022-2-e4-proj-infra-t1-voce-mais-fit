@@ -9,6 +9,10 @@ const StylesExercices = StyleSheet.create({
     kcal: {
         alignItems: 'center'
     },
+    main: {
+        marginTop: 100,
+        marginBottom: 100,
+    },
     input: {
         color:'#fffbfb',
         backgroundColor: '#601430',
