@@ -7,6 +7,17 @@ const StylesRegister = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection: "row",
     },
+    elementsMenu: {
+        alignItems: 'center',
+        padding: 10,
+    },
+    textMenu: {
+        color: '#fff'
+    },
+    containerMenu: {
+        justifyContent: "space-between",
+        flexDirection: "row",
+    },
     inputBtn: {
         color:'#fffbfb',
         width: 50,
