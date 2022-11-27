@@ -179,11 +179,11 @@ const alimentosPage = () =>{
                             <Text style={StylesExercices.espacamentoText}>Sex</Text>
                             <Text style={StylesExercices.espacamentoText}>Sab</Text>
                        */} 
-                       <Text>Data: {datExib}</Text>
+                       <Text style={Styles.btnText}>Data: {datExib}</Text>
                     </View>
                         
                     <View style={StylesRegister.containerBtn}>
-                        <Text>{x}</Text>
+                        <Text style={Styles.btnText}>{x}</Text>
                     </View>
                     
                
