@@ -79,7 +79,7 @@ const LoginPage = () =>{
         <Text style={Styles.title}>
           Crie Sua Conta
         </Text>
-        <Text>Escolha entre Aluno ou Professor:</Text>
+        <Text style={Styles.btnText}>Escolha entre Aluno ou Professor:</Text>
 
         <View style={StylesRegister.containerBtn}>
           <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setOpenModalAl(true)}>
@@ -135,7 +135,7 @@ const LoginPage = () =>{
                 autoCorrect={true}
                 onChangeText={(text) => setworkHoursDescription(text)}
               />
-              <TextInput style={StylesRegister.inputBtn}
+              <TextInput style={Styles.inputWhats}
                 placeholder="Whatsapp"
                 autoCorrect={true}
                 onChangeText={(text) => setwhatsapp(text)}
@@ -205,7 +205,7 @@ const LoginPage = () =>{
                 autoCorrect={true}
                 onChangeText={(text) => setworkHoursDescription(text)}
               />
-              <TextInput style={StylesRegister.inputBtn}
+              <TextInput style={Styles.inputWhats}
                 placeholder="Whatsapp"
                 autoCorrect={true}
                 onChangeText={(text) => setwhatsapp(text)}

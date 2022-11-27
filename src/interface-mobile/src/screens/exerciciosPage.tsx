@@ -7,7 +7,7 @@ import StylesExercices from '../styles/stylesExercices';
 import api from '../services/api';
 
 import { propsStack } from "../models/modelStack";
-import modalGeneric from "./modalGeneric";
+import ApiExercices from "../api/apiExercices";
 
 
 const exerciciosPage = () =>{
@@ -15,54 +15,104 @@ const exerciciosPage = () =>{
     const [modalOpen, setModalOpen] = useState(false)
     const [modalOpenEx, setModalOpenEx] = useState(false);
 
-    const [exercicio, setExercicio] = useState('')
-    const [URLVideo, setURLVideo] = useState('')
-    const [dias, setDias] = useState('')
-    const [series, setSeries] = useState('')
+    const [nameGrupamento, setNameGrupamento] = useState('')
+    const [descricaoGrupamento, setDescricaoGrupamento] = useState('')
+    const [nomeExercicio, setNomeExercicio] = useState('')
+    const [descricaoExercicio, setDescricaoExercicio] = useState('')
 
+    
+    const [nomeAcademia, setNomeAcademia] = useState('')
+    const [descricaoAcademia, setDescricaoAcademia] = useState('');
+    const [enderecoAcademia, setEnderecoAcademia] = useState('');
+    
     const navigation = useNavigation<propsStack>()
 
 
     const userId = localStorage.getItem("userId")
     const gymgoerId = localStorage.getItem("userGymgoerInfo")
 
-    const getExercices = async () => {
-            try{
-                let response = await api.get(`/api/gymgoer/${gymgoerId}/exerciseModels`)
-                let json = JSON.stringify(response);
-                let dados = JSON.parse(json || '{}')
-                for(let i = 0; i < dados.data.length; i++){
-                    console.log(dados.data[i].name);
-                    console.log(dados.data[i].description);
-                    console.log(dados.data[i]._id);
-                    console.log("---------------------")
-                    for(let x=0; x < i; x++){
-                        console.log(dados.data[i].exercises[x].name);
-                        console.log(dados.data[i].exercises[x].youtubeUrl);
-                        console.log(dados.data[i].exercises[x]._id);
-                        console.log("---------------------")
-                    }
-                    
-                }
-            }
-            catch(err){
-                console.log('Error: ' + err);
-            }
+
+    const postAcademia = async (name: string, descricao: string, endereco: string) => {
+        try{
+            await api.post(`/api/gym`, {
+                name: name,
+                description: descricao,
+                address: endereco
+            })
+        }
+        catch(err){
+            console.log("Error: " + err)
+        }
     }
 
-    const dadosExercices = [
-        {key: ["Peito ", "Supino ", "Supino com Halter "]},
-        {key: "Perna"},
-        {key: "Costas"},
-        {key: "Biceps"},
-        {key: "Triceps"},
-        {key: "Abomen"},
-    ]
+    const postExercicies = async (name: string, description: string, nameExercices: string, descriptionExercices: string) => {
+        try{
+            await api.post(`/api/gymgoer/${gymgoerId}/exerciseModels`, {
+                name: `${name}`,
+                description: `${description}`,
+                exercises: [{
+                    name: `${nameExercices}`,
+                    description: `${descriptionExercices}`
+                }]
+            })
+        }
+        catch(err){
+            console.log("Error: " + err);
+        }
+    }
 
+    const getExercices = async () => {
+        try{
+            let response = await api.get(`/api/gymgoer/${gymgoerId}/exerciseModels`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+            let vetor = [];
+            for(let i=0; i < dados.data.length; i++){
+                vetor[i] = `\n Grupamento Muscular a Trabalhar: ${dados.data[i].name} \n Descrição: ${dados.data[i].description} \n Nome do Exercício: ${dados.data[i].exercises[0].name} \n Vídeo do Exercício: ${dados.data[i].exercises[0].youtubeUrl} \n`
+            }
+            return (JSON.stringify(vetor) == null ?'{}' : Object(vetor))
+        }
+        catch(err){
+            console.log("Error: " + err)
+        }
+    }
+
+    const getAcademias =async () => {
+        try{
+            let response = await api.get(`/api/gym`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+            let vetor = []
+            for(let i=0; i < dados.data.length; i++){
+                console.log(dados.data[i]._id)
+                vetor[i] = `\n Nome Academia: ${dados.data[i].name} \nDescrição: ${dados.data[i].description} \nEndereço: ${dados.data[i].address} \n`
+            }
+            return (JSON.stringify(vetor) == null ?'{}' : Object(vetor))
+        }
+        catch(err){
+            console.log("Error: " + err)
+        }
+    }
+
+
+    const [x, setX] = useState('');
+    const chamarExercicios = async () => {
+        setX(await getExercices());
+    }
+
+    const [y, setY] = useState('');
+    const chamarAcademias = async () => {
+        setY(await getAcademias())
+    }
+    
 
     useEffect(() => {
-        getExercices();
-    })
+        chamarAcademias();
+        chamarExercicios();
+    }, []);
+        
+    
+   
 
     return(
         <View style={Styles.container}>
@@ -104,11 +154,8 @@ const exerciciosPage = () =>{
             
 
             <View style={StylesExercices.containeListExercices}>
-                <ScrollView >
-                <FlatList
-                    data={dadosExercices}
-                    renderItem = {( {item} ) => <Text>{item.key}{"\n"}</Text>}
-                />
+            <ScrollView >
+                    <Text style={Styles.btnText}>{x}</Text>
                 </ScrollView >
             </View>
 
@@ -119,31 +166,29 @@ const exerciciosPage = () =>{
                 <View style={Styles.container}>
 
                     <TextInput style={Styles.input}
-                        placeholder="Exercício"
+                        placeholder="Nome Grupamento"
                         autoCorrect={true}
-                        onChangeText={(text) => setExercicio(text)}
+                        onChangeText={(text) => setNameGrupamento(text)}
                     />
                     <TextInput style={Styles.input}
-                        placeholder="Link do Vídeo"
+                        placeholder="Descrição"
                         autoCorrect={true}
-                        onChangeText={(text) => setURLVideo(text)}
+                        onChangeText={(text) => setDescricaoGrupamento(text)}
                     />
-                    <View style={StylesRegister.containerBtn}>
-
-                        <TextInput style={StylesRegister.inputBtn}
-                        placeholder="Dias"
+                    
+                    <TextInput style={Styles.input}
+                        placeholder="Nome Exercicio"
                         autoCorrect={true}
-                        onChangeText={(text) => setDias(text)}
-                        />
-                        <TextInput style={StylesRegister.inputBtn}
-                        placeholder="N Séries"
+                        onChangeText={(text) => setNomeExercicio(text)}
+                    />
+                    <TextInput style={Styles.input}
+                        placeholder="Descrição Exercicio"
                         autoCorrect={true}
-                        onChangeText={(text) => setSeries(text)}
-                        />
-                    </View>
+                        onChangeText={(text) => setDescricaoExercicio(text)}
+                    />
 
                     <View style={StylesRegister.containerBtn}>
-                        <TouchableOpacity style={StylesExercices.menuExercicesButton}>
+                        <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={() => postExercicies(nameGrupamento, descricaoGrupamento, nomeExercicio, descricaoExercicio)}>
                         <Text>
                             Adicionar
                         </Text>
@@ -167,37 +212,44 @@ const exerciciosPage = () =>{
                 <View style={Styles.container}>
 
                 <Text style={Styles.title}>
-                    Lista de Exercícios
+                    Adicionar Academia
                 </Text>
-                    
-                <View style={StylesRegister.containerBtn}>
-                    <Text style={StylesExercices.espacamentoText}>Lista Cost Inic </Text>
-                    <Text style={StylesExercices.espacamentoText}> Segunda</Text>
-                </View>
-                <View style={StylesRegister.containerBtn}>
-                    <Text style={StylesExercices.espacamentoText}>Lista Perna Hard </Text>
-                    <Text style={StylesExercices.espacamentoText}> Terça</Text>
-                </View>
-                <View style={StylesRegister.containerBtn}>
-                    <Text style={StylesExercices.espacamentoText}>Peitoral de Monstro </Text>
-                    <Text style={StylesExercices.espacamentoText}> Quarta</Text>
-                </View>
-                <View style={StylesRegister.containerBtn}>
-                    <Text style={StylesExercices.espacamentoText}>Barriga Seca </Text>
-                    <Text style={StylesExercices.espacamentoText}> Quinta</Text>
-                </View>
-                    
-                    
-                    
-                    
+                  
+                <View>
+                    <TextInput style={Styles.input}
+                        placeholder="Nome Academia"
+                        autoCorrect={true}
+                        onChangeText={(text) => setNomeAcademia(text)}
+                    />
+                    <TextInput style={Styles.input}
+                        placeholder="Descrição da Academia"
+                        autoCorrect={true}
+                        onChangeText={(text) => setDescricaoAcademia(text)}
+                    />
+                    <TextInput style={Styles.input}
+                        placeholder="Endereço da Academia"
+                        autoCorrect={true}
+                        onChangeText={(text) => setEnderecoAcademia(text)}
+                    />
+                </View> 
 
-
+                <View style={StylesExercices.containeListExercices}>
+                    <ScrollView >
+                            <Text style={Styles.btnText}>{y}</Text>
+                    </ScrollView >
+                 </View>
+                
                     <View style={StylesRegister.containerBtn}>
-                    <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenEx(false)}>
-                        <Text>
-                            Fechar
-                        </Text> 
-                    </TouchableOpacity>
+                        <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> postAcademia(nomeAcademia, descricaoAcademia, enderecoAcademia)}>
+                            <Text>
+                                Adicionar
+                            </Text> 
+                        </TouchableOpacity>
+                        <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenEx(false)}>
+                            <Text>
+                                Fechar
+                            </Text> 
+                        </TouchableOpacity>
                     </View>
                     
                 </View>
@@ -208,13 +260,13 @@ const exerciciosPage = () =>{
             <View style={StylesRegister.containerBtn}>
 
                 <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpen(true)}>
-                    <Text >
+                    <Text>
                         Adicionar
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenEx(true)}>
                     <Text>
-                    Listar Personal
+                    Adicioar Academia
                 </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={() => navigation.goBack()}>

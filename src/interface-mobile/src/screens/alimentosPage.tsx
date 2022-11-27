@@ -18,6 +18,7 @@ const alimentosPage = () =>{
     var mes = String(data.getMonth() + 1).padStart(2, '0');
     var ano = data.getFullYear();
     const dat = `${ano}-${mes}-${dia}`;
+    const datExib = `${dia}/${mes}/${ano}`
 
     type apiBusca = {
         name: string;
@@ -114,18 +115,18 @@ const alimentosPage = () =>{
             </View>
 
         <View style={StylesAliments.main}>
-            <View style={StylesRegister.containerBtn}>
+            <View style={Styles.container}>
 
                 <View style={StylesAliments.viewSpaco}>
-                    <Text>Alimento</Text>
-                    <TextInput style={StylesAliments.input}
+                    <Text style={Styles.btnText}>Alimento</Text>
+                    <TextInput style={StylesAliments.inputLarge}
                     placeholder="Nome Alimento"
                     autoCorrect={true}
                     onChangeText={(text) => getBuscaAlimentosAuto(text)}
                 />
                 </View>
                 <View style={StylesAliments.viewSpaco}>
-                    <Text>Carboidratos</Text>
+                    <Text style={Styles.btnText}>Carboidratos</Text>
                     <TextInput style={StylesAliments.input}
                     placeholder={apiBuscaAlimento.carbPer100g == undefined ? "n calorias" : apiBuscaAlimento.carbPer100g }
                     autoCorrect={true}
@@ -133,7 +134,7 @@ const alimentosPage = () =>{
                 />
                 </View>
                 <View style={StylesAliments.viewSpaco}>
-                    <Text>Proteinas</Text>
+                    <Text style={Styles.btnText}>Proteinas</Text>
                     <TextInput style={StylesAliments.input}
                     placeholder={apiBuscaAlimento.proteinPer100g == undefined ? "N Proteinas" : apiBuscaAlimento.proteinPer100g}
                     autoCorrect={true}
@@ -141,7 +142,7 @@ const alimentosPage = () =>{
                 />
                 </View>
                 <View style={StylesAliments.viewSpaco}>
-                   <Text>Gordura</Text>
+                   <Text style={Styles.btnText}>Gordura</Text>
                     <TextInput style={StylesAliments.input}
                     placeholder={apiBuscaAlimento.fatPer100g == undefined ? "N Gordura" : apiBuscaAlimento.fatPer100g}
                     autoCorrect={true}
@@ -150,7 +151,7 @@ const alimentosPage = () =>{
                 </View>
             </View>
             <View style={StylesAliments.kcal}>
-                <Text>Kcal</Text>
+                <Text style={Styles.btnText}>Kcal</Text>
                 <TextInput style={StylesAliments.inputLarge}
                     placeholder={apiBuscaAlimento.kcalPer100g == undefined ? "N Kcal" : apiBuscaAlimento.kcalPer100g}
                     autoCorrect={true}
@@ -167,35 +168,26 @@ const alimentosPage = () =>{
                     Dieta de Alimentos
                 </Text>
 
-             {/*
+             
                 <View style={StylesRegister.containerBtn}>
-                        <Text style={StylesExercices.espacamentoText}>Dom</Text>
-                        <Text style={StylesExercices.espacamentoText}>Seg</Text>
-                        <Text style={StylesExercices.espacamentoText}>Ter</Text>
-                        <Text style={StylesExercices.espacamentoText}>Qua</Text>
-                        <Text style={StylesExercices.espacamentoText}>Qui</Text>
-                        <Text style={StylesExercices.espacamentoText}>Sex</Text>
-                        <Text style={StylesExercices.espacamentoText}>Sab</Text>
+                       {/*
+                            <Text style={StylesExercices.espacamentoText}>Dom</Text>
+                            <Text style={StylesExercices.espacamentoText}>Seg</Text>
+                            <Text style={StylesExercices.espacamentoText}>Ter</Text>
+                            <Text style={StylesExercices.espacamentoText}>Qua</Text>
+                            <Text style={StylesExercices.espacamentoText}>Qui</Text>
+                            <Text style={StylesExercices.espacamentoText}>Sex</Text>
+                            <Text style={StylesExercices.espacamentoText}>Sab</Text>
+                       */} 
+                       <Text>Data: {datExib}</Text>
                     </View>
                         
                     <View style={StylesRegister.containerBtn}>
-                        <Text style={StylesExercices.espacamentoText}>Alimento </Text>
-                        <Text style={StylesExercices.espacamentoText}> V.Kcal e V.Nutri</Text>
+                        <Text>{x}</Text>
                     </View>
-                    <View style={StylesRegister.containerBtn}>
-                        <Text style={StylesExercices.espacamentoText}>Alimento </Text>
-                        <Text style={StylesExercices.espacamentoText}> V.Kcal e V.Nutri</Text>
-                    </View>
-                    <View style={StylesRegister.containerBtn}>
-                        <Text style={StylesExercices.espacamentoText}>Alimento </Text>
-                        <Text style={StylesExercices.espacamentoText}> V.Kcal e V.Nutr</Text>
-                    </View>
-                    <View style={StylesRegister.containerBtn}>
-                        <Text style={StylesExercices.espacamentoText}>Alimento </Text>
-                        <Text style={StylesExercices.espacamentoText}> V.Kcal e V.Nutr</Text>
-                    </View>
-             */}   
-                    <Text>{x}</Text>
+                    
+               
+                    
 
                     <View style={StylesRegister.containerBtn}>
                     <TouchableOpacity style={StylesExercices.menuExercicesButton} onPress={()=> setModalOpenEx(false)}>

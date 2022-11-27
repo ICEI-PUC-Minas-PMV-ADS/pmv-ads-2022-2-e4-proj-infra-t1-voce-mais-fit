@@ -5,6 +5,7 @@ const StylesExercices = StyleSheet.create({
     viewSpaco: {
         marginLeft: 25,
         marginRight: 25,
+        alignItems: 'center',
     },
     kcal: {
         alignItems: 'center'

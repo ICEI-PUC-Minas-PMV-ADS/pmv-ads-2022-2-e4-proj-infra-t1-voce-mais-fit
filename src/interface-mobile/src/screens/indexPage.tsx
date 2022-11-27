@@ -9,11 +9,18 @@ import Styles from '../styles/stylesLogin';
 import StylesGeneric from './../styles/stylesGeneric';
 import StylesRegister from '../styles/stylesRegister';
 import StylesExercices from '../styles/stylesExercices';
+import apiEmail from '../api/apiEmail';
+import ApiResterUser from '../api/apiRegisterUser';
+import apiUsuario from '../api/apiUsuario';
 
 
 const indexPage = () =>{
     const route = useRoute()
     const navigation = useNavigation<propsStack>()
+
+    const [pesoBoolean, setPesoBoolean] = useState(false);
+    const [alturaBoolean, setAlturaBoolean] = useState(false);
+    
 
     const [email, setEmail] = useState('')
     const [nome, setNome] = useState('');
@@ -42,9 +49,6 @@ const indexPage = () =>{
     const userId = localStorage.getItem("userId")
     const gymgoerId = localStorage.getItem("userGymgoerInfo")
     const trainerId = localStorage.getItem("userTrainerInfo")
-    console.log(gymgoerId)
-    console.log(trainerId)
-
 
     // Métodos para pegar os dados do usuário da API
     const getUser = async () => {
@@ -52,7 +56,6 @@ const indexPage = () =>{
             let response = await api.get(`/api/user/${userId}`)
             let json = JSON.stringify(response);
             let dados = JSON.parse(json || '{}')
-            
             setEmail(dados.data.email);
             setSenha(dados.data.password)
         }
@@ -96,7 +99,6 @@ const indexPage = () =>{
 
             setPeso(dados.data.weight)
             setAltura(dados.data.height)
-
         }
         catch(err){
             console.log(err);
@@ -109,18 +111,13 @@ const indexPage = () =>{
             if(gymgoerId != 'null'){
                 getGymgoer();
                 getGymgoerPhisical();
-                console.log("Entrou Gym")
+                setAlturaBoolean(true);
+                setPesoBoolean(true);
             }
             else if(trainerId != 'null'){
                 getTrainer();
-                console.log("Entrou Trainer")
             }
         })
-
-        
-
-    
-
 
     //Métodos para alterar os dados do usuário
     const alterarNome = async () => {
@@ -184,16 +181,55 @@ const indexPage = () =>{
         }
     }
 
+   async function loginGoogle(given_name:string , email:string, password:string) {
+    let valida = await apiUsuario.getUsuario(email);
+    if(valida == '' || valida == undefined){
+        await ApiResterUser.criarGymgoer(given_name,email,password,'gymgoer','310000000','Você é o melhor!');
+        await apiEmail.emailGoogleConta(given_name, email,password);
+        await logar(email,password);
+    }else{
+       valida =  valida == undefined? '': valida;
+        await logar(email,valida)
+    }
+   }
+    const logar = async (email: string, password:string) => {
+        try{
+            let response = await api.post('/api/user/login', {
+                //mode: 'cors',
+                email:`${email}`,
+                password: `${password}`
+            })
+              localStorage.setItem('usuarioApi', JSON.stringify(response.data));
+              let dados = JSON.parse(localStorage.getItem("usuarioApi") || '{}');
+              localStorage.setItem('userId', dados.usuario[0]._id);
+              localStorage.setItem('userGymgoerInfo', dados.usuario[0].gymgoerInfo);
+              localStorage.setItem('userTrainerInfo', dados.usuario[0].trainerInfo);
+  
+              if(dados != null || dados != undefined)
+              setModalOpen(true);
+        }
+        catch(error){
+            console.log('Erro usuarioApi error: ', error);
+        } 
+      }  
     
-
+//#region criando usuario apartir da Google 
     let dadosUsuario = ""
     var resultado =["a","b"];
 
-    if (route.params != undefined ) {
+    if (route.params != undefined) {
         dadosUsuario = Object.values(route.params).toString()
+        let userGymgoerInfo = localStorage.getItem("userGymgoerInfo");
+        console.log(userGymgoerInfo)
         resultado = dadosUsuario.split(",")
-        console.log(resultado)
+        if(resultado[1] == "Google" && userGymgoerInfo == null){
+            let apiGoogle = JSON.parse(localStorage.getItem("usuarioGoogle") || '{}');
+            let password = apiGoogle.id + apiGoogle.given_name;
+            loginGoogle(apiGoogle.given_name, apiGoogle.email, password)
+        }
+
     }
+//#endregion
 
     function Voltar(){
         navigation.navigate('loginPage');
@@ -234,29 +270,13 @@ const indexPage = () =>{
                         Exercícios
                     </Text> 
                 </View>
+            </View>
+            <View>  
+            <Text style={Styles.btnText}>Bem-Vindo {nome}!</Text>
+            <Text style={Styles.btnText}>Nosso aplicativo foi criado para te ajudar</Text>
+            <Text style={Styles.btnText}>Facilitando a organização dos seus treinos e da sua alimentação!</Text>    
+            </View>
             
-            </View>
-
-            <Text> {resultado[0]}</Text>
-            <Text> {resultado[1]}</Text>
-
-            <View style={Styles.tamanho}>
-
-                <Text>Nome: {nome}</Text>
-                
-                <Text>Email: {email}</Text>
-
-                <Text>Senha: {senha}</Text>
-
-                <Text>Peso: {Peso}</Text>
-
-                <Text>Altura: {Altura}</Text>
-
-                <Text>Whatsapp: {Whatsapp}</Text>
-
-            </View>
-
-
             {/* Modal Alteração dos Dados */}
             <Modal visible={modalOpen} animationType='slide'>
 
@@ -267,49 +287,58 @@ const indexPage = () =>{
                 </Text>
 
                 <View style={StylesRegister.containerMenu}>
+                    <Text style={Styles.textEnfeite}>Nome:</Text>
                     <TextInput style={Styles.input}
-                        placeholder="Nome"
-                        autoCorrect={true}
+                        placeholder={nome}
+                        autoCorrect={false}
                         onChangeText={(text) => setNomePrint(text)}
                     />
                     <Text style={Styles.textButton} onPress={alterarNome}>Alterar</Text>
                 </View>
                     
                 <View style={StylesRegister.containerMenu}>
+                    <Text style={Styles.textEnfeite}>Email:</Text>
                     <TextInput style={Styles.input}
-                        placeholder="Email"
+                        placeholder={email}
                         autoCorrect={true}
                         onChangeText={(text) => setEmailPrint(text)}
                     />
                     <Text style={Styles.textButton} onPress={alterarEmail}>Alterar</Text>
                 </View>
                 <View style={StylesRegister.containerMenu}>
+                    <Text style={Styles.textEnfeite}>Senha:</Text>
                     <TextInput style={Styles.input}
-                        placeholder="Senha"
+                        placeholder={senha}
                         autoCorrect={true}
                         onChangeText={(text) => setSenhaPrint(text)}
                     />
                     <Text style={Styles.textButton} onPress={alterarSenha}>Alterar</Text>
                 </View>
-                <View style={StylesRegister.containerMenu}>
+
+                { pesoBoolean ? <View style={StylesRegister.containerMenu}>
+                    <Text style={Styles.textEnfeite}>Peso:</Text>
                     <TextInput style={Styles.input}
-                        placeholder="Peso"
+                        placeholder={Peso}
                         autoCorrect={true}
                         onChangeText={(text) => setPesoPrint(text)}
                     />
                     <Text style={Styles.textButton} onPress={alterarPeso}>Alterar</Text>
-                </View>
-                <View style={StylesRegister.containerMenu}>
+                </View> : null }
+
+                { alturaBoolean ? <View style={StylesRegister.containerMenu}>
+                    <Text style={Styles.textEnfeite}>Altura:</Text>
                     <TextInput style={Styles.input}
-                        placeholder="Altura"
+                        placeholder={Altura}
                         autoCorrect={true}
                         onChangeText={(text) => setAlturaPrint(text)}
                     />
                     <Text style={Styles.textButton} onPress={alterarAltura}>Alterar</Text>
-                </View>
+                </View> : null }
+
                 <View style={StylesRegister.containerMenu}>
+                    <Text style={Styles.textEnfeite}>Whatsapp:</Text>
                     <TextInput style={Styles.input}
-                        placeholder="Whatsapp"
+                        placeholder={Whatsapp}
                         autoCorrect={true}
                         onChangeText={(text) => setWhatsappPrint(text)}
                     />

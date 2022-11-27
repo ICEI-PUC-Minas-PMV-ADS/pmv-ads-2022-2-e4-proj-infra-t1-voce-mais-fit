@@ -10,10 +10,9 @@ class apiRegistroDiario {
             let response = await api.get(`/api/gymgoer/${gymgoerId}/dailyRegisters/${dat}`)
             let json = JSON.stringify(response);
             let dados = JSON.parse(json || '{}');
-           // console.log(dados.data.exercises);
            let vetor = []
            for(let i=0; i < dados.data.foods.length; i++){
-            vetor[i] = `Alimento: ${dados.data.foods[i].name}, Calorias: ${dados.data.foods[i].kcal}`
+            vetor[i] = `Alimento: ${dados.data.foods[i].name} / Calorias: ${dados.data.foods[i].kcal} \n`;
            }
            localStorage.setItem('idRegistroAlimentoDiario', dados.data._id);
           return (JSON.stringify(vetor) == null ?'{}' : Object(vetor))
