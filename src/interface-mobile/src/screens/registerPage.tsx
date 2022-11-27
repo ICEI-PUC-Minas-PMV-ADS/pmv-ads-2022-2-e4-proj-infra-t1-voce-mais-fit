@@ -35,7 +35,7 @@ const LoginPage = () =>{
     const [loginError, setLoginError] = useState(false);
     const[loginErrorProf, setLoginErrorProf] = useState(false);
 
-    const criar = async (name: string, email: string, password:string, userType:string, whatsapp:string,workHoursDescription:string) => {
+    const criarGymgoer = async (name: string, email: string, password:string, userType:string, whatsapp:string,workHoursDescription:string) => {
       try{
           let response = await api.post('/api/user', {
               name:`${name}`,
@@ -46,7 +46,25 @@ const LoginPage = () =>{
               workHoursDescription: `${workHoursDescription}`
           })
             console.log(JSON.stringify(response.data));
-           //navigation.goBack()
+            navigation.navigate("loginPage");
+      }
+      catch(error){
+          console.log('Erro usuarioApi error: ', error);
+      }
+    }
+
+    const criarTrainer   = async (name: string, email: string, password:string, userType:string, whatsapp:string,workHoursDescription:string) => {
+      try{
+          let response = await api.post('/api/user', {
+              name:`${name}`,
+              email:`${email}`,
+              password: `${password}`,
+              userType: 'trainer',
+              whatsapp: `${whatsapp}`,
+              workHoursDescription: `${workHoursDescription}`
+          })
+            console.log(JSON.stringify(response.data));
+            navigation.navigate("loginPage");
       }
       catch(error){
           console.log('Erro usuarioApi error: ', error);
@@ -128,7 +146,7 @@ const LoginPage = () =>{
               <Text style={Styles.btnLogin}
                 onPress={()=> email == ''|| password == '' || whatsapp == '' || workHoursDescription == '' 
                 ? setLoginError(true)
-                : criar(name ,email, password, userType, whatsapp, workHoursDescription)}>
+                : criarGymgoer(name ,email, password, userType, whatsapp, workHoursDescription)}>
                 Criar a Conta
               </Text >
 
@@ -158,42 +176,47 @@ const LoginPage = () =>{
 
 
             <TextInput style={Styles.input}
-              placeholder="Digite o Nome"
-              autoCorrect={true}
-              onChangeText={(text) => setName(text)}
-            />
-            <TextInput style={Styles.input}
-              placeholder="Digite o Apelido"
-              autoCorrect={true}
-              onChangeText={(text) => setApelido(text)}
-            />
-            <TextInput style={Styles.input}
-              placeholder="Digite o Email"
-              autoCorrect={true}
-              onChangeText={(text) => setEmail(text)}
-            />
-            <TextInput style={Styles.input}
-              placeholder="Confirme o Email"
-              autoCorrect={true}
-              onChangeText={(text) => setEmail(text)}
-            />
-            <TextInput style={Styles.input}
-              placeholder="********"
-              autoCorrect={true}
-              onChangeText={(text) => setPassword(text)}
-            />
-            <TextInput style={Styles.input}
-              placeholder="********"
-              autoCorrect={true}
-              onChangeText={(text) => setPassword(text)}
-            />
+                placeholder="Digite o Nome"
+                autoCorrect={true}
+                onChangeText={(text) => setName(text)}
+              />
+              <TextInput style={Styles.input}
+                placeholder="Digite o Email"
+                autoCorrect={true}
+                onChangeText={(text) => setEmail(text)}
+              />
+              <TextInput style={Styles.input}
+                placeholder="Confirme o Email"
+                autoCorrect={true}
+                onChangeText={(text) => setEmail(text)}
+              />
+              <TextInput style={Styles.input}
+                placeholder="********"
+                autoCorrect={true}
+                onChangeText={(text) => setPassword(text)}
+              />
+              <TextInput style={Styles.input}
+                placeholder="********"
+                autoCorrect={true}
+                onChangeText={(text) => setPassword(text)}
+              />
+              <TextInput style={Styles.input}
+                placeholder="Motivação para TREINAR"
+                autoCorrect={true}
+                onChangeText={(text) => setworkHoursDescription(text)}
+              />
+              <TextInput style={StylesRegister.inputBtn}
+                placeholder="Whatsapp"
+                autoCorrect={true}
+                onChangeText={(text) => setwhatsapp(text)}
+              />
 
             <Text>{ loginErrorProf ? 'Verifique os campos!' : null }</Text>
 
             <Text style={Styles.btnLogin}
-              onPress={()=> email == ''|| password == '' || userType == '' || whatsapp == '' || apelido == '' 
+              onPress={()=> email == ''|| password == '' || whatsapp == '' || workHoursDescription == ''
               ? setLoginErrorProf(true)
-              : criar(name ,email, password, userType, whatsapp, workHoursDescription)}>
+              : criarTrainer(name ,email, password, userType, whatsapp, workHoursDescription)}>
               Criar a Conta
             </Text >
 

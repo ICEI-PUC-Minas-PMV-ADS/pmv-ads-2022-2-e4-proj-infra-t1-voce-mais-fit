@@ -41,6 +41,9 @@ const indexPage = () =>{
 
     const userId = localStorage.getItem("userId")
     const gymgoerId = localStorage.getItem("userGymgoerInfo")
+    const trainerId = localStorage.getItem("userTrainerInfo")
+    console.log(gymgoerId)
+    console.log(trainerId)
 
 
     // Métodos para pegar os dados do usuário da API
@@ -70,6 +73,21 @@ const indexPage = () =>{
             console.log(err);
         }
     }
+
+    const getTrainer = async () => {
+        try{
+            let response = await api.get(`/api/trainer/${trainerId}`)
+            let json = JSON.stringify(response);
+            let dados = JSON.parse(json || '{}')
+
+            setNome(dados.data.name)
+            setWhatsapp(dados.data.whatsapp)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
     const getGymgoerPhisical = async () => {
         try{
             let response = await api.get(`/api/gymgoer/${gymgoerId}/physicalInformation`)
@@ -85,11 +103,23 @@ const indexPage = () =>{
         }
     }
 
-    useEffect(() => {
-        getUser();
-        getGymgoer();
-        getGymgoerPhisical();
-    })
+
+        useEffect(() => {
+            getUser();
+            if(gymgoerId != 'null'){
+                getGymgoer();
+                getGymgoerPhisical();
+                console.log("Entrou Gym")
+            }
+            else if(trainerId != 'null'){
+                getTrainer();
+                console.log("Entrou Trainer")
+            }
+        })
+
+        
+
+    
 
 
     //Métodos para alterar os dados do usuário
