@@ -35,7 +35,7 @@ describe('Update Trainer by Id', () => {
         //todo: implement
     })
 
-    it('should return same properties if they are not given', async () => {
+    it('should keep same properties if they are not given', async () => {
         //todo: implement
     })
 

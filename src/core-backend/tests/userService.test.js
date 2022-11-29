@@ -43,7 +43,7 @@ describe('Update User by Id', () => {
         //todo: implement
     })
 
-    it('should return same properties if they are not given', () => {
+    it('should keep same properties if they are not given', () => {
         //todo: implement
     })
 
