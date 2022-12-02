@@ -75,7 +75,6 @@ async function createNewDailyRegister(gymgoerId, dailyRegister){
 
     return {gymgoerId: gymgoer._id, newDailyRegister};
 }
-
 //#endregion
 
 //#region Food Eaten in day
