@@ -99,7 +99,7 @@ describe('Search Food', () => {
 
     it('should return null if an error is thrown', async () => {
         axios.get = jest.fn(() => {
-            throw "Expection test"
+            throw "Exception test"
         })
 
         let data = await foodApi.searchFood('teste'); 

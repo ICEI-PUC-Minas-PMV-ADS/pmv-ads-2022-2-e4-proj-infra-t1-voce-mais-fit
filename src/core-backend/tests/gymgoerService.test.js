@@ -3,22 +3,28 @@ const Gymgoer = require('../models/Gymgoer');
 
 const databaseMock = [
     {
-        "_id": "637c2e4d907bed0e49c1de07",
-        "name": "Felipe Bohm",
-        "whatsapp": "999999",
-        "dailyRegisters": [],
-        "exerciseModels": [],
-        "foodSaved": [],
-        "authCodes": []
+        _id: "637c2e4d907bed0e49c1de07",
+        name: "Felipe Bohm",
+        whatsapp: "999999",
+        dailyRegisters: [],
+        exerciseModels: [],
+        foodSaved: [],
+        authCodes: [{
+            code: 'abc123',
+            expirationDate: 1670261690092
+        }]
     },
     {
-        "_id": "637c2a13907bed0e49c1dde8",
-        "name": "Gabriel ilidio",
-        "whatsapp": "319888666",
-        "dailyRegisters": [],
-        "exerciseModels": [],
-        "foodSaved": [],
-        "authCodes": []
+        _id: "637c2a13907bed0e49c1dde8",
+        name: "Gabriel ilidio",
+        whatsapp: 319888666,
+        dailyRegisters: [],
+        exerciseModels: [],
+        foodSaved: [],
+        authCodes: [{
+            code: 'def456',
+            expirationDate: Date.now()
+        }]
     },
 ]
 
@@ -41,7 +47,10 @@ describe('Get all Gymgoers', () => {
                     dailyRegisters: [],
                     exerciseModels: [],
                     foodSaved: [],
-                    authCodes: []
+                    authCodes: [expect.objectContaining({
+                        code: expect.any(String),
+                        expirationDate: expect.any(Number)
+                    })]
                 })
             ])
         )
@@ -77,7 +86,10 @@ describe('Get Gymgoer by Id', () => {
             dailyRegisters: [],
             exerciseModels: [],
             foodSaved: [],
-            authCodes: []
+            authCodes: [expect.objectContaining({
+                code: expect.any(String),
+                expirationDate: expect.any(Number)
+            })]
         })
     })
 
@@ -96,7 +108,7 @@ describe('Get Gymgoer by Valid Auth Code', () => {
     })
 
     it('should return an error 404 if Auth Code doest match any Gymgoer', async () => {
-        //todo: implement
+         //todo: implement
     })
 
     it('should return an error 403 if Auth Code match a Gymgoer, but is expired', async () => {
