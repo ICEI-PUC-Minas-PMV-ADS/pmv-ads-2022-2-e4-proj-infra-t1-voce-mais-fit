@@ -32,10 +32,9 @@ async function searchFood(queryPortuguese){
     let result = [];
 
     try{
-        let response = await await axios.get('https://api.spoonacular.com/food/ingredients/search?query=' + queryEnglish + '&number=3', {
+        let response = await axios.get('https://api.spoonacular.com/food/ingredients/search?query=' + queryEnglish + '&number=3', {
             headers: { 'x-api-key': getApiKey() }
         });
-        
 
         for(let apiFood of response.data.results){
             let apiFoodDetails = await axios.get('https://api.spoonacular.com/food/ingredients/' + apiFood.id + '/information?amount=100&unit=grams', {
