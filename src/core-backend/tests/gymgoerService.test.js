@@ -23,7 +23,7 @@ const databaseMock = [
         foodSaved: [],
         authCodes: [{
             code: 'def456',
-            expirationDate: Date.now()
+            expirationDate: new Date(Date.now + 300000)
         }]
     },
 ]
@@ -104,15 +104,32 @@ describe('Get Gymgoer by Id', () => {
 
 describe('Get Gymgoer by Valid Auth Code', () => {
     it('should return a Gymgoer if a valid (existent and not expired) Auth Code is given', async () => {
-        //todo: implement
+        Gymgoer.Model.findOne = jest.fn(() => { return databaseMock[1] })
+
+        let data = await gymgoerService.getGymgoerByValidAuthCode('def456');
+
+        expect(data._id).toBe('637c2a13907bed0e49c1dde8')
+
     })
 
     it('should return an error 404 if Auth Code doest match any Gymgoer', async () => {
-         //todo: implement
+        Gymgoer.Model.findOne = jest.fn(() => { return null })
+
+        let data = await gymgoerService.getGymgoerByValidAuthCode('abc234234234123');
+
+        expect(data).toMatchObject({
+            errorType: 404
+        })   
     })
 
     it('should return an error 403 if Auth Code match a Gymgoer, but is expired', async () => {
-        //todo: implement
+        Gymgoer.Model.findOne = jest.fn(() => { return databaseMock[0] })
+
+        let data = await gymgoerService.getGymgoerByValidAuthCode('abc123');
+
+        expect(data).toMatchObject({
+            errorType: 403
+        })   
     })
 })
 
