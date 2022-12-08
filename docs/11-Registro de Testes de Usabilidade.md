@@ -37,6 +37,34 @@ Relatório com as evidências dos testes de software realizados no sistema pela 
 |**Resultado**|Usuário consegue contatar os desenvolvedores.|
 
 
+## Imagens
+
+Clicando na opção de Registrar no Login o usuário e redirecionado para a tela perguntando se deseja criar uma conta para Aluno ou Treinador <br>
+![Foto X](img/ImagensRegistro/register.jpg)<br>
+Clicando em uma das Opções irá aparecer os dados para preenchimento após preenchimento dos dados o Usuário poderá criar sua conta. <br>
+![Foto X](img/ImagensRegistro/contaALuno.jpg)<br>
+Em seguida será redirecionado para a tela, para que o Usuario possa estar Logando com seu email e Senha<br>
+![Foto X](img/ImagensRegistro/loginPage.jpg)<br>
+Página principal com informações do usuário após logar <br>
+![Foto X](img/ImagensRegistro/indexpage.jpg)<br>
+Página Usuário para alteração de dados(Os dados já são buscados da API para mostrar ao usuário)<br>
+![Foto X](img/ImagensRegistro/alteraDados.jpg)<br>
+Página para adicionar alimentos, quando o usuário digita o nome do alimento a busca pelos valores nutricionais acontece automaticamente.
+![Foto X](img/ImagensRegistro/addAlimentos.jpg)<br>
+Apertando em Dieta o usuário consegue ver os alimentos já cadastrado e o dia de cadastro <br>
+![Foto X](img/ImagensRegistro/dietaAlimentos.jpg)<br>
+Na opção de Exercícios irá ser exibido todos os exercicios já cadastrados para o aluno, também é conectado a uma API para buscar de forma automatica o vídeo no Youtube sobre o exercício e retornado a URL do vídeo <br>
+![Foto X](img/ImagensRegistro/exercicios.jpg) <br>
+Clicando na opção de Adicionar será exibido a tela para o usuário adicionar um novo exercício <br>
+![Foto X](img/ImagensRegistro/addExercicios.jpg)<br>
+Clicando na opção de Adicionar Academia, será redirecionado para a tela listando todas as academias já registradas na aplicação por todos os usuários e o usuário poderá adicionar uma nova caso deseje. <br>
+![Foto X](img/ImagensRegistro/addAcademia.jpg)<br>
+O usuário também poderá logar com o Google caso deseje, apertando em Login com o Google na página de Login. Após clicar na opção para Login com o Google e escolher o Gmail que deseja logar, será redirecionado para a tela onde poderá estar completando o seu cadastro com os dados que a aplicação exige, como o usuário logou com o Google já terá algumas informações como o Nome, Email e a Senha.<br>
+![Foto X](img/ImagensRegistro/loginGoogle.jpg)<br>
+Após editar os dados o usuário logado pelo Google será redirecionado para a página principal, onde poderá usar a aplicação normalmente <br>
+![Foto X](img/ImagensRegistro/indexGoogle.jpg)
+
+
 ## Avaliação
 
 A maior parte das funcionabilidades estão corretas de acordo com a documentação. Algumas funcionalidades extras foram criadas mas ainda existem possibilidades para melhorias e atualizações.
