@@ -8,8 +8,8 @@ function normalize(text) {
         text = text.replace(withGrammarMark[i], withoutGrammarMark[i]);
     }
 
-    text = text.replace('-', ' ');
-    text = text.replace("'", " ");
+    text = text.replace(/-/g, ' ');
+    text = text.replace(/'/g, " ");
 
     return text;
 }
