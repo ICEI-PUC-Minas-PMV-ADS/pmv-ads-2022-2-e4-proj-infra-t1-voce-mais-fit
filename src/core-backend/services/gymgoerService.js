@@ -81,6 +81,7 @@ async function generateAuthCode(gymgoerId, minutes = 5){
     return authCode;
 }
 
+
 module.exports.createNewGymgoer = createNewGymgoer;
 module.exports.getAllGymgoers = getAllGymgoers;
 module.exports.getGymgoerById = getGymgoerById;
