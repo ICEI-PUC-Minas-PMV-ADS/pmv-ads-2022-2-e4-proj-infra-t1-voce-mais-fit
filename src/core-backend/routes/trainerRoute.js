@@ -115,6 +115,7 @@ router.patch('/:trainerId', (req, res) => {
  *      type: string
  *    - name: gymgoerId
  *      in: query
+ *      required: true
  *      type: string
  *   responses: 
  *    200:
@@ -124,7 +125,7 @@ router.patch('/:trainerId', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.patch('/:trainerId', (req, res) => {
+router.post('/:trainerId', (req, res) => {
     trainerService.linkGymgoerAndTrainer(req.params.trainerId, req.query.gymgoerId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);
