@@ -30,6 +30,7 @@ export default {
     padding-top: 5%;
     padding-bottom: 5%;
     margin-bottom: 2%;
+    padding-right: 3%;
 }
 .acadGyn{
     width: 100%;

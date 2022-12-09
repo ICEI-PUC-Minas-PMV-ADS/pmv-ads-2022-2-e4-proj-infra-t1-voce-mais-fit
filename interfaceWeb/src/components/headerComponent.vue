@@ -1,13 +1,12 @@
 <template>
     <div class="allHeaderComponent">
         <div class="headerMiniLogo">
-            <img src="@/assets/alllImages/alterIcon.svg" class="alterLink">
+            <img src="@/assets/allImages/alterIcon.svg" class="alterLink">
             <p class="textLogo">VOCÊ + FIT</p>
         </div>
         <div class="linksHeader">
             <a @click="toMain" class="link" href="#home">Home</a>
             <a @click="toMain" class="link" href="#rotina">Rotina</a>
-            <a class="link" id="dieta" href="#listaFood">Dieta</a>
             <a class="link" id="ex" href="#listaEx">Exercicíos</a>
             <a class="link" id="ex" href="#academia">Academias</a>
         </div>

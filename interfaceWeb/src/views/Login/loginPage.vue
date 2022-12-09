@@ -3,7 +3,7 @@
         <header class="headerLoginContainer">
             <div class="headerLogin">
                 <router-link to="/" class="headerMiniLogo">
-                    <img src="@/assets/alllImages/alterIcon.svg" class="alterLink">
+                    <img src="@/assets/allImages/alterIcon.svg" class="alterLink">
                     <p class="textLogo">VOCÊ + FIT</p>
                 </router-link>
                 <div class="headerLink">
@@ -120,6 +120,7 @@ export default {
             // userSenha
             
                 HTTP.post("user/login", { email: this.userEmail, password: this.userSenha })
+                
                 .then((res) => {
                     // Possui a msg de sucesso da API e o Token
                     const data = res.data;
@@ -135,8 +136,9 @@ export default {
                         token: data.token,
                         trainerId: dataUser.trainerInfo,
                     }
+                    const gymgoerId = dataUser.gymgoerInfo
                     window.localStorage.setItem("localStorage", JSON.stringify(localStorage))
-
+                    window.localStorage.setItem("gymgoerId", JSON.stringify(gymgoerId))
                     const localStorageToken = JSON.parse(window.localStorage.getItem('localStorage')).token
                     console.log(localStorageToken)
                     if(localStorage.gymgoerId){
@@ -147,7 +149,12 @@ export default {
                     
                 })
                 .catch((error) => {
-                    this.errorLogin = error
+                    if(error.message === "Request failed with status code 404"){
+                        this.errorLogin = "Preencha os campos corretamente"
+                    }else if(error.message === "Request failed with status code 422"){
+                        this.errorLogin = "Conta não encontrada, e-mail ou senha incorretos"
+                    }
+                    
                 })
         },
 

@@ -5,7 +5,7 @@ import VueTheMask from 'vue-the-mask'
 import store from './store.js'
 
 
-Vue.use(VueTheMask)
+Vue.use(VueTheMask);
 
 Vue.config.productionTip = false
 

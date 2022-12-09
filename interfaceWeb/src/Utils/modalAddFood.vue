@@ -15,7 +15,10 @@
                         <img @click="searchFood" class="lupaSearch" src="@/assets/modalAddImg/searchButton.png">
                     </div>
                 </div>
-                <div class="typeFoodCont">
+                <div class="spinnerCont" v-if="this.load">
+                    <div class="spinner-border text-danger" role="status" id="spinner"></div>
+                </div>
+                <div v-else class="typeFoodCont" >
                     <div v-for="resultado in result" :key="resultado" :value="resultado" class="typeFood">
                         <div id="divInfo" class="name">
                             <p class="titleInfo">Nome:</p>
@@ -61,14 +64,19 @@ export default {
             defineImg: false,
             defineModal:true,
             searchResult: "",
-            result:[]
+            result:[],
+            load:true,
         }
     },
     methods:{
         searchFood(){
-            HTTP.get(`foodSaved?foodName=${this.searchResult}`)
+            if(this.result.length !== 0 ){
+                this.result = ""
+                this.load = true
+                HTTP.get(`gymgoer/foodSaved/searchFood?foodName=${this.searchResult}`)
             .then(response =>{
                 this.result = response.data
+                this.load = false
             })
             .catch(error =>{
                 if(error.message === 'Request failed with status code 404'){
@@ -77,6 +85,24 @@ export default {
                     alert('OPS, O BANCO DE DADOS EXPLODIU <3')
                 }
             })
+            }else{
+                let spiiner = document.querySelector('#spinner')
+                spiiner.style.display = 'block'
+                HTTP.get(`gymgoer/foodSaved/searchFood?foodName=${this.searchResult}`)
+                .then(response =>{
+                    this.result = response.data
+                    this.load = false
+                })
+                .catch(error =>{
+                    if(error.message === 'Request failed with status code 404'){
+                        alert('ALIMENTO NÃO ENCONTRADO')
+                    }else{
+                        alert('OPS, O BANCO DE DADOS EXPLODIU <3')
+                    }
+                })
+            }
+            
+            
         },
         closeModal(){
             this.searchResult = ""
@@ -146,7 +172,7 @@ export default {
     width: 6.2%!important;
 }
 #divInfo{
-    width: 15.2%;
+    width: 12.2%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -193,7 +219,22 @@ p{
     width: 4.5%;
     cursor: pointer;
 }
+#spinner{
+    display: none;  
+}
+.spinnerCont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .modal-title{
     font-size: 1.8rem;
+}
+.typeFood #divInfo:nth-child(1){
+    width: 18.2%;
+}
+.typeFood #divInfo:nth-child(6){
+    width: 18.2%;
 }
 </style>

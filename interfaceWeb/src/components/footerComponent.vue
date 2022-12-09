@@ -6,7 +6,7 @@
                 <img @click="goToTop" src="@/assets/footerImg/pngwing.com.png" class="goToTop">
             </div>
             <div class="footerComponentLogo">
-                <img src="@/assets/alllImages/alterIcon.svg" class="alterLink">
+                <img src="@/assets/allImages/alterIcon.svg" class="alterLink">
             </div>
         </div>
     </footer>

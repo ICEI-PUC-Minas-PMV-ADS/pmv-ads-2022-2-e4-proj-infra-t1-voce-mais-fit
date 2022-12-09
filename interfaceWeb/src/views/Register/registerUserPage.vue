@@ -3,7 +3,7 @@
         <header class="headerLoginContainer">
             <div class="headerLogin">
                 <router-link to="/" class="headerMiniLogo">
-                    <img src="@/assets/alllImages/alterIcon.svg" class="alterLink">
+                    <img src="@/assets/allImages/alterIcon.svg" class="alterLink">
                     <p class="textLogo">VOCÊ + FIT</p>
                 </router-link>
                 <div class="headerLink">

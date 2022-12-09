@@ -1,25 +1,25 @@
 <template >
   <div class="allContainerRotina">
     <div class="titleBlockCont">
-      <label class="titleBlock" for="">Rotina</label>
+      <label class="titleBlock" for="">Rotina | {{this.day}}</label>
     </div>
     <div class="geraldebaixo">
       <div class="teste">
         <p class="titleInfo">Carboidratos</p>
-        <p class="info">500</p>
+        <p class="info">{{this.carb}}</p>
       </div>
       <div class="pro">
         <p class="titleInfo">Proteinas</p>
-        <p class="info">500</p>
+        <p class="info">{{this.protein}}</p>
       </div>
       <div class="gord">
         <p class="titleInfo">Gorduras</p>
-        <p class="info">500</p>
+        <p class="info">{{this.gord}}</p>
       </div>
     </div>
     <div class="kcal">
       <p class="titleInfo" >kcal</p>
-      <p class="info">500</p>
+      <p class="info">{{this.kcal}}</p>
     </div>
     <div class="addFoodCont">
       <button type="button" class="food" data-bs-toggle="modal" data-bs-target="#addFoodModal">ADD ALIMENTOS</button>
@@ -31,9 +31,47 @@
 
 <script>
 import modalAddFood from '@/Utils/modalAddFood.vue'
+import { HTTP } from '@/api_system'
 export default {
   components:{
     modalAddFood
+  },
+  data(){
+    return{
+      carb: 0,
+      gord: 0,
+      kcal: 0,
+      protein: 0,
+      day: ""
+    }
+  },
+  methods:{
+    getTodayFunc(){
+      var data = new Date();
+      var dia  = data.getDate();
+      if (dia< 10) {
+          dia  = "0" + dia;
+      }
+      var mes  = data.getMonth() + 1;
+      if (mes < 10) {
+          mes  = "0" + mes;
+      }
+      var ano  = data.getFullYear();
+      this.day = ano + "-" + mes + "-" + dia;
+      let id = window.localStorage.getItem('gymgoerId')
+      let idFormado = id.replace(/"/g, '')
+      HTTP.get(`gymgoer/${idFormado}/dailyRegisters/${this.day}`)
+      .then((x) => {
+        let result = x.data
+        this.carb = result.totalCarb
+        this.gord = result.totalFat
+        this.kcal = result.totalKcal
+        this.protein = result.totalProtein
+      })
+    }
+  },
+  mounted(){
+    this.getTodayFunc()
   }
 }
 </script>>

@@ -275,6 +275,9 @@ label{
 .listItem{
     border: 1px #737373 solid;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .listItem p{
     padding-top: 0px;
