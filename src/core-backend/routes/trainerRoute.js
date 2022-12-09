@@ -125,7 +125,7 @@ router.patch('/:trainerId', (req, res) => {
  *    500:
  *     description: Erro interno
  */
-router.post('/:trainerId', (req, res) => {
+router.post('/:trainerId/gymgoer', (req, res) => {
     trainerService.linkGymgoerAndTrainer(req.params.trainerId, req.query.gymgoerId).then((result) => {
         if(result.errorMessage != null)
             return res.status(result.errorType).send(result.errorMessage);

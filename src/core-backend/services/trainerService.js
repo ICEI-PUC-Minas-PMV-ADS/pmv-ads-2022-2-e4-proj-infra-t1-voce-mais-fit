@@ -58,9 +58,15 @@ async function linkGymgoerAndTrainer(trainerId, gymgoerId){
     if(gymgoer._id == null)
         return {errorType: 404, errorMessage: 'Gymgoer not found'};
         
-    trainerDb.gymgoers.push(gymgoerId);
+    let oldIdSaved = trainerDb.gymgoers.indexOf(gymgoerId);
 
-    return trainerDb.save();
+    if(oldIdSaved == -1){
+        trainerDb.gymgoers.push(gymgoerId);
+
+        return trainerDb.save();
+    }
+
+    return trainerDb;
 }
 
 module.exports.createNewTrainer = createNewTrainer;
