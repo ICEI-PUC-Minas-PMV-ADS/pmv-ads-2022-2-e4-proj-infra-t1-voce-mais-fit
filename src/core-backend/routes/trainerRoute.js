@@ -101,4 +101,38 @@ router.patch('/:trainerId', (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /api/trainer/{trainerId}/gymgoer:
+ *  post:
+ *   tags:
+ *    - Instrutor
+ *   description: Vincula Gymgoer com Trainer, através do TrainerId (ObjectId) e GymgoerId (ObjectId)
+ *   parameters:
+ *    - name: trainerId
+ *      in: path
+ *      required: true
+ *      type: string
+ *    - name: gymgoerId
+ *      in: query
+ *      type: string
+ *   responses: 
+ *    200:
+ *     description: Vinculado com sucesso
+ *    404:
+ *     description: Trainer/Gymgoer não encontrado
+ *    500:
+ *     description: Erro interno
+ */
+router.patch('/:trainerId', (req, res) => {
+    trainerService.linkGymgoerAndTrainer(req.params.trainerId, req.query.gymgoerId).then((result) => {
+        if(result.errorMessage != null)
+            return res.status(result.errorType).send(result.errorMessage);
+
+        return res.status(200).send(result);
+    }).catch((err) => {
+        return res.status(500).send(err.message);
+    });
+});
+
 module.exports = router;
