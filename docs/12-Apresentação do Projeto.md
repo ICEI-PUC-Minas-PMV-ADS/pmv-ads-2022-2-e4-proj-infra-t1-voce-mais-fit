@@ -73,3 +73,23 @@ Grafico da Frequencia de Códigos
 ![Grafico Frequencia de Códigos](img/imagendGitGraph/GraficoGitCodeFrequenc.jpg)<br>
 Grafico dos Commits
 ![Grafico Git Commits](img/imagendGitGraph/GraficoGitCommits.jpg)
+<br>
+
+## Responsabilidades/Atribuições dos Membros do Time
+
+Tendo em vista os papéis do Scrum a equipe foi organizada da seguinte maneira:
+
+- Scrum Master: João Sena
+- Product Owner: Gabriel Ilídio
+- Equipe de desenvolvimento:
+    - Felipe Bohm
+    - Gabriel Ilídio
+    - Iann Iago
+    - João Sena
+    - Victor Lopes
+    - Yuri Witter
+- Equipe de UX Design:
+    - Iago Iann
+<br><br>
+
+![Simple Project Timeline](img/GerProjeto/GerenciamentoEquipe.png)
