@@ -19,8 +19,8 @@
                     <div class="spinner-border text-danger" role="status" id="spinner"></div>
                 </div>
                 <div v-else class="typeFoodCont" >
-                    <div v-for="resultado in result" :key="resultado" :value="resultado" class="typeFood">
-                        <div id="divInfo" class="name">
+                    <div @click="choosedFood(resultado)" v-for="resultado in result" :key="resultado" :value="resultado" class="typeFood">
+                        <div id="divInfo" class="name">                            
                             <p class="titleInfo">Nome:</p>
                             <p>{{resultado.name}}</p>
                         </div>
@@ -42,13 +42,13 @@
                         </div>
                         <div id="divInfo" class="quant">
                             <p class="titleInfo">Gramas consumidas</p>
-                            <input type="text" placeholder="Q° Gramas"/>
+                            <input type="text" placeholder="Q° Gramas" v-model="perGram"/>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="buttonSend">Adicionar</button>
+                <button @click="confirmChoose" type="button" class="btn btn-primary" id="buttonSend">Adicionar</button>
                 <button @click="closeModal"  type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="buttonClose">Fechar</button>
             </div>
             </div>
@@ -66,14 +66,52 @@ export default {
             searchResult: "",
             result:[],
             load:true,
+            perGram:0,
+            carb:0,
+            prot:0,
+            gor:0,
+            kcal:0,
+            quant:0,
+            day:"",
+            infoId:"",
+            id:"",
+            name:""
         }
     },
+    mounted(){
+        this.getDailyId()
+    },
     methods:{
+        getDailyId(){
+            var data = new Date();
+            var dia  = data.getDate();
+            if (dia< 10) {
+                dia  = "0" + dia;
+            }
+            var mes  = data.getMonth() + 1;
+            if (mes < 10) {
+                mes  = "0" + mes;
+            }
+            var ano  = data.getFullYear();
+            this.day = ano + "-" + mes + "-" + dia;
+            let id = window.localStorage.getItem('gymgoerId')
+            let idFormado = id.replace(/"/g, '')
+            HTTP.get(`/gymgoer/${idFormado}/dailyRegisters/${this.day}`)
+            .then(response =>{
+                this.infoId = response.data
+                this.id = this.infoId._id
+            })
+            .catch(error =>{
+                console.log(error)
+            })
+        },
         searchFood(){
             if(this.result.length !== 0 ){
+                let id = window.localStorage.getItem('gymgoerId')
+                 let idFormado = id.replace(/"/g, '')
                 this.result = ""
                 this.load = true
-                HTTP.get(`gymgoer/foodSaved/searchFood?foodName=${this.searchResult}`)
+                HTTP.get(`gymgoer/${idFormado}/foodSaved?foodName=${this.searchResult}`)
             .then(response =>{
                 this.result = response.data
                 this.load = false
@@ -100,9 +138,47 @@ export default {
                         alert('OPS, O BANCO DE DADOS EXPLODIU <3')
                     }
                 })
+            }          
+        },
+        choosedFood(x){        
+            let cont = document.querySelector('.typeFood')
+            
+            if(cont.style.backgroundColor !== 'rgb(179, 179, 179)'){
+                cont.style.backgroundColor = '#b3b3b3'
+                this.name = x.name
+                this.carb = x.carbPer100g
+                this.prot = x.proteinPer100g
+                this.gor = x.fatPer100g
+                this.kcal = x.kcalPer100g                
+            }else{
+                cont.style.backgroundColor = '#FFFF'
+                this.name = ""
+                this.carb = 0
+                this.prot = 0
+                this.gor = 0
+                this.kcal = 0
+                this.quant = 0
             }
-            
-            
+                   
+        },  
+        confirmChoose(){
+            this.quant = this.perGram
+            this.carb = (this.carb * this.perGram)/100
+            this.prot = (this.prot * this.perGram)/100
+            this.gor = (this.gor * this.perGram)/100
+            this.kcal = (this.kcal * this.perGram)/100
+            HTTP.post(`gymgoer/dailyRegisters/${this.id}/foods`, {            
+                name: this.name,
+                gramsAmount: this.quant,
+                carb: this.carb,
+                protein: this.prot,
+                fat: this.gor,
+                kcal: this.kcal,
+                description: ""
+            })
+            .then(()=>{
+                window.location.reload()
+            })
         },
         closeModal(){
             this.searchResult = ""

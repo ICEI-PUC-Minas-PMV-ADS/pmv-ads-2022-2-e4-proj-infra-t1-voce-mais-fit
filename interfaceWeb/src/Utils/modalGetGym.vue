@@ -5,22 +5,29 @@
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="getGynModalLabel">Procure a academia ideal para Você!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button @click="closeModalGyn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="inputCont">
-                    <input @keyup="searchFilter" class="input" type="text" placeholder="Nome da Academia"/>
+                    <input @keyup="searchFilter" class="input" type="text" placeholder="Nome da Academia" v-model="inputAcad"/>
                 </div>
                 <div class="acadCont">
-                    <div class="acadCad" v-for="gyn in allInfoFilter" :key="gyn" :value="gyn">
+                    <div @click="selectGyn(gyn)" class="acadCad" v-for="gyn in allInfoFilter" :key="gyn" :value="gyn">
                         <p><strong>Nome:</strong> {{gyn.name}}</p>
                         <p><strong>Descrição:</strong> {{gyn.description}}</p>
+                    </div>           
+                </div>
+                <div class="resultAcadCont">
+                    <div class="resultAca">
+                        <p><strong>Nome:</strong>{{this.nome}}</p>
+                        <p><strong>Endereço:</strong>{{this.endereço}}</p>
+                        <p><strong>Descrição:</strong>{{this.desc}}</p>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="buttonSend">Adicionar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="buttonClose">Fechar</button>
+                <button @click="closeModalGyn" type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="buttonClose">Fechar</button>
             </div>
             </div>
         </div>
@@ -33,7 +40,11 @@ export default {
     data(){
         return{
             allInfo:[],
-            allInfoFilter:[]
+            allInfoFilter:[],
+            nome:"",
+            endereço:"",
+            desc:"",
+            inputAcad:""
         }
     },
     methods:{
@@ -51,7 +62,27 @@ export default {
                 return name.toUpperCase().includes(target.value.toUpperCase())
             })
             this.allInfoFilter = filter
-        }  
+        },
+        selectGyn(x){
+            console.log(x)
+            this.nome = x.name  
+            this.endereço = x.address 
+            this.desc = x.description  
+            let cont = document.querySelector('.resultAcadCont')
+            cont.style.display = 'flex'
+            let closeCont = document.querySelector('.acadCont')
+            closeCont.style.display = 'none'
+        },
+        closeModalGyn(){
+            this.nome = "" 
+            this.endereço = "" 
+            this.desc = ""
+            this.inputAcad = ""
+            let cont = document.querySelector('.resultAcadCont')
+            cont.style.display = 'none'
+            let closeCont = document.querySelector('.acadCont')
+            closeCont.style.display = 'flex'
+        }
     },
     mounted(){
         this.addCad()
@@ -59,6 +90,9 @@ export default {
 }
 </script>
 <style scoped>
+.resultAcadCont{
+    display: none;
+}
 .inputCont{
     margin-bottom: 15px;
 }
