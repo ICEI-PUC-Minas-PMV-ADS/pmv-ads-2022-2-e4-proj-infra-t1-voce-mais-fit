@@ -12,6 +12,7 @@ Tecnologias utilizadas:
 [Express Js](https://expressjs.com/pt-br/)| O Express é um framework utilizado em conjunto com o Node. js. Ele possui características que facilitam o desenvolvimento de nossas aplicações web e APIs, como um sistema de rotas completo, tratamento de exceções, gerenciamento de requisições HTTP e muito mais.
 [Nodemon](https://nodemon.io/)| O nodemon é uma biblioteca que ajuda no desenvolvimento de sistemas com o Node. js reiniciando automaticamente o servidor.
 [Mongoose](https://mongoosejs.com/)|  Mongoose é um biblioteca de Modelagem de Dados de Objeto para MongoDB e Node.js. Ele gerencia o relacionamento entre dados, fornece a validação de esquemas e é usado como tradutor entre objetos no código e a representação desses objetos no MongoDB.
+[Jest](https://jestjs.io/pt-BR/)| Jest é uma estrutura de teste JavaScript construída em cima do Jasmine e mantida pela Meta. Ele foi projetado e construído por Christoph Nakazawa com foco na simplicidade e suporte para grandes aplicativos da web. Trabalha com projetos usando Babel, TypeScript, Node.js, React, Angular, Vue.js e Svelte.
 | |  |  |
 <br>
 
@@ -45,6 +46,8 @@ Proposta #1: A aplicação poderá ser totalmente hospedada, no momento apenas o
 Proposta #2: A parte Mobile da aplicação não contem todas as funcionalidades detalhadas com exatidão comparado a Web, no futuro poderá ser atualizadas e melhoradas.
 <br>
 Proposta #3: Foi utilizado uma API para a busca dos valores nutricionais com base no nome do alimento fornecido pelo usuário de forma automatica, porém esta API apenas busca por produtos em Ingles, sendo necessário consumir outra API antes para que possa traduzir o nome do alimento, este processo deixa a busca de forma lenta, no futuro poderá ser melhorado para que tenha um melhor desempenho.
+<br>
+Proposta #4: No futuro poderá ter uma melhor cobertura de testes automatizados.
 <br><br><br>
 
 
