@@ -38,12 +38,25 @@ Tecnologias utilizadas:
 
 
 ## Propostas de Melhorias
+<br>
 
 Proposta #1: A aplicação poderá ser totalmente hospedada, no momento apenas o Banco de Dados está hospedado em Servidor, no futuro poderá ter a aplicação Web e Mobile também hospedadas em Servidores.
 <br>
 Proposta #2: A parte Mobile da aplicação não contem todas as funcionalidades detalhadas com exatidão comparado a Web, no futuro poderá ser atualizadas e melhoradas.
 <br>
 Proposta #3: Foi utilizado uma API para a busca dos valores nutricionais com base no nome do alimento fornecido pelo usuário de forma automatica, porém esta API apenas busca por produtos em Ingles, sendo necessário consumir outra API antes para que possa traduzir o nome do alimento, este processo deixa a busca de forma lenta, no futuro poderá ser melhorado para que tenha um melhor desempenho.
+<br><br><br>
+
+
+## Gestão de Trabalho do Time pelo GitHub
+<br>
+
+![Grafico 1](img/imagendGitGraph/GraficoGit1.jpg)
+![Grafico 2](img/imagendGitGraph/GraficoGit2.jpg)<br>
+Grafico da Frequencia de Códigos
+![Grafico Frequencia de Códigos](img/imagendGitGraph/GraficoGitCodeFrequenc.jpg)<br>
+Grafico dos Commits
+![Grafico Git Commits](img/imagendGitGraph/GraficoGitCommits.jpg)
 
 
 
