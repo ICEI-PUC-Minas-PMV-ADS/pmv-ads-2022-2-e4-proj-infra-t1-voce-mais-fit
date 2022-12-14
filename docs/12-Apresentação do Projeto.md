@@ -14,7 +14,7 @@
 
 ## Conjunto de Slides (Estrutura)
 
-[Slide](img/apresentacao/Voce%20Mais%20Fit.pdf)
+[Slide Apresentação](img/apresentacao/Voce%20Mais%20Fit.pdf)
 
 
 ## Tecnologias Utilizadas:
