@@ -26,7 +26,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="buttonSend">Adicionar</button>
                 <button @click="closeModalGyn" type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="buttonClose">Fechar</button>
             </div>
             </div>
